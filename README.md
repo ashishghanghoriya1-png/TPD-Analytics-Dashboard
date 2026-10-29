@@ -47,6 +47,7 @@ This repository is formatted for instant deployment via GitHub Pages:
 * Course-Wise Selector: Nested dropdown under Online Courses to analyze specific courses with completion rates and learning shifts.
 * Monthly Trajectory Panel: Interactive 48-month timeline comparing monthly inflows against cumulative progression.
 * Zero External Dependencies: Built entirely with standalone HTML5, CSS3, and JavaScript with embedded SVG graphics.
+* Executive Access Protection: Integrated cryptographic access gate using SHA-256 validation to restrict executive analytics and civil service data to authorized reviewers. Includes one-click Lock action and session persistence.
 
 ---
 
