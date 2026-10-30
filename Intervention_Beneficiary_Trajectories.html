@@ -1594,15 +1594,15 @@
         </button>
         <button class="slicer-pill" data-slicer-year="AY 2023-24" onclick="selectYear('AY 2023-24')">
           <span>AY 2023-24 (Post-Covid)</span>
-          <span class="slicer-badge">129,432</span>
+          <span class="slicer-badge">125,695</span>
         </button>
         <button class="slicer-pill" data-slicer-year="AY 2024-25" onclick="selectYear('AY 2024-25')">
           <span>AY 2024-25</span>
-          <span class="slicer-badge">107,875</span>
+          <span class="slicer-badge">89,655</span>
         </button>
         <button class="slicer-pill" data-slicer-year="AY 2025-26" onclick="selectYear('AY 2025-26')">
           <span>AY 2025-26</span>
-          <span class="slicer-badge">119,304</span>
+          <span class="slicer-badge">134,268</span>
         </button>
         <button class="slicer-pill" data-slicer-year="AY 2026-27" onclick="selectYear('AY 2026-27')">
           <span>AY 2026-27</span>
@@ -1620,11 +1620,11 @@
       <div id="sideInvSlicers">
         <button class="slicer-pill active" data-slicer-inv="ALL" onclick="selectIntervention('ALL')">
           <span>All 19 Programs</span>
-          <span class="slicer-badge">206k</span>
+          <span class="slicer-badge">212k</span>
         </button>
         <button class="slicer-pill" data-slicer-inv="DIGITAL" onclick="selectIntervention('DIGITAL')">
           <span>Online Courses</span>
-          <span class="slicer-badge">172k</span>
+          <span class="slicer-badge">177k</span>
         </button>
         <!-- Nested Digital Course Dropdown (Expands when Online Courses is selected) -->
         <div id="nestedDigitalContainer" style="display: none; margin: 4px 0 8px 10px; padding: 6px 8px; background: #F0F9FF; border-left: 3px solid #0284C7; border-radius: 6px;">
@@ -1666,11 +1666,11 @@
         </button>
         <button class="slicer-pill" data-slicer-inv="DO" onclick="selectIntervention('DO')">
           <span>District Trainers (DO)</span>
-          <span class="slicer-badge">8.4k</span>
+          <span class="slicer-badge">8.5k</span>
         </button>
         <button class="slicer-pill" data-slicer-inv="INPERSON" onclick="selectIntervention('INPERSON')">
           <span>In-Person Workshops</span>
-          <span class="slicer-badge">59k</span>
+          <span class="slicer-badge">69k</span>
         </button>
       </div>
     </div>
@@ -1703,9 +1703,9 @@
     <!-- Download Center in Sidebar -->
     <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--surface-border);">
       <span class="slicer-title">Export Verified Data</span>
-      <a href="Master_Beneficiary_Registry_Verified_206k.csv" download class="slicer-pill" style="text-decoration: none; background: var(--blue-primary); color: #FFFFFF; font-weight: 700; border-color: var(--blue-primary); justify-content: center; gap: 0.5rem;">
+      <a href="Master_Beneficiary_Registry_Verified_212k.csv" download class="slicer-pill" style="text-decoration: none; background: var(--blue-primary); color: #FFFFFF; font-weight: 700; border-color: var(--blue-primary); justify-content: center; gap: 0.5rem;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Verified Roster (206k CSV)
+        Download Verified Roster (212k CSV)
       </a>
       <a href="Master_Beneficiary_Registry_387k.csv" download class="slicer-pill" style="text-decoration: none; background: #FFFFFF; color: var(--text-muted); justify-content: center; font-size: 0.78rem;">
         Download All 386k Accounts
@@ -1739,8 +1739,8 @@
         <a href="Master_Beneficiary_Registry_387k.xlsx" download class="top-dl-btn">
           Download Master Registry (Excel)
         </a>
-        <a href="Master_Beneficiary_Registry_Verified_206k.csv" download class="top-dl-btn">
-          Download Verified 206k Roster (CSV)
+        <a href="Master_Beneficiary_Registry_Verified_212k.csv" download class="top-dl-btn">
+          Download Verified 212k Roster (CSV)
         </a>
       </div>
     </div>
@@ -5891,19 +5891,19 @@ gba(2, 132, 199, );
         pill.style.display = 'flex';
         if (selectedEra === 'COVID') {
           if (labelSpan) labelSpan.textContent = 'All Programs (Covid)';
-          if (badgeSpan) badgeSpan.textContent = '129k';
+          if (badgeSpan) badgeSpan.textContent = '131k';
         } else if (selectedEra === 'POST_COVID') {
           if (labelSpan) labelSpan.textContent = 'All Programs (Post-Covid)';
-          if (badgeSpan) badgeSpan.textContent = '198k';
+          if (badgeSpan) badgeSpan.textContent = '201k';
         } else {
           if (labelSpan) labelSpan.textContent = 'All 19 Programs';
-          if (badgeSpan) badgeSpan.textContent = '206k';
+          if (badgeSpan) badgeSpan.textContent = '212k';
         }
       } else if (inv === 'DIGITAL') {
         pill.style.display = 'flex';
         if (selectedEra === 'COVID') {
           if (labelSpan) labelSpan.textContent = 'Online Courses (DIKSHA)';
-          if (badgeSpan) badgeSpan.textContent = '129k';
+          if (badgeSpan) badgeSpan.textContent = '131k';
         } else if (selectedEra === 'POST_COVID') {
           if (labelSpan) labelSpan.textContent = 'Online Courses (DIKSHA)';
           if (badgeSpan) badgeSpan.textContent = '163k';
