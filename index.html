@@ -6951,10 +6951,12 @@ gba(2, 132, 199, );
 
   /* --- Executive Password Protection Gate Logic --- */
   const AUTH_HASHES = [
-    'f2e7233455dbef4818521cc0ca658542a6f322dde9bf03ec8bd58ef732bc632c', // RSK@2026
-    '4b281e3adfd9a00b786d6f80c23877e7f08fd243817b96dbaf9eca185ecbf093', // MPTPD@2026
-    'd59bc046e534a9616f271b6145ffbe525ed646c5d1419546f9bf45de15b1a92a'  // rsk2026
+    '2348eb72bc4c13afabfcb845a78d70e267a5bcdf2c4ed3302ce65f95528ae070', // Rsk_Tpd#2026.mp
+    '134ae020125517ae1a5dcc95ce12188579a3445c6d7a640bc3b58cd13b872e47', // RSK_tpd#2026.mp
+    '304a105836e483b9616cf21a7d8f6480966d0f5d2cfc074594d3118001b69262', // Rsk_TPD#2026.mp
+    'f87fb724535ece9f9bf1c72d2dc1b41b17c762f6a06d5631f3b2b84145dfc8fa'  // RSK_TPD#2026.mp
   ];
+  const VALID_KEYS = ['Rsk_Tpd#2026.mp', 'RSK_tpd#2026.mp', 'Rsk_TPD#2026.mp', 'RSK_TPD#2026.mp'];
 
   async function computeHash(text) {
     if (window.crypto && window.crypto.subtle) {
@@ -6990,7 +6992,7 @@ gba(2, 132, 199, );
     
     try {
       const hash = await computeHash(val);
-      if (AUTH_HASHES.includes(hash) || val === 'RSK@2026' || val === 'MPTPD@2026' || val === 'rsk2026') {
+      if (AUTH_HASHES.includes(hash) || VALID_KEYS.includes(val)) {
         sessionStorage.setItem('rsk_tpd_auth_session', hash);
         if (errEl) errEl.style.display = 'none';
         unlockGate(true);
@@ -7009,7 +7011,7 @@ gba(2, 132, 199, );
         }
       }
     } catch (err) {
-      if (val === 'RSK@2026' || val === 'MPTPD@2026' || val === 'rsk2026') {
+      if (VALID_KEYS.includes(val)) {
         sessionStorage.setItem('rsk_tpd_auth_session', 'authorized_session');
         unlockGate(true);
       } else {
