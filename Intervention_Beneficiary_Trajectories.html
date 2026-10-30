@@ -1549,11 +1549,17 @@
       <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Filter data by year and program</div>
     </div>
 
-        <!-- Slicer 0: Timeline Period (Covid vs Post-Covid) -->
-    <div class="slicer-section">
-      <div class="slicer-header">
-        <span class="slicer-title">Timeline Period</span>
+    <!-- Master Slicer: Timeline Period (Controls All Slicers Below) -->
+    <div class="slicer-section" style="border: 2px solid #BAE6FD; background: #F0F9FF; border-radius: 8px; padding: 10px 10px 8px 10px; margin-bottom: 12px;">
+      <div class="slicer-header" style="margin-bottom: 4px;">
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <span style="font-size: 0.62rem; font-family: var(--font-mono); font-weight: 800; background: #0284C7; color: #FFFFFF; padding: 1px 5px; border-radius: 3px;">MASTER</span>
+          <span class="slicer-title" style="color: #0369A1; font-weight: 800;">Timeline Period</span>
+        </div>
         <span class="slicer-reset-link" onclick="selectEra('ALL')">Reset</span>
+      </div>
+      <div style="font-size: 0.68rem; color: #0284C7; margin-bottom: 8px; line-height: 1.25;">
+        Master filter: sorts and scopes all academic years, programs, and delivery channels below.
       </div>
       <div id="sideEraSlicers">
         <button class="slicer-pill active" data-slicer-era="ALL" onclick="selectEra('ALL')">
@@ -1741,10 +1747,13 @@
   </header>
 
   <!-- Comprehensive Executive KPI Suite: Combining Scale, Delivery Channels & Classroom Pedagogy -->
-            <!-- Top Timeline Period Slicer (Covid vs Post-Covid Segregation) -->
+            <!-- Master Timeline Period Slicer (Controls All Child Slicers, Years & Interventions) -->
       <div class="era-slicer-bar" id="topEraBar">
         <div style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
-          <span style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">TIMELINE PERIOD:</span>
+          <div style="display: flex; align-items: center; gap: 0.35rem;">
+            <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: #0284C7; color: #FFFFFF; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em;">MASTER SLICER</span>
+            <span style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">TIMELINE PERIOD:</span>
+          </div>
           <div class="era-pills" id="topEraSlicers" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
             <button class="era-pill active" data-era="ALL" onclick="selectEra('ALL')">
               <span>All Periods (2022 to 2026)</span>
@@ -3161,22 +3170,41 @@ gba(2, 132, 199, );
     );
   }
 
-  // --- RENDER YEAR TABS & BARS ---
+  // --- RENDER YEAR TABS & BARS (DYNAMICALLY SCOPED BY MASTER SLICER) ---
   function buildYearTabs() {
     const container = document.getElementById('yearTabsContainer');
+    if (!container) return;
     container.innerHTML = '';
 
-    const tabs = [
-      { id: 'ALL', label: 'All Academic Years (AY 2022-23 to AY 2026-27)' },
-      { id: 'AY 2022-23', label: 'AY 2022-23 (Covid)' },
-      { id: 'AY 2023-24', label: 'AY 2023-24 (Post-Covid)' },
-      { id: 'AY 2024-25', label: 'AY 2024-25' },
-      { id: 'AY 2025-26', label: 'AY 2025-26' },
-      { id: 'AY 2026-27', label: 'AY 2026-27' }
-    ];
+    let tabs = [];
+    if (selectedEra === 'COVID') {
+      tabs = [
+        { id: 'ALL', label: 'All Covid (AY 2022-23)' },
+        { id: 'AY 2022-23', label: 'AY 2022-23 (Covid)' }
+      ];
+    } else if (selectedEra === 'POST_COVID') {
+      tabs = [
+        { id: 'ALL', label: 'All Post-Covid (AY 2023-27)' },
+        { id: 'AY 2023-24', label: 'AY 2023-24 (Post-Covid)' },
+        { id: 'AY 2024-25', label: 'AY 2024-25' },
+        { id: 'AY 2025-26', label: 'AY 2025-26' },
+        { id: 'AY 2026-27', label: 'AY 2026-27' }
+      ];
+    } else {
+      tabs = [
+        { id: 'ALL', label: 'All Academic Years (AY 2022-23 to AY 2026-27)' },
+        { id: 'AY 2022-23', label: 'AY 2022-23 (Covid)' },
+        { id: 'AY 2023-24', label: 'AY 2023-24 (Post-Covid)' },
+        { id: 'AY 2024-25', label: 'AY 2024-25' },
+        { id: 'AY 2025-26', label: 'AY 2025-26' },
+        { id: 'AY 2026-27', label: 'AY 2026-27' }
+      ];
+    }
+
     tabs.forEach(t => {
       const btn = document.createElement('button');
-      btn.className = `seg-btn ${t.id === currentYear ? 'active' : ''}`;
+      const isMatch = (t.id === selectedYear) || (selectedYear === 'ALL' && t.id === 'ALL') || (selectedEra !== 'ALL' && selectedYear === 'ALL' && t.id === 'ALL');
+      btn.className = `seg-btn ${isMatch ? 'active' : ''}`;
       btn.onclick = () => selectYear(t.id);
       btn.innerText = t.label;
       container.appendChild(btn);
@@ -5824,11 +5852,151 @@ gba(2, 132, 199, );
   let currentFilter = 'ALL';
   let currentYear = 'ALL';
 
+  // --- MASTER SLICER SYNCHRONIZATION ENGINE ---
+  function syncChildSlicers() {
+    // 1. Filter & Scope Child Slicer 1: Academic Year Slicer (#sideYearSlicers)
+    const yearPills = document.querySelectorAll('#sideYearSlicers .slicer-pill');
+    yearPills.forEach(pill => {
+      const yr = pill.dataset.slicerYear;
+      const labelSpan = pill.querySelector('span:first-child');
+      const badgeSpan = pill.querySelector('.slicer-badge');
+      if (yr === 'ALL') {
+        pill.style.display = 'flex';
+        if (selectedEra === 'COVID') {
+          if (labelSpan) labelSpan.textContent = 'All Covid (AY 2022-23)';
+          if (badgeSpan) badgeSpan.textContent = '129,090';
+        } else if (selectedEra === 'POST_COVID') {
+          if (labelSpan) labelSpan.textContent = 'All Post-Covid (AY 2023-27)';
+          if (badgeSpan) badgeSpan.textContent = '193,754';
+        } else {
+          if (labelSpan) labelSpan.textContent = 'All Academic Years';
+          if (badgeSpan) badgeSpan.textContent = '205,657';
+        }
+      } else if (yr === 'AY 2022-23') {
+        // Covid year only
+        pill.style.display = (selectedEra === 'ALL' || selectedEra === 'COVID') ? 'flex' : 'none';
+      } else {
+        // Post-Covid years: AY 2023-24, AY 2024-25, AY 2025-26, AY 2026-27
+        pill.style.display = (selectedEra === 'ALL' || selectedEra === 'POST_COVID') ? 'flex' : 'none';
+      }
+    });
+
+    // 2. Filter & Scope Child Slicer 2: Training Program Slicer (#sideInvSlicers)
+    const invPills = document.querySelectorAll('#sideInvSlicers .slicer-pill');
+    invPills.forEach(pill => {
+      const inv = pill.dataset.slicerInv;
+      const labelSpan = pill.querySelector('span:first-child');
+      const badgeSpan = pill.querySelector('.slicer-badge');
+      if (inv === 'ALL') {
+        pill.style.display = 'flex';
+        if (selectedEra === 'COVID') {
+          if (labelSpan) labelSpan.textContent = 'All Programs (Covid)';
+          if (badgeSpan) badgeSpan.textContent = '129k';
+        } else if (selectedEra === 'POST_COVID') {
+          if (labelSpan) labelSpan.textContent = 'All Programs (Post-Covid)';
+          if (badgeSpan) badgeSpan.textContent = '194k';
+        } else {
+          if (labelSpan) labelSpan.textContent = 'All 19 Programs';
+          if (badgeSpan) badgeSpan.textContent = '206k';
+        }
+      } else if (inv === 'DIGITAL') {
+        pill.style.display = 'flex';
+        if (selectedEra === 'COVID') {
+          if (labelSpan) labelSpan.textContent = 'Online Courses (DIKSHA)';
+          if (badgeSpan) badgeSpan.textContent = '129k';
+        } else if (selectedEra === 'POST_COVID') {
+          if (labelSpan) labelSpan.textContent = 'Online Courses (DIKSHA)';
+          if (badgeSpan) badgeSpan.textContent = '163k';
+        } else {
+          if (labelSpan) labelSpan.textContent = 'Online Courses';
+          if (badgeSpan) badgeSpan.textContent = '177k';
+        }
+      } else if (inv === 'CLSS' || inv === 'DO' || inv === 'INPERSON') {
+        // These programs did NOT exist during Covid (0 teachers)
+        pill.style.display = (selectedEra === 'COVID') ? 'none' : 'flex';
+        if (badgeSpan) {
+          if (inv === 'CLSS') badgeSpan.textContent = '52k';
+          if (inv === 'DO') badgeSpan.textContent = '8.5k';
+          if (inv === 'INPERSON') badgeSpan.textContent = '69k';
+        }
+      }
+    });
+
+    // 3. Filter Nested Digital Course Dropdown (#selectDigitalCourse)
+    const digSelect = document.getElementById('selectDigitalCourse');
+    if (digSelect) {
+      const covidCourses = ['ALL_DIGITAL', 'MA_C1', 'PSP_1', 'PSP_2'];
+      Array.from(digSelect.options).forEach(opt => {
+        if (opt.value === 'ALL_DIGITAL') {
+          if (selectedEra === 'COVID') {
+            opt.textContent = 'All Covid Digital Courses (173k records)';
+          } else if (selectedEra === 'POST_COVID') {
+            opt.textContent = 'All Post-Covid Digital Courses (574k records)';
+          } else {
+            opt.textContent = 'All 19 Digital Courses (727k enrollments)';
+          }
+          opt.hidden = false;
+        } else {
+          const isCovid = covidCourses.includes(opt.value);
+          if (selectedEra === 'COVID') {
+            opt.hidden = !isCovid;
+            opt.disabled = !isCovid;
+          } else if (selectedEra === 'POST_COVID') {
+            opt.hidden = isCovid;
+            opt.disabled = isCovid;
+          } else {
+            opt.hidden = false;
+            opt.disabled = false;
+          }
+        }
+      });
+      // Also filter optgroups
+      Array.from(digSelect.querySelectorAll('optgroup')).forEach(grp => {
+        const visibleChild = Array.from(grp.children).some(opt => !opt.hidden);
+        grp.hidden = !visibleChild;
+      });
+    }
+
+    // 4. Filter Macro Chart Filter Tabs (#chartFilterNav .filter-tab)
+    document.querySelectorAll('#chartFilterNav .filter-tab').forEach(tab => {
+      const f = tab.dataset.filter;
+      if (f === 'CLSS' || f === 'DO') {
+        tab.style.display = (selectedEra === 'COVID') ? 'none' : 'inline-block';
+      } else {
+        tab.style.display = 'inline-block';
+      }
+    });
+
+    // 5. Filter Drilldown Category Filter Pills (.filter-pills .filter-pill)
+    document.querySelectorAll('.filter-pills .filter-pill').forEach(pill => {
+      const txt = pill.innerText.trim();
+      const isCovidRestricted = txt.includes('CLSS') || txt.includes('DO') || txt.includes('In-Person');
+      if (selectedEra === 'COVID') {
+        pill.style.display = isCovidRestricted ? 'none' : 'inline-block';
+      } else {
+        pill.style.display = 'inline-block';
+      }
+    });
+
+    // 6. Rebuild Segmented Year Tabs above Drilldown (#yearTabsContainer)
+    buildYearTabs();
+  }
+
   function selectEra(era) {
     selectedEra = String(era);
     if (era === 'COVID') {
       selectedYear = 'AY 2022-23';
       currentYear = 'AY 2022-23';
+      // If an in-person, clss, or do filter was active, reset to ALL
+      if (['CLSS', 'DO', 'INPERSON'].includes(selectedIntervention)) {
+        selectedIntervention = 'ALL';
+      }
+      if (typeof currentFilter !== 'undefined' && ['CLSS Participant', 'DO Participant', 'In-Person'].includes(currentFilter)) {
+        currentFilter = 'ALL';
+      }
+      if (typeof activeChartFilter !== 'undefined' && ['CLSS', 'DO'].includes(activeChartFilter)) {
+        activeChartFilter = 'ALL';
+      }
     } else if (era === 'POST_COVID') {
       if (selectedYear === 'AY 2022-23' || selectedYear === 'COVID') {
         selectedYear = 'ALL';
@@ -5838,6 +6006,7 @@ gba(2, 132, 199, );
       selectedYear = 'ALL';
       currentYear = 'ALL';
     }
+    syncChildSlicers();
     applySlicers();
   }
 
@@ -5846,16 +6015,20 @@ gba(2, 132, 199, );
     currentYear = yr;
     if (selectedYear === 'AY 2022-23' || selectedYear === 'COVID') {
       selectedEra = 'COVID';
-    } else if (['AY 2023-24', 'AY 2024-25', 'AY 2025-26', 'AY 2026-27', 'POST_COVID'].includes(selectedYear)) {
+    } else if (['AY 2023-24', 'AY 2024-25', 'AY 2025-26', 'AY 2026-27'].includes(selectedYear)) {
       selectedEra = 'POST_COVID';
-    } else {
-      selectedEra = 'ALL';
     }
+    syncChildSlicers();
     applySlicers();
   }
 
   function selectIntervention(inv) {
     selectedIntervention = String(inv);
+    if (['CLSS', 'DO', 'INPERSON'].includes(selectedIntervention) && selectedEra === 'COVID') {
+      selectedEra = 'POST_COVID';
+      selectedYear = 'ALL';
+    }
+    syncChildSlicers();
     applySlicers();
   }
 
@@ -5869,6 +6042,9 @@ gba(2, 132, 199, );
     selectedYear = 'ALL';
     selectedIntervention = 'ALL';
     selectedVerification = 'VERIFIED';
+    if (typeof currentFilter !== 'undefined') currentFilter = 'ALL';
+    if (typeof activeChartFilter !== 'undefined') activeChartFilter = 'ALL';
+    syncChildSlicers();
     applySlicers();
   }
 
@@ -6220,11 +6396,11 @@ gba(2, 132, 199, );
     const badgeEra = document.getElementById('badgeSliceEra');
     if (badgeEra) {
       const eraLabels = {
-        'ALL': 'Period: All Periods (2022 to 2026)',
-        'COVID': 'Period: Covid Era (Before Apr 2023)',
-        'POST_COVID': 'Period: Post-Covid Era (After Apr 2023)'
+        'ALL': 'MASTER PERIOD: All Periods (2022 to 2026)',
+        'COVID': 'MASTER PERIOD: Covid Era (Before Apr 2023)',
+        'POST_COVID': 'MASTER PERIOD: Post-Covid Era (After Apr 2023)'
       };
-      badgeEra.textContent = eraLabels[selectedEra] || ('Period: ' + selectedEra);
+      badgeEra.textContent = eraLabels[selectedEra] || ('MASTER PERIOD: ' + selectedEra);
     }
     if (badgeYear) badgeYear.textContent = 'Academic Year: ' + (selectedYear === 'ALL' ? 'All Academic Years (AY 2022-23 to AY 2026-27)' : selectedYear);
 
@@ -6381,7 +6557,7 @@ gba(2, 132, 199, );
 
   window.addEventListener('DOMContentLoaded', () => {
     init3DTilt();
-    buildYearTabs();
+    syncChildSlicers();
     renderMacroSvg();
     renderDrilldown('ALL');
 
