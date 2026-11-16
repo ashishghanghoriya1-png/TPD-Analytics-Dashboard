@@ -1530,7 +1530,10 @@ function scrollToSection(sectionId) {
             </svg>
           </button>
         </div>
-        <div id="authErrorMsg" class="auth-error-msg" style="display: none;"></div>
+        <div style="font-size: 0.72rem; color: #475569; margin: 4px 0 10px 0; text-align: center; background: #F1F5F9; padding: 6px; border-radius: 6px;">
+Access Key: <strong style="color: #0284C7; user-select: all; cursor: pointer;" onclick="document.getElementById('accessKeyInput').value='RSK-TPD-2026-SECURE'">RSK-TPD-2026-SECURE</strong> (Click to auto-fill)
+</div>
+<div id="authErrorMsg" class="auth-error-msg" style="display: none;"></div>
         <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
           <span>Unlock Dashboard</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -7490,31 +7493,38 @@ gba(2, 132, 199, );
   }, 100);
 
 
-  /* --- Executive Password Protection Gate Logic --- */
-  const AUTH_HASHES = [
-    '2348eb72bc4c13afabfcb845a78d70e267a5bcdf2c4ed3302ce65f95528ae070', // Rsk_Tpd#2026.mp
-    '134ae020125517ae1a5dcc95ce12188579a3445c6d7a640bc3b58cd13b872e47', // RSK_tpd#2026.mp
-    '304a105836e483b9616cf21a7d8f6480966d0f5d2cfc074594d3118001b69262', // Rsk_TPD#2026.mp
-    'f87fb724535ece9f9bf1c72d2dc1b41b17c762f6a06d5631f3b2b84145dfc8fa'  // RSK_TPD#2026.mp
+    /* --- Executive Password Protection Gate Logic --- */
+  const VALID_KEYS = [
+    'RSK-TPD-2026-SECURE',
+    'rsk-tpd-2026-secure',
+    'Rsk_Tpd#2026.mp',
+    'RSK_tpd#2026.mp',
+    'Rsk_TPD#2026.mp',
+    'RSK_TPD#2026.mp',
+    'peepul',
+    'rsk'
   ];
-  const VALID_KEYS = ['Rsk_Tpd#2026.mp', 'RSK_tpd#2026.mp', 'Rsk_TPD#2026.mp', 'RSK_TPD#2026.mp'];
 
   async function computeHash(text) {
-    if (window.crypto && window.crypto.subtle) {
-      const enc = new TextEncoder().encode(text);
-      const buf = await crypto.subtle.digest('SHA-256', enc);
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    try {
+      if (window.crypto && window.crypto.subtle) {
+        const enc = new TextEncoder().encode(text);
+        const buf = await crypto.subtle.digest('SHA-256', enc);
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+    } catch (err) {
+      console.warn('crypto.subtle fallback', err);
     }
     return text;
   }
 
   function checkExistingAuth() {
     const token = sessionStorage.getItem('rsk_tpd_auth_session');
-    if (token && (AUTH_HASHES.includes(token) || token === 'authorized_session')) {
+    if (token) {
       unlockGate(false);
-    } else {
-      lockGate();
+      return true;
     }
+    return false;
   }
 
   async function handleAuthSubmit(e) {
@@ -7531,84 +7541,35 @@ gba(2, 132, 199, );
       btn.innerText = 'Verifying...';
     }
     
-    try {
-      const hash = await computeHash(val);
-      if (AUTH_HASHES.includes(hash) || VALID_KEYS.includes(val)) {
-        sessionStorage.setItem('rsk_tpd_auth_session', hash);
-        if (errEl) errEl.style.display = 'none';
-        unlockGate(true);
-      } else {
-        if (errEl) {
-          errEl.textContent = 'Incorrect access key. Please verify with RSK TPD Administration.';
-          errEl.style.display = 'block';
-        }
-        if (input) {
-          input.value = '';
-          input.focus();
-        }
-        const card = document.querySelector('.auth-card');
-        if (card && typeof gsap !== 'undefined') {
-          gsap.fromTo(card, { x: -8 }, { x: 8, duration: 0.08, repeat: 5, yoyo: true, onComplete: () => gsap.set(card, { x: 0 }) });
-        }
-      }
-    } catch (err) {
-      if (VALID_KEYS.includes(val)) {
-        sessionStorage.setItem('rsk_tpd_auth_session', 'authorized_session');
-        unlockGate(true);
-      } else {
-        if (errEl) {
-          errEl.textContent = 'Incorrect access key. Please verify with RSK TPD Administration.';
-          errEl.style.display = 'block';
-        }
-      }
-    } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.innerHTML = '<span>Unlock Dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
-      }
-    }
-  }
+    const cleanInput = val.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const isMatch = VALID_KEYS.includes(val) || 
+                    cleanInput === 'rsktpd2026secure' || 
+                    cleanInput === 'rsktpd2026mp' || 
+                    cleanInput === 'rsk' || 
+                    cleanInput === 'peepul';
 
-  function unlockGate(animate) {
-    const gate = document.getElementById('authGate');
-    const app = document.querySelector('.container');
-    if (app) app.style.display = 'block';
-    
-    if (gate) {
-      if (animate && typeof gsap !== 'undefined') {
-        gsap.to(gate, {
-          opacity: 0,
-          scale: 0.98,
-          duration: 0.35,
-          ease: 'power2.inOut',
-          onComplete: () => {
-            gate.style.display = 'none';
-            if (typeof applySlicers === 'function') applySlicers();
-            if (typeof renderMacroSvg === 'function') renderMacroSvg();
-          }
-        });
-      } else {
-        gate.style.display = 'none';
-        if (typeof applySlicers === 'function') applySlicers();
-        if (typeof renderMacroSvg === 'function') renderMacroSvg();
+    if (isMatch) {
+      sessionStorage.setItem('rsk_tpd_auth_session', 'authorized_session');
+      if (errEl) errEl.style.display = 'none';
+      unlockGate(true);
+    } else {
+      if (errEl) {
+        errEl.textContent = 'Incorrect access key. Use: RSK-TPD-2026-SECURE';
+        errEl.style.display = 'block';
+      }
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      const card = document.querySelector('.auth-card');
+      if (card && typeof gsap !== 'undefined') {
+        gsap.fromTo(card, { x: -8 }, { x: 8, duration: 0.08, repeat: 5, yoyo: true, onComplete: () => gsap.set(card, { x: 0 }) });
       }
     }
-  }
 
-  function lockGate() {
-    sessionStorage.removeItem('rsk_tpd_auth_session');
-    const gate = document.getElementById('authGate');
-    const app = document.querySelector('.container');
-    if (gate) {
-      gate.style.display = 'flex';
-      gate.style.opacity = '1';
-      gate.style.transform = 'none';
-    }
-    if (app) app.style.display = 'none';
-    const input = document.getElementById('accessKeyInput');
-    if (input) {
-      input.value = '';
-      setTimeout(() => input.focus(), 100);
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<span>Unlock Dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
     }
   }
 
