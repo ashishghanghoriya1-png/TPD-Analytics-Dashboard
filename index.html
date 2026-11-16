@@ -1194,7 +1194,7 @@
       50%, 100% { transform: translateX(100%); }
     }
 
-    /* Tactile Interactive Buttons */
+    /* Tactile Navigation Buttons */
     .dl-btn, .top-dl-btn, .seg-btn {
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
@@ -1218,7 +1218,7 @@
       transform: translateY(0.5px) scale(0.98);
     }
 
-    /* SVG Interactive Tooltip */
+    /* SVG Dynamic Tooltip */
     #chartTooltip {
       position: absolute;
       background: rgba(15, 23, 42, 0.92);
@@ -1842,7 +1842,7 @@
           <div class="kpi-label" id="kpi-digital-label">Online Course Learners</div>
           <div class="kpi-value" id="kpi-digital" style="color: var(--blue-primary);">177,025</div>
           <div class="kpi-meta" id="kpi-digital-meta">Completed courses on DIKSHA like Mission Ankur, PSP, PLC.</div>
-          <div class="kpi-source-note" id="kpi-digital-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: DIKSHA LMS Telemetry Progress Exports (19 Courses)</div>
+          <div class="kpi-source-note" id="kpi-digital-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: DIKSHA Online Records Progress Exports (19 Courses)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label" id="kpi-inperson-label">In-Person Workshop Attendees</div>
@@ -1907,8 +1907,8 @@
   <div class="panel" id="macro-panel">
     <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
       <div>
-        <div class="panel-title" id="trajectoryTitle">Teachers Trained Each Academic Year (AY 2022-23 to AY 2026-27)</div>
-        <div class="panel-desc" id="trajectorySubtitle">Active teachers each year and total teachers reached so far across the state.</div>
+        <div class="panel-title" id="progressTitle">Teachers Trained Each Academic Year (AY 2022-23 to AY 2026-27)</div>
+        <div class="panel-desc" id="progressSubtitle">Active teachers each year and total teachers reached so far across the state.</div>
       </div>
       <div class="chart-filter-nav" id="chartFilterNav">
         <button class="filter-tab active" data-filter="ALL" onclick="setChartFilter('ALL')">All Interventions</button>
@@ -2021,7 +2021,7 @@
         <path id="pathLineSrg" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lineGlow)" d=""></path>
         <!-- Nodes rendered by JS -->
         <g id="monthlyNodesGroup"></g>
-        <!-- Interactive Vertical Tracking Line -->
+        <!-- Vertical Tracking Line -->
         <line id="monthlyTrackingLine" x1="0" y1="25" x2="0" y2="275" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3" style="display: none;"></line>
         <rect id="monthlyOverlayRect" x="65" y="25" width="1005" height="250" fill="transparent" style="cursor: crosshair;"></rect>
       </svg>
@@ -2064,45 +2064,64 @@
     </div>
 
     <!-- Cycle Scores Grid -->
-    <div class="ped-grid">
-      <div class="ped-card">
-        <div class="ped-card-cycle">Aug 2025</div>
-        <div class="ped-card-score">87.3</div>
-        <div class="ped-card-theme">Classroom Setup & Seating</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Sep 2025</div>
-        <div class="ped-card-score">85.6</div>
-        <div class="ped-card-theme">Prior Knowledge & Group Work</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Nov 2025</div>
-        <div class="ped-card-score">84.6</div>
-        <div class="ped-card-theme">Purposeful Homework</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Dec 2025</div>
-        <div class="ped-card-score">92.6</div>
-        <div class="ped-card-theme">Formative Review & Synthesis</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Jan 2026</div>
-        <div class="ped-card-score">82.5</div>
-        <div class="ped-card-theme">Targeted Ability Revision</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Aug 2026</div>
-        <div class="ped-card-score">75.3</div>
-        <div class="ped-card-theme">Safe Climate & Engagement</div>
-      </div>
-      <div class="ped-card">
-        <div class="ped-card-cycle">Sep 2026</div>
-        <div class="ped-card-score">80.6</div>
-        <div class="ped-card-theme">Concrete TLM Usage</div>
-      </div>
-    </div>
-
-    <!-- Thematic & Qualitative Details -->
+    <div class="ped-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+<div class="ped-card" style="border-top: 3px solid #0284C7;">
+<div class="ped-card-cycle">Sep 2024 (24-25)</div>
+<div class="ped-card-score">86.2</div>
+<div class="ped-card-theme">Orientation Setup</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #0284C7;">
+<div class="ped-card-cycle">Oct 2024 (24-25)</div>
+<div class="ped-card-score">84.8</div>
+<div class="ped-card-theme">Facilitation Balance</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #0284C7;">
+<div class="ped-card-cycle">Dec 2024 (24-25)</div>
+<div class="ped-card-score">88.4</div>
+<div class="ped-card-theme">Constructive Feedback</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #0284C7;">
+<div class="ped-card-cycle">Jan 2025 (24-25)</div>
+<div class="ped-card-score">85.1</div>
+<div class="ped-card-theme">Lesson Consolidation</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
+<div class="ped-card-cycle">Aug 2025 (25-26)</div>
+<div class="ped-card-score">87.3</div>
+<div class="ped-card-theme">Classroom Setup & Seating</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
+<div class="ped-card-cycle">Sep 2025 (25-26)</div>
+<div class="ped-card-score">85.6</div>
+<div class="ped-card-theme">Prior Knowledge & Group Work</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
+<div class="ped-card-cycle">Nov 2025 (25-26)</div>
+<div class="ped-card-score">84.6</div>
+<div class="ped-card-theme">Purposeful Homework</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
+<div class="ped-card-cycle">Dec 2025 (25-26)</div>
+<div class="ped-card-score">92.6</div>
+<div class="ped-card-theme">Formative Review & Synthesis</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
+<div class="ped-card-cycle">Jan 2026 (25-26)</div>
+<div class="ped-card-score">82.5</div>
+<div class="ped-card-theme">Targeted Ability Revision</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #10B981;">
+<div class="ped-card-cycle">Aug 2026 (26-27)</div>
+<div class="ped-card-score">75.3</div>
+<div class="ped-card-theme">Safe Climate & Engagement</div>
+</div>
+<div class="ped-card" style="border-top: 3px solid #10B981;">
+<div class="ped-card-cycle">Sep 2026 (26-27)</div>
+<div class="ped-card-score">80.6</div>
+<div class="ped-card-theme">Concrete TLM Usage</div>
+</div>
+</div>
+<!-- Thematic & Qualitative Details -->
     <div class="ped-detail-grid">
       <!-- 5 Core Themes -->
       <div>
@@ -2161,7 +2180,7 @@
       <!-- Qualitative Feedback Categorization -->
       <div>
         <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem;">
-          Teacher Classroom Innovations (74,562 Open-Ended Entries)
+          Teacher Classroom Feedback (68,295 Substantive Open-Ended Entries Across 3 Years)
         </div>
         <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem;">
           <div class="qual-category-item">
@@ -2218,7 +2237,240 @@
 
   <!-- Annual Intervention Drilldown Panel -->
   
-  <!-- Digital Courses Assessment Mastery & Knowledge Shifts Panel -->
+  
+<!-- ========================================================================= -->
+<!-- 3-YEAR QUALITATIVE STUDY & MACHINE LEARNING PREDICTION ENGINE PANEL -->
+<!-- ========================================================================= -->
+<div class="panel" id="qualitative-prediction-panel" style="margin-top: 1.5rem;">
+<div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
+<div>
+<div class="panel-title">3-Year Teacher Voices and Machine Learning Predictions</div>
+<div class="panel-desc">
+Teacher feedback across 68,295 classroom entries from 2024 to 2027, analyzed with local language models and tabular retention prediction algorithms.
+</div>
+</div>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--blue-subtle); color: var(--blue-primary); padding: 4px 10px; border-radius: 6px; font-weight: 700;">
+68,295 Teacher Submissions
+</span>
+<span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 4px 10px; border-radius: 6px; font-weight: 700;">
+3 Academic Years (10 Cycles)
+</span>
+<span style="font-family: var(--font-mono); font-size: 0.76rem; background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 6px; font-weight: 700;">
+52 Districts Ranked
+</span>
+</div>
+</div>
+
+<!-- Longitudinal Journey Across Academic Years -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #0284C7;">
+<div style="font-size: 0.76rem; font-weight: 700; color: #0284C7; text-transform: uppercase; margin-bottom: 0.35rem; font-family: var(--font-mono);">
+Phase 1: Academic Year 2024-25
+</div>
+<div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+Program Setup & Facilitation Rules
+</div>
+<p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
+Teachers focused on orientation dates, session length, and meeting places. Key feedback requested longer practice time, fixed meeting schedules, and equal speaking opportunities between trainers and teachers.
+</p>
+<div style="font-size: 0.75rem; background: white; padding: 8px; border-radius: 6px; border: 1px solid #E2E8F0; color: var(--text-body);">
+<strong>Teacher Quote (Sheopur):</strong> "शैक्षिक संवाद बहुत अच्छा है। समयाभाव के कारण सभी बिंदुओं पर विस्तार से चर्चा नहीं हो पायी।" (Good initiative, but we need more allocated time to discuss classroom problems in depth.)
+</div>
+</div>
+
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #8B5CF6;">
+<div style="font-size: 0.76rem; font-weight: 700; color: #8B5CF6; text-transform: uppercase; margin-bottom: 0.35rem; font-family: var(--font-mono);">
+Phase 2: Academic Year 2025-26
+</div>
+<div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+Multi-Grade Teaching & Peer Learning
+</div>
+<p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
+Dialogue shifted toward everyday classroom realities. Teachers shared methods for managing multiple grades simultaneously in single-teacher schools, group seating arrangements, and meaningful homework.
+</p>
+<div style="font-size: 0.75rem; background: white; padding: 8px; border-radius: 6px; border: 1px solid #E2E8F0; color: var(--text-body);">
+<strong>Teacher Quote (Chhindwara):</strong> "U आकार की बैठक व्यवस्था अपनाई जिससे सभी बच्चे श्यामपट्ट और शिक्षक को स्पष्ट देख पा रहे हैं।" (U-shaped seating helped every child see the board and participate directly.)
+</div>
+</div>
+
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #10B981;">
+<div style="font-size: 0.76rem; font-weight: 700; color: #10B981; text-transform: uppercase; margin-bottom: 0.35rem; font-family: var(--font-mono);">
+Phase 3: Academic Year 2026-27
+</div>
+<div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+Active Learning Materials & Student Practice
+</div>
+<p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
+Discussion deepened into student practice. Teachers requested hands-on learning kits, activity-based math demonstrations, and peer observation tools so educators can visit each other's classrooms.
+</p>
+<div style="font-size: 0.75rem; background: white; padding: 8px; border-radius: 6px; border: 1px solid #E2E8F0; color: var(--text-body);">
+<strong>Teacher Quote (Bhind):</strong> "छात्रों को समूह कार्य अधिक कराने चाहिए और व्यावहारिक सामग्री का प्रयोग बढ़ाना चाहिए।" (Students need more collaborative group tasks and concrete learning materials.)
+</div>
+</div>
+</div>
+
+<!-- Tabular Model & Prediction Architecture Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+
+<!-- Left Column: Prediction Model Benchmark -->
+<div style="background: white; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.2rem;">
+<div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+Machine Learning Engine & Model Benchmarks
+</div>
+<p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
+Evaluation of teacher retention across cycles using TabPFN (Tabular Prior-Data Transformer) alongside tree-based baselines. We use a hybrid design: local language models extract sentiment and workload tags from teacher comments, which are then passed into tabular classifiers.
+</p>
+
+<table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; margin-bottom: 1rem;">
+<thead>
+<tr style="background: var(--surface-subtle); border-bottom: 1px solid var(--surface-border); color: var(--text-muted);">
+<th style="padding: 6px 10px;">Model Algorithm</th>
+<th style="padding: 6px 10px; text-align: right;">ROC-AUC</th>
+<th style="padding: 6px 10px; text-align: right;">Accuracy</th>
+<th style="padding: 6px 10px; text-align: right;">Brier Score</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 6px 10px; font-weight: 600;">Logistic Regression</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.6150</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">59.4%</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.2396</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 6px 10px; font-weight: 600;">Random Forest Ensemble</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.5949</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">58.6%</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.2419</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 6px 10px; font-weight: 600;">LightGBM Boosted Trees</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.5829</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">55.5%</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono);">0.2456</td>
+</tr>
+<tr>
+<td style="padding: 6px 10px; font-weight: 600; color: #0284C7;">TabPFN (Tabular Transformer)</td>
+<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono); color: #0284C7;" colspan="3">Integrated via Hybrid Local Pipeline</td>
+</tr>
+</tbody>
+</table>
+
+<div style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.4; background: var(--surface-subtle); padding: 8px; border-radius: 6px;">
+<strong>Why TabFM requires a hybrid pipeline:</strong> TabPFN is designed for numerical and categorical tables. Unstructured Hindi comments cannot be passed directly into tabular transformers. Local Qwen converts teacher prose into structured barriers (multi-grade burden, workload delays), which the prediction engine combines with attendance records.
+</div>
+</div>
+
+<!-- Right Column: Top District Support Priorities -->
+<div style="background: white; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.2rem;">
+<div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+District Support Need Rankings (Top 10 Priority Areas)
+</div>
+<p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.8rem;">
+Districts identified by the algorithm as having the lowest predicted retention probability and highest reported multi-grade classroom challenges.
+</p>
+
+<table style="width: 100%; border-collapse: collapse; font-size: 0.76rem; text-align: left;">
+<thead>
+<tr style="background: var(--surface-subtle); border-bottom: 1px solid var(--surface-border); color: var(--text-muted);">
+<th style="padding: 6px 8px;">District</th>
+<th style="padding: 6px 8px; text-align: right;">Predicted Retention</th>
+<th style="padding: 6px 8px; text-align: right;">Multi-Grade Hurdle</th>
+<th style="padding: 6px 8px; text-align: center;">Support Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Ujjain</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">27.0%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.3%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEE2E2; color: #991B1B; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Moderate Support</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Tikamgarh</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">28.4%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.3%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEE2E2; color: #991B1B; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Moderate Support</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Sheopur</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">31.6%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.3%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Targeted Coaching</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Shivpuri</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">37.7%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.0%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Targeted Coaching</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Neemuch</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">40.4%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.0%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Targeted Coaching</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Sagar</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">39.8%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.0%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Targeted Coaching</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Umaria</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">41.0%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.2%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #D1FAE5; color: #065F46; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stable Cadre</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Indore</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">42.1%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.1%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #D1FAE5; color: #065F46; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stable Cadre</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 5px 8px; font-weight: 600;">Guna</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">42.7%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.0%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #D1FAE5; color: #065F46; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stable Cadre</span></td>
+</tr>
+<tr>
+<td style="padding: 5px 8px; font-weight: 600;">Gwalior</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">42.5%</td>
+<td style="padding: 5px 8px; text-align: right; font-family: var(--font-mono);">0.0%</td>
+<td style="padding: 5px 8px; text-align: center;"><span style="background: #D1FAE5; color: #065F46; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stable Cadre</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Peepul Action Recommendations Banner -->
+<div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 1.1rem;">
+<div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-bottom: 0.4rem;">
+Action Steps for Peepul and Rajya Shiksha Kendra
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; font-size: 0.8rem; color: #14532D;">
+<div>
+<strong>1. Multi-Grade Teaching Toolkits:</strong> Supply practical classroom kits with self-guided activity cards so one teacher can manage two grades at once.
+</div>
+<div>
+<strong>2. Consistent Session Schedules:</strong> Fix orientation and cluster meeting calendars early to avoid clashing with exams and administrative duties.
+</div>
+<div>
+<strong>3. Single-Cycle Cadre Check:</strong> Ensure educators who attend district orientation lead cluster meetings only in that same cycle.
+</div>
+<div>
+<strong>4. Peer Classroom Visits:</strong> Set up short peer visits where teachers observe classroom techniques in neighboring schools.
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- Digital Courses Assessment Mastery & Knowledge Shifts Panel -->
   <div class="panel" id="digital-kpi-panel" style="margin-top: 1.5rem;">
     <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
       <div>
@@ -2977,8 +3229,8 @@ gba(2, 132, 199, );
     });
 
     const ds = chartDatasets[filterKey];
-    document.getElementById('trajectoryTitle').textContent = ds.title;
-    document.getElementById('trajectorySubtitle').textContent = ds.subtitle;
+    document.getElementById('progressTitle').textContent = ds.title;
+    document.getElementById('progressSubtitle').textContent = ds.subtitle;
 
     renderMacroSvg();
 
@@ -2991,13 +3243,13 @@ gba(2, 132, 199, );
     }
   }
 
-  // --- RENDER MACRO SVG TRAJECTORY ---
+  // --- RENDER MACRO SVG PROGRESS ---
   function renderMacroSvg() {
     const eraObj = chartDatasetsByEra[selectedEra] || chartDatasetsByEra['ALL'];
     const ds = eraObj[activeChartFilter] || eraObj['ALL'];
 
-    const tTitle = document.getElementById('trajectoryTitle');
-    const tSub = document.getElementById('trajectorySubtitle');
+    const tTitle = document.getElementById('progressTitle');
+    const tSub = document.getElementById('progressSubtitle');
     if (tTitle && ds.title) tTitle.textContent = ds.title;
     if (tSub && ds.subtitle) tSub.textContent = ds.subtitle;
     const yMax = ds.yMax;
@@ -3129,7 +3381,7 @@ gba(2, 132, 199, );
       circle.setAttribute('class', 'macro-node');
       circle.onclick = () => selectYear(t.year);
 
-      // Interactive Node Hover Tooltip
+      // Node Hover Tooltip
       circle.onmouseenter = (e) => {
         gsap.to(circle, { r: 8, strokeWidth: 3.5, duration: 0.2, ease: 'power2.out' });
         const tip = document.getElementById('chartTooltip');
@@ -6061,7 +6313,7 @@ gba(2, 132, 199, );
       postScore: '44.5%',
       gain: '-13.9%',
       meta: 'Foundational primary math module. Peak enrollment across all 55 districts.',
-      source: 'Source: MA C1 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C1 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'MA_C2': {
       name: 'Mission Ankur Course 2: संख्याओं की समझ',
@@ -6073,7 +6325,7 @@ gba(2, 132, 199, );
       postScore: '66.3%',
       gain: '+16.4%',
       meta: 'Double-digit learning gain (+16.4%) in foundational number sense concepts.',
-      source: 'Source: MA C2 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C2 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'MA_C3': {
       name: 'Mission Ankur Course 3: स्थानीय मान और संक्रियाएं',
@@ -6085,7 +6337,7 @@ gba(2, 132, 199, );
       postScore: '69.4%',
       gain: '+20.3%',
       meta: 'Top foundational knowledge gain (+20.3%) from pre-test to post-test evaluation.',
-      source: 'Source: MA C3 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C3 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'MA_C4': {
       name: 'Mission Ankur Course 4: ज्यामिति और आकृतियां',
@@ -6097,7 +6349,7 @@ gba(2, 132, 199, );
       postScore: '51.0%',
       gain: '+8.2%',
       meta: 'Mid-year geometric thinking rollout. 6,485 certified completions.',
-      source: 'Source: MA C4 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C4 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'MA_C5': {
       name: 'Mission Ankur Course 5: मापन एवं डेटा संधारण',
@@ -6109,7 +6361,7 @@ gba(2, 132, 199, );
       postScore: '59.6%',
       gain: '+10.9%',
       meta: 'Practical measurement and data collection pedagogy with +10.9% gain.',
-      source: 'Source: MA C5 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C5 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'MA_C6': {
       name: 'Mission Ankur Course 6: गणितीय तर्क और पैटर्न',
@@ -6121,7 +6373,7 @@ gba(2, 132, 199, );
       postScore: '67.1%',
       gain: '+8.9%',
       meta: 'Mathematical reasoning and pattern recognition capstone course.',
-      source: 'Source: MA C6 Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: MA C6 Course Progress.xlsx (DIKSHA Online Records)'
     },
     'PSP_1': {
       name: 'PSP Batch 1 (Primary Practice)',
@@ -6133,7 +6385,7 @@ gba(2, 132, 199, );
       postScore: '34.7%',
       gain: '-16.3%',
       meta: 'First cohort in pedagogical subject practice across elementary grades.',
-      source: 'Source: PSP1_batch2_progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PSP1_batch2_progress.xlsx (DIKSHA Online Records)'
     },
     'PSP_2': {
       name: 'PSP Batch 2 (Classroom Pedagogy)',
@@ -6145,7 +6397,7 @@ gba(2, 132, 199, );
       postScore: '65.5%',
       gain: '+20.9%',
       meta: 'Highest subject pedagogy improvement (+20.9%) across all training programs.',
-      source: 'Source: PSP2_batch2_progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PSP2_batch2_progress.xlsx (DIKSHA Online Records)'
     },
     'PSP_3': {
       name: 'PSP Batch 3 (Language & Literacy)',
@@ -6157,7 +6409,7 @@ gba(2, 132, 199, );
       postScore: '56.3%',
       gain: '+10.9%',
       meta: 'Subject-specific language instruction and literacy building module.',
-      source: 'Source: PSP3 Course Progress-Ramesh.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PSP3 Course Progress-Ramesh.xlsx (DIKSHA Online Records)'
     },
     'PSP_4': {
       name: 'PSP Batch 4 (Advanced Methods)',
@@ -6169,7 +6421,7 @@ gba(2, 132, 199, );
       postScore: '22.4%',
       gain: 'Final Quiz Only',
       meta: 'Large-scale advanced pedagogical rollout. 18,896 educators completed.',
-      source: 'Source: PSP4_Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PSP4_Course progress.xlsx (DIKSHA Online Records)'
     },
     'PSP_5': {
       name: 'PSP Batch 5 (Consolidation)',
@@ -6181,7 +6433,7 @@ gba(2, 132, 199, );
       postScore: '50.8%',
       gain: 'Final Quiz Only',
       meta: 'Targeted pedagogical consolidation module across upper elementary grades.',
-      source: 'Source: PSP5_Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PSP5_Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_1': {
       name: 'ECE Course 1: प्रारंभिक बाल्यावस्था शिक्षा के सिद्धांत',
@@ -6193,7 +6445,7 @@ gba(2, 132, 199, );
       postScore: '51.5%',
       gain: '-4.9%',
       meta: 'Foundational early childhood development and child psychology principles.',
-      source: 'Source: ECE (Edu) C1_ Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C1_ Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_2': {
       name: 'ECE Course 2: खेल और मॉर्निंग सर्कल',
@@ -6205,7 +6457,7 @@ gba(2, 132, 199, );
       postScore: '40.4%',
       gain: '+3.3%',
       meta: 'High completion rate (76.8%) in activity-based morning routine implementation.',
-      source: 'Source: ECE (Edu) C2_ Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C2_ Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_3': {
       name: 'ECE Course 3: भाषा विकास एवं आरंभिक साक्षरता',
@@ -6217,7 +6469,7 @@ gba(2, 132, 199, );
       postScore: '51.5%',
       gain: '+10.4%',
       meta: 'Early childhood phonological awareness and oral vocabulary with +10.4% gain.',
-      source: 'Source: ECE (Edu) C3_ Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C3_ Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_4': {
       name: 'ECE Course 4: संज्ञानात्मक विकास एवं संख्या-पूर्व कौशल',
@@ -6229,7 +6481,7 @@ gba(2, 132, 199, );
       postScore: '47.7%',
       gain: 'Final Quiz Only',
       meta: 'Cognitive milestones and pre-number reasoning for pre-primary educators.',
-      source: 'Source: ECE (Edu) C4_ Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C4_ Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_5': {
       name: 'ECE Course 5: थीम आधारित दृष्टिकोण',
@@ -6241,7 +6493,7 @@ gba(2, 132, 199, );
       postScore: '61.9%',
       gain: 'Final Quiz Only',
       meta: 'Thematic curriculum integration across weekly early childhood lesson plans.',
-      source: 'Source: ECE (Edu) C5_ Course progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C5_ Course progress.xlsx (DIKSHA Online Records)'
     },
     'ECE_6': {
       name: 'ECE Course 6: आकलन एवं पालकों के साथ साझेदारी',
@@ -6253,7 +6505,7 @@ gba(2, 132, 199, );
       postScore: '60.8%',
       gain: 'Final Quiz Only',
       meta: 'Continuous qualitative assessment and parent-teacher communication strategies.',
-      source: 'Source: ECE (Edu) C6_ Course progress.csv.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: ECE (Edu) C6_ Course progress.csv.xlsx (DIKSHA Online Records)'
     },
     'NAS': {
       name: 'National Achievement Survey (NAS) Competency Course',
@@ -6265,7 +6517,7 @@ gba(2, 132, 199, );
       postScore: '83.4%',
       gain: '+6.8%',
       meta: 'Top assessment mastery across MP (83.4% post-test) across 46k educators.',
-      source: 'Source: NAS Course Progress.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: NAS Course Progress.xlsx (DIKSHA Online Records)'
     },
     'PLC': {
       name: 'Professional Learning Communities (PLC) Digital Course',
@@ -6277,7 +6529,7 @@ gba(2, 132, 199, );
       postScore: '18.5%',
       gain: 'Final Quiz Only',
       meta: 'Broadest teacher community rollout (1.29 lakh teachers). 54,834 certified.',
-      source: 'Source: PLC_Course progress_till 16th march.xlsx (DIKSHA LMS Telemetry)'
+      source: 'Source: PLC_Course progress_till 16th march.xlsx (DIKSHA Online Records)'
     }
   };
 
@@ -6515,7 +6767,7 @@ gba(2, 132, 199, );
     // Card 12: Multi-Program Participation
     updateCard('kpi-multiprog', 'kpi-multiprog-meta', slice.multiprog, slice.multiprogMeta, slice.multiprogNum);
 
-    // 8. Update Trajectory Chart to match selected intervention & era
+    // 8. Update Progress Chart to match selected intervention & era
     const chartKey = (selectedIntervention === 'CLSS' || selectedIntervention === 'DO' || selectedIntervention === 'DIGITAL') ? selectedIntervention : 'ALL';
     activeChartFilter = chartKey;
     document.querySelectorAll('#chartFilterNav .filter-tab').forEach(btn => {
@@ -6662,15 +6914,15 @@ gba(2, 132, 199, );
       // Covid: before April 2023 (Oct 2022 to Mar 2023: indices 0 to 6)
       endIdx = 6;
       if (timelineTitleEl) timelineTitleEl.textContent = "Monthly Participation Trends: Covid Period (Before April 2023)";
-      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month trajectory of remote digital learning modules on DIKSHA during school closures.";
+      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month progress of remote digital learning modules on DIKSHA during school closures.";
     } else if (selectedEra === 'POST_COVID') {
       // Post-Covid: from April 2023 onwards (indices 6 to end)
       startIdx = 6;
       if (timelineTitleEl) timelineTitleEl.textContent = "Monthly Participation Trends: Post-Covid Period (After April 2023)";
-      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month trajectory comparing Digital Courses, CLSS cluster meetings, and DO orientations in the blended learning era.";
+      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month progress comparing Digital Courses, CLSS cluster meetings, and DO orientations in the blended learning era.";
     } else {
       if (timelineTitleEl) timelineTitleEl.textContent = "Monthly Participation Trends Across Interventions (AY 2022-23 to AY 2026-27)";
-      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month trajectory comparing Digital Courses, In-Person Dialogues (CLSS), and Orientations.";
+      if (timelineDescEl) timelineDescEl.textContent = "Month-by-month progress comparing Digital Courses, In-Person Dialogues (CLSS), and Orientations.";
     }
 
     currentTimelineStartIdx = startIdx;

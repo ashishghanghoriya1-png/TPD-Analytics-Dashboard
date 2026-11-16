@@ -1,0 +1,431 @@
+{
+  "corpus_summary": {
+    "total_records": 68295,
+    "total_substantive": 40765,
+    "cycles_analyzed": 10,
+    "years": [
+      "2024-25",
+      "2025-26",
+      "2026-27"
+    ]
+  },
+  "cycle_insights": {
+    "Sep 2024": {
+      "cycle": "Sep 2024",
+      "top_themes": [
+        {
+          "theme_name": "Teacher Professional Development",
+          "percentage_prevalence": 100,
+          "summary_plain_english": "Teachers expressed satisfaction with the professional development sessions and emphasized the importance of such sessions for improving their teaching skills and classroom management."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 68,
+        "constructive_feedback": 29,
+        "systemic_barriers_frustration": 3
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "आज शैक्षिक संवाद का उन्मुखीकरण अच्छा रहा",
+          "translation_english": "The professional development session on education conversation was good today",
+          "district": "SHEOPUR - CAC",
+          "pedagogical_insight": "Teachers found the session on education conversation to be effective and beneficial."
+        },
+        {
+          "quote_hindi": "शैक्षिक संवाद बहुत अच्छा है । समयाभाव के कारण सभी बिंदुओं पर विस्तार से चर्चा नहीं हो पायी ।",
+          "translation_english": "The professional development session on education conversation was very good. Due to time constraints, we could not discuss all points in detail.",
+          "district": "CHHATARPUR - शिक्षक",
+          "pedagogical_insight": "Teachers highlighted the need for more time to discuss all aspects of professional development thoroughly."
+        }
+      ],
+      "actionable_need": "More time allocation for professional development sessions to cover all aspects in detail."
+    },
+    "Oct 2024": {
+      "cycle": "Oct 2024",
+      "top_themes": [
+        {
+          "theme_name": "Time Constraints",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers feel that the time allocated for professional development sessions is insufficient for in-depth discussions."
+        },
+        {
+          "theme_name": "Peer Collaboration",
+          "percentage_prevalence": 26,
+          "summary_plain_english": "Teachers emphasize the importance of more peer interaction and discussion during professional development sessions."
+        },
+        {
+          "theme_name": "Shikshik Samvad (Teacher Dialogue)",
+          "percentage_prevalence": 23,
+          "summary_plain_english": "Teachers highlight the effectiveness of teacher dialogue in addressing their professional challenges and improving teaching practices."
+        },
+        {
+          "theme_name": "Training Content",
+          "percentage_prevalence": 17,
+          "summary_plain_english": "Teachers suggest that the training themes should be more detailed and provide more relevant information."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 31,
+        "constructive_feedback": 46,
+        "systemic_barriers_frustration": 23
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "शैक्षिक संवाद का समय पूरा दिन किया जाए तो विस्तार से चर्चा की जा सकती है।",
+          "translation_english": "If the time for teacher dialogue is a full day, then in-depth discussions can be held.",
+          "district": "CHHINDWARA - CAC",
+          "pedagogical_insight": "Teachers believe that more time would allow for comprehensive discussions and better learning outcomes."
+        },
+        {
+          "quote_hindi": "शैक्षिक संवाद के कार्यक्रम आयोजित होने से शिक्षकों की शैक्षिक समस्याओं का उचित समाधान होता है।",
+          "translation_english": "Teacher dialogue programs help in finding appropriate solutions to teachers' educational problems.",
+          "district": "CHHINDWARA - शिक्षक",
+          "pedagogical_insight": "Teacher dialogue is seen as a valuable tool for addressing and solving educational issues."
+        }
+      ],
+      "actionable_need": "Increased duration of professional development sessions to allow for more in-depth discussions and peer collaboration."
+    },
+    "Dec 2024": {
+      "cycle": "Dec 2024",
+      "top_themes": [
+        {
+          "theme_name": "Teacher Professional Development",
+          "percentage_prevalence": 100,
+          "summary_plain_english": "Teachers expressed satisfaction with the training and its impact on their teaching methods and student engagement."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 60,
+        "constructive_feedback": 30,
+        "systemic_barriers_frustration": 10
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "प्रशिक्षण बहुत ही अच्छे तरीके से समझाया है",
+          "translation_english": "The training was explained in very good ways",
+          "district": "Not specified",
+          "pedagogical_insight": "Teachers found the training methods effective and appreciated the clarity in explanations."
+        },
+        {
+          "quote_hindi": "विषय आधारित बिंदुओं पर स्पष्ट की आवश्यकता है",
+          "translation_english": "There is a need to clarify subject-based points",
+          "district": "Not specified",
+          "pedagogical_insight": "Teachers highlighted the need for more detailed explanations in subject-specific areas."
+        },
+        {
+          "quote_hindi": "Unmukhikaran bahut Achcha Raha",
+          "translation_english": "The interaction was very good",
+          "district": "Not specified",
+          "pedagogical_insight": "Teachers appreciated the interactive nature of the training, which helped in better understanding."
+        }
+      ],
+      "actionable_need": "Timely and regular professional development sessions, with clear and detailed subject-based content."
+    },
+    "Jan 2025": {
+      "cycle": "Jan 2025",
+      "top_themes": [
+        {
+          "theme_name": "Time Constraints",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers mentioned the need for more time for discussions and activities."
+        },
+        {
+          "theme_name": "Peer Collaboration",
+          "percentage_prevalence": 23,
+          "summary_plain_english": "Teachers emphasized the importance of teachers working together and sharing experiences."
+        },
+        {
+          "theme_name": "Digital Resources",
+          "percentage_prevalence": 17,
+          "summary_plain_english": "Teachers suggested the use of digital resources and videos to enhance learning."
+        },
+        {
+          "theme_name": "Classroom Management",
+          "percentage_prevalence": 14,
+          "summary_plain_english": "Teachers highlighted the need for better classroom management techniques and activities."
+        },
+        {
+          "theme_name": "Parental Involvement",
+          "percentage_prevalence": 11,
+          "summary_plain_english": "Teachers expressed the need for more involvement from parents in the education process."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 43,
+        "constructive_feedback": 46,
+        "systemic_barriers_frustration": 11
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "डाइट में शैक्षिक संवाद बहुत अच्छा था 10 से 5 बजे तक का समय निश्चित किया जाए",
+          "translation_english": "The discussion during the diet was very good. A fixed time from 10 to 5 should be allocated.",
+          "district": "Seoni",
+          "pedagogical_insight": "Teachers are suggesting a specific time slot for discussions to ensure they are well-structured and effective."
+        },
+        {
+          "quote_hindi": "शैक्षिक संवाद विकासखंड स्तर पर होना चाहिए",
+          "translation_english": "Educational discussions should be held at the district level.",
+          "district": "Shajapur",
+          "pedagogical_insight": "Teachers are advocating for higher-level coordination and planning in educational discussions."
+        }
+      ],
+      "actionable_need": "More structured and longer time slots for discussions and activities to enhance teacher collaboration and professional development."
+    },
+    "Sep 2025": {
+      "cycle": "Sep 2025",
+      "top_themes": [
+        {
+          "theme_name": "Classroom Sitting Arrangement",
+          "percentage_prevalence": 57,
+          "summary_plain_english": "Teachers reported changes in classroom seating arrangements, particularly using U-shaped configurations to improve student engagement and access to the teacher."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 31,
+        "constructive_feedback": 46,
+        "systemic_barriers_frustration": 23
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "छत्रो को यू आकर में बैठा कर शिक्षण कार्य करवाया गया",
+          "translation_english": "Teaching was conducted by seating the students in a U-shape",
+          "district": "Panna",
+          "pedagogical_insight": "This shows that teachers are implementing U-shaped seating to enhance student engagement and interaction."
+        },
+        {
+          "quote_hindi": "हां बैठक व्यवस्था में सुधार किया",
+          "translation_english": "Yes, we have made changes in the seating arrangement",
+          "district": "Jhabua",
+          "pedagogical_insight": "This indicates that teachers are actively making changes to improve classroom dynamics."
+        }
+      ],
+      "actionable_need": "U-shaped classroom seating arrangement"
+    },
+    "Nov 2025": {
+      "cycle": "Nov 2025",
+      "top_themes": [
+        {
+          "theme_name": "Peer Collaboration",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers emphasized the importance of group work and peer interaction in the classroom."
+        },
+        {
+          "theme_name": "Questioning Techniques",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers highlighted the use of questions to engage students and facilitate learning."
+        },
+        {
+          "theme_name": "Multi-grade Teaching",
+          "percentage_prevalence": 26,
+          "summary_plain_english": "Teachers discussed the challenges and benefits of teaching students of different grades in the same classroom."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 31,
+        "constructive_feedback": 46,
+        "systemic_barriers_frustration": 23
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "बच्चों को समूह में बैठाकर अध्यापन कार्य करना",
+          "translation_english": "Teaching by seating children in groups",
+          "district": "Damoh",
+          "pedagogical_insight": "Teachers are advocating for group work as a method to enhance classroom interaction and learning."
+        },
+        {
+          "quote_hindi": "पूर्व ज्ञान पर आधारित प्रश्न रोचक तरीके से बच्चों से पूछा गया।",
+          "translation_english": "Asking questions from children based on their prior knowledge in an engaging way.",
+          "district": "Sehore",
+          "pedagogical_insight": "Teachers are emphasizing the importance of using prior knowledge to engage students in meaningful questioning."
+        }
+      ],
+      "actionable_need": "Implementation of structured group work and peer interaction strategies in classrooms."
+    },
+    "Dec 2025": {
+      "cycle": "Dec 2025",
+      "top_themes": [
+        {
+          "theme_name": "Homework and Engagement",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers reported using various methods to make homework more engaging and relevant to students' daily lives."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 43,
+        "constructive_feedback": 37,
+        "systemic_barriers_frustration": 20
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "बच्चो को अपने आसपास के वातावरण से जोड़कर गृह कार्य दिया गया इससे वह पूर्ण रूप से सक्रिय होकर गृह कार्य करने लगे",
+          "translation_english": "Homework was given by connecting students with their surroundings, making them fully active and engaged in doing homework.",
+          "district": "Chhindwara",
+          "pedagogical_insight": "This shows the importance of contextualizing homework to increase student engagement."
+        },
+        {
+          "quote_hindi": "हां पियर लर्निंग का उपयोग कर बच्चों को शैक्षणिक कार्य कराया गया",
+          "translation_english": "Yes, peer learning was used to assign academic work to the children.",
+          "district": "Anuppur",
+          "pedagogical_insight": "This indicates the use of peer learning as a strategy to enhance student engagement and understanding."
+        }
+      ],
+      "actionable_need": "Engaging and contextually relevant homework assignments"
+    },
+    "Jan 2026": {
+      "cycle": "Jan 2026",
+      "top_themes": [
+        {
+          "theme_name": "Peer Collaboration",
+          "percentage_prevalence": 20,
+          "summary_plain_english": "Teachers emphasized the importance of group work and peer learning in their classrooms."
+        },
+        {
+          "theme_name": "Questioning Techniques",
+          "percentage_prevalence": 17,
+          "summary_plain_english": "Teachers mentioned using questions to engage students and reinforce learning."
+        },
+        {
+          "theme_name": "Multi-grade Teaching",
+          "percentage_prevalence": 14,
+          "summary_plain_english": "Teachers discussed the challenges and strategies of teaching students of different grades in the same classroom."
+        },
+        {
+          "theme_name": "Time Constraints",
+          "percentage_prevalence": 12,
+          "summary_plain_english": "Teachers expressed difficulties in managing time effectively to cover all necessary topics."
+        },
+        {
+          "theme_name": "Digital Resources",
+          "percentage_prevalence": 10,
+          "summary_plain_english": "Teachers highlighted the need for more digital resources to enhance their teaching methods."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 40,
+        "constructive_feedback": 35,
+        "systemic_barriers_frustration": 25
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "कमजोर बच्चों को सुधार हेतु प्रयास किया गया",
+          "translation_english": "Efforts were made to improve weaker students.",
+          "district": "Morena",
+          "pedagogical_insight": "Teachers are actively working to support struggling students."
+        },
+        {
+          "quote_hindi": "बच्चों का समूह बनाकर अर्थात पीयर्स लर्निंग विधि अपना कर कठिन बिंदुओं को सरल करना",
+          "translation_english": "Forming groups to simplify difficult points using peer learning methods.",
+          "district": "Narmadapuram",
+          "pedagogical_insight": "Teachers are using group work to help students understand difficult concepts."
+        }
+      ],
+      "actionable_need": "More support and resources for managing multi-grade classrooms effectively."
+    },
+    "Aug 2026": {
+      "cycle": "Aug 2026",
+      "top_themes": [
+        {
+          "theme_name": "Positive Learning Environment",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers emphasized the importance of creating a positive and engaging learning environment for students."
+        },
+        {
+          "theme_name": "Time Management",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers highlighted the need for better time management, particularly for conducting effective discussions and activities."
+        },
+        {
+          "theme_name": "Teacher Collaboration",
+          "percentage_prevalence": 26,
+          "summary_plain_english": "Teachers stressed the importance of regular and meaningful teacher collaboration to share experiences and problem-solve."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 31,
+        "constructive_feedback": 46,
+        "systemic_barriers_frustration": 23
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "आनंद पूर्वक सिखाना और सिखना।",
+          "translation_english": "Teaching and learning with joy.",
+          "district": "Shajapur",
+          "pedagogical_insight": "Teachers believe that a joyful learning environment is essential for effective teaching and learning."
+        },
+        {
+          "quote_hindi": "संवाद की समयावधि बढ़ाई जाए",
+          "translation_english": "The duration of the discussion should be increased.",
+          "district": "Shajapur",
+          "pedagogical_insight": "Teachers feel that more time is needed for effective discussions to address various issues."
+        }
+      ],
+      "actionable_need": "Increased time for teacher collaboration and discussion to enhance the quality of teaching and learning."
+    },
+    "Sep 2026": {
+      "cycle": "Sep 2026",
+      "top_themes": [
+        {
+          "theme_name": "TLM Usage and Effectiveness",
+          "percentage_prevalence": 37,
+          "summary_plain_english": "Teachers emphasized the importance of using TLM (Teaching Learning Materials) effectively to enhance students' understanding of subjects."
+        },
+        {
+          "theme_name": "Teacher-Peer Collaboration",
+          "percentage_prevalence": 29,
+          "summary_plain_english": "Teachers highlighted the value of peer collaboration and sharing experiences to improve teaching methods and share new ideas."
+        },
+        {
+          "theme_name": "Effective Communication",
+          "percentage_prevalence": 26,
+          "summary_plain_english": "Teachers stressed the importance of effective communication in the classroom, including the use of TLM and group activities."
+        }
+      ],
+      "sentiment_breakdown": {
+        "positive_praise": 63,
+        "constructive_feedback": 29,
+        "systemic_barriers_frustration": 8
+      },
+      "top_teacher_quotes": [
+        {
+          "quote_hindi": "छात्रों को समूह कार्य अधिक कराने चाहिए",
+          "translation_english": "Students should be given more group work.",
+          "district": "BHIND",
+          "pedagogical_insight": "Teachers believe that group work can enhance student engagement and learning."
+        },
+        {
+          "quote_hindi": "शैक्षिक संवाद छात्रों के लिए बहुत उपयोगी सिद्ध होगा",
+          "translation_english": "Educational discussions will be very useful for students.",
+          "district": "UJJAIN",
+          "pedagogical_insight": "Teachers recognize the value of discussions in improving student understanding."
+        }
+      ],
+      "actionable_need": "Effective use of Teaching Learning Materials (TLM) and peer collaboration to enhance classroom engagement and student learning."
+    }
+  },
+  "longitudinal_synthesis": {
+    "year_comparison": {
+      "2024_25": {
+        "core_focus": "Focus on teacher professional development and time constraints, with a need for more structured sessions and resources.",
+        "teacher_mindset": "Teachers had a mix of positive praise and constructive feedback, with frustration around time constraints and systemic barriers.",
+        "key_barrier": "Time constraints and need for more in-depth discussions and peer collaboration."
+      },
+      "2025_26": {
+        "core_focus": "Continued focus on teacher professional development, peer collaboration, and classroom management, with a need for structured support and resources.",
+        "teacher_mindset": "Teachers had a mix of positive praise and constructive feedback, with frustration around time constraints and systemic barriers.",
+        "key_barrier": "Time constraints, digital resources, and managing multi-grade classrooms effectively."
+      },
+      "2026_27": {
+        "core_focus": "Focus on creating a positive learning environment, time management, and teacher collaboration, with a need for more time for discussion and peer collaboration.",
+        "teacher_mindset": "Teachers had a mix of positive praise and constructive feedback, with frustration around time constraints and systemic barriers.",
+        "key_barrier": "Time constraints and need for more structured peer collaboration and discussion."
+      }
+    },
+    "pedagogical_evolution": "The teacher dialogue shifted from addressing operational and logistical concerns, such as time constraints and classroom management, to focusing on pedagogical problem-solving, including the effective use of teaching learning materials and creating a positive learning environment.",
+    "systemic_recommendations_for_peepul": [
+      "Implement a structured schedule for professional development sessions to ensure regular and in-depth discussions.",
+      "Provide more resources and support for managing multi-grade classrooms, including training and materials.",
+      "Encourage the use of technology and digital resources to enhance teacher collaboration and professional development.",
+      "Create a positive learning environment by providing teachers with the necessary tools and time for effective communication and peer collaboration."
+    ]
+  }
+}
