@@ -7573,6 +7573,45 @@ gba(2, 132, 199, );
     }
   }
 
+  
+  function unlockGate(animate) {
+    const gate = document.getElementById('authGate');
+    if (gate) {
+      if (animate && typeof gsap !== 'undefined') {
+        gsap.to(gate, {
+          opacity: 0,
+          scale: 0.98,
+          duration: 0.35,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            gate.style.display = 'none';
+            if (typeof applySlicers === 'function') applySlicers();
+            if (typeof renderMacroSvg === 'function') renderMacroSvg();
+          }
+        });
+      } else {
+        gate.style.display = 'none';
+        if (typeof applySlicers === 'function') applySlicers();
+        if (typeof renderMacroSvg === 'function') renderMacroSvg();
+      }
+    }
+  }
+
+  function lockGate() {
+    sessionStorage.removeItem('rsk_tpd_auth_session');
+    const gate = document.getElementById('authGate');
+    if (gate) {
+      gate.style.display = 'flex';
+      gate.style.opacity = '1';
+      gate.style.transform = 'none';
+    }
+    const input = document.getElementById('accessKeyInput');
+    if (input) {
+      input.value = '';
+      setTimeout(() => input.focus(), 100);
+    }
+  }
+
   function togglePasswordVisibility() {
     const input = document.getElementById('accessKeyInput');
     if (!input) return;
