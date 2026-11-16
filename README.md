@@ -1,6 +1,6 @@
 # Madhya Pradesh Teacher Professional Development Analytics Dashboard (AY 2022-23 to AY 2026-27)
 
-Interactive executive analytics dashboard evaluating statewide teacher capacity-building interventions across Madhya Pradesh from AY 2022-23 to AY 2026-27. All metrics follow the official Indian Academic Year cycle (1 April to 31 March).
+Executive dashboard evaluating statewide teacher capacity-building interventions across Madhya Pradesh from AY 2022-23 to AY 2026-27. All metrics follow the official Indian Academic Year cycle (1 April to 31 March).
 
 ---
 
@@ -54,16 +54,16 @@ This repository is formatted for instant deployment via GitHub Pages:
 2. Click Pages in the left sidebar.
 3. Under Build and deployment > Source, select Deploy from a branch.
 4. Choose main branch and / (root) folder, then click Save.
-5. Your interactive dashboard will be live at https://<your-username>.github.io/<repository-name>/.
+5. Your dashboard will be live at https://<your-username>.github.io/<repository-name>/.
 
 ---
 
 ## Key Dashboard Features
 
-* Academic Year Slicing: Interactive buttons for AY 2022-23, AY 2023-24, AY 2024-25, AY 2025-26, and AY 2026-27 with real-time card and chart updates.
+* Academic Year Slicing: Buttons for AY 2022-23, AY 2023-24, AY 2024-25, AY 2025-26, and AY 2026-27 with real-time card and chart updates.
 * Channel Bifurcation: Filter by Online Courses (DIKSHA), In-Person Training, Cluster Meetings (CLSS), or District Orientations (DO).
 * Course-Wise Selector: Nested dropdown under Online Courses to analyze specific courses with completion rates and learning shifts.
-* Monthly Trajectory Panel: Interactive 48-month timeline comparing monthly inflows against cumulative progression.
+* Monthly Trajectory Panel: 48-month timeline comparing monthly inflows against cumulative progression.
 * Zero External Dependencies: Built entirely with standalone HTML5, CSS3, and JavaScript with embedded SVG graphics.
 * Executive Access Protection: Integrated cryptographic access gate using SHA-256 validation to restrict executive analytics and civil service data to authorized reviewers. Includes one-click Lock action and session persistence.
 
