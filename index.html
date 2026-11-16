@@ -1963,8 +1963,8 @@ Online Courses
       <div class="chart-filter-nav" id="chartFilterNav">
         <button class="filter-tab active" data-filter="ALL" onclick="setChartFilter('ALL')">All Interventions</button>
         <button class="filter-tab" data-filter="DIGITAL" onclick="setChartFilter('DIGITAL')">Digital Courses (2022-2026)</button>
-        <button class="filter-tab" data-filter="CLSS" onclick="setChartFilter('CLSS')">CLSS Sessions (7 Rounds)</button>
-        <button class="filter-tab" data-filter="DO" onclick="setChartFilter('DO')">DO Orientations (7 Rounds)</button>
+        <button class="filter-tab" data-filter="CLSS" onclick="setChartFilter('CLSS')">CLSS Sessions (11 Rounds)</button>
+        <button class="filter-tab" data-filter="DO" onclick="setChartFilter('DO')">DO Orientations (11 Rounds)</button>
       </div>
     </div>
 
@@ -2034,7 +2034,7 @@ Online Courses
       <div class="timeline-legend-item" id="leg-clss" onclick="toggleTimelineSeries('clss')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #DDD6FE; background: #F5F3FF; transition: all 0.2s;">
         <span style="width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6; display: inline-block;"></span>
         <span style="font-weight: 700; color: #6D28D9;">Cluster Meetings (CLSS)</span>
-        <span id="badge-count-clss" style="font-size: 0.72rem; color: #8B5CF6;">(144.2k total)</span>
+        <span id="badge-count-clss" style="font-size: 0.72rem; color: #8B5CF6;">(252.2k total)</span>
       </div>
       <div class="timeline-legend-item" id="leg-pedagogy" onclick="toggleTimelineSeries('pedagogy')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #A7F3D0; background: #ECFDF5; transition: all 0.2s;">
         <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
@@ -2086,7 +2086,7 @@ Online Courses
         <strong>Nov 2023 & Jul 2024:</strong> State pedagogy workshops conducted face-to-face across 48,437 verified teachers.
       </div>
       <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #8B5CF6;">
-        <strong>Aug 2025 to Sep 2026:</strong> 7 consecutive cluster dialogue cycles deployed across all 55 districts, engaging 144,221 total session attendees.
+        <strong>Sep 2024 to Sep 2026:</strong> 11 cluster dialogue cycles deployed statewide (4 rounds in AY 2024-25, 5 in AY 2025-26, and 2 in AY 2026-27), engaging 252,226 total session attendees.
       </div>
       <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #F59E0B;">
         <strong>Aug 2024:</strong> 263 CRO SRG master trainers certified across Batches 1 to 7 to facilitate cluster dialogues.
@@ -3243,7 +3243,7 @@ gba(2, 132, 199, );
         programs: [
           { name: "Mission Ankur Courses 2 to 6", category: "Digital", channel: "Digital", count: 123452, download: "participant_lists/Mission_Ankur_4_5_6_Combined.csv" },
           { name: "PLC Digital Course", category: "Digital", channel: "Digital", count: 95604, download: "participant_lists/PLC_Digital_Course_Teachers_129818.csv" },
-          { name: "CLSS Cluster Dialogue (7 Rounds)", category: "CLSS Participant", channel: "In-Person", count: 51659, download: "participant_lists/CLSS_Combined_Unique_51659.csv" },
+          { name: "CLSS Cluster Dialogue (11 Rounds)", category: "CLSS Participant", channel: "In-Person", count: 51659, download: "participant_lists/CLSS_Combined_Unique_51659.csv" },
           { name: "NAS Assessment Course", category: "Digital", channel: "Digital", count: 46233, download: "participant_lists/NAS_Assessment_Course_Teachers_46233.csv" },
           { name: "Subject Pedagogy 2024", category: "In-Person", channel: "In-Person", count: 41883, download: "participant_lists/Subject_Pedagogy_2024_Teachers_41883.csv" },
           { name: "District Orientation Cadre (DO)", category: "DO Participant", channel: "In-Person", count: 8459, download: "participant_lists/DO_Combined_Cadre_8459.csv" }
@@ -3344,7 +3344,7 @@ gba(2, 132, 199, );
           { name: "Mission Ankur Course 2", category: "Digital", channel: "Digital", count: 123452, download: "participant_lists/Mission_Ankur_Course_2_Teachers_124738.csv" },
           { name: "PLC Digital Course", category: "Digital", channel: "Digital", count: 95604, download: "participant_lists/PLC_Digital_Course_Teachers_129818.csv" },
           { name: "Mission Ankur Course 3", category: "Digital", channel: "Digital", count: 78916, download: "participant_lists/Mission_Ankur_Course_3_Teachers_79286.csv" },
-          { name: "CLSS Cluster Dialogue (7 Rounds)", category: "CLSS Participant", channel: "In-Person", count: 51659, download: "participant_lists/CLSS_Combined_Unique_51659.csv" },
+          { name: "CLSS Cluster Dialogue (11 Rounds)", category: "CLSS Participant", channel: "In-Person", count: 51659, download: "participant_lists/CLSS_Combined_Unique_51659.csv" },
           { name: "NAS Assessment Course", category: "Digital", channel: "Digital", count: 46233, download: "participant_lists/NAS_Assessment_Course_Teachers_46233.csv" },
           { name: "Subject Pedagogy 2024", category: "In-Person", channel: "In-Person", count: 41883, download: "participant_lists/Subject_Pedagogy_2024_Teachers_41883.csv" },
           { name: "PSP Batches 1 to 5", category: "Digital", channel: "Digital", count: 87231, download: "participant_lists/PSP_Combined.csv" },
@@ -3365,8 +3365,8 @@ gba(2, 132, 199, );
         nodes: [
           { label: "AY 22-23", year: "AY 2022-23", active: 130561, cumulative: 130086, digital: 130561, clss: 0, do: 0, other: 0, x: 140 },
           { label: "AY 23-24", year: "AY 2023-24", active: 125695, cumulative: 152083, digital: 124203, clss: 0, do: 0, other: 6541, x: 370 },
-          { label: "AY 24-25", year: "AY 2024-25", active: 110003,  cumulative: 185995, digital: 76703,  clss: 0, do: 0, other: 41988, x: 600 },
-          { label: "AY 25-26", year: "AY 2025-26", active: 134268, cumulative: 207913, digital: 95604,  clss: 42583, do: 6840, other: 0, x: 830 },
+          { label: "AY 24-25", year: "AY 2024-25", active: 110003, cumulative: 190831, digital: 76703, clss: 52871, do: 0, other: 41988, x: 600 },
+          { label: "AY 25-26", year: "AY 2025-26", active: 134268, cumulative: 212749, digital: 95604,  clss: 42583, do: 6840, other: 0, x: 830 },
           { label: "AY 26-27", year: "AY 2026-27", active: 71593,  cumulative: 216954, digital: 0,      clss: 33607, do: 4210, other: 0, x: 1060 }
         ]
       },
@@ -3384,33 +3384,41 @@ gba(2, 132, 199, );
         ]
       },
       CLSS: {
-        title: "Monthly School Cluster Meetings (CLSS)",
-        subtitle: "Teachers meeting each month in school clusters to discuss lesson planning.",
-        yMax: 60000,
-        yLabels: ['60k', '40k', '20k', '0'],
+        title: "Monthly School Cluster Meetings (CLSS - 11 Statewide Rounds)",
+        subtitle: "Teachers meeting each month in school clusters to discuss lesson planning across AY 2024-25, AY 2025-26, and AY 2026-27.",
+        yMax: 80000,
+        yLabels: ['80k', '55k', '25k', '0'],
         nodes: [
-          { label: "Aug 25", year: "AY 2025-26", active: 25512, cumulative: 25512, clss: 25512, digital: 0, do: 0, other: 0, x: 120 },
-          { label: "Sep 25", year: "AY 2025-26", active: 22139, cumulative: 32180, clss: 22139, digital: 0, do: 0, other: 0, x: 275 },
-          { label: "Nov 25", year: "AY 2025-26", active: 13658, cumulative: 36440, clss: 13658, digital: 0, do: 0, other: 0, x: 430 },
-          { label: "Dec 25", year: "AY 2025-26", active: 17737, cumulative: 40533, clss: 17737, digital: 0, do: 0, other: 0, x: 585 },
-          { label: "Jan 26", year: "AY 2025-26", active: 18020, cumulative: 44120, clss: 18020, digital: 0, do: 0, other: 0, x: 740 },
-          { label: "Aug 26", year: "AY 2026-27", active: 23785, cumulative: 48910, clss: 23785, digital: 0, do: 0, other: 0, x: 895 },
-          { label: "Sep 26", year: "AY 2026-27", active: 23169, cumulative: 51659, clss: 23169, digital: 0, do: 0, other: 0, x: 1050 }
+          { label: "Sep 24", year: "AY 2024-25", active: 25949, cumulative: 25949, clss: 25949, digital: 0, do: 0, other: 0, x: 90 },
+          { label: "Oct 24", year: "AY 2024-25", active: 24995, cumulative: 38444, clss: 24995, digital: 0, do: 0, other: 0, x: 185 },
+          { label: "Dec 24", year: "AY 2024-25", active: 25273, cumulative: 46232, clss: 25273, digital: 0, do: 0, other: 0, x: 280 },
+          { label: "Jan 25", year: "AY 2024-25", active: 28547, cumulative: 52871, clss: 28547, digital: 0, do: 0, other: 0, x: 375 },
+          { label: "Aug 25", year: "AY 2025-26", active: 25512, cumulative: 58451, clss: 25512, digital: 0, do: 0, other: 0, x: 475 },
+          { label: "Sep 25", year: "AY 2025-26", active: 22139, cumulative: 61111, clss: 22139, digital: 0, do: 0, other: 0, x: 570 },
+          { label: "Nov 25", year: "AY 2025-26", active: 13658, cumulative: 62191, clss: 13658, digital: 0, do: 0, other: 0, x: 665 },
+          { label: "Dec 25", year: "AY 2025-26", active: 17737, cumulative: 62735, clss: 17737, digital: 0, do: 0, other: 0, x: 760 },
+          { label: "Jan 26", year: "AY 2025-26", active: 18020, cumulative: 62990, clss: 18020, digital: 0, do: 0, other: 0, x: 855 },
+          { label: "Aug 26", year: "AY 2026-27", active: 23785, cumulative: 63553, clss: 23785, digital: 0, do: 0, other: 0, x: 955 },
+          { label: "Sep 26", year: "AY 2026-27", active: 23169, cumulative: 68941, clss: 23169, digital: 0, do: 0, other: 0, x: 1050 }
         ]
       },
       DO: {
-        title: "District Master Trainers (DO)",
-        subtitle: "Lead teachers trained at district centers to run monthly school cluster meetings.",
-        yMax: 12000,
-        yLabels: ['12k', '8k', '4k', '0'],
+        title: "District Master Trainers & Orientations (DO - 11 Statewide Rounds)",
+        subtitle: "Cadre trainees and district orientation feedback across AY 2024-25, AY 2025-26, and AY 2026-27.",
+        yMax: 50000,
+        yLabels: ['50k', '35k', '18k', '0'],
         nodes: [
-          { label: "Aug 25", year: "AY 2025-26", active: 4833, cumulative: 4833, do: 4833, digital: 0, clss: 0, other: 0, x: 120 },
-          { label: "Sep 25", year: "AY 2025-26", active: 4280, cumulative: 6120, do: 4280, digital: 0, clss: 0, other: 0, x: 275 },
-          { label: "Nov 25", year: "AY 2025-26", active: 3205, cumulative: 7140, do: 3205, digital: 0, clss: 0, other: 0, x: 430 },
-          { label: "Dec 25", year: "AY 2025-26", active: 3990, cumulative: 7803, do: 3990, digital: 0, clss: 0, other: 0, x: 585 },
-          { label: "Jan 26", year: "AY 2025-26", active: 3944, cumulative: 8890, do: 3944, digital: 0, clss: 0, other: 0, x: 740 },
-          { label: "Aug 26", year: "AY 2026-27", active: 4434, cumulative: 9960, do: 4434, digital: 0, clss: 0, other: 0, x: 895 },
-          { label: "Sep 26", year: "AY 2026-27", active: 4351, cumulative: 10747, do: 4351, digital: 0, clss: 0, other: 0, x: 1050 }
+          { label: "Sep 24", year: "AY 2024-25", active: 7297, cumulative: 7297, do: 7297, digital: 0, clss: 0, other: 0, x: 90 },
+          { label: "Oct 24", year: "AY 2024-25", active: 9874, cumulative: 17171, do: 9874, digital: 0, clss: 0, other: 0, x: 185 },
+          { label: "Dec 24", year: "AY 2024-25", active: 14844, cumulative: 32015, do: 14844, digital: 0, clss: 0, other: 0, x: 280 },
+          { label: "Jan 25", year: "AY 2024-25", active: 14535, cumulative: 46550, do: 14535, digital: 0, clss: 0, other: 0, x: 375 },
+          { label: "Aug 25", year: "AY 2025-26", active: 4833, cumulative: 51383, do: 4833, digital: 0, clss: 0, other: 0, x: 475 },
+          { label: "Sep 25", year: "AY 2025-26", active: 4280, cumulative: 52670, do: 4280, digital: 0, clss: 0, other: 0, x: 570 },
+          { label: "Nov 25", year: "AY 2025-26", active: 3205, cumulative: 53690, do: 3205, digital: 0, clss: 0, other: 0, x: 665 },
+          { label: "Dec 25", year: "AY 2025-26", active: 3990, cumulative: 54353, do: 3990, digital: 0, clss: 0, other: 0, x: 760 },
+          { label: "Jan 26", year: "AY 2025-26", active: 3944, cumulative: 55440, do: 3944, digital: 0, clss: 0, other: 0, x: 855 },
+          { label: "Aug 26", year: "AY 2026-27", active: 4434, cumulative: 56510, do: 4434, digital: 0, clss: 0, other: 0, x: 955 },
+          { label: "Sep 26", year: "AY 2026-27", active: 4351, cumulative: 57297, do: 4351, digital: 0, clss: 0, other: 0, x: 1050 }
         ]
       }
     },
@@ -3466,9 +3474,9 @@ gba(2, 132, 199, );
         yLabels: ['220k', '160k', '80k', '0'],
         nodes: [
           { label: "AY 23-24", year: "AY 2023-24", active: 125695, cumulative: 125695, digital: 124203, clss: 0, do: 0, other: 6541, x: 180 },
-          { label: "AY 24-25", year: "AY 2024-25", active: 110003,  cumulative: 169820, digital: 76703,  clss: 0, do: 0, other: 41988, x: 450 },
-          { label: "AY 25-26", year: "AY 2025-26", active: 134268, cumulative: 196760, digital: 95604,  clss: 42583, do: 6840, other: 0, x: 720 },
-          { label: "AY 26-27", year: "AY 2026-27", active: 71593,  cumulative: 200965, digital: 0,      clss: 33607, do: 4210, other: 0, x: 990 }
+          { label: "AY 24-25", year: "AY 2024-25", active: 110003, cumulative: 174656, digital: 76703, clss: 52871, do: 0, other: 41988, x: 450 },
+          { label: "AY 25-26", year: "AY 2025-26", active: 134268, cumulative: 201596, digital: 95604,  clss: 42583, do: 6840, other: 0, x: 720 },
+          { label: "AY 26-27", year: "AY 2026-27", active: 71593,  cumulative: 205801, digital: 0,      clss: 33607, do: 4210, other: 0, x: 990 }
         ]
       },
       DIGITAL: {
@@ -3484,33 +3492,41 @@ gba(2, 132, 199, );
         ]
       },
       CLSS: {
-        title: "Monthly School Cluster Meetings (CLSS) - Post-Covid Era",
-        subtitle: "Teachers meeting each month in school clusters to discuss lesson planning across 7 rounds.",
-        yMax: 60000,
-        yLabels: ['60k', '40k', '20k', '0'],
+        title: "Monthly School Cluster Meetings (CLSS) - Post-Covid Era (11 Rounds)",
+        subtitle: "Teachers meeting each month in school clusters to discuss lesson planning across 11 rounds (AY 2024-25 to AY 2026-27).",
+        yMax: 80000,
+        yLabels: ['80k', '55k', '25k', '0'],
         nodes: [
-          { label: "Aug 25", year: "AY 2025-26", active: 25512, cumulative: 25512, clss: 25512, digital: 0, do: 0, other: 0, x: 120 },
-          { label: "Sep 25", year: "AY 2025-26", active: 22139, cumulative: 32180, clss: 22139, digital: 0, do: 0, other: 0, x: 275 },
-          { label: "Nov 25", year: "AY 2025-26", active: 13658, cumulative: 36440, clss: 13658, digital: 0, do: 0, other: 0, x: 430 },
-          { label: "Dec 25", year: "AY 2025-26", active: 17737, cumulative: 40533, clss: 17737, digital: 0, do: 0, other: 0, x: 585 },
-          { label: "Jan 26", year: "AY 2025-26", active: 18020, cumulative: 44120, clss: 18020, digital: 0, do: 0, other: 0, x: 740 },
-          { label: "Aug 26", year: "AY 2026-27", active: 23785, cumulative: 48910, clss: 23785, digital: 0, do: 0, other: 0, x: 895 },
-          { label: "Sep 26", year: "AY 2026-27", active: 23169, cumulative: 51659, clss: 23169, digital: 0, do: 0, other: 0, x: 1050 }
+          { label: "Sep 24", year: "AY 2024-25", active: 25949, cumulative: 25949, clss: 25949, digital: 0, do: 0, other: 0, x: 90 },
+          { label: "Oct 24", year: "AY 2024-25", active: 24995, cumulative: 38444, clss: 24995, digital: 0, do: 0, other: 0, x: 185 },
+          { label: "Dec 24", year: "AY 2024-25", active: 25273, cumulative: 46232, clss: 25273, digital: 0, do: 0, other: 0, x: 280 },
+          { label: "Jan 25", year: "AY 2024-25", active: 28547, cumulative: 52871, clss: 28547, digital: 0, do: 0, other: 0, x: 375 },
+          { label: "Aug 25", year: "AY 2025-26", active: 25512, cumulative: 58451, clss: 25512, digital: 0, do: 0, other: 0, x: 475 },
+          { label: "Sep 25", year: "AY 2025-26", active: 22139, cumulative: 61111, clss: 22139, digital: 0, do: 0, other: 0, x: 570 },
+          { label: "Nov 25", year: "AY 2025-26", active: 13658, cumulative: 62191, clss: 13658, digital: 0, do: 0, other: 0, x: 665 },
+          { label: "Dec 25", year: "AY 2025-26", active: 17737, cumulative: 62735, clss: 17737, digital: 0, do: 0, other: 0, x: 760 },
+          { label: "Jan 26", year: "AY 2025-26", active: 18020, cumulative: 62990, clss: 18020, digital: 0, do: 0, other: 0, x: 855 },
+          { label: "Aug 26", year: "AY 2026-27", active: 23785, cumulative: 63553, clss: 23785, digital: 0, do: 0, other: 0, x: 955 },
+          { label: "Sep 26", year: "AY 2026-27", active: 23169, cumulative: 68941, clss: 23169, digital: 0, do: 0, other: 0, x: 1050 }
         ]
       },
       DO: {
-        title: "District Master Trainers (DO) - Post-Covid Era",
-        subtitle: "Lead teachers trained at district centers to run monthly school cluster meetings.",
-        yMax: 12000,
-        yLabels: ['12k', '8k', '4k', '0'],
+        title: "District Master Trainers & Orientations (DO - Post-Covid Era)",
+        subtitle: "Cadre trainees and district orientation feedback across AY 2024-25, AY 2025-26, and AY 2026-27.",
+        yMax: 50000,
+        yLabels: ['50k', '35k', '18k', '0'],
         nodes: [
-          { label: "Aug 25", year: "AY 2025-26", active: 4833, cumulative: 4833, do: 4833, digital: 0, clss: 0, other: 0, x: 120 },
-          { label: "Sep 25", year: "AY 2025-26", active: 4280, cumulative: 6120, do: 4280, digital: 0, clss: 0, other: 0, x: 275 },
-          { label: "Nov 25", year: "AY 2025-26", active: 3205, cumulative: 7140, do: 3205, digital: 0, clss: 0, other: 0, x: 430 },
-          { label: "Dec 25", year: "AY 2025-26", active: 3990, cumulative: 7803, do: 3990, digital: 0, clss: 0, other: 0, x: 585 },
-          { label: "Jan 26", year: "AY 2026-27", active: 3944, cumulative: 8890, do: 3944, digital: 0, clss: 0, other: 0, x: 740 },
-          { label: "Aug 26", year: "AY 2026-27", active: 4434, cumulative: 9960, do: 4434, digital: 0, clss: 0, other: 0, x: 895 },
-          { label: "Sep 26", year: "AY 2026-27", active: 4351, cumulative: 10747, do: 4351, digital: 0, clss: 0, other: 0, x: 1050 }
+          { label: "Sep 24", year: "AY 2024-25", active: 7297, cumulative: 7297, do: 7297, digital: 0, clss: 0, other: 0, x: 90 },
+          { label: "Oct 24", year: "AY 2024-25", active: 9874, cumulative: 17171, do: 9874, digital: 0, clss: 0, other: 0, x: 185 },
+          { label: "Dec 24", year: "AY 2024-25", active: 14844, cumulative: 32015, do: 14844, digital: 0, clss: 0, other: 0, x: 280 },
+          { label: "Jan 25", year: "AY 2024-25", active: 14535, cumulative: 46550, do: 14535, digital: 0, clss: 0, other: 0, x: 375 },
+          { label: "Aug 25", year: "AY 2025-26", active: 4833, cumulative: 51383, do: 4833, digital: 0, clss: 0, other: 0, x: 475 },
+          { label: "Sep 25", year: "AY 2025-26", active: 4280, cumulative: 52670, do: 4280, digital: 0, clss: 0, other: 0, x: 570 },
+          { label: "Nov 25", year: "AY 2025-26", active: 3205, cumulative: 53690, do: 3205, digital: 0, clss: 0, other: 0, x: 665 },
+          { label: "Dec 25", year: "AY 2025-26", active: 3990, cumulative: 54353, do: 3990, digital: 0, clss: 0, other: 0, x: 760 },
+          { label: "Jan 26", year: "AY 2025-26", active: 3944, cumulative: 55440, do: 3944, digital: 0, clss: 0, other: 0, x: 855 },
+          { label: "Aug 26", year: "AY 2026-27", active: 4434, cumulative: 56510, do: 4434, digital: 0, clss: 0, other: 0, x: 955 },
+          { label: "Sep 26", year: "AY 2026-27", active: 4351, cumulative: 57297, do: 4351, digital: 0, clss: 0, other: 0, x: 1050 }
         ]
       }
     }
@@ -7165,7 +7181,7 @@ gba(2, 132, 199, );
   });
 
   // --- Monthly Intervention Trajectories Engine ---
-  const MONTHLY_TIMELINE_DATA = {"labels": ["2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"], "monthly": {"digital": [280, 1196, 88936, 76176, 58233, 36192, 14271, 12038, 13599, 21864, 22264, 18124, 19513, 17129, 34336, 2863, 3058, 5391, 3974, 2935, 1869, 3920, 7216, 5338, 5410, 35230, 7476, 1319, 510, 4967, 2144, 2057, 1790, 4401, 1456, 3543, 1912, 24032, 96983, 33213, 14924, 4278, 7950, 1638, 1485, 205, 0, 0], "clss": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25512, 22139, 0, 13658, 17737, 18221, 0, 0, 0, 0, 0, 0, 23785, 23169], "srg": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 263, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "pedagogy": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6554, 0, 0, 0, 0, 0, 0, 0, 41883, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, "cumulative": {"digital": [280, 1476, 90412, 166588, 224821, 261013, 275284, 287322, 300921, 322785, 345049, 363173, 382686, 399815, 434151, 437014, 440072, 445463, 449437, 452372, 454241, 458161, 465377, 470715, 476125, 511355, 518831, 520150, 520660, 525627, 527771, 529828, 531618, 536019, 537475, 541018, 542930, 566962, 663945, 697158, 712082, 716360, 724310, 725948, 727433, 727638, 727638, 727638], "clss": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25512, 47651, 47651, 61309, 79046, 97267, 97267, 97267, 97267, 97267, 97267, 97267, 121052, 144221], "srg": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263], "pedagogy": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6554, 6554, 6554, 6554, 6554, 6554, 6554, 6554, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437]}};
+  const MONTHLY_TIMELINE_DATA = {"labels": ["2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"], "monthly": {"digital": [280, 1196, 88936, 76176, 58233, 36192, 14271, 12038, 13599, 21864, 22264, 18124, 19513, 17129, 34336, 2863, 3058, 5391, 3974, 2935, 1869, 3920, 7216, 5338, 5410, 35230, 7476, 1319, 510, 4967, 2144, 2057, 1790, 4401, 1456, 3543, 1912, 24032, 96983, 33213, 14924, 4278, 7950, 1638, 1485, 205, 0, 0], "clss": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25949, 24995, 0, 25273, 28547, 0, 0, 0, 0, 0, 0, 25512, 22139, 0, 13658, 17737, 18221, 0, 0, 0, 0, 0, 0, 23785, 23169], "srg": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 263, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "pedagogy": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6554, 0, 0, 0, 0, 0, 0, 0, 41883, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, "cumulative": {"digital": [280, 1476, 90412, 166588, 224821, 261013, 275284, 287322, 300921, 322785, 345049, 363173, 382686, 399815, 434151, 437014, 440072, 445463, 449437, 452372, 454241, 458161, 465377, 470715, 476125, 511355, 518831, 520150, 520660, 525627, 527771, 529828, 531618, 536019, 537475, 541018, 542930, 566962, 663945, 697158, 712082, 716360, 724310, 725948, 727433, 727638, 727638, 727638], "clss": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25949, 50944, 50944, 76217, 104764, 104764, 104764, 104764, 104764, 104764, 104764, 130276, 152415, 152415, 166073, 183810, 202031, 202031, 202031, 202031, 202031, 202031, 202031, 225816, 248985], "srg": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263], "pedagogy": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6554, 6554, 6554, 6554, 6554, 6554, 6554, 6554, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437, 48437]}};
 
   let currentMonthlyMode = 'monthly'; // 'monthly' | 'cumulative'
   let activeTimelineSeries = {
