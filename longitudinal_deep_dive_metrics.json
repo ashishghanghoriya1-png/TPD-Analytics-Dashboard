@@ -1,0 +1,101 @@
+{
+  "total_verified_teachers": 212118,
+  "yearly_unique_reach": {
+    "2022": 129090,
+    "2023": 124203,
+    "2024": 86671,
+    "2025": 126384,
+    "2026": 71593
+  },
+  "annual_transitions": {
+    "2022->2023": {
+      "active_prior": 129090,
+      "retained_subsequent": 102878,
+      "retention_rate_pct": 79.69,
+      "dropped_teachers": 26212
+    },
+    "2023->2024": {
+      "active_prior": 124203,
+      "retained_subsequent": 47074,
+      "retention_rate_pct": 37.9,
+      "dropped_teachers": 77129
+    },
+    "2024->2025": {
+      "active_prior": 86671,
+      "retained_subsequent": 63557,
+      "retention_rate_pct": 73.33,
+      "dropped_teachers": 23114
+    },
+    "2025->2026": {
+      "active_prior": 126384,
+      "retained_subsequent": 57272,
+      "retention_rate_pct": 45.32,
+      "dropped_teachers": 69112
+    }
+  },
+  "persistence_distribution": {
+    "1": 45603,
+    "2": 62033,
+    "3": 56958,
+    "4": 32608,
+    "5": 14916
+  },
+  "core_persistent_cadre_count": 104482,
+  "one_hit_dropout_count": 38469,
+  "digital_course_funnel": [
+    {
+      "course": "Course 1 (Foundational Math)",
+      "teachers": 122922
+    },
+    {
+      "course": "Course 2 (Number Sense)",
+      "teachers": 116082
+    },
+    {
+      "course": "Course 3 (Place Value & Ops)",
+      "teachers": 76033
+    },
+    {
+      "course": "Course 4 (Geometry & Shapes)",
+      "teachers": 28357
+    },
+    {
+      "course": "Course 5 (Measurement & Data)",
+      "teachers": 18649
+    },
+    {
+      "course": "Course 6 (Pedagogical Consolidation)",
+      "teachers": 13618
+    }
+  ],
+  "clss_in_person_funnel": [
+    {
+      "round": "Aug 2025",
+      "teachers": 25294
+    },
+    {
+      "round": "Sep 2025",
+      "teachers": 21958
+    },
+    {
+      "round": "Nov 2025",
+      "teachers": 13568
+    },
+    {
+      "round": "Dec 2025",
+      "teachers": 17595
+    },
+    {
+      "round": "Jan 2026",
+      "teachers": 17898
+    },
+    {
+      "round": "Aug 2026",
+      "teachers": 23645
+    },
+    {
+      "round": "Sep 2026",
+      "teachers": 22985
+    }
+  ]
+}

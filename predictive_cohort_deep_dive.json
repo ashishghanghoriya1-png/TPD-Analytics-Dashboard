@@ -1,0 +1,60 @@
+{
+  "model_1_blended_conversion": [
+    {
+      "conversion_rate_pct": 10.0,
+      "teachers_converted_to_blended": 14308,
+      "net_additional_persistent_teachers": 5222,
+      "new_system_retention_lift_pct": 2.46
+    },
+    {
+      "conversion_rate_pct": 15.0,
+      "teachers_converted_to_blended": 21462,
+      "net_additional_persistent_teachers": 7833,
+      "new_system_retention_lift_pct": 3.69
+    },
+    {
+      "conversion_rate_pct": 20.0,
+      "teachers_converted_to_blended": 28617,
+      "net_additional_persistent_teachers": 10445,
+      "new_system_retention_lift_pct": 4.92
+    },
+    {
+      "conversion_rate_pct": 25.0,
+      "teachers_converted_to_blended": 35771,
+      "net_additional_persistent_teachers": 13056,
+      "new_system_retention_lift_pct": 6.16
+    }
+  ],
+  "model_2_digital_cliff_recovery": [
+    {
+      "recovery_rate_pct": 15.0,
+      "additional_c3_completers": 6007,
+      "additional_c4_completers": 7151,
+      "total_teachers_mastering_advanced_math": 13158,
+      "estimated_students_impacted": 460530
+    },
+    {
+      "recovery_rate_pct": 25.0,
+      "additional_c3_completers": 10012,
+      "additional_c4_completers": 11919,
+      "total_teachers_mastering_advanced_math": 21931,
+      "estimated_students_impacted": 767585
+    },
+    {
+      "recovery_rate_pct": 35.0,
+      "additional_c3_completers": 14017,
+      "additional_c4_completers": 16686,
+      "total_teachers_mastering_advanced_math": 30703,
+      "estimated_students_impacted": 1074605
+    }
+  ],
+  "model_3_november_slump": {
+    "november_loss_headcount": 8390,
+    "percentage_drop_from_september": 38.2,
+    "reasons_in_data": "Diwali festival break, harvest season, and mid-term exam duties",
+    "predicted_retention_if_shifted_to_early_dec": {
+      "recovered_teachers": 5873,
+      "follow_on_january_retention_boost": 3817
+    }
+  }
+}
