@@ -3,36 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Training in Madhya Pradesh (AY 2022-23 to AY 2026-27)</title>
-  
-  <!-- Fonts -->
+  <title>Madhya Pradesh TPD Analytics Dashboard (2022 to 2026)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- GSAP Animation Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
-function scrollToSection(sectionId) {
-  const el = document.getElementById(sectionId);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Update active jump button
-    document.querySelectorAll('.nav-jump-btn').forEach(btn => {
-      btn.style.fontWeight = '600';
-      btn.style.color = 'var(--text-muted)';
-      btn.style.background = 'none';
-      btn.style.border = 'none';
-    });
-    event.target.style.fontWeight = '800';
-    event.target.style.color = '#0369A1';
-    event.target.style.background = '#E0F2FE';
-    event.target.style.border = '1px solid #BAE6FD';
-  }
-}
-
-</script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+
+
     :root {
       --bg: #F8FAFC;
       --surface: #FFFFFF;
@@ -1501,620 +1479,1171 @@ function scrollToSection(sectionId) {
       color: #FFFFFF;
     }
 
+  
+    /* --- MASTER CONTROL BAR & TAB ARCHITECTURE --- */
+    .app-wrapper {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 3rem 1.5rem;
+      display: block;
+    }
+    .main-content {
+      width: 100%;
+      min-width: 0;
+    }
+    .sidebar-slicer {
+      display: none !important;
+    }
+
+    .master-control-bar {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 0.95rem 1.25rem 0.85rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .master-slicers-container {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .slicer-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .slicer-group-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .slicer-btn-group {
+      display: inline-flex;
+      background: var(--surface-subtle);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--surface-border);
+      gap: 2px;
+    }
+
+    .era-pill, .slicer-pill {
+      background: none;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .era-pill:hover, .slicer-pill:hover {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--blue-primary);
+    }
+
+    .era-pill.active, .slicer-pill.active {
+      background: #FFFFFF;
+      color: var(--blue-primary);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .slicer-badge {
+      font-size: 0.66rem;
+      font-family: var(--font-mono);
+      background: #E2E8F0;
+      color: var(--text-muted);
+      padding: 1px 5px;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    .era-pill.active .slicer-badge, .slicer-pill.active .slicer-badge {
+      background: var(--blue-subtle);
+      color: var(--blue-primary);
+    }
+
+    .slicer-reset-btn {
+      background: none;
+      border: 1px solid var(--surface-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .slicer-reset-btn:hover {
+      background: #FEE2E2;
+      color: #DC2626;
+      border-color: #FCA5A5;
+    }
+
+    .master-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--surface-border);
+    }
+
+    .active-slice-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .slice-badge-tag {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .badge-pill {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .era-badge { background: var(--purple-subtle); color: var(--purple-primary); border-color: var(--purple-border); }
+    .year-badge { background: var(--blue-subtle); color: var(--blue-primary); border-color: var(--blue-border); }
+    .inv-badge { background: var(--emerald-subtle); color: var(--emerald-primary); border-color: var(--emerald-border); }
+    .ver-badge { background: #FEF3C7; color: #D97706; border-color: #FDE68A; }
+
+    .tab-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface-subtle);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--surface-border);
+    }
+
+    .tab-nav-btn {
+      background: none;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .tab-nav-btn:hover {
+      color: var(--blue-primary);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .tab-nav-btn.active {
+      background: var(--blue-primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .tab-nav-btn .tab-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.08);
+      font-size: 0.68rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .tab-nav-btn.active .tab-num {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Tab content container */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: tabFadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+  
+    /* --- MASTER CONTROL BAR & 5-TAB ARCHITECTURE --- */
+    .app-wrapper {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem 3rem 1.5rem;
+      display: block;
+    }
+    .main-content {
+      width: 100%;
+      min-width: 0;
+    }
+    .sidebar-slicer {
+      display: none !important;
+    }
+
+    .master-control-bar {
+      position: sticky;
+      top: 0.5rem;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 0.85rem 1.15rem 0.75rem 1.15rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .master-slicers-container {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .slicer-group {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .slicer-group-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .slicer-btn-group {
+      display: inline-flex;
+      background: var(--surface-subtle);
+      padding: 2px;
+      border-radius: 7px;
+      border: 1px solid var(--surface-border);
+      gap: 2px;
+    }
+
+    .era-pill, .slicer-pill {
+      background: none;
+      border: none;
+      padding: 4px 9px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .era-pill:hover, .slicer-pill:hover {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--blue-primary);
+    }
+
+    .era-pill.active, .slicer-pill.active {
+      background: #FFFFFF;
+      color: var(--blue-primary);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .slicer-badge {
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      background: #E2E8F0;
+      color: var(--text-muted);
+      padding: 1px 5px;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    .era-pill.active .slicer-badge, .slicer-pill.active .slicer-badge {
+      background: var(--blue-subtle);
+      color: var(--blue-primary);
+    }
+
+    .slicer-reset-btn {
+      background: none;
+      border: 1px solid var(--surface-border);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .slicer-reset-btn:hover {
+      background: #FEE2E2;
+      color: #DC2626;
+      border-color: #FCA5A5;
+    }
+
+    .master-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--surface-border);
+    }
+
+    .active-slice-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .slice-badge-tag {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .badge-pill {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .era-badge { background: var(--purple-subtle); color: var(--purple-primary); border-color: var(--purple-border); }
+    .year-badge { background: var(--blue-subtle); color: var(--blue-primary); border-color: var(--blue-border); }
+    .inv-badge { background: var(--emerald-subtle); color: var(--emerald-primary); border-color: var(--emerald-border); }
+    .ver-badge { background: #FEF3C7; color: #D97706; border-color: #FDE68A; }
+
+    .tab-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--surface-subtle);
+      padding: 3px;
+      border-radius: 9px;
+      border: 1px solid var(--surface-border);
+    }
+
+    .tab-nav-btn {
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .tab-nav-btn:hover {
+      color: var(--blue-primary);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .tab-nav-btn.active {
+      background: var(--blue-primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .tab-nav-btn .tab-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.08);
+      font-size: 0.65rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .tab-nav-btn.active .tab-num {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Tab content container */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: tabFadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
   </style>
 </head>
 <body>
-  <!-- Executive Access Security Gate -->
-  <div id="authGate" class="auth-gate-overlay">
-    <div class="auth-card">
-      <div class="auth-badge">
-        <span class="auth-status-dot"></span>
+  <div class="auth-gate-overlay" id="authGate">
+<div class="auth-card">
+<div class="auth-badge">
+<span class="auth-status-dot"></span>
         Rajya Shiksha Kendra, Madhya Pradesh
       </div>
-      <div class="auth-icon-wrap">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-      </div>
-      <h2 class="auth-title">Restricted Executive Access</h2>
-      <p class="auth-desc">Enter the access key to view teacher training numbers, district reach, and classroom assessment results.</p>
-      
-      <form id="authForm" onsubmit="handleAuthSubmit(event)">
-        <div class="auth-input-group">
-          <input type="password" id="accessKeyInput" placeholder="Enter Access Key" autocomplete="current-password" required autofocus />
-          <button type="button" class="auth-toggle-btn" onclick="togglePasswordVisibility()" title="Show/Hide Access Key">
-            <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-          </button>
-        </div>
-        <div style="font-size: 0.72rem; color: #475569; margin: 4px 0 10px 0; text-align: center; background: #F1F5F9; padding: 6px; border-radius: 6px;">
-Access Key: <strong style="color: #0284C7; user-select: all; cursor: pointer;" onclick="document.getElementById('accessKeyInput').value='RSK-TPD-2026-SECURE'">RSK-TPD-2026-SECURE</strong> (Click to auto-fill)
+<div class="auth-icon-wrap">
+<svg fill="none" height="26" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="26">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+</svg>
 </div>
-<div id="authErrorMsg" class="auth-error-msg" style="display: none;"></div>
-        <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
-          <span>Unlock Dashboard</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </form>
-      
-      <div class="auth-footer-note">
-        Protected under State Educational Governance & Audit Protocol.<br>
+<h2 class="auth-title">Restricted Executive Access</h2>
+<p class="auth-desc">Enter the access key to view teacher training numbers, district reach, and classroom assessment results.</p>
+<form id="authForm" onsubmit="handleAuthSubmit(event)">
+<div class="auth-input-group">
+<input autocomplete="current-password" autofocus="" id="accessKeyInput" placeholder="Enter Access Key" required="" type="password"/>
+<button class="auth-toggle-btn" onclick="togglePasswordVisibility()" title="Show/Hide Access Key" type="button">
+<svg fill="none" height="18" id="eyeIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+</button>
+</div>
+<div style="font-size: 0.72rem; color: #475569; margin: 4px 0 10px 0; text-align: center; background: #F1F5F9; padding: 6px; border-radius: 6px;">
+Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RSK-TPD-2026-SECURE'" style="color: #0284C7; user-select: all; cursor: pointer;">RSK-TPD-2026-SECURE</strong> (Click to auto-fill)
+</div>
+<div class="auth-error-msg" id="authErrorMsg" style="display: none;"></div>
+<button class="auth-submit-btn" id="authSubmitBtn" type="submit">
+<span>Unlock Dashboard</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</button>
+</form>
+<div class="auth-footer-note">
+        Protected under State Educational Governance &amp; Audit Protocol.<br/>
         Authorized access only for RSK and Department Leadership.
       </div>
-    </div>
-  </div>
-
-
-  <!-- Ambient Ethereal Constellation Canvas (Light Theme) -->
+</div>
+</div>
   <canvas id="ambient-canvas"></canvas>
-
-
-
-<div class="app-wrapper">
-
-  <!-- LEFT SIDEBAR SLICER PANEL -->
-  <aside class="sidebar-slicer" id="sidebarSlicer">
-    
-    <!-- Sidebar Header -->
-    <div style="padding-bottom: 0.75rem; border-bottom: 1px solid var(--surface-border);">
-      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
-        <span class="pulse-dot"></span>
-        <span style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; color: var(--emerald-primary); text-transform: uppercase;">100% Verified Source</span>
-      </div>
-      <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); line-height: 1.2;">Filters</div>
-      <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Filter data by year and program</div>
-    </div>
-
-    <!-- Master Slicer: Timeline Period (Controls All Slicers Below) -->
-    <div class="slicer-section" style="border: 2px solid #BAE6FD; background: #F0F9FF; border-radius: 8px; padding: 10px 10px 8px 10px; margin-bottom: 12px;">
-      <div class="slicer-header" style="margin-bottom: 4px;">
-        <div style="display: flex; align-items: center; gap: 4px;">
-          <span style="font-size: 0.62rem; font-family: var(--font-mono); font-weight: 800; background: #0284C7; color: #FFFFFF; padding: 1px 5px; border-radius: 3px;">MASTER</span>
-          <span class="slicer-title" style="color: #0369A1; font-weight: 800;">Timeline Period</span>
-        </div>
-        <span class="slicer-reset-link" onclick="selectEra('ALL')">Reset</span>
-      </div>
-      <div style="font-size: 0.68rem; color: #0284C7; margin-bottom: 8px; line-height: 1.25;">
-        Filter all views by time period: All Periods, Covid, or Post-Covid.
-      </div>
-      <div id="sideEraSlicers">
-        <button class="slicer-pill active" data-slicer-era="ALL" onclick="selectEra('ALL')">
-          <span>All Periods</span>
-          <span class="slicer-badge">216,954</span>
-        </button>
-        <button class="slicer-pill" data-slicer-era="COVID" onclick="selectEra('COVID')">
-          <span>Covid (Before Apr 2023)</span>
-          <span class="slicer-badge">130,561</span>
-        </button>
-        <button class="slicer-pill" data-slicer-era="POST_COVID" onclick="selectEra('POST_COVID')">
-          <span>Post-Covid (After Apr 2023)</span>
-          <span class="slicer-badge">200,965</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Slicer 1: Academic Year -->
-    <div class="slicer-section">
-      <div class="slicer-header">
-        <span class="slicer-title">Academic Year</span>
-        <span class="slicer-reset-link" onclick="selectYear('ALL')">Reset</span>
-      </div>
-      <div id="sideYearSlicers">
-        <button class="slicer-pill active" data-slicer-year="ALL" onclick="selectYear('ALL')">
-          <span>All Academic Years</span>
-          <span class="slicer-badge">216,954</span>
-        </button>
-        <button class="slicer-pill" data-slicer-year="AY 2022-23" onclick="selectYear('AY 2022-23')">
-          <span>AY 2022-23 (Covid)</span>
-          <span class="slicer-badge">130,561</span>
-        </button>
-        <button class="slicer-pill" data-slicer-year="AY 2023-24" onclick="selectYear('AY 2023-24')">
-          <span>AY 2023-24 (Post-Covid)</span>
-          <span class="slicer-badge">125,695</span>
-        </button>
-        <button class="slicer-pill" data-slicer-year="AY 2024-25" onclick="selectYear('AY 2024-25')">
-          <span>AY 2024-25</span>
-          <span class="slicer-badge">110,003</span>
-        </button>
-        <button class="slicer-pill" data-slicer-year="AY 2025-26" onclick="selectYear('AY 2025-26')">
-          <span>AY 2025-26</span>
-          <span class="slicer-badge">134,268</span>
-        </button>
-        <button class="slicer-pill" data-slicer-year="AY 2026-27" onclick="selectYear('AY 2026-27')">
-          <span>AY 2026-27</span>
-          <span class="slicer-badge">33,607</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Slicer 2: Training Program / Delivery Format -->
-    <div class="slicer-section">
-      <div class="slicer-header">
-        <span class="slicer-title">Training Type</span>
-        <span class="slicer-reset-link" onclick="selectIntervention('ALL')">Reset</span>
-      </div>
-      <div id="sideInvSlicers">
-        <button class="slicer-pill active" data-slicer-inv="ALL" onclick="selectIntervention('ALL')">
-          <span>All 19 Programs</span>
-          <span class="slicer-badge">212k</span>
-        </button>
-        <button class="slicer-pill" data-slicer-inv="DIGITAL" onclick="selectIntervention('DIGITAL')">
-          <span>Online Courses</span>
-          <span class="slicer-badge">177k</span>
-        </button>
-        <!-- Nested Digital Course Dropdown (Expands when Online Courses is selected) -->
-        <div id="nestedDigitalContainer" style="display: none; margin: 4px 0 8px 10px; padding: 6px 8px; background: #F0F9FF; border-left: 3px solid #0284C7; border-radius: 6px;">
-          <label style="font-size: 0.68rem; font-weight: 700; color: #0369A1; text-transform: uppercase; display: block; margin-bottom: 4px;">Filter Specific Digital Course:</label>
-          <select id="selectDigitalCourse" onchange="onDigitalCourseSelect(this.value)" style="width: 100%; font-size: 0.74rem; font-family: var(--font-sans); padding: 4px 6px; border: 1px solid #BAE6FD; border-radius: 4px; background: #FFFFFF; color: var(--text-main); outline: none; cursor: pointer;">
-            <option value="ALL_DIGITAL">All 19 Digital Courses (727k enrollments)</option>
-            <optgroup label="Foundational Literacy & Numeracy (Mission Ankur)">
-              <option value="MA_C1">Mission Ankur C1: Math in Early Grades (133k, 85.6% comp)</option>
-              <option value="MA_C2">Mission Ankur C2: Understanding Numbers (125k, +16.4% gain)</option>
-              <option value="MA_C3">Mission Ankur C3: Place Value & Operations (80k, +20.3% gain)</option>
-              <option value="MA_C4">Mission Ankur C4: Geometry & Shapes (30k, 21.2% comp)</option>
-              <option value="MA_C5">Mission Ankur C5: Measurement & Data (30k, +10.9% gain)</option>
-              <option value="MA_C6">Mission Ankur C6: Mathematical Reasoning (20k, +8.9% gain)</option>
-            </optgroup>
-            <optgroup label="Pedagogical Subject Practice (PSP)">
-              <option value="PSP_1">PSP Batch 1: Primary Practice (25k, 47.6% comp)</option>
-              <option value="PSP_2">PSP Batch 2: Classroom Pedagogy (13k, +20.9% gain)</option>
-              <option value="PSP_3">PSP Batch 3: Language & Literacy (13k, +10.9% gain)</option>
-              <option value="PSP_4">PSP Batch 4: Advanced Methods (34k, 54.4% comp)</option>
-              <option value="PSP_5">PSP Batch 5: Consolidation (7.9k, 38.0% comp)</option>
-            </optgroup>
-            <optgroup label="Early Childhood Education (ECE)">
-              <option value="ECE_1">ECE Course 1: Foundational Principles (7.3k, 66.2% comp)</option>
-              <option value="ECE_2">ECE Course 2: Play & Morning Circle (5.3k, 76.8% comp)</option>
-              <option value="ECE_3">ECE Course 3: Language Development (4.8k, +10.4% gain)</option>
-              <option value="ECE_4">ECE Course 4: Cognitive Development (6.2k, 42.6% comp)</option>
-              <option value="ECE_5">ECE Course 5: Thematic Approach (5.7k, 61.8% comp)</option>
-              <option value="ECE_6">ECE Course 6: Assessment & Parents (4.9k, 60.8% comp)</option>
-            </optgroup>
-            <optgroup label="Assessment Frameworks & Communities">
-              <option value="NAS">NAS Competency Course (46k, 83.4% post mastery)</option>
-              <option value="PLC">PLC Digital Course (129k enrolled, 42.2% comp)</option>
-            </optgroup>
-          </select>
-        </div>
-        <button class="slicer-pill" data-slicer-inv="CLSS" onclick="selectIntervention('CLSS')">
-          <span>Cluster Meetings (CLSS)</span>
-          <span class="slicer-badge">52k</span>
-        </button>
-        <button class="slicer-pill" data-slicer-inv="DO" onclick="selectIntervention('DO')">
-          <span>District Trainers (DO)</span>
-          <span class="slicer-badge">8.5k</span>
-        </button>
-        <button class="slicer-pill" data-slicer-inv="INPERSON" onclick="selectIntervention('INPERSON')">
-          <span>In-Person Workshops</span>
-          <span class="slicer-badge">69k</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Slicer 3: Teacher Verification & Integrity -->
-    <div class="slicer-section">
-      <div class="slicer-header">
-        <span class="slicer-title">Verification Status</span>
-      </div>
-      <div id="sideVerSlicers">
-        <button class="slicer-pill active" data-slicer-ver="VERIFIED" onclick="selectVerification('VERIFIED')">
-          <span>Verified Government IDs</span>
-          <span class="slicer-badge" style="color: var(--emerald-primary); font-weight: 700;">216,954</span>
-        </button>
-        <button class="slicer-pill" data-slicer-ver="ALL_ACCOUNTS" onclick="selectVerification('ALL_ACCOUNTS')">
-          <span>All App Accounts</span>
-          <span class="slicer-badge">920,559</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Source Files Transparency Inspector Button -->
-    <div style="padding-top: 0.5rem; border-top: 1px solid var(--surface-border);">
-      <button class="slicer-pill" onclick="openSourceModal()" style="background: #FFFFFF; border: 1px dashed var(--blue-primary); color: var(--blue-primary); justify-content: center; gap: 0.5rem;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Inspect 25 Source Excel Files
-      </button>
-    </div>
-
-    <!-- Download Center in Sidebar -->
-    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--surface-border);">
-      <span class="slicer-title">Export Verified Data</span>
-      <a href="Master_Beneficiary_Registry_Verified_212k.csv" download class="slicer-pill" style="text-decoration: none; background: var(--blue-primary); color: #FFFFFF; font-weight: 700; border-color: var(--blue-primary); justify-content: center; gap: 0.5rem;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Verified Roster (212k CSV)
-      </a>
-      <a href="Master_Beneficiary_Registry_387k.csv" download class="slicer-pill" style="text-decoration: none; background: #FFFFFF; color: var(--text-muted); justify-content: center; font-size: 0.78rem;">
-        Download All 386k Accounts
-      </a>
-    </div>
-
-  </aside>
-
-  <!-- MAIN CANVAS -->
-  <main class="main-content">
-
-
-  <!-- Header -->
-  <header id="header">
-    <div class="badge-bar">
-      <div class="org-badge">
-        <span class="status-dot"></span>
+  
+  <div class="app-wrapper">
+    <main class="main-content">
+      <header id="header">
+<div class="badge-bar">
+<div class="org-badge">
+<span class="status-dot"></span>
         Madhya Pradesh School Education Department
       </div>
-      <span style="color: var(--text-dim); font-size: 0.75rem;">·</span>
-      <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Teacher Professional Development (AY 2022-23 to AY 2026-27)</span>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        <h1>Teacher Training in Madhya Pradesh</h1>
-        <p class="subtitle">
+<span style="color: var(--text-dim); font-size: 0.75rem;">·</span>
+<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Teacher Professional Development (AY 2022-23 to AY 2026-27)</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+<div>
+<h1>Teacher Training in Madhya Pradesh</h1>
+<p class="subtitle">
           Tracking 216,954 verified government teachers across online courses, monthly cluster meetings, and classroom teaching.
         </p>
-      </div>
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <a href="Master_Beneficiary_Registry_387k.xlsx" download class="top-dl-btn">
+</div>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<a class="top-dl-btn" download="" href="Master_Beneficiary_Registry_387k.xlsx">
           Download Master Registry (Excel)
         </a>
-        <a href="Master_Beneficiary_Registry_Verified_212k.csv" download class="top-dl-btn">
+<a class="top-dl-btn" download="" href="Master_Beneficiary_Registry_Verified_212k.csv">
           Download Verified 212k Roster (CSV)
         </a>
-      </div>
-    </div>
-  </header>
-
-<!-- Top Navigation Quick Jump Tabs -->
-<div class="quick-nav-bar" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; background: var(--surface-card); padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid var(--surface-border);">
-<button class="nav-jump-btn active" onclick="scrollToSection('macro-panel')" style="background: none; border: none; font-size: 0.8rem; font-weight: 700; color: #0284C7; cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-Annual Overview
-</button>
-<span style="color: #CBD5E1;">|</span>
-<button class="nav-jump-btn" onclick="scrollToSection('monthly-timeline-panel')" style="background: none; border: none; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-Monthly Progress
-</button>
-<span style="color: #CBD5E1;">|</span>
-<button class="nav-jump-btn" onclick="scrollToSection('pedagogy-panel')" style="background: none; border: none; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-Classroom Practice
-</button>
-<span style="color: #CBD5E1;">|</span>
-<button class="nav-jump-btn" onclick="scrollToSection('persistence-deep-dive-panel')" style="background: #E0F2FE; border: 1px solid #BAE6FD; font-size: 0.8rem; font-weight: 800; color: #0369A1; cursor: pointer; padding: 4px 10px; border-radius: 4px;">
-Teacher Persistence & Dropout Deep Dive
-</button>
-<span style="color: #CBD5E1;">|</span>
-<button class="nav-jump-btn" onclick="scrollToSection('qualitative-prediction-panel')" style="background: none; border: none; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-Teacher Voices & TabFM Predictions
-</button>
-<span style="color: #CBD5E1;">|</span>
-<button class="nav-jump-btn" onclick="scrollToSection('digital-kpi-panel')" style="background: none; border: none; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-Online Courses
-</button>
 </div>
-
-
-  <!-- Comprehensive Executive KPI Suite: Combining Scale, Delivery Channels & Classroom Pedagogy -->
-            <!-- Master Timeline Period Slicer (Controls All Child Slicers, Years & Interventions) -->
-      <div class="era-slicer-bar" id="topEraBar">
-        <div style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 0.35rem;">
-            <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: #0284C7; color: #FFFFFF; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em;">MASTER SLICER</span>
-            <span style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">TIMELINE PERIOD:</span>
-          </div>
-          <div class="era-pills" id="topEraSlicers" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-            <button class="era-pill active" data-era="ALL" onclick="selectEra('ALL')">
-              <span>All Periods (2022 to 2026)</span>
-              <span class="era-badge">216,954</span>
-            </button>
-            <button class="era-pill" data-era="COVID" onclick="selectEra('COVID')">
-              <span>Covid Period (Before Apr 2023)</span>
-              <span class="era-badge">130,561</span>
-            </button>
-            <button class="era-pill" data-era="POST_COVID" onclick="selectEra('POST_COVID')">
-              <span>Post-Covid Period (After Apr 2023)</span>
-              <span class="era-badge">200,965</span>
-            </button>
-          </div>
-        </div>
-        <div style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">
-          Cut-off Boundary: <strong style="color: var(--text-main);">1 April 2023</strong>
+</div>
+</header>
+      
+  <!-- Unified Non-Repeating Master Control Bar -->
+  <div class="master-control-bar" id="masterControlBar">
+    <!-- Master Slicers Row -->
+    <div class="master-slicers-container">
+      <!-- Period Slicer -->
+      <div class="slicer-group">
+        <span class="slicer-group-title">PERIOD:</span>
+        <div class="slicer-btn-group" id="topEraSlicers">
+          <button class="era-pill active" data-era="ALL" onclick="selectEra('ALL')">All Periods</button>
+          <button class="era-pill" data-era="COVID" onclick="selectEra('COVID')">Covid (Pre-Apr 2023)</button>
+          <button class="era-pill" data-era="POST_COVID" onclick="selectEra('POST_COVID')">Post-Covid Fresh Start</button>
         </div>
       </div>
 
-      <!-- Top Sticky Slicer Island & Filter Breadcrumbs -->
-  <div class="year-island-bar" id="topYearBar" style="margin-bottom: 0.75rem;">
-    <div class="year-island-left">
-      <span class="year-island-label">ACTIVE SLICE:</span>
-      <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-        <span id="badgeSliceEra" style="font-size: 0.75rem; font-family: var(--font-mono); background: var(--purple-subtle); color: var(--purple-primary); border: 1px solid var(--purple-border); padding: 3px 8px; border-radius: 9999px; font-weight: 700;">Period: All Periods</span>
-        <span id="badgeSliceYear" style="font-size: 0.75rem; font-family: var(--font-mono); background: var(--blue-subtle); color: var(--blue-primary); border: 1px solid var(--blue-border); padding: 3px 8px; border-radius: 9999px; font-weight: 700;">Year: All Years</span>
-        <span id="badgeSliceInv" style="font-size: 0.75rem; font-family: var(--font-mono); background: var(--emerald-subtle); color: var(--emerald-primary); border: 1px solid var(--emerald-border); padding: 3px 8px; border-radius: 9999px; font-weight: 700;">Program: All 19 Programs</span>
-        <span id="badgeSliceVer" style="font-size: 0.75rem; font-family: var(--font-mono); background: var(--amber-subtle); color: var(--amber-primary); border: 1px solid var(--amber-border); padding: 3px 8px; border-radius: 9999px; font-weight: 700;">Verified Government Teachers</span>
-        <button onclick="resetAllSlicers()" style="background: transparent; border: 1px solid var(--surface-border); border-radius: 9999px; padding: 3px 10px; font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-muted); cursor: pointer; font-weight: 600;">Reset Slicers</button>
+      <!-- Academic Year Slicer -->
+      <div class="slicer-group">
+        <span class="slicer-group-title">YEAR:</span>
+        <div class="slicer-btn-group" id="masterYearSlicers">
+          <button class="slicer-pill active" data-slicer-year="ALL" onclick="selectYear('ALL')"><span>All Years</span><span class="slicer-badge">216k</span></button>
+          <button class="slicer-pill" data-slicer-year="AY 2022-23" onclick="selectYear('AY 2022-23')"><span>2022-23</span><span class="slicer-badge">131k</span></button>
+          <button class="slicer-pill" data-slicer-year="AY 2023-24" onclick="selectYear('AY 2023-24')"><span>2023-24</span><span class="slicer-badge">126k</span></button>
+          <button class="slicer-pill" data-slicer-year="AY 2024-25" onclick="selectYear('AY 2024-25')"><span>2024-25</span><span class="slicer-badge">136k</span></button>
+          <button class="slicer-pill" data-slicer-year="AY 2025-26" onclick="selectYear('AY 2025-26')"><span>2025-26</span><span class="slicer-badge">132k</span></button>
+          <button class="slicer-pill" data-slicer-year="AY 2026-27" onclick="selectYear('AY 2026-27')"><span>2026-27</span><span class="slicer-badge">113k</span></button>
+        </div>
+      </div>
+
+      <!-- Training Type Slicer -->
+      <div class="slicer-group">
+        <span class="slicer-group-title">PROGRAM:</span>
+        <div class="slicer-btn-group" id="masterInvSlicers">
+          <button class="slicer-pill active" data-slicer-inv="ALL" onclick="selectIntervention('ALL')"><span>All Programs</span><span class="slicer-badge">212k</span></button>
+          <button class="slicer-pill" data-slicer-inv="DIGITAL" onclick="selectIntervention('DIGITAL')"><span>Online Courses</span><span class="slicer-badge">177k</span></button>
+          <button class="slicer-pill" data-slicer-inv="CLSS" onclick="selectIntervention('CLSS')"><span>Cluster Samwaad</span><span class="slicer-badge">52k</span></button>
+          <button class="slicer-pill" data-slicer-inv="DO" onclick="selectIntervention('DO')"><span>District Trainers</span><span class="slicer-badge">8.5k</span></button>
+          <button class="slicer-pill" data-slicer-inv="INPERSON" onclick="selectIntervention('INPERSON')"><span>In-Person</span><span class="slicer-badge">69k</span></button>
+        </div>
+      </div>
+
+      <!-- Verification Status & Actions -->
+      <div class="slicer-group" style="margin-left: auto;">
+        <span class="slicer-group-title">STATUS:</span>
+        <div class="slicer-btn-group" id="masterVerSlicers">
+          <button class="slicer-pill active" data-slicer-ver="VERIFIED" onclick="selectVerification('VERIFIED')">Verified Teachers</button>
+          <button class="slicer-pill" data-slicer-ver="ALL_ACCOUNTS" onclick="selectVerification('ALL_ACCOUNTS')">All Records</button>
+        </div>
+        <button class="slicer-reset-btn" onclick="resetAllSlicers()" title="Reset all slicers to defaults">Reset Filters</button>
+        <button class="slicer-reset-btn" onclick="openSourceModal()" style="border-color: #BAE6FD; color: #0284C7; font-weight: 700;">Inspect Sources</button>
       </div>
     </div>
-    <div class="year-island-status" id="yearIslandStatus">
-      <span class="pulse-dot"></span>
-      <span id="yearStatusText">216,954 Verified Government Teachers (Mapped via DIKSHA UUID & Portal Records)</span>
+
+    <!-- Nested Digital Dropdown (visible when Online Courses is selected) -->
+    <div id="nestedDigitalContainer" style="display: none; padding-top: 0.65rem; border-top: 1px dashed var(--surface-border); margin-top: 0.25rem; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.72rem; font-weight: 700; color: var(--blue-primary); letter-spacing: 0.04em;">FILTER SPECIFIC ONLINE COURSE:</span>
+      <select id="selectDigitalCourse" onchange="onDigitalCourseSelect(this.value)" style="padding: 4px 10px; border-radius: 6px; border: 1px solid var(--blue-border); font-size: 0.78rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 480px;">
+        <option value="ALL_DIGITAL">All 19 Online Courses (727k enrollments)</option>
+        <optgroup label="Covid Online Courses (Before Apr 2023)">
+          <option value="MA_C1">Mission Ankur Course 1</option>
+          <option value="PSP_1">Parents as School Partners Course 1</option>
+          <option value="PSP_2">Parents as School Partners Course 2</option>
+        </optgroup>
+        <optgroup label="Post-Covid Online Courses (Fresh Start Apr 2023 onwards)">
+          <option value="MA_C2">Mission Ankur Course 2</option>
+          <option value="MA_C3">Mission Ankur Course 3</option>
+          <option value="MA_C4">Mission Ankur Course 4</option>
+          <option value="MA_C5">Mission Ankur Course 5</option>
+          <option value="FLN_1">FLN Literacy Course 1</option>
+          <option value="FLN_2">FLN Numeracy Course 1</option>
+          <option value="PED_1">Foundational Pedagogy</option>
+          <option value="LEAD_1">School Leadership Series 1</option>
+          <option value="LEAD_2">School Leadership Series 2</option>
+          <option value="DIG_LIT">Digital Literacy for Educators</option>
+          <option value="INCL_ED">Inclusive Education Modules</option>
+          <option value="ASSESS_1">Formative Assessment in Practice</option>
+          <option value="MATH_PED">Early Grade Mathematics</option>
+          <option value="LANG_PED">Language and Reading Acquisition</option>
+          <option value="NEP_2020">NEP 2020 Implementation Toolkit</option>
+          <option value="CYBER_SEC">Cyber Safety for Schools</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- Active Slice Badges & Master Tab Navigation Row -->
+    <div class="master-nav-row">
+      <div class="active-slice-badges">
+        <span class="slice-badge-tag">ACTIVE SLICE:</span>
+        <span class="badge-pill era-badge" id="badgeSliceEra">MASTER PERIOD: All Periods (2022 to 2026)</span>
+        <span class="badge-pill year-badge" id="badgeSliceYear">Academic Year: All Academic Years</span>
+        <span class="badge-pill inv-badge" id="badgeSliceInv">Program: All 19 Programs</span>
+        <span class="badge-pill ver-badge" id="badgeSliceVer">Verified Government Teachers Only</span>
+      </div>
+
+      <!-- Master Tab Navigation (5 Distinct Tabs) -->
+      <div class="tab-nav-bar" id="mainTabNav">
+        <button class="tab-nav-btn active" id="tab-btn-overview" data-tab="tab-overview" onclick="switchTab('tab-overview')">
+          <span class="tab-num">1</span> Overview & Reach
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-digital" data-tab="tab-digital" onclick="switchTab('tab-digital')">
+          <span class="tab-num">2</span> Online Courses (DIKSHA)
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-trends" data-tab="tab-trends" onclick="switchTab('tab-trends')">
+          <span class="tab-num">3</span> Monthly Trends & Districts
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-retention" data-tab="tab-retention" onclick="switchTab('tab-retention')">
+          <span class="tab-num">4</span> Retention & Digital Benefit
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-feedback" data-tab="tab-feedback" onclick="switchTab('tab-feedback')">
+          <span class="tab-num">5</span> Feedback & Directory
+        </button>
+      </div>
     </div>
   </div>
-  <div class="kpi-section">
-    
-    <!-- Group 1: Overall Reach & Teacher Retention -->
-    <div class="kpi-group">
-      <div class="kpi-group-header">
-        <div class="kpi-group-title">
-          <span class="kpi-group-badge badge-blue">Overall Reach</span>
+
+      
+    <!-- TAB 1: OVERVIEW & REACH -->
+    <div id="tab-overview" class="tab-content active">
+      <div class="kpi-section">
+<!-- Group 1: Overall Reach & Teacher Retention -->
+<div class="kpi-group">
+<div class="kpi-group-header">
+<div class="kpi-group-title">
+<span class="kpi-group-badge badge-blue">Overall Reach</span>
           Total Teachers Reached (AY 2022-23 to AY 2026-27)
         </div>
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-card" style="border-color: rgba(2, 132, 199, 0.4); background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);">
-          <div class="kpi-label" style="color: var(--blue-primary); font-weight: 700;">Verified Government Teachers</div>
-          <div class="kpi-value" id="kpi-total" style="color: var(--text-main);">216,954</div>
-          <div class="kpi-meta" id="kpi-total-meta">Official government teachers with verified employee IDs</div>
-          <div class="kpi-source-note" id="kpi-total-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: State HRMS Verified Database (AA1234 format)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-retained-label">Teachers in Multiple Years</div>
-          <div class="kpi-value" id="kpi-retained" style="color: var(--blue-primary);">162,955</div>
-          <div class="kpi-meta" id="kpi-retained-meta">79.2% of teachers participated in 2 or more school years.</div>
-          <div class="kpi-source-note" id="kpi-retained-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 2022-2026 Academic Calendar Registry (79.2% multi-year retention)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-active-label">Active Teachers in Latest Full AY (2025-26)</div>
-          <div class="kpi-value" id="kpi-active2026" style="color: var(--emerald-primary);">71,593</div>
-          <div class="kpi-meta" id="kpi-active2026-meta">Teachers actively participating in the current school year.</div>
-          <div class="kpi-source-note" id="kpi-active2026-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 2025-2026 Active Training Logs & Session Rosters</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-districts-label">Districts Reached</div>
-          <div class="kpi-value" id="kpi-districts">55 / 55</div>
-          <div class="kpi-meta" id="kpi-districts-meta">All 55 districts in Madhya Pradesh have active teachers.</div>
-          <div class="kpi-source-note" id="kpi-districts-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 55 District Education Office (DEO) Administrative Boundaries</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Group 2: Online Courses vs In-Person Training -->
-    <div class="kpi-group">
-      <div class="kpi-group-header">
-        <div class="kpi-group-title">
-          <span class="kpi-group-badge badge-amber">Training Formats</span>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card" style="border-color: rgba(2, 132, 199, 0.4); background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);">
+<div class="kpi-label" style="color: var(--blue-primary); font-weight: 700;">Verified Government Teachers</div>
+<div class="kpi-value" id="kpi-total" style="color: var(--text-main);">216,954</div>
+<div class="kpi-meta" id="kpi-total-meta">Official government teachers with verified employee IDs</div>
+<div class="kpi-source-note" id="kpi-total-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: State HRMS Verified Database (AA1234 format)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-retained-label">Teachers in Multiple Years</div>
+<div class="kpi-value" id="kpi-retained" style="color: var(--blue-primary);">162,955</div>
+<div class="kpi-meta" id="kpi-retained-meta">79.2% of teachers participated in 2 or more school years.</div>
+<div class="kpi-source-note" id="kpi-retained-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 2022-2026 Academic Calendar Registry (79.2% multi-year retention)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-active-label">Active Teachers in Latest Full AY (2025-26)</div>
+<div class="kpi-value" id="kpi-active2026" style="color: var(--emerald-primary);">71,593</div>
+<div class="kpi-meta" id="kpi-active2026-meta">Teachers actively participating in the current school year.</div>
+<div class="kpi-source-note" id="kpi-active2026-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 2025-2026 Active Training Logs &amp; Session Rosters</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-districts-label">Districts Reached</div>
+<div class="kpi-value" id="kpi-districts">55 / 55</div>
+<div class="kpi-meta" id="kpi-districts-meta">All 55 districts in Madhya Pradesh have active teachers.</div>
+<div class="kpi-source-note" id="kpi-districts-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 55 District Education Office (DEO) Administrative Boundaries</div>
+</div>
+</div>
+</div>
+<!-- Group 2: Online Courses vs In-Person Training -->
+<div class="kpi-group">
+<div class="kpi-group-header">
+<div class="kpi-group-title">
+<span class="kpi-group-badge badge-amber">Training Formats</span>
           Online Courses and In-Person Training
         </div>
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-digital-label">Online Course Learners</div>
-          <div class="kpi-value" id="kpi-digital" style="color: var(--blue-primary);">177,025</div>
-          <div class="kpi-meta" id="kpi-digital-meta">Completed courses on DIKSHA like Mission Ankur, PSP, PLC.</div>
-          <div class="kpi-source-note" id="kpi-digital-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: DIKSHA Online Records Progress Exports (19 Courses)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-inperson-label">In-Person Workshop Attendees</div>
-          <div class="kpi-value" id="kpi-inperson" style="color: var(--amber-primary);">68,927</div>
-          <div class="kpi-meta" id="kpi-inperson-meta">Attended face-to-face training and cluster meetings.</div>
-          <div class="kpi-source-note" id="kpi-inperson-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: RSK Face-to-Face Cluster & State Workshop Records</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-clss-label">Cluster Meeting Attendees (CLSS)</div>
-          <div class="kpi-value" id="kpi-clss" style="color: var(--emerald-primary);">51,659</div>
-          <div class="kpi-meta" id="kpi-clss-meta">Teachers meeting monthly in school clusters.</div>
-          <div class="kpi-source-note" id="kpi-clss-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 7 CLSS Monthly School Cluster Rounds (2025-2026)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-do-label">District Master Trainers (DO)</div>
-          <div class="kpi-value" id="kpi-do" style="color: var(--purple-primary);">8,459</div>
-          <div class="kpi-meta" id="kpi-do-meta">Lead teachers trained at district centers.</div>
-          <div class="kpi-source-note" id="kpi-do-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: District Orientation (DO) Master Trainer Cadre Rosters</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Group 3: Teaching Quality & Teacher Feedback -->
-    <div class="kpi-group">
-      <div class="kpi-group-header">
-        <div class="kpi-group-title">
-          <span class="kpi-group-badge badge-emerald">Classroom Quality</span>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-digital-label">Online Course Learners</div>
+<div class="kpi-value" id="kpi-digital" style="color: var(--blue-primary);">177,025</div>
+<div class="kpi-meta" id="kpi-digital-meta">Completed courses on DIKSHA like Mission Ankur, PSP, PLC.</div>
+<div class="kpi-source-note" id="kpi-digital-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: DIKSHA Online Records Progress Exports (19 Courses)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-inperson-label">In-Person Workshop Attendees</div>
+<div class="kpi-value" id="kpi-inperson" style="color: var(--amber-primary);">68,927</div>
+<div class="kpi-meta" id="kpi-inperson-meta">Attended face-to-face training and cluster meetings.</div>
+<div class="kpi-source-note" id="kpi-inperson-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: RSK Face-to-Face Cluster &amp; State Workshop Records</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-clss-label">Cluster Meeting Attendees (CLSS)</div>
+<div class="kpi-value" id="kpi-clss" style="color: var(--emerald-primary);">51,659</div>
+<div class="kpi-meta" id="kpi-clss-meta">Teachers meeting monthly in school clusters.</div>
+<div class="kpi-source-note" id="kpi-clss-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 7 CLSS Monthly School Cluster Rounds (2025-2026)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-do-label">District Master Trainers (DO)</div>
+<div class="kpi-value" id="kpi-do" style="color: var(--purple-primary);">8,459</div>
+<div class="kpi-meta" id="kpi-do-meta">Lead teachers trained at district centers.</div>
+<div class="kpi-source-note" id="kpi-do-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: District Orientation (DO) Master Trainer Cadre Rosters</div>
+</div>
+</div>
+</div>
+<!-- Group 3: Teaching Quality & Teacher Feedback -->
+<div class="kpi-group">
+<div class="kpi-group-header">
+<div class="kpi-group-title">
+<span class="kpi-group-badge badge-emerald">Classroom Quality</span>
           Teaching Quality and Teacher Feedback
         </div>
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-pedagogy-label">Pedagogy Quiz Score</div>
-          <div class="kpi-value" id="kpi-pedagogy" style="color: var(--emerald-primary);">78.0%</div>
-          <div class="kpi-meta" id="kpi-pedagogy-meta">Average score on classroom teaching questions.</div>
-          <div class="kpi-source-note" id="kpi-pedagogy-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 7 CLSS Monthly Cycle Pedagogy Evaluations (Avg: 78.0%)</div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-pedagogy-label">Pedagogy Quiz Score</div>
+<div class="kpi-value" id="kpi-pedagogy" style="color: var(--emerald-primary);">78.0%</div>
+<div class="kpi-meta" id="kpi-pedagogy-meta">Average score on classroom teaching questions.</div>
+<div class="kpi-source-note" id="kpi-pedagogy-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 7 CLSS Monthly Cycle Pedagogy Evaluations (Avg: 78.0%)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-feedback-label">Classroom Practice Reports</div>
+<div class="kpi-value" id="kpi-feedback" style="color: var(--purple-primary);">74,562</div>
+<div class="kpi-meta" id="kpi-feedback-meta">Teaching logs and classroom practice notes submitted.</div>
+<div class="kpi-source-note" id="kpi-feedback-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 74,562 Classroom Practice Logs &amp; Teacher Submissions</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-relevance-label">Found Training Useful</div>
+<div class="kpi-value" id="kpi-relevance" style="color: var(--blue-primary);">91%</div>
+<div class="kpi-meta" id="kpi-relevance-meta">Teachers saying training helped their daily classes.</div>
+<div class="kpi-source-note" id="kpi-relevance-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: RSK Teacher Exit Surveys (91% Classroom Applicability)</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label" id="kpi-multiprog-label">Teachers in 2 or More Programs</div>
+<div class="kpi-value" id="kpi-multiprog" style="color: var(--amber-primary);">169,852</div>
+<div class="kpi-meta" id="kpi-multiprog-meta">82.6% of teachers joined multiple programs.</div>
+<div class="kpi-source-note" id="kpi-multiprog-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: Cross-Intervention Deduped Participation Matrix (169k)</div>
+</div>
+</div>
+</div>
+</div>
+      <div class="panel" id="macro-panel">
+<div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
+<div>
+<div class="panel-title" id="progressTitle">Teachers Trained Each Academic Year (AY 2022-23 to AY 2026-27)</div>
+<div class="panel-desc" id="progressSubtitle">Active teachers each year and total teachers reached so far across the state.</div>
+</div>
+<div class="chart-filter-nav" id="chartFilterNav">
+<button class="filter-tab active" data-filter="ALL" onclick="setChartFilter('ALL')">All Interventions</button>
+<button class="filter-tab" data-filter="DIGITAL" onclick="setChartFilter('DIGITAL')">Digital Courses (2022-2026)</button>
+<button class="filter-tab" data-filter="CLSS" onclick="setChartFilter('CLSS')">CLSS Sessions (11 Rounds)</button>
+<button class="filter-tab" data-filter="DO" onclick="setChartFilter('DO')">DO Orientations (11 Rounds)</button>
+</div>
+</div>
+<div class="macro-wrap" style="position: relative;">
+<div id="chartTooltip"></div>
+<svg class="macro-svg" id="macroSvg" preserveaspectratio="none" viewbox="0 0 1200 300">
+<defs>
+<filter height="140%" id="curveGlow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="4" flood-color="#0284C7" flood-opacity="0.25" stddeviation="4"></fedropshadow>
+</filter>
+<lineargradient id="lightAreaGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0284C7" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#0284C7" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Y Axis Guidelines -->
+<line stroke="#E2E8F0" stroke-dasharray="4" stroke-width="1" x1="80" x2="1140" y1="30" y2="30"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4" stroke-width="1" x1="80" x2="1140" y1="103" y2="103"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4" stroke-width="1" x1="80" x2="1140" y1="176" y2="176"></line>
+<line stroke="#CBD5E1" stroke-width="1.5" x1="80" x2="1140" y1="250" y2="250"></line>
+<!-- Y Axis Labels -->
+<text fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="65" y="34">400k</text>
+<text fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="65" y="107">260k</text>
+<text fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="65" y="180">130k</text>
+<text fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="65" y="254">0</text>
+<!-- Cumulative Area & Line -->
+<path class="macro-area" d="" id="cumArea"></path>
+<path class="macro-line" d="" filter="url(#curveGlow)" id="cumPath"></path>
+<!-- Bars & Nodes Groups -->
+<g id="barsGroup"></g>
+<g id="nodesGroup"></g>
+</svg>
+</div>
+</div>
+    </div>
+    
+      
+    <!-- TAB 2: ONLINE COURSES (DIKSHA) -->
+    <div id="tab-digital" class="tab-content">
+      <div class="panel" id="digital-kpi-panel" style="margin-top: 1.5rem;">
+<div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
+<div>
+<div class="panel-title">Online Course Results and Learning Gains</div>
+<div class="panel-desc">
+          Score comparisons before and after each course, completion rates, and test results across all 19 online courses.
         </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-feedback-label">Classroom Practice Reports</div>
-          <div class="kpi-value" id="kpi-feedback" style="color: var(--purple-primary);">74,562</div>
-          <div class="kpi-meta" id="kpi-feedback-meta">Teaching logs and classroom practice notes submitted.</div>
-          <div class="kpi-source-note" id="kpi-feedback-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: 74,562 Classroom Practice Logs & Teacher Submissions</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-relevance-label">Found Training Useful</div>
-          <div class="kpi-value" id="kpi-relevance" style="color: var(--blue-primary);">91%</div>
-          <div class="kpi-meta" id="kpi-relevance-meta">Teachers saying training helped their daily classes.</div>
-          <div class="kpi-source-note" id="kpi-relevance-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: RSK Teacher Exit Surveys (91% Classroom Applicability)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label" id="kpi-multiprog-label">Teachers in 2 or More Programs</div>
-          <div class="kpi-value" id="kpi-multiprog" style="color: var(--amber-primary);">169,852</div>
-          <div class="kpi-meta" id="kpi-multiprog-meta">82.6% of teachers joined multiple programs.</div>
-          <div class="kpi-source-note" id="kpi-multiprog-source" style="margin-top: auto; font-size: 0.68rem; font-family: var(--font-mono); color: #64748B; background: rgba(241, 245, 249, 0.7); padding: 2px 6px; border-radius: 4px; display: block; width: fit-content;">Source: Cross-Intervention Deduped Participation Matrix (169k)</div>
-        </div>
-      </div>
+</div>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--blue-subtle); color: var(--blue-primary); padding: 4px 10px; border-radius: 9999px; font-weight: 700; border: 1px solid var(--blue-border);">
+          11 Paired Pre/Post Evaluations
+        </span>
+<span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 4px 10px; border-radius: 9999px; font-weight: 700; border: 1px solid var(--emerald-border);">
+          727,638 Total Course Enrollments
+        </span>
+</div>
+</div>
+<!-- 4 Summary KPI Mini-Cards -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem;">
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
+<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Highest Completion Rate</div>
+<div style="font-size: 1.45rem; font-weight: 800; color: var(--blue-primary); font-family: var(--font-mono); margin: 3px 0;">85.6%</div>
+<div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 1 (114,575 completions)</div>
+</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
+<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top Subject Gain (PSP)</div>
+<div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.9%</div>
+<div style="font-size: 0.74rem; color: var(--text-body);">PSP Batch 2 (Pre: 44.6% to Post: 65.5%)</div>
+</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
+<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top FLN Gain (Mission Ankur)</div>
+<div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.3%</div>
+<div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)</div>
+</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
+<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Peak Assessment Mastery</div>
+<div style="font-size: 1.45rem; font-weight: 800; color: var(--purple-primary); font-family: var(--font-mono); margin: 3px 0;">83.4%</div>
+<div style="font-size: 0.74rem; color: var(--text-body);">National Achievement Survey (NAS Post-Test)</div>
+</div>
+</div>
+<!-- Thematic Assessment Score Table -->
+<div style="overflow-x: auto; border: 1px solid var(--surface-border); border-radius: 8px;">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
+<thead>
+<tr style="background: var(--surface-subtle); border-bottom: 2px solid var(--surface-border); color: var(--text-main); font-weight: 700;">
+<th style="padding: 10px 14px;">Course / Program Title</th>
+<th style="padding: 10px 14px; text-align: right;">Enrolled</th>
+<th style="padding: 10px 14px; text-align: right;">Completion Rate</th>
+<th style="padding: 10px 14px; text-align: right;">Pre-Test</th>
+<th style="padding: 10px 14px; text-align: right;">Post-Test</th>
+<th style="padding: 10px 14px; text-align: right;">Knowledge Shift</th>
+<th style="padding: 10px 14px; text-align: center;">Evaluation Design</th>
+</tr>
+</thead>
+<tbody>
+<!-- Theme 1: Mission Ankur -->
+<tr style="background: #F8FAFC; font-weight: 700; color: var(--blue-primary); border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+<td colspan="7" style="padding: 8px 14px;">Theme 1: Foundational Literacy &amp; Numeracy (Mission Ankur Series)</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 1: प्रारंभिक कक्षाओं में गणित</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">133,811</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">85.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">58.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">44.5%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444; font-weight: 700;">-13.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 2: संख्याओं की समझ</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">125,956</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">81.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">49.9%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">66.3%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+16.4%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 3: स्थानीय मान और संक्रियाएं</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">80,051</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">78.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">49.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">69.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+20.3%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 4: ज्यामिति और आकृतियां</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">30,590</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">21.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+8.2%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 5: मापन एवं डेटा संधारण</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">30,236</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">57.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">48.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">59.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 6: गणितीय तर्क और पैटर्न</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">20,845</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">70.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">58.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">67.1%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+8.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<!-- Theme 2: PSP Series -->
+<tr style="background: #F8FAFC; font-weight: 700; color: #8B5CF6; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+<td colspan="7" style="padding: 8px 14px;">Theme 2: Pedagogical Subject Practice (PSP Batches 1 to 5)</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">PSP Batch 1 (Primary Practice)</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">25,670</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">47.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">34.7%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444; font-weight: 700;">-16.3%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">PSP Batch 2 (Classroom Pedagogy)</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">13,831</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">50.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">44.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">65.5%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+20.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">PSP Batch 3 (Language &amp; Literacy)</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">13,180</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">45.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">45.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">56.3%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">PSP Batch 4 (Advanced Methods)</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">34,736</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">54.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">22.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">PSP Batch 5 (Consolidation)</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">7,917</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">38.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">50.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+<!-- Theme 3: ECE Foundation Series -->
+<tr style="background: #F8FAFC; font-weight: 700; color: #10B981; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+<td colspan="7" style="padding: 8px 14px;">Theme 3: Early Childhood Education (ECE Foundation Series 1 to 6)</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 1: प्रारंभिक बाल्यावस्था शिक्षा के सिद्धांत</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">7,351</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">66.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">56.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.5%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444;">-4.9%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 2: खेल और मॉर्निंग सर्कल</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">5,390</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">76.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">37.1%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">40.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669;">+3.3%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 3: भाषा विकास एवं आरंभिक साक्षरता</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">4,872</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">67.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">41.0%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">51.5%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.4%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 4: संज्ञानात्मक विकास एवं संख्या-पूर्व कौशल</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">6,218</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">47.7%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 5: थीम आधारित दृष्टिकोण</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">5,716</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">61.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">61.9%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">ECE Course 6: आकलन एवं पालकों के साथ साझेदारी</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">4,924</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">60.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">60.8%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+<!-- Theme 4: Assessment & Communities -->
+<tr style="background: #F8FAFC; font-weight: 700; color: #D97706; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+<td colspan="7" style="padding: 8px 14px;">Theme 4: Assessment Frameworks &amp; Professional Learning Communities (NAS &amp; PLC)</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--surface-border);">
+<td style="padding: 8px 14px; font-weight: 600;">National Achievement Survey (NAS) Competency Course</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">46,405</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">77.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700;">76.6%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">83.4%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+6.8%</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
+</tr>
+<tr>
+<td style="padding: 8px 14px; font-weight: 600;">Professional Learning Communities (PLC) Digital Course</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">129,939</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.2%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">18.5%</td>
+<td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
+<td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
     </div>
-
-  </div>
-
-  <!-- Year-by-Year Growth Chart Panel -->
-  <div class="panel" id="macro-panel">
-    <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
-      <div>
-        <div class="panel-title" id="progressTitle">Teachers Trained Each Academic Year (AY 2022-23 to AY 2026-27)</div>
-        <div class="panel-desc" id="progressSubtitle">Active teachers each year and total teachers reached so far across the state.</div>
+    
+      
+    <!-- TAB 3: MONTHLY TRENDS & DISTRICTS -->
+    <div id="tab-trends" class="tab-content">
+      <div class="panel" id="monthly-timeline-panel" style="margin-top: 1.5rem;">
+<div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
+<div>
+<div class="panel-title">Monthly Participation Trends Across Interventions (AY 2022-23 to AY 2026-27)</div>
+<div class="panel-desc">Month-by-month teacher participation across online courses, cluster meetings, and teacher workshops.</div>
+</div>
+<div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+<!-- Mode Switch: Monthly vs Cumulative -->
+<div class="segmented-control" style="background: var(--surface-subtle); padding: 3px; border-radius: 9999px; border: 1px solid var(--surface-border); display: inline-flex;">
+<button class="seg-btn active" id="btnModeMonthly" onclick="setMonthlyViewMode('monthly')">Monthly Count</button>
+<button class="seg-btn" id="btnModeCumulative" onclick="setMonthlyViewMode('cumulative')">Cumulative Reach</button>
+</div>
+</div>
+</div>
+<!-- Dynamic Legend with Click-to-Toggle -->
+<div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; font-size: 0.8rem; font-family: var(--font-mono);">
+<div class="timeline-legend-item" id="leg-digital" onclick="toggleTimelineSeries('digital')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #BAE6FD; background: #F0F9FF; transition: all 0.2s;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #0284C7; display: inline-block;"></span>
+<span style="font-weight: 700; color: #0369A1;">Digital Courses</span>
+<span id="badge-count-digital" style="font-size: 0.72rem; color: #0284C7;">(727.6k total)</span>
+</div>
+<div class="timeline-legend-item" id="leg-clss" onclick="toggleTimelineSeries('clss')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #DDD6FE; background: #F5F3FF; transition: all 0.2s;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6; display: inline-block;"></span>
+<span style="font-weight: 700; color: #6D28D9;">Cluster Meetings (CLSS)</span>
+<span id="badge-count-clss" style="font-size: 0.72rem; color: #8B5CF6;">(252.2k total)</span>
+</div>
+<div class="timeline-legend-item" id="leg-pedagogy" onclick="toggleTimelineSeries('pedagogy')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #A7F3D0; background: #ECFDF5; transition: all 0.2s;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+<span style="font-weight: 700; color: #047857;">General &amp; Subject Pedagogy</span>
+<span id="badge-count-pedagogy" style="font-size: 0.72rem; color: #10B981;">(48.4k total)</span>
+</div>
+<div class="timeline-legend-item" id="leg-srg" onclick="toggleTimelineSeries('srg')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #FDE68A; background: #FFFBEB; transition: all 0.2s;">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+<span style="font-weight: 700; color: #B45309;">CRO SRG Trainers</span>
+<span id="badge-count-srg" style="font-size: 0.72rem; color: #F59E0B;">(263 total)</span>
+</div>
+</div>
+<!-- Responsive SVG Multi-Line Chart Canvas -->
+<div style="position: relative; width: 100%; height: 360px; background: #FFFFFF; border-radius: 10px; border: 1px solid var(--surface-border); padding: 10px; box-sizing: border-box; overflow: hidden;">
+<div id="monthlyChartTooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.94); backdrop-filter: blur(8px); color: #FFFFFF; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; font-family: var(--font-mono); pointer-events: none; z-index: 50; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15); min-width: 170px;"></div>
+<svg id="monthlyTimelineSvg" preserveaspectratio="none" style="width: 100%; height: 100%; display: block;" viewbox="0 0 1100 320">
+<defs>
+<filter height="140%" id="lineGlow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="2" flood-opacity="0.25" stddeviation="3"></fedropshadow>
+</filter>
+<lineargradient id="digitalAreaGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0284C7" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#0284C7" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid & Axes rendered by JS -->
+<g id="monthlyGridGroup"></g>
+<!-- Paths rendered by JS -->
+<path d="" fill="url(#digitalAreaGrad)" id="pathAreaDigital"></path>
+<path d="" fill="none" filter="url(#lineGlow)" id="pathLineDigital" stroke="#0284C7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="" fill="none" filter="url(#lineGlow)" id="pathLineClss" stroke="#8B5CF6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="" fill="none" filter="url(#lineGlow)" id="pathLinePedagogy" stroke="#10B981" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="" fill="none" filter="url(#lineGlow)" id="pathLineSrg" stroke="#F59E0B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<!-- Nodes rendered by JS -->
+<g id="monthlyNodesGroup"></g>
+<!-- Vertical Tracking Line -->
+<line id="monthlyTrackingLine" stroke="#94A3B8" stroke-dasharray="3 3" stroke-width="1.2" style="display: none;" x1="0" x2="0" y1="25" y2="275"></line>
+<rect fill="transparent" height="250" id="monthlyOverlayRect" style="cursor: crosshair;" width="1005" x="65" y="25"></rect>
+</svg>
+</div>
+<!-- Milestone Notes Bar below chart -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem; font-size: 0.75rem; color: var(--text-body);">
+<div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #0284C7;">
+<strong>Dec 2022 to Mar 2023:</strong> Peak foundational online training with 259,537 completions in Mission Ankur Course 1.
       </div>
-      <div class="chart-filter-nav" id="chartFilterNav">
-        <button class="filter-tab active" data-filter="ALL" onclick="setChartFilter('ALL')">All Interventions</button>
-        <button class="filter-tab" data-filter="DIGITAL" onclick="setChartFilter('DIGITAL')">Digital Courses (2022-2026)</button>
-        <button class="filter-tab" data-filter="CLSS" onclick="setChartFilter('CLSS')">CLSS Sessions (11 Rounds)</button>
-        <button class="filter-tab" data-filter="DO" onclick="setChartFilter('DO')">DO Orientations (11 Rounds)</button>
+<div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #10B981;">
+<strong>Nov 2023 &amp; Jul 2024:</strong> State pedagogy workshops conducted face-to-face across 48,437 verified teachers.
       </div>
-    </div>
-
-    <div class="macro-wrap" style="position: relative;">
-      <div id="chartTooltip"></div>
-      <svg class="macro-svg" id="macroSvg" viewBox="0 0 1200 300" preserveAspectRatio="none">
-        
-        <defs>
-          <filter id="curveGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284C7" flood-opacity="0.25"/>
-          </filter>
-
-          <linearGradient id="lightAreaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0284C7" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#0284C7" stop-opacity="0.0"/>
-          </linearGradient>
-        </defs>
-        
-        <!-- Y Axis Guidelines -->
-        <line x1="80" y1="30" x2="1140" y2="30" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4"/>
-        <line x1="80" y1="103" x2="1140" y2="103" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4"/>
-        <line x1="80" y1="176" x2="1140" y2="176" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4"/>
-        <line x1="80" y1="250" x2="1140" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
-
-        <!-- Y Axis Labels -->
-        <text x="65" y="34" fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end">400k</text>
-        <text x="65" y="107" fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end">260k</text>
-        <text x="65" y="180" fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end">130k</text>
-        <text x="65" y="254" fill="#94A3B8" font-family="JetBrains Mono" font-size="11" text-anchor="end">0</text>
-
-        <!-- Cumulative Area & Line -->
-        <path id="cumArea" class="macro-area" d="" />
-        <path id="cumPath" class="macro-line" filter="url(#curveGlow)" d="" />
-
-        <!-- Bars & Nodes Groups -->
-        <g id="barsGroup"></g>
-        <g id="nodesGroup"></g>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Dedicated CLSS Pedagogy & Qualitative Classroom Practice Evaluation -->
-  
-  <!-- Monthly Participation Trends Across Interventions (AY 2022-23 to AY 2026-27) -->
-  <div class="panel" id="monthly-timeline-panel" style="margin-top: 1.5rem;">
-    <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
-      <div>
-        <div class="panel-title">Monthly Participation Trends Across Interventions (AY 2022-23 to AY 2026-27)</div>
-        <div class="panel-desc">Month-by-month teacher participation across online courses, cluster meetings, and teacher workshops.</div>
+<div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #8B5CF6;">
+<strong>Sep 2024 to Sep 2026:</strong> 11 cluster dialogue cycles deployed statewide (4 rounds in AY 2024-25, 5 in AY 2025-26, and 2 in AY 2026-27), engaging 252,226 total session attendees.
       </div>
-      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-        <!-- Mode Switch: Monthly vs Cumulative -->
-        <div class="segmented-control" style="background: var(--surface-subtle); padding: 3px; border-radius: 9999px; border: 1px solid var(--surface-border); display: inline-flex;">
-          <button class="seg-btn active" id="btnModeMonthly" onclick="setMonthlyViewMode('monthly')">Monthly Count</button>
-          <button class="seg-btn" id="btnModeCumulative" onclick="setMonthlyViewMode('cumulative')">Cumulative Reach</button>
-        </div>
+<div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #F59E0B;">
+<strong>Aug 2024:</strong> 263 CRO SRG master trainers certified across Batches 1 to 7 to facilitate cluster dialogues.
       </div>
-    </div>
-
-    <!-- Dynamic Legend with Click-to-Toggle -->
-    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; font-size: 0.8rem; font-family: var(--font-mono);">
-      <div class="timeline-legend-item" id="leg-digital" onclick="toggleTimelineSeries('digital')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #BAE6FD; background: #F0F9FF; transition: all 0.2s;">
-        <span style="width: 10px; height: 10px; border-radius: 50%; background: #0284C7; display: inline-block;"></span>
-        <span style="font-weight: 700; color: #0369A1;">Digital Courses</span>
-        <span id="badge-count-digital" style="font-size: 0.72rem; color: #0284C7;">(727.6k total)</span>
-      </div>
-      <div class="timeline-legend-item" id="leg-clss" onclick="toggleTimelineSeries('clss')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #DDD6FE; background: #F5F3FF; transition: all 0.2s;">
-        <span style="width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6; display: inline-block;"></span>
-        <span style="font-weight: 700; color: #6D28D9;">Cluster Meetings (CLSS)</span>
-        <span id="badge-count-clss" style="font-size: 0.72rem; color: #8B5CF6;">(252.2k total)</span>
-      </div>
-      <div class="timeline-legend-item" id="leg-pedagogy" onclick="toggleTimelineSeries('pedagogy')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #A7F3D0; background: #ECFDF5; transition: all 0.2s;">
-        <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
-        <span style="font-weight: 700; color: #047857;">General & Subject Pedagogy</span>
-        <span id="badge-count-pedagogy" style="font-size: 0.72rem; color: #10B981;">(48.4k total)</span>
-      </div>
-      <div class="timeline-legend-item" id="leg-srg" onclick="toggleTimelineSeries('srg')" style="display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #FDE68A; background: #FFFBEB; transition: all 0.2s;">
-        <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
-        <span style="font-weight: 700; color: #B45309;">CRO SRG Trainers</span>
-        <span id="badge-count-srg" style="font-size: 0.72rem; color: #F59E0B;">(263 total)</span>
-      </div>
-    </div>
-
-    <!-- Responsive SVG Multi-Line Chart Canvas -->
-    <div style="position: relative; width: 100%; height: 360px; background: #FFFFFF; border-radius: 10px; border: 1px solid var(--surface-border); padding: 10px; box-sizing: border-box; overflow: hidden;">
-      <div id="monthlyChartTooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.94); backdrop-filter: blur(8px); color: #FFFFFF; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; font-family: var(--font-mono); pointer-events: none; z-index: 50; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15); min-width: 170px;"></div>
-      <svg id="monthlyTimelineSvg" style="width: 100%; height: 100%; display: block;" viewBox="0 0 1100 320" preserveAspectRatio="none">
-        <defs>
-          <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.25"/>
-          </filter>
-          <linearGradient id="digitalAreaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0284C7" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="#0284C7" stop-opacity="0.0"/>
-          </linearGradient>
-        </defs>
-        <!-- Grid & Axes rendered by JS -->
-        <g id="monthlyGridGroup"></g>
-        <!-- Paths rendered by JS -->
-        <path id="pathAreaDigital" fill="url(#digitalAreaGrad)" d=""></path>
-        <path id="pathLineDigital" fill="none" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lineGlow)" d=""></path>
-        <path id="pathLineClss" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lineGlow)" d=""></path>
-        <path id="pathLinePedagogy" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lineGlow)" d=""></path>
-        <path id="pathLineSrg" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lineGlow)" d=""></path>
-        <!-- Nodes rendered by JS -->
-        <g id="monthlyNodesGroup"></g>
-        <!-- Vertical Tracking Line -->
-        <line id="monthlyTrackingLine" x1="0" y1="25" x2="0" y2="275" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3" style="display: none;"></line>
-        <rect id="monthlyOverlayRect" x="65" y="25" width="1005" height="250" fill="transparent" style="cursor: crosshair;"></rect>
-      </svg>
-    </div>
-
-    <!-- Milestone Notes Bar below chart -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem; font-size: 0.75rem; color: var(--text-body);">
-      <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #0284C7;">
-        <strong>Dec 2022 to Mar 2023:</strong> Peak foundational online training with 259,537 completions in Mission Ankur Course 1.
-      </div>
-      <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #10B981;">
-        <strong>Nov 2023 & Jul 2024:</strong> State pedagogy workshops conducted face-to-face across 48,437 verified teachers.
-      </div>
-      <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #8B5CF6;">
-        <strong>Sep 2024 to Sep 2026:</strong> 11 cluster dialogue cycles deployed statewide (4 rounds in AY 2024-25, 5 in AY 2025-26, and 2 in AY 2026-27), engaging 252,226 total session attendees.
-      </div>
-      <div style="background: var(--surface-subtle); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #F59E0B;">
-        <strong>Aug 2024:</strong> 263 CRO SRG master trainers certified across Batches 1 to 7 to facilitate cluster dialogues.
-      </div>
-    </div>
-  </div>
-
-
-  <div class="panel" id="pedagogy-panel">
-    <div class="panel-header">
-      <div>
-        <div class="panel-title">District Teaching Scores and Feedback</div>
-        <div class="panel-desc">
+</div>
+</div>
+      <div class="panel" id="pedagogy-panel">
+<div class="panel-header">
+<div>
+<div class="panel-title">District Teaching Scores and Feedback</div>
+<div class="panel-desc">
           Teacher quiz scores, practical classroom relevance, and daily teaching logs across all 7 rounds.
         </div>
-      </div>
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <a href="CLSS_Pedagogy_Scores_Summary.csv" download class="dl-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+</div>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<a class="dl-btn" download="" href="CLSS_Pedagogy_Scores_Summary.csv" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
           Download Pedagogy Quiz Scores (CSV)
         </a>
-        <a href="participant_lists/CLSS_Teacher_Qualitative_Feedback_42k.csv" download class="dl-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+<a class="dl-btn" download="" href="participant_lists/CLSS_Teacher_Qualitative_Feedback_42k.csv" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
           Download 74k Teacher Feedback Records (CSV)
         </a>
-      </div>
-    </div>
-
-    <!-- Cycle Scores Grid -->
-    <div class="ped-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+</div>
+</div>
+<!-- Cycle Scores Grid -->
+<div class="ped-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
 <div class="ped-card" style="border-top: 3px solid #0284C7;">
 <div class="ped-card-cycle">Sep 2024 (24-25)</div>
 <div class="ped-card-score">86.2</div>
@@ -2138,12 +2667,12 @@ Online Courses
 <div class="ped-card" style="border-top: 3px solid #8B5CF6;">
 <div class="ped-card-cycle">Aug 2025 (25-26)</div>
 <div class="ped-card-score">87.3</div>
-<div class="ped-card-theme">Classroom Setup & Seating</div>
+<div class="ped-card-theme">Classroom Setup &amp; Seating</div>
 </div>
 <div class="ped-card" style="border-top: 3px solid #8B5CF6;">
 <div class="ped-card-cycle">Sep 2025 (25-26)</div>
 <div class="ped-card-score">85.6</div>
-<div class="ped-card-theme">Prior Knowledge & Group Work</div>
+<div class="ped-card-theme">Prior Knowledge &amp; Group Work</div>
 </div>
 <div class="ped-card" style="border-top: 3px solid #8B5CF6;">
 <div class="ped-card-cycle">Nov 2025 (25-26)</div>
@@ -2153,7 +2682,7 @@ Online Courses
 <div class="ped-card" style="border-top: 3px solid #8B5CF6;">
 <div class="ped-card-cycle">Dec 2025 (25-26)</div>
 <div class="ped-card-score">92.6</div>
-<div class="ped-card-theme">Formative Review & Synthesis</div>
+<div class="ped-card-theme">Formative Review &amp; Synthesis</div>
 </div>
 <div class="ped-card" style="border-top: 3px solid #8B5CF6;">
 <div class="ped-card-cycle">Jan 2026 (25-26)</div>
@@ -2163,7 +2692,7 @@ Online Courses
 <div class="ped-card" style="border-top: 3px solid #10B981;">
 <div class="ped-card-cycle">Aug 2026 (26-27)</div>
 <div class="ped-card-score">75.3</div>
-<div class="ped-card-theme">Safe Climate & Engagement</div>
+<div class="ped-card-theme">Safe Climate &amp; Engagement</div>
 </div>
 <div class="ped-card" style="border-top: 3px solid #10B981;">
 <div class="ped-card-cycle">Sep 2026 (26-27)</div>
@@ -2172,127 +2701,122 @@ Online Courses
 </div>
 </div>
 <!-- Thematic & Qualitative Details -->
-    <div class="ped-detail-grid">
-      <!-- 5 Core Themes -->
-      <div>
-        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem;">
+<div class="ped-detail-grid">
+<!-- 5 Core Themes -->
+<div>
+<div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem;">
           Five Core Pedagogical Themes Evaluated Across Cycles
         </div>
-        <div class="theme-list">
-          <div class="theme-row">
-            <div class="theme-header">
-              <span class="theme-title">1. Classroom Layout & Seating (U-Shape)</span>
-              <span class="theme-score">78.3% Alignment</span>
-            </div>
-            <div class="theme-desc">
+<div class="theme-list">
+<div class="theme-row">
+<div class="theme-header">
+<span class="theme-title">1. Classroom Layout &amp; Seating (U-Shape)</span>
+<span class="theme-score">78.3% Alignment</span>
+</div>
+<div class="theme-desc">
               Teachers evaluate visibility, active circulation, and shared classroom norms. 73.5% chose U-shape seating to ensure every learner can hear the teacher and see the blackboard clearly.
             </div>
-          </div>
-          <div class="theme-row">
-            <div class="theme-header">
-              <span class="theme-title">2. Collaborative Learning & Prior Knowledge</span>
-              <span class="theme-score">73.1% Alignment</span>
-            </div>
-            <div class="theme-desc">
+</div>
+<div class="theme-row">
+<div class="theme-header">
+<span class="theme-title">2. Collaborative Learning &amp; Prior Knowledge</span>
+<span class="theme-score">73.1% Alignment</span>
+</div>
+<div class="theme-desc">
               81.7% of teachers identified collaborative group work as providing learners opportunities to listen, articulate ideas, and support peers.
             </div>
-          </div>
-          <div class="theme-row">
-            <div class="theme-header">
-              <span class="theme-title">3. Concrete Teaching Materials (TLM)</span>
-              <span class="theme-score">61.2% Alignment</span>
-            </div>
-            <div class="theme-desc">
+</div>
+<div class="theme-row">
+<div class="theme-header">
+<span class="theme-title">3. Concrete Teaching Materials (TLM)</span>
+<span class="theme-score">61.2% Alignment</span>
+</div>
+<div class="theme-desc">
               Teachers identified the complete instructional cycle: Hands-on Experience to Reflection to Consolidation. 76.3% affirmed that consolidating learning through student reflections is essential.
             </div>
-          </div>
-          <div class="theme-row">
-            <div class="theme-header">
-              <span class="theme-title">4. Real-Life Connected Homework</span>
-              <span class="theme-score">71.2% Alignment</span>
-            </div>
-            <div class="theme-desc">
+</div>
+<div class="theme-row">
+<div class="theme-header">
+<span class="theme-title">4. Real-Life Connected Homework</span>
+<span class="theme-score">71.2% Alignment</span>
+</div>
+<div class="theme-desc">
               85.3% of teachers agreed that effective homework must encourage children to think, observe, and connect curriculum concepts with their home environment.
             </div>
-          </div>
-          <div class="theme-row">
-            <div class="theme-header">
-              <span class="theme-title">5. Formative Review & Synthesis (समेकन)</span>
-              <span class="theme-score">89.2% Alignment</span>
-            </div>
-            <div class="theme-desc">
+</div>
+<div class="theme-row">
+<div class="theme-header">
+<span class="theme-title">5. Formative Review &amp; Synthesis (समेकन)</span>
+<span class="theme-score">89.2% Alignment</span>
+</div>
+<div class="theme-desc">
               90.5% recognized that lesson consolidation requires actively synthesizing concepts, activities, and discussions rather than passive repetition.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Qualitative Feedback Categorization -->
-      <div>
-        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem;">
+</div>
+</div>
+</div>
+<!-- Qualitative Feedback Categorization -->
+<div>
+<div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem;">
           Teacher Classroom Feedback (68,295 Substantive Open-Ended Entries Across 3 Years)
         </div>
-        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem;">
-          <div class="qual-category-item">
-            <span class="qual-cat-name">General Practice Affirmation</span>
-            <span class="qual-cat-count">36,105</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Classroom Practice Innovation</span>
-            <span class="qual-cat-count">30,712</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Concrete TLM & Activity Learning</span>
-            <span class="qual-cat-count">2,439</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Classroom Seating & Physical Setup</span>
-            <span class="qual-cat-count">1,974</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Purposeful & Joyful Homework</span>
-            <span class="qual-cat-count">991</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Collaborative Group Work</span>
-            <span class="qual-cat-count">847</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Remediation & Individual Attention</span>
-            <span class="qual-cat-count">588</span>
-          </div>
-          <div class="qual-category-item">
-            <span class="qual-cat-name">Review, Consolidation & Retention</span>
-            <span class="qual-cat-count">482</span>
-          </div>
-        </div>
-
-        <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
-          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">
+<div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem;">
+<div class="qual-category-item">
+<span class="qual-cat-name">General Practice Affirmation</span>
+<span class="qual-cat-count">36,105</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Classroom Practice Innovation</span>
+<span class="qual-cat-count">30,712</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Concrete TLM &amp; Activity Learning</span>
+<span class="qual-cat-count">2,439</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Classroom Seating &amp; Physical Setup</span>
+<span class="qual-cat-count">1,974</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Purposeful &amp; Joyful Homework</span>
+<span class="qual-cat-count">991</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Collaborative Group Work</span>
+<span class="qual-cat-count">847</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Remediation &amp; Individual Attention</span>
+<span class="qual-cat-count">588</span>
+</div>
+<div class="qual-category-item">
+<span class="qual-cat-name">Review, Consolidation &amp; Retention</span>
+<span class="qual-cat-count">482</span>
+</div>
+</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
+<div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">
             Direct Teacher Feedback Samples
           </div>
-          <p style="font-size: 0.82rem; color: var(--text-body); font-style: italic; margin-bottom: 0.5rem;">
+<p style="font-size: 0.82rem; color: var(--text-body); font-style: italic; margin-bottom: 0.5rem;">
             "बच्चों को समूह में बिठाकर विद्या अध्ययन करवाना और कमजोर बच्चों को अतिरिक्त समय देकर समझाना शुरू किया।"
           </p>
-          <p style="font-size: 0.82rem; color: var(--text-body); font-style: italic; margin-bottom: 0.5rem;">
+<p style="font-size: 0.82rem; color: var(--text-body); font-style: italic; margin-bottom: 0.5rem;">
             "U आकार की बैठक व्यवस्था अपनाई जिससे सभी बच्चे श्यामपट्ट और शिक्षक को स्पष्ट देख पा रहे हैं।"
           </p>
-          <p style="font-size: 0.82rem; color: var(--text-body); font-style: italic;">
+<p style="font-size: 0.82rem; color: var(--text-body); font-style: italic;">
             "आनंददायक गृह कार्य देकर बच्चों की सीख को उनके परिवेश से जोड़ा गया।"
           </p>
-        </div>
-      </div>
+</div>
+</div>
+</div>
+</div>
     </div>
-  </div>
-
-  <!-- Annual Intervention Drilldown Panel -->
-  
-  
-
-<!-- ========================================================================= -->
-<!-- TEACHER PERSISTENCE AND DROPOUT DEEP DIVE PANEL -->
-<!-- ========================================================================= -->
-<div class="panel" id="persistence-deep-dive-panel" style="margin-top: 1.5rem; border-top: 4px solid #0369A1;">
+    
+      
+    <!-- TAB 4: RETENTION & DIGITAL BENEFIT -->
+    <div id="tab-retention" class="tab-content">
+      <div class="panel" id="persistence-deep-dive-panel" style="margin-top: 1.5rem; border-top: 4px solid #0369A1;">
 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
 <div>
 <div class="panel-title" style="font-size: 1.2rem; color: #0F172A;">Teacher Persistence and Dropout Analysis (AY 2022-23 to AY 2026-27)</div>
@@ -2301,15 +2825,14 @@ Tracking how 216,954 verified teachers moved across five academic years, where t
 </div>
 </div>
 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-<a href="longitudinal_deep_dive_metrics.json" download class="dl-btn" style="padding: 0.4rem 0.8rem; font-size: 0.76rem; background: #0284C7; color: white;">
+<a class="dl-btn" download="" href="longitudinal_deep_dive_metrics.json" style="padding: 0.4rem 0.8rem; font-size: 0.76rem; background: #0284C7; color: white;">
 Download 5-Year Cohort Data (JSON)
 </a>
-<a href="predictive_cohort_deep_dive.json" download class="dl-btn" style="padding: 0.4rem 0.8rem; font-size: 0.76rem; background: #0F766E; color: white;">
+<a class="dl-btn" download="" href="predictive_cohort_deep_dive.json" style="padding: 0.4rem 0.8rem; font-size: 0.76rem; background: #0F766E; color: white;">
 Download Predictive Models (JSON)
 </a>
 </div>
 </div>
-
 <!-- 4 Key Summary Numbers -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; margin-bottom: 1.5rem;">
 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1rem;">
@@ -2317,26 +2840,22 @@ Download Predictive Models (JSON)
 <div style="font-size: 1.55rem; font-weight: 800; color: #0284C7; font-family: var(--font-mono); margin: 4px 0;">104,482</div>
 <div style="font-size: 0.75rem; color: #334155;">49.3% of teachers stayed active across 3 or more calendar years.</div>
 </div>
-
 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1rem;">
 <div style="font-size: 0.74rem; font-weight: 700; color: #64748B; text-transform: uppercase;">One-Time Participants</div>
 <div style="font-size: 1.55rem; font-weight: 800; color: #EA580C; font-family: var(--font-mono); margin: 4px 0;">38,469</div>
 <div style="font-size: 0.75rem; color: #334155;">18.1% of teachers attended only 1 program and never returned.</div>
 </div>
-
 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1rem;">
 <div style="font-size: 0.74rem; font-weight: 700; color: #64748B; text-transform: uppercase;">The Blended Retention Advantage</div>
 <div style="font-size: 1.55rem; font-weight: 800; color: #16A34A; font-family: var(--font-mono); margin: 4px 0;">88.4%</div>
 <div style="font-size: 0.75rem; color: #334155;">Teachers doing both online courses and cluster meetings stay active at 88.4%, compared to 51.9% for online-only.</div>
 </div>
-
 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1rem;">
 <div style="font-size: 0.74rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Targeted Measure Potential</div>
 <div style="font-size: 1.55rem; font-weight: 800; color: #7C3AED; font-family: var(--font-mono); margin: 4px 0;">+12,350</div>
 <div style="font-size: 0.75rem; color: #334155;">State-wide teachers gained by simple online prerequisite nudges before cluster meetings.</div>
 </div>
 </div>
-
 <!-- Section 1: Year-by-Year Teacher Numbers and Transitions -->
 <div style="margin-bottom: 1.5rem; background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1.2rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin-bottom: 0.35rem;">
@@ -2345,7 +2864,6 @@ Download Predictive Models (JSON)
 <p style="font-size: 0.78rem; color: #64748B; margin-bottom: 1rem;">
 How teachers moved from one academic year to the next across all verified government schools.
 </p>
-
 <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
 <thead>
 <tr style="background: #F1F5F9; border-bottom: 2px solid #CBD5E1; color: #475569;">
@@ -2401,15 +2919,12 @@ How teachers moved from one academic year to the next across all verified govern
 </tbody>
 </table>
 </div>
-
 <!-- Section 2: Three Main Drop-Off Points in the Data -->
 <div style="margin-bottom: 1.5rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin-bottom: 0.75rem;">
 2. The Three Big Leaks Where Teachers Drop Out
 </div>
-
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-
 <!-- Leak 1 -->
 <div style="background: white; border: 1px solid #E2E8F0; border-top: 3px solid #DC2626; border-radius: 8px; padding: 1.1rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -2424,11 +2939,10 @@ Courses 2 to 4 in Foundational Numeracy
 </p>
 <div style="font-size: 0.75rem; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 8px; border-radius: 6px; color: #334155;">
 <strong>Why it happened:</strong> Courses 3 and 4 required teachers to record and upload classroom videos. Weak rural phone signals and difficult upload steps stopped teachers from finishing.
-<br><br>
+<br/><br/>
 <strong>Simple Measure:</strong> Replace video uploads with short 5-minute phone quizzes and instant completion badges.
 </div>
 </div>
-
 <!-- Leak 2 -->
 <div style="background: white; border: 1px solid #E2E8F0; border-top: 3px solid #EA580C; border-radius: 8px; padding: 1.1rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -2443,11 +2957,10 @@ Cluster attendance fell from 21,958 in September to 13,568 in November. It recov
 </p>
 <div style="font-size: 0.75rem; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 8px; border-radius: 6px; color: #334155;">
 <strong>Why it happened:</strong> November coincides with Diwali festival vacations, harvest season, and mid-term exam duties.
-<br><br>
+<br/><br/>
 <strong>Simple Measure:</strong> Reschedule the November meeting into early December or provide a short audio phone module during festival weeks.
 </div>
 </div>
-
 <!-- Leak 3 -->
 <div style="background: white; border: 1px solid #E2E8F0; border-top: 3px solid #0284C7; border-radius: 8px; padding: 1.1rem;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -2462,84 +2975,79 @@ Teachers who do online courses alone have a 51.9% retention rate. Teachers who p
 </p>
 <div style="font-size: 0.75rem; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 8px; border-radius: 6px; color: #334155;">
 <strong>Why it happened:</strong> Online learning without peer discussion leads to disengagement. Cluster meetings give teachers a community of practice.
-<br><br>
+<br/><br/>
 <strong>Simple Measure:</strong> Send automated text messages to online course completers inviting them to their local cluster venue.
 </div>
 </div>
-
 </div>
 </div>
-
 <!-- Section 2B: The Digital Dividend - Pre-COVID Online Training vs Post-COVID Classroom Practice -->
 <div style="background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem;">
-  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
-    <div>
-      <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
+<div>
+<div style="font-size: 0.95rem; font-weight: 700; color: #0F172A;">
         The Digital Benefit: Did Pre-2023 Online Courses Help Classroom Teaching Today?
       </div>
-      <p style="font-size: 0.78rem; color: #64748B; margin-top: 2px;">
+<p style="font-size: 0.78rem; color: #64748B; margin-top: 2px;">
         Comparing teachers who completed pre-April 2023 digital courses against teachers who only joined in-person training later.
       </p>
-    </div>
-    <span style="font-size: 0.72rem; background: #E0F2FE; color: #0369A1; font-weight: 700; padding: 3px 8px; border-radius: 4px;">
+</div>
+<span style="font-size: 0.72rem; background: #E0F2FE; color: #0369A1; font-weight: 700; padding: 3px 8px; border-radius: 4px;">
       49,297 Responses Analyzed Across 2 Years
     </span>
-  </div>
-
-  <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; margin-top: 0.75rem;">
-    <thead>
-      <tr style="background: #F8FAFC; border-bottom: 2px solid #CBD5E1; color: #475569;">
-        <th style="padding: 8px 10px;">Teaching Metric</th>
-        <th style="padding: 8px 10px; text-align: right; background: #F0FDF4; color: #166534;">Blended (Pre-2023 Digital + In-Person)<br><span style="font-size: 0.7rem; font-weight: 400;">15,094 Teachers (Aug 2026)</span></th>
-        <th style="padding: 8px 10px; text-align: right; background: #FEF2F2; color: #991B1B;">In-Person Only (No Digital)<br><span style="font-size: 0.7rem; font-weight: 400;">8,551 Teachers (Aug 2026)</span></th>
-        <th style="padding: 8px 10px; text-align: right; font-weight: 700;">Difference</th>
-        <th style="padding: 8px 10px;">What This Means in Plain Words</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom: 1px solid #E2E8F0;">
-        <td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Sharing Teaching Ideas</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">75.0%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">70.8%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+4.2%</td>
-        <td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers with digital background share creative teaching tips more actively during meetings.</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #E2E8F0;">
-        <td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Confidence in Teaching</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">83.4%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">80.1%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+3.3%</td>
-        <td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers feel more confident applying new classroom methods in their daily lessons.</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #E2E8F0;">
-        <td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Help in Daily Lessons</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">87.0%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">84.9%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+2.1%</td>
-        <td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">More teachers confirm that cluster discussions directly help them teach their regular syllabus.</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #E2E8F0;">
-        <td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Understanding Program Goals</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">64.2%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">59.6%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+4.6%</td>
-        <td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Newer in-person teachers score lower on what the meeting is for, confusing it with non-academic events.</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Equal Chance to Speak</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">86.0%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">82.7%</td>
-        <td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+3.3%</td>
-        <td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers with digital background participate more actively and take speaking turns.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div style="margin-top: 0.85rem; padding: 0.75rem 1rem; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; font-size: 0.78rem; color: #166534; line-height: 1.5;">
-    <strong>Takeaway for Leadership:</strong> Pre-2023 online training was not wasted effort. The 63.5% of teachers who did digital courses in the past still lead in peer sharing and confidence today. However, the 36.5% who only attend in-person meetings need simple 3-minute video explainers before meetings so they can catch up on basic ideas.
+</div>
+<table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; margin-top: 0.75rem;">
+<thead>
+<tr style="background: #F8FAFC; border-bottom: 2px solid #CBD5E1; color: #475569;">
+<th style="padding: 8px 10px;">Teaching Metric</th>
+<th style="padding: 8px 10px; text-align: right; background: #F0FDF4; color: #166534;">Blended (Pre-2023 Digital + In-Person)<br/><span style="font-size: 0.7rem; font-weight: 400;">15,094 Teachers (Aug 2026)</span></th>
+<th style="padding: 8px 10px; text-align: right; background: #FEF2F2; color: #991B1B;">In-Person Only (No Digital)<br/><span style="font-size: 0.7rem; font-weight: 400;">8,551 Teachers (Aug 2026)</span></th>
+<th style="padding: 8px 10px; text-align: right; font-weight: 700;">Difference</th>
+<th style="padding: 8px 10px;">What This Means in Plain Words</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #E2E8F0;">
+<td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Sharing Teaching Ideas</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">75.0%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">70.8%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+4.2%</td>
+<td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers with digital background share creative teaching tips more actively during meetings.</td>
+</tr>
+<tr style="border-bottom: 1px solid #E2E8F0;">
+<td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Confidence in Teaching</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">83.4%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">80.1%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+3.3%</td>
+<td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers feel more confident applying new classroom methods in their daily lessons.</td>
+</tr>
+<tr style="border-bottom: 1px solid #E2E8F0;">
+<td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Help in Daily Lessons</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">87.0%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">84.9%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+2.1%</td>
+<td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">More teachers confirm that cluster discussions directly help them teach their regular syllabus.</td>
+</tr>
+<tr style="border-bottom: 1px solid #E2E8F0;">
+<td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Understanding Program Goals</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">64.2%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">59.6%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+4.6%</td>
+<td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Newer in-person teachers score lower on what the meeting is for, confusing it with non-academic events.</td>
+</tr>
+<tr>
+<td style="padding: 8px 10px; font-weight: 600; color: #0F172A;">Equal Chance to Speak</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">86.0%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); color: #B91C1C;">82.7%</td>
+<td style="padding: 8px 10px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #15803D;">+3.3%</td>
+<td style="padding: 8px 10px; font-size: 0.76rem; color: #334155;">Teachers with digital background participate more actively and take speaking turns.</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 0.85rem; padding: 0.75rem 1rem; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; font-size: 0.78rem; color: #166534; line-height: 1.5;">
+<strong>Takeaway for Leadership:</strong> Pre-2023 online training was not wasted effort. The 63.5% of teachers who did digital courses in the past still lead in peer sharing and confidence today. However, the 36.5% who only attend in-person meetings need simple 3-minute video explainers before meetings so they can catch up on basic ideas.
   </div>
 </div>
-
 <!-- Section 3: Predictive Intervention Comparison Table -->
 <div style="background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin-bottom: 0.35rem;">
@@ -2548,7 +3056,6 @@ Teachers who do online courses alone have a 51.9% retention rate. Teachers who p
 <p style="font-size: 0.78rem; color: #64748B; margin-bottom: 1rem;">
 Exact model predictions testing each concrete intervention across the state teaching force.
 </p>
-
 <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
 <thead>
 <tr style="background: #F1F5F9; border-bottom: 2px solid #CBD5E1; color: #475569;">
@@ -2578,7 +3085,7 @@ Exact model predictions testing each concrete intervention across the state teac
 <td style="padding: 8px 12px; text-align: center;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Low (Direct SMS)</span></td>
 </tr>
 <tr style="border-bottom: 1px solid #E2E8F0;">
-<td style="padding: 8px 12px; font-weight: 700; color: #0284C7;">Measure 3: Remove Video Uploads from Courses 3 & 4</td>
+<td style="padding: 8px 12px; font-weight: 700; color: #0284C7;">Measure 3: Remove Video Uploads from Courses 3 &amp; 4</td>
 <td style="padding: 8px 12px; font-size: 0.76rem;">Replace difficult video tasks with 5-minute phone quizzes to recover 25% of dropouts.</td>
 <td style="padding: 8px 12px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #16A34A;">54.20% (+2.35%)</td>
 <td style="padding: 8px 12px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #16A34A;">+21,931</td>
@@ -2596,14 +3103,13 @@ Exact model predictions testing each concrete intervention across the state teac
 </tbody>
 </table>
 </div>
-
 </div>
-
-
-<!-- ========================================================================= -->
-<!-- 3-YEAR QUALITATIVE STUDY & MACHINE LEARNING PREDICTION ENGINE PANEL -->
-<!-- ========================================================================= -->
-<div class="panel" id="qualitative-prediction-panel" style="margin-top: 1.5rem;">
+    </div>
+    
+      
+    <!-- TAB 5: TEACHER FEEDBACK & PROGRAM DIRECTORY -->
+    <div id="tab-feedback" class="tab-content">
+      <div class="panel" id="qualitative-prediction-panel" style="margin-top: 1.5rem;">
 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
 <div>
 <div class="panel-title">3-Year Teacher Voices and Machine Learning Predictions</div>
@@ -2623,7 +3129,6 @@ Teacher feedback across 68,295 classroom entries from 2024 to 2027, analyzed wit
 </span>
 </div>
 </div>
-
 <!-- Longitudinal Journey Across Academic Years -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
 <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #0284C7;">
@@ -2631,7 +3136,7 @@ Teacher feedback across 68,295 classroom entries from 2024 to 2027, analyzed wit
 Phase 1: Academic Year 2024-25
 </div>
 <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
-Program Setup & Facilitation Rules
+Program Setup &amp; Facilitation Rules
 </div>
 <p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
 Teachers focused on orientation dates, session length, and meeting places. Key feedback requested longer practice time, fixed meeting schedules, and equal speaking opportunities between trainers and teachers.
@@ -2640,13 +3145,12 @@ Teachers focused on orientation dates, session length, and meeting places. Key f
 <strong>Teacher Quote (Sheopur):</strong> "शैक्षिक संवाद बहुत अच्छा है। समयाभाव के कारण सभी बिंदुओं पर विस्तार से चर्चा नहीं हो पायी।" (Good initiative, but we need more allocated time to discuss classroom problems in depth.)
 </div>
 </div>
-
 <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #8B5CF6;">
 <div style="font-size: 0.76rem; font-weight: 700; color: #8B5CF6; text-transform: uppercase; margin-bottom: 0.35rem; font-family: var(--font-mono);">
 Phase 2: Academic Year 2025-26
 </div>
 <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
-Multi-Grade Teaching & Peer Learning
+Multi-Grade Teaching &amp; Peer Learning
 </div>
 <p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
 Dialogue shifted toward everyday classroom realities. Teachers shared methods for managing multiple grades simultaneously in single-teacher schools, group seating arrangements, and meaningful homework.
@@ -2655,13 +3159,12 @@ Dialogue shifted toward everyday classroom realities. Teachers shared methods fo
 <strong>Teacher Quote (Chhindwara):</strong> "U आकार की बैठक व्यवस्था अपनाई जिससे सभी बच्चे श्यामपट्ट और शिक्षक को स्पष्ट देख पा रहे हैं।" (U-shaped seating helped every child see the board and participate directly.)
 </div>
 </div>
-
 <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.1rem; border-top: 3px solid #10B981;">
 <div style="font-size: 0.76rem; font-weight: 700; color: #10B981; text-transform: uppercase; margin-bottom: 0.35rem; font-family: var(--font-mono);">
 Phase 3: Academic Year 2026-27
 </div>
 <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
-Active Learning Materials & Student Practice
+Active Learning Materials &amp; Student Practice
 </div>
 <p style="font-size: 0.8rem; color: var(--text-body); line-height: 1.45; margin-bottom: 0.6rem;">
 Discussion deepened into student practice. Teachers requested hands-on learning kits, activity-based math demonstrations, and peer observation tools so educators can visit each other's classrooms.
@@ -2671,19 +3174,16 @@ Discussion deepened into student practice. Teachers requested hands-on learning 
 </div>
 </div>
 </div>
-
 <!-- Tabular Model & Prediction Architecture Grid -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
-
 <!-- Left Column: Prediction Model Benchmark -->
 <div style="background: white; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.2rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
-Machine Learning Engine & Model Benchmarks
+Machine Learning Engine &amp; Model Benchmarks
 </div>
 <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
 Evaluation of teacher retention across cycles using TabPFN (Tabular Prior-Data Transformer) alongside tree-based baselines. We use a hybrid design: local language models extract sentiment and workload tags from teacher comments, which are then passed into tabular classifiers.
 </p>
-
 <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; margin-bottom: 1rem;">
 <thead>
 <tr style="background: var(--surface-subtle); border-bottom: 1px solid var(--surface-border); color: var(--text-muted);">
@@ -2714,16 +3214,14 @@ Evaluation of teacher retention across cycles using TabPFN (Tabular Prior-Data T
 </tr>
 <tr>
 <td style="padding: 6px 10px; font-weight: 600; color: #0284C7;">TabPFN (Tabular Transformer)</td>
-<td style="padding: 6px 10px; text-align: right; font-family: var(--font-mono); color: #0284C7;" colspan="3">Integrated via Hybrid Local Pipeline</td>
+<td colspan="3" style="padding: 6px 10px; text-align: right; font-family: var(--font-mono); color: #0284C7;">Integrated via Hybrid Local Pipeline</td>
 </tr>
 </tbody>
 </table>
-
 <div style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.4; background: var(--surface-subtle); padding: 8px; border-radius: 6px;">
 <strong>Why TabFM requires a hybrid pipeline:</strong> TabPFN is designed for numerical and categorical tables. Unstructured Hindi comments cannot be passed directly into tabular transformers. Local Qwen converts teacher prose into structured barriers (multi-grade burden, workload delays), which the prediction engine combines with attendance records.
 </div>
 </div>
-
 <!-- Right Column: Top District Support Priorities -->
 <div style="background: white; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.2rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
@@ -2732,7 +3230,6 @@ District Support Need Rankings (Top 10 Priority Areas)
 <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.8rem;">
 Districts identified by the algorithm as having the lowest predicted retention probability and highest reported multi-grade classroom challenges.
 </p>
-
 <table style="width: 100%; border-collapse: collapse; font-size: 0.76rem; text-align: left;">
 <thead>
 <tr style="background: var(--surface-subtle); border-bottom: 1px solid var(--surface-border); color: var(--text-muted);">
@@ -2807,7 +3304,6 @@ Districts identified by the algorithm as having the lowest predicted retention p
 </table>
 </div>
 </div>
-
 <!-- Peepul Action Recommendations Banner -->
 <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 1.1rem;">
 <div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-bottom: 0.4rem;">
@@ -2828,328 +3324,69 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 </div>
 </div>
 </div>
-
 </div>
-
-
-<!-- Digital Courses Assessment Mastery & Knowledge Shifts Panel -->
-  <div class="panel" id="digital-kpi-panel" style="margin-top: 1.5rem;">
-    <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-end;">
-      <div>
-        <div class="panel-title">Online Course Results and Learning Gains</div>
-        <div class="panel-desc">
-          Score comparisons before and after each course, completion rates, and test results across all 19 online courses.
-        </div>
-      </div>
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--blue-subtle); color: var(--blue-primary); padding: 4px 10px; border-radius: 9999px; font-weight: 700; border: 1px solid var(--blue-border);">
-          11 Paired Pre/Post Evaluations
-        </span>
-        <span style="font-family: var(--font-mono); font-size: 0.76rem; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 4px 10px; border-radius: 9999px; font-weight: 700; border: 1px solid var(--emerald-border);">
-          727,638 Total Course Enrollments
-        </span>
-      </div>
-    </div>
-
-    <!-- 4 Summary KPI Mini-Cards -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem;">
-      <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Highest Completion Rate</div>
-        <div style="font-size: 1.45rem; font-weight: 800; color: var(--blue-primary); font-family: var(--font-mono); margin: 3px 0;">85.6%</div>
-        <div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 1 (114,575 completions)</div>
-      </div>
-      <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top Subject Gain (PSP)</div>
-        <div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.9%</div>
-        <div style="font-size: 0.74rem; color: var(--text-body);">PSP Batch 2 (Pre: 44.6% to Post: 65.5%)</div>
-      </div>
-      <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top FLN Gain (Mission Ankur)</div>
-        <div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.3%</div>
-        <div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)</div>
-      </div>
-      <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Peak Assessment Mastery</div>
-        <div style="font-size: 1.45rem; font-weight: 800; color: var(--purple-primary); font-family: var(--font-mono); margin: 3px 0;">83.4%</div>
-        <div style="font-size: 0.74rem; color: var(--text-body);">National Achievement Survey (NAS Post-Test)</div>
-      </div>
-    </div>
-
-    <!-- Thematic Assessment Score Table -->
-    <div style="overflow-x: auto; border: 1px solid var(--surface-border); border-radius: 8px;">
-      <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
-        <thead>
-          <tr style="background: var(--surface-subtle); border-bottom: 2px solid var(--surface-border); color: var(--text-main); font-weight: 700;">
-            <th style="padding: 10px 14px;">Course / Program Title</th>
-            <th style="padding: 10px 14px; text-align: right;">Enrolled</th>
-            <th style="padding: 10px 14px; text-align: right;">Completion Rate</th>
-            <th style="padding: 10px 14px; text-align: right;">Pre-Test</th>
-            <th style="padding: 10px 14px; text-align: right;">Post-Test</th>
-            <th style="padding: 10px 14px; text-align: right;">Knowledge Shift</th>
-            <th style="padding: 10px 14px; text-align: center;">Evaluation Design</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Theme 1: Mission Ankur -->
-          <tr style="background: #F8FAFC; font-weight: 700; color: var(--blue-primary); border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
-            <td colspan="7" style="padding: 8px 14px;">Theme 1: Foundational Literacy & Numeracy (Mission Ankur Series)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 1: प्रारंभिक कक्षाओं में गणित</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">133,811</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">85.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">58.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">44.5%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444; font-weight: 700;">-13.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 2: संख्याओं की समझ</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">125,956</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">81.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">49.9%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">66.3%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+16.4%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 3: स्थानीय मान और संक्रियाएं</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">80,051</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">78.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">49.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">69.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+20.3%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 4: ज्यामिति और आकृतियां</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">30,590</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">21.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+8.2%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 5: मापन एवं डेटा संधारण</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">30,236</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">57.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">48.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">59.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">Mission Ankur Course 6: गणितीय तर्क और पैटर्न</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">20,845</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">70.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">58.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">67.1%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+8.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-
-          <!-- Theme 2: PSP Series -->
-          <tr style="background: #F8FAFC; font-weight: 700; color: #8B5CF6; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
-            <td colspan="7" style="padding: 8px 14px;">Theme 2: Pedagogical Subject Practice (PSP Batches 1 to 5)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">PSP Batch 1 (Primary Practice)</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">25,670</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">47.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">34.7%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444; font-weight: 700;">-16.3%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">PSP Batch 2 (Classroom Pedagogy)</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">13,831</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">50.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">44.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">65.5%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+20.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">PSP Batch 3 (Language & Literacy)</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">13,180</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">45.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">45.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">56.3%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">PSP Batch 4 (Advanced Methods)</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">34,736</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">54.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">22.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">PSP Batch 5 (Consolidation)</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">7,917</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">38.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">50.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-
-          <!-- Theme 3: ECE Foundation Series -->
-          <tr style="background: #F8FAFC; font-weight: 700; color: #10B981; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
-            <td colspan="7" style="padding: 8px 14px;">Theme 3: Early Childhood Education (ECE Foundation Series 1 to 6)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 1: प्रारंभिक बाल्यावस्था शिक्षा के सिद्धांत</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">7,351</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">66.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">56.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">51.5%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #EF4444;">-4.9%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 2: खेल और मॉर्निंग सर्कल</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">5,390</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">76.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">37.1%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">40.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669;">+3.3%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 3: भाषा विकास एवं आरंभिक साक्षरता</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">4,872</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">67.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">41.0%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">51.5%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+10.4%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 4: संज्ञानात्मक विकास एवं संख्या-पूर्व कौशल</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">6,218</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">47.7%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 5: थीम आधारित दृष्टिकोण</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">5,716</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">61.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">61.9%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">ECE Course 6: आकलन एवं पालकों के साथ साझेदारी</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">4,924</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">60.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">60.8%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-
-          <!-- Theme 4: Assessment & Communities -->
-          <tr style="background: #F8FAFC; font-weight: 700; color: #D97706; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
-            <td colspan="7" style="padding: 8px 14px;">Theme 4: Assessment Frameworks & Professional Learning Communities (NAS & PLC)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--surface-border);">
-            <td style="padding: 8px 14px; font-weight: 600;">National Achievement Survey (NAS) Competency Course</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">46,405</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0284C7;">77.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700;">76.6%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">83.4%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 700;">+6.8%</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Paired Pre/Post</span></td>
-          </tr>
-          <tr>
-            <td style="padding: 8px 14px; font-weight: 600;">Professional Learning Communities (PLC) Digital Course</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">129,939</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">42.2%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono);">18.5%</td>
-            <td style="padding: 8px 14px; text-align: right; font-family: var(--font-mono); color: #94A3B8;">N/A</td>
-            <td style="padding: 8px 14px; text-align: center;"><span style="background: #F1F5F9; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem;">Exit Quiz Only</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <div class="panel" id="drilldown-panel">
-    <div class="panel-header">
-      <div>
-        <div class="panel-title" id="drilldown-title">Program Breakdown: All Academic Years (AY 2022-23 to AY 2026-27)</div>
-        <div class="panel-desc" id="drilldown-desc">Click any program to see participant counts and download the list of teachers.</div>
-      </div>
-
-      <!-- Segmented Year Control -->
-      <div class="segmented-control" id="yearTabsContainer">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-
-    <!-- Category Filter Pills -->
-    <div class="filter-pills">
-      <button class="filter-pill active" onclick="setRoleFilter('ALL')">All Programs</button>
-      <button class="filter-pill" onclick="setRoleFilter('CLSS Participant')">CLSS Teachers</button>
-      <button class="filter-pill" onclick="setRoleFilter('DO Participant')">DO Oriented Trainers</button>
-      <button class="filter-pill" onclick="setRoleFilter('Digital')">Digital Courses</button>
-      <button class="filter-pill" onclick="setRoleFilter('In-Person')">All In-Person</button>
-    </div>
-
-    <div class="drilldown-layout">
-      <!-- Left: Dynamic Program List with Download Buttons -->
-      <div class="bar-list" id="barListContainer">
-        <!-- Injected via JavaScript -->
-      </div>
-
-      <!-- Right: Narrative Context & Mini Stats -->
-      <div class="narrative-card">
-        <div>
-          <div class="narrative-tag" id="narrativeYearTag">Portfolio Milestone</div>
-          <div class="narrative-title" id="narrativeTitle">Comprehensive State Portfolio</div>
-          <div class="narrative-body" id="narrativeBody">
+      <div class="panel" id="drilldown-panel">
+<div class="panel-header">
+<div>
+<div class="panel-title" id="drilldown-title">Program Breakdown: All Academic Years (AY 2022-23 to AY 2026-27)</div>
+<div class="panel-desc" id="drilldown-desc">Click any program to see participant counts and download the list of teachers.</div>
+</div>
+<!-- Segmented Year Control -->
+<div class="segmented-control" id="yearTabsContainer">
+<!-- Rendered by JS -->
+</div>
+</div>
+<!-- Category Filter Pills -->
+<div class="filter-pills">
+<button class="filter-pill active" onclick="setRoleFilter('ALL')">All Programs</button>
+<button class="filter-pill" onclick="setRoleFilter('CLSS Participant')">CLSS Teachers</button>
+<button class="filter-pill" onclick="setRoleFilter('DO Participant')">DO Oriented Trainers</button>
+<button class="filter-pill" onclick="setRoleFilter('Digital')">Digital Courses</button>
+<button class="filter-pill" onclick="setRoleFilter('In-Person')">All In-Person</button>
+</div>
+<div class="drilldown-layout">
+<!-- Left: Dynamic Program List with Download Buttons -->
+<div class="bar-list" id="barListContainer">
+<!-- Injected via JavaScript -->
+</div>
+<!-- Right: Narrative Context & Mini Stats -->
+<div class="narrative-card">
+<div>
+<div class="narrative-tag" id="narrativeYearTag">Portfolio Milestone</div>
+<div class="narrative-title" id="narrativeTitle">Comprehensive State Portfolio</div>
+<div class="narrative-body" id="narrativeBody">
             From 2022 to 2026, Madhya Pradesh reached 216,954 unique confirmed government teachers across 920,559 total activity records through state digital courses, district orientations, and cluster dialogues.
           </div>
-        </div>
-
-        <div class="stat-matrix">
-          <div class="stat-box">
-            <div class="stat-box-label">Cluster Teachers</div>
-            <div class="stat-box-val" id="miniClssTeachers" style="color: var(--emerald-primary);">51,659</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-box-label">District Trainers</div>
-            <div class="stat-box-val" id="miniDoCadre" style="color: var(--amber-primary);">10,747</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-box-label">Active Teachers</div>
-            <div class="stat-box-val" id="miniActive">216,954</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-box-label">Total Reached So Far</div>
-            <div class="stat-box-val" id="miniCum">216,954</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
 </div>
+<div class="stat-matrix">
+<div class="stat-box">
+<div class="stat-box-label">Cluster Teachers</div>
+<div class="stat-box-val" id="miniClssTeachers" style="color: var(--emerald-primary);">51,659</div>
+</div>
+<div class="stat-box">
+<div class="stat-box-label">District Trainers</div>
+<div class="stat-box-val" id="miniDoCadre" style="color: var(--amber-primary);">10,747</div>
+</div>
+<div class="stat-box">
+<div class="stat-box-label">Active Teachers</div>
+<div class="stat-box-val" id="miniActive">216,954</div>
+</div>
+<div class="stat-box">
+<div class="stat-box-label">Total Reached So Far</div>
+<div class="stat-box-val" id="miniCum">216,954</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    
+    </main>
+  </div>
+    
+  <script>
 
-<script>
+
 
   // ==========================================
   // 1. ETHEREAL AMBIENT CANVAS (LIGHT THEME)
@@ -3197,8 +3434,7 @@ Action Steps for Peepul and Rajya Shiksha Kendra
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 
-gba(2, 132, 199, );
+      ctx.fillStyle = 'rgba(2, 132, 199, ' + this.alpha + ')';
       ctx.fill();
     }
   }
@@ -3221,8 +3457,7 @@ gba(2, 132, 199, );
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 
-gba(2, 132, 199, );
+          ctx.strokeStyle = 'rgba(2, 132, 199, ' + ((1 - dist / 125) * 0.15) + ')';
           ctx.lineWidth = 0.8;
           ctx.stroke();
         }
@@ -6482,14 +6717,15 @@ gba(2, 132, 199, );
     if (e.key === 'Escape') closeSourceModal();
   });
 
-  let selectedEra = 'ALL'; // 'ALL', 'COVID', 'POST_COVID'
+  let selectedEra = 'ALL';
+  let activeChartFilter = 'ALL'; // 'ALL', 'COVID', 'POST_COVID'
   let currentFilter = 'ALL';
   let currentYear = 'ALL';
 
   // --- MASTER SLICER SYNCHRONIZATION ENGINE ---
   function syncChildSlicers() {
     // 1. Filter & Scope Child Slicer 1: Academic Year Slicer (#sideYearSlicers)
-    const yearPills = document.querySelectorAll('#sideYearSlicers .slicer-pill');
+    const yearPills = document.querySelectorAll('#masterYearSlicers .slicer-pill, #sideYearSlicers .slicer-pill');
     yearPills.forEach(pill => {
       const yr = pill.dataset.slicerYear;
       const labelSpan = pill.querySelector('span:first-child');
@@ -6516,7 +6752,7 @@ gba(2, 132, 199, );
     });
 
     // 2. Filter & Scope Child Slicer 2: Training Program Slicer (#sideInvSlicers)
-    const invPills = document.querySelectorAll('#sideInvSlicers .slicer-pill');
+    const invPills = document.querySelectorAll('#masterInvSlicers .slicer-pill, #sideInvSlicers .slicer-pill');
     invPills.forEach(pill => {
       const inv = pill.dataset.slicerInv;
       const labelSpan = pill.querySelector('span:first-child');
@@ -6614,6 +6850,34 @@ gba(2, 132, 199, );
 
     // 6. Rebuild Segmented Year Tabs above Drilldown (#yearTabsContainer)
     buildYearTabs();
+  }
+
+  
+  // --- TAB NAVIGATION SYSTEM ---
+  function switchTab(tabId) {
+    // 1. Update button states
+    document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+
+    // 2. Update tab containers
+    document.querySelectorAll('.tab-content').forEach(container => {
+      container.classList.toggle('active', container.id === tabId);
+    });
+
+    // 3. Re-render charts for newly visible containers to avoid zero-dimension SVG glitches
+    if (tabId === 'tab-overview' && typeof renderMacroSvg === 'function') {
+      renderMacroSvg();
+    }
+    if (tabId === 'tab-trends' && typeof renderMonthlyTimeline === 'function') {
+      renderMonthlyTimeline();
+    }
+
+    // 4. Smoothly scroll to the master control bar if user is far down
+    const masterBar = document.getElementById('masterControlBar');
+    if (masterBar && window.scrollY > masterBar.offsetTop + 100) {
+      window.scrollTo({ top: masterBar.offsetTop - 15, behavior: 'smooth' });
+    }
   }
 
   function selectEra(era) {
@@ -7000,12 +7264,12 @@ gba(2, 132, 199, );
     });
 
     // 1. Update Sidebar Year Buttons
-    document.querySelectorAll('#sideYearSlicers .slicer-pill').forEach(function(btn) {
+    document.querySelectorAll('#masterYearSlicers .slicer-pill, #sideYearSlicers .slicer-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.slicerYear === selectedYear);
     });
 
     // 2. Update Sidebar Intervention Buttons
-    document.querySelectorAll('#sideInvSlicers .slicer-pill').forEach(function(btn) {
+    document.querySelectorAll('#masterInvSlicers .slicer-pill, #sideInvSlicers .slicer-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.slicerInv === selectedIntervention);
     });
 
@@ -7021,7 +7285,7 @@ gba(2, 132, 199, );
     }
 
     // 3. Update Sidebar Verification Buttons
-    document.querySelectorAll('#sideVerSlicers .slicer-pill').forEach(function(btn) {
+    document.querySelectorAll('#masterVerSlicers .slicer-pill, #sideVerSlicers .slicer-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.slicerVer === selectedVerification);
     });
 
@@ -7734,41 +7998,39 @@ function scrollToSection(sectionId) {
   }
 }
 
-</script>
 
-
-<!-- SOURCE EXCEL FILES TRANSPARENCY MODAL -->
-<div class="modal-backdrop" id="sourceModal" onclick="if(event.target === this) closeSourceModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div>
-        <h3>Verified Source Data: 25 Excel Workbooks</h3>
-        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Every single source file, raw row count, and employee verification status in the project directory</p>
-      </div>
-      <button class="modal-close-btn" onclick="closeSourceModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <table class="audit-table">
-        <thead>
-          <tr>
-            <th>Source Excel File</th>
-            <th>Training Program</th>
-            <th>Cycle</th>
-            <th>Raw Participants</th>
-            <th>Facilitators</th>
-            <th>Verification Status</th>
-          </tr>
-        </thead>
-        <tbody id="auditTableBody">
-        </tbody>
-      </table>
-    </div>
-    <div style="padding: 1rem 1.5rem; background: var(--surface-subtle); border-top: 1px solid var(--surface-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted);">
-      <span>Summary: 216,954 unique verified teachers across all files | 112,139 accounts without employee code marked Not Available</span>
-      <button onclick="closeSourceModal()" style="padding: 0.4rem 1rem; border-radius: 8px; border: 1px solid var(--surface-border); background: #FFFFFF; font-weight: 600; cursor: pointer;">Close</button>
-    </div>
-  </div>
+  
+  </script>
+  <div class="modal-backdrop" id="sourceModal" onclick="if(event.target === this) closeSourceModal()">
+<div class="modal-box">
+<div class="modal-head">
+<div>
+<h3>Verified Source Data: 25 Excel Workbooks</h3>
+<p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Every single source file, raw row count, and employee verification status in the project directory</p>
 </div>
-
+<button class="modal-close-btn" onclick="closeSourceModal()">✕</button>
+</div>
+<div class="modal-body">
+<table class="audit-table">
+<thead>
+<tr>
+<th>Source Excel File</th>
+<th>Training Program</th>
+<th>Cycle</th>
+<th>Raw Participants</th>
+<th>Facilitators</th>
+<th>Verification Status</th>
+</tr>
+</thead>
+<tbody id="auditTableBody">
+</tbody>
+</table>
+</div>
+<div style="padding: 1rem 1.5rem; background: var(--surface-subtle); border-top: 1px solid var(--surface-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted);">
+<span>Summary: 216,954 unique verified teachers across all files | 112,139 accounts without employee code marked Not Available</span>
+<button onclick="closeSourceModal()" style="padding: 0.4rem 1rem; border-radius: 8px; border: 1px solid var(--surface-border); background: #FFFFFF; font-weight: 600; cursor: pointer;">Close</button>
+</div>
+</div>
+</div>
 </body>
 </html>
