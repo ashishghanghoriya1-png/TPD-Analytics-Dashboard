@@ -2113,7 +2113,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <span class="badge-pill ver-badge" id="badgeSliceVer">Verified Government Teachers Only</span>
       </div>
 
-      <!-- Master Tab Navigation (5 Distinct Tabs) -->
+      <!-- Master Tab Navigation (6 Distinct Tabs) -->
       <div class="tab-nav-bar" id="mainTabNav">
         <button class="tab-nav-btn active" id="tab-btn-overview" data-tab="tab-overview" onclick="switchTab('tab-overview')">
           <span class="tab-num">1</span> Overview & Reach
@@ -3607,19 +3607,19 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--emerald-border);">POLICY &amp; FIELD PLAYBOOK</span>
               <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Based on Qwen 3.5 Qualitative Synthesis &amp; Global EEF Evidence</span>
             </div>
-            <div class="panel-title">Intervention Action Playbook: Operational Boundaries and Solutions</div>
+            <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Intervention Action Playbook: Operational Boundaries and Solutions</h2>
             <div class="panel-desc">
               Clear guidance on high-impact practices to adopt and common systemic traps to avoid across Madhya Pradesh teacher professional development.
             </div>
           </div>
           
           <!-- Playbook Filter Pills -->
-          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-            <button class="slicer-chip active" id="playbook-filter-all" onclick="filterPlaybookCards('all')" style="font-size: 0.75rem; padding: 4px 10px;">All Interventions</button>
-            <button class="slicer-chip" id="playbook-filter-digital" onclick="filterPlaybookCards('digital')" style="font-size: 0.75rem; padding: 4px 10px;">1. Online Courses</button>
-            <button class="slicer-chip" id="playbook-filter-do" onclick="filterPlaybookCards('do')" style="font-size: 0.75rem; padding: 4px 10px;">2. District Orientation</button>
-            <button class="slicer-chip" id="playbook-filter-clss" onclick="filterPlaybookCards('clss')" style="font-size: 0.75rem; padding: 4px 10px;">3. Shaikshik Samwaad</button>
-            <button class="slicer-chip" id="playbook-filter-mentoring" onclick="filterPlaybookCards('mentoring')" style="font-size: 0.75rem; padding: 4px 10px;">4. Leadership &amp; Mentoring</button>
+          <div class="filter-pills" style="margin-bottom: 0;">
+            <button class="filter-pill active" id="playbook-filter-all" onclick="filterPlaybookCards('all')" aria-pressed="true" style="font-size: 0.78rem; padding: 5px 12px;">All Interventions</button>
+            <button class="filter-pill" id="playbook-filter-digital" onclick="filterPlaybookCards('digital')" aria-pressed="false" style="font-size: 0.78rem; padding: 5px 12px;">1. Online Courses</button>
+            <button class="filter-pill" id="playbook-filter-do" onclick="filterPlaybookCards('do')" aria-pressed="false" style="font-size: 0.78rem; padding: 5px 12px;">2. District Orientation</button>
+            <button class="filter-pill" id="playbook-filter-clss" onclick="filterPlaybookCards('clss')" aria-pressed="false" style="font-size: 0.78rem; padding: 5px 12px;">3. Shaikshik Samwaad</button>
+            <button class="filter-pill" id="playbook-filter-mentoring" onclick="filterPlaybookCards('mentoring')" aria-pressed="false" style="font-size: 0.78rem; padding: 5px 12px;">4. Leadership &amp; Mentoring</button>
           </div>
         </div>
 
@@ -3632,7 +3632,7 @@ Action Steps for Peepul and Rajya Shiksha Kendra
             <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
               <div style="font-size: 0.75rem; font-weight: 800; color: var(--rose-primary); margin-bottom: 4px;">1. Administrative Drain (43.72%)</div>
               <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
-                Non-academic portal uploads and survey duties divert cognitive energy away from teaching. Teachers function as data entry clerks rather than educators.
+                Non-academic portal uploads and survey duties take focus away from classroom teaching. Teachers spend class time filling out portal forms.
               </div>
             </div>
             <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
@@ -3650,7 +3650,7 @@ Action Steps for Peepul and Rajya Shiksha Kendra
             <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
               <div style="font-size: 0.75rem; font-weight: 800; color: var(--purple-primary); margin-bottom: 4px;">4. Mentorship Fear (20.00% Anxiety)</div>
               <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
-                Half of teachers seek developmental coaching (50.00%), but one in five experiences visits as punitive inspections. Surveillance anxiety causes defensive compliance.
+                Half of teachers seek developmental coaching (50.00%), but one in five experiences visits as punitive inspections. Surveillance anxiety causes hesitation to try new methods.
               </div>
             </div>
           </div>
@@ -3675,7 +3675,7 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <!-- What We CAN Do -->
               <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span aria-hidden="true" style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
@@ -3689,12 +3689,12 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <!-- What We CANNOT Do -->
               <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span aria-hidden="true" style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
                   <li><strong>Do not expect video watching alone to change teaching:</strong> Field research confirms digital courses alone produce 0.0% classroom lesson plan adoption.</li>
-                  <li><strong>Do not require video uploads from teachers:</strong> Demanding high-bandwidth file uploads in rural schools causes 40% of participants to abandon the platform.</li>
+                  <li><strong>Do not lock courses behind rigid quiz pass walls without guidance:</strong> Forcing teachers to repeat modules after scoring below 70% without question explanations causes participants to abandon courses.</li>
                   <li><strong>Do not rely on quiz scores as proof of teaching quality:</strong> Passing an exit quiz on a phone indicates knowledge recall, not actual classroom application.</li>
                   <li><strong>Do not launch long multi-course series without in-person syncs:</strong> Releasing 6 sequential courses without cluster review leads to an 84.4% drop-off by Course 4.</li>
                 </ul>
@@ -3723,21 +3723,21 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <!-- What We CAN Do -->
               <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span aria-hidden="true" style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
                   <li><strong>Run physical classroom simulations:</strong> Have master trainers rehearse live demonstrations on blackboards with peer role-playing before going to clusters.</li>
                   <li><strong>Enforce Single-Cycle Cadre Fidelity:</strong> Require master trainers who attend the August orientation to facilitate the August Shaikshik Samwaad only.</li>
                   <li><strong>Provide 1-page session scripts:</strong> Replace thick training manuals with a 1-page timeline showing exact 15-minute group activities and prompt questions.</li>
-                  <li><strong>Assess practical delivery:</strong> Evaluate master trainers on whether they can demonstrate manipulatives rather than testing their slide recall.</li>
+                  <li><strong>Assess practical delivery:</strong> Evaluate master trainers on hands-on learning tool demonstrations instead of written slide quizzes.</li>
                 </ul>
               </div>
 
               <!-- What We CANNOT Do -->
               <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span aria-hidden="true" style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
@@ -3771,21 +3771,21 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <!-- What We CAN Do -->
               <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span aria-hidden="true" style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
                   <li><strong>Institutionalize peer learning pods:</strong> Protect 90 minutes of the monthly cluster meeting for small groups of 4 to 5 teachers to solve shared classroom challenges.</li>
                   <li><strong>Shift meeting dates away from exams and harvest:</strong> Scheduling cluster meetings away from October and November prevents attendance drops and recovers 5,873 teachers.</li>
                   <li><strong>Equip language teachers with structured cards:</strong> Distribute printed 15-minute dialogue prompt cards for Hindi to bring Humanities adoption up from 0% toward STEM levels (87.5%).</li>
-                  <li><strong>Celebrate real classroom artifacts:</strong> Have teachers bring actual student notebooks or chart activities to meetings rather than delivering abstract speeches.</li>
+                  <li><strong>Celebrate real classroom artifacts:</strong> Have teachers bring actual student notebooks or chart activities to meetings instead of lecturing from the front.</li>
                 </ul>
               </div>
 
               <!-- What We CANNOT Do -->
               <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span aria-hidden="true" style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
@@ -3819,21 +3819,21 @@ Action Steps for Peepul and Rajya Shiksha Kendra
               <!-- What We CAN Do -->
               <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span aria-hidden="true" style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
                   <li><strong>Train coordinators to co-teach lessons:</strong> Have Cluster Academic Coordinators step in to teach alongside the teacher, demonstrating classroom management directly.</li>
                   <li><strong>Adopt a 3-question coaching debrief:</strong> Replace lengthy checklists with: (1) What went well? (2) Where did students struggle? (3) What will we try next Tuesday?</li>
                   <li><strong>Protect Head Masters from clerical overload:</strong> Free school heads from routine survey reporting so they can spend 30 minutes daily supporting classroom teachers.</li>
-                  <li><strong>Conduct psychological safety reviews:</strong> Survey teachers anonymously to ensure visits are experienced as developmental support rather than administrative policing.</li>
+                  <li><strong>Conduct psychological safety reviews:</strong> Survey teachers anonymously to ensure visits provide helpful coaching without administrative fear.</li>
                 </ul>
               </div>
 
               <!-- What We CANNOT Do -->
               <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span aria-hidden="true" style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
                   <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
                 </div>
                 <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
@@ -8603,7 +8603,11 @@ function scrollToSection(sectionId) {
     const chips = ['all', 'digital', 'do', 'clss', 'mentoring'];
     chips.forEach(c => {
       const el = document.getElementById('playbook-filter-' + c);
-      if (el) el.classList.toggle('active', c === cat);
+      if (el) {
+        const isActive = (c === cat);
+        el.classList.toggle('active', isActive);
+        el.setAttribute('aria-pressed', String(isActive));
+      }
     });
 
     const cards = document.querySelectorAll('.playbook-card');
