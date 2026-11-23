@@ -640,7 +640,7 @@
 
     /* Macro SVG Visualizer */
     .macro-wrap {
-      overflow: hidden;
+      overflow: visible;
       width: 100%;
       height: 310px;
       position: relative;
@@ -1218,18 +1218,20 @@
     /* SVG Dynamic Tooltip */
     #chartTooltip {
       position: absolute;
-      background: rgba(15, 23, 42, 0.92);
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(8px);
       color: #FFFFFF;
-      padding: 0.5rem 0.8rem;
-      border-radius: 6px;
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
       font-size: 0.78rem;
       font-family: var(--font-mono);
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.15s ease;
       z-index: 100;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      white-space: nowrap;
     }
 
   
@@ -2642,7 +2644,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 </div>
 </div>
 <!-- Responsive SVG Multi-Line Chart Canvas -->
-<div style="position: relative; width: 100%; height: 360px; background: #FFFFFF; border-radius: 10px; border: 1px solid var(--surface-border); padding: 10px; box-sizing: border-box; overflow: hidden;">
+<div style="position: relative; width: 100%; height: 360px; background: #FFFFFF; border-radius: 10px; border: 1px solid var(--surface-border); padding: 10px; box-sizing: border-box; overflow: visible;">
 <div id="monthlyChartTooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.94); backdrop-filter: blur(8px); color: #FFFFFF; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; font-family: var(--font-mono); pointer-events: none; z-index: 50; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15); min-width: 170px;"></div>
 <svg id="monthlyTimelineSvg" preserveaspectratio="none" style="width: 100%; height: 100%; display: block;" viewbox="0 0 1100 320">
 <defs>
@@ -4476,10 +4478,33 @@ Action Steps for Peepul and Rajya Shiksha Kendra
       circle.onmouseenter = (e) => {
         gsap.to(circle, { r: 8, strokeWidth: 3.5, duration: 0.2, ease: 'power2.out' });
         const tip = document.getElementById('chartTooltip');
-        if (tip) {
-          tip.innerHTML = `<strong>${t.label}</strong><br>Cadence / Active: ${t.active.toLocaleString()}<br>Cumulative Reached: ${t.cumulative.toLocaleString()}`;
+        const wrap = document.querySelector('.macro-wrap');
+        if (tip && wrap) {
+          tip.innerHTML = `<div style="font-weight: 700; color: #38BDF8; margin-bottom: 3px;">${t.label}</div><div>Cadence / Active: <strong>${t.active.toLocaleString()}</strong></div><div>Cumulative Reached: <strong>${t.cumulative.toLocaleString()}</strong></div>`;
           tip.style.opacity = '1';
-          tip.style.transform = `translate(${t.x - 40}px, ${nodeY - 75}px)`;
+
+          const circleRect = circle.getBoundingClientRect();
+          const wrapRect = wrap.getBoundingClientRect();
+          const nodeCenterX = circleRect.left - wrapRect.left + circleRect.width / 2;
+          const nodeCenterY = circleRect.top - wrapRect.top + circleRect.height / 2;
+
+          const tipWidth = tip.offsetWidth || 190;
+          const tipHeight = tip.offsetHeight || 65;
+
+          let left = nodeCenterX - tipWidth / 2;
+          let top = nodeCenterY - tipHeight - 12;
+
+          if (left < 10) left = 10;
+          if (left + tipWidth > wrapRect.width - 10) {
+            left = wrapRect.width - tipWidth - 10;
+          }
+          if (top < 5) {
+            top = nodeCenterY + 16;
+          }
+
+          tip.style.transform = 'none';
+          tip.style.left = Math.round(left) + 'px';
+          tip.style.top = Math.round(top) + 'px';
         }
       };
       circle.onmouseleave = () => {
@@ -8390,12 +8415,29 @@ Action Steps for Peepul and Rajya Shiksha Kendra
       trackLine.setAttribute('x2', xPos);
       trackLine.style.display = 'block';
 
-      // Tooltip position
+      // Tooltip position with dynamic boundary clamping
       tooltip.style.display = 'block';
-      let tipLeft = mouseX + 25;
-      if (tipLeft + 190 > rect.width) tipLeft = mouseX - 195;
-      tooltip.style.left = tipLeft + 'px';
-      tooltip.style.top = '30px';
+      const tipWidth = tooltip.offsetWidth || 230;
+      const tipHeight = tooltip.offsetHeight || 160;
+
+      let tipLeft = mouseX + 20;
+      if (tipLeft + tipWidth > rect.width - 10) {
+        tipLeft = mouseX - tipWidth - 20;
+      }
+      if (tipLeft < 10) tipLeft = 10;
+      if (tipLeft + tipWidth > rect.width - 10) {
+        tipLeft = Math.max(10, rect.width - tipWidth - 10);
+      }
+
+      const mouseY = e.clientY - rect.top;
+      let tipTop = mouseY - tipHeight / 2;
+      if (tipTop < 10) tipTop = 10;
+      if (tipTop + tipHeight > rect.height - 10) {
+        tipTop = Math.max(10, rect.height - tipHeight - 10);
+      }
+
+      tooltip.style.left = Math.round(tipLeft) + 'px';
+      tooltip.style.top = Math.round(tipTop) + 'px';
 
       const globalIdx = (currentTimelineStartIdx || 0) + idx;
       const sData = MONTHLY_TIMELINE_DATA[currentMonthlyMode];
