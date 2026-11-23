@@ -2130,6 +2130,9 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <button class="tab-nav-btn" id="tab-btn-feedback" data-tab="tab-feedback" onclick="switchTab('tab-feedback')">
           <span class="tab-num">5</span> Feedback & Directory
         </button>
+        <button class="tab-nav-btn" id="tab-btn-playbook" data-tab="tab-playbook" onclick="switchTab('tab-playbook')">
+          <span class="tab-num">6</span> Action Playbook
+        </button>
       </div>
     </div>
   </div>
@@ -3594,6 +3597,264 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 </div>
     </div>
     
+
+    <!-- TAB 6: INTERVENTION ACTION PLAYBOOK (WHAT WE CAN & CANNOT DO) -->
+    <div id="tab-playbook" class="tab-content">
+      <div class="panel" id="playbook-main-panel" style="margin-top: 1.5rem; border-top: 4px solid var(--emerald-primary);">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+              <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--emerald-border);">POLICY &amp; FIELD PLAYBOOK</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Based on Qwen 3.5 Qualitative Synthesis &amp; Global EEF Evidence</span>
+            </div>
+            <div class="panel-title">Intervention Action Playbook: Operational Boundaries and Solutions</div>
+            <div class="panel-desc">
+              Clear guidance on high-impact practices to adopt and common systemic traps to avoid across Madhya Pradesh teacher professional development.
+            </div>
+          </div>
+          
+          <!-- Playbook Filter Pills -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+            <button class="slicer-chip active" id="playbook-filter-all" onclick="filterPlaybookCards('all')" style="font-size: 0.75rem; padding: 4px 10px;">All Interventions</button>
+            <button class="slicer-chip" id="playbook-filter-digital" onclick="filterPlaybookCards('digital')" style="font-size: 0.75rem; padding: 4px 10px;">1. Online Courses</button>
+            <button class="slicer-chip" id="playbook-filter-do" onclick="filterPlaybookCards('do')" style="font-size: 0.75rem; padding: 4px 10px;">2. District Orientation</button>
+            <button class="slicer-chip" id="playbook-filter-clss" onclick="filterPlaybookCards('clss')" style="font-size: 0.75rem; padding: 4px 10px;">3. Shaikshik Samwaad</button>
+            <button class="slicer-chip" id="playbook-filter-mentoring" onclick="filterPlaybookCards('mentoring')" style="font-size: 0.75rem; padding: 4px 10px;">4. Leadership &amp; Mentoring</button>
+          </div>
+        </div>
+
+        <!-- Research Context Banner: Qwen 3.5 & Global Evidence -->
+        <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>Core Research Summary: Ground Realities from Qwen 3.5 and Field Audits</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+            <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--rose-primary); margin-bottom: 4px;">1. Administrative Drain (43.72%)</div>
+              <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+                Non-academic portal uploads and survey duties divert cognitive energy away from teaching. Teachers function as data entry clerks rather than educators.
+              </div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--amber-primary); margin-bottom: 4px;">2. 30-Day Transfer Decay (24.51%)</div>
+              <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+                Training is treated as an isolated event. Without an embedded peer learning circle inside the school building, new teaching methods are forgotten within 30 days.
+              </div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--blue-primary); margin-bottom: 4px;">3. The Cascade Collapse (1.20% Formal)</div>
+              <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+                While 72.73% of teachers praise peer discussions, only 1.20% of training cascades are preserved formally. Information dilutes rapidly down the administrative chain.
+              </div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.85rem;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--purple-primary); margin-bottom: 4px;">4. Mentorship Fear (20.00% Anxiety)</div>
+              <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+                Half of teachers seek developmental coaching (50.00%), but one in five experiences visits as punitive inspections. Surveillance anxiety causes defensive compliance.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Detailed Intervention Action Cards -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;" id="playbookCardsContainer">
+          
+          <!-- CARD 1: ONLINE DIGITAL COURSES -->
+          <div class="playbook-card" data-category="digital" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; box-shadow: var(--shadow-card);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 800; background: var(--blue-subtle); color: var(--blue-primary); padding: 2px 7px; border-radius: 4px;">INTERVENTION 1</span>
+                <span style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-left: 0.5rem;">Online Digital Courses (DIKSHA / PSP / Mission Ankur)</span>
+              </div>
+              <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); background: var(--surface-subtle); padding: 4px 8px; border-radius: 6px;">
+                Scope: 267,909 Enrolments | Multi-Course Drop-off: 84.4%
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+              <!-- What We CAN Do -->
+              <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
+                  <li><strong>Deliver bite-sized micro-learning:</strong> Keep videos under 6 minutes, focusing strictly on one classroom technique teachers can test the next morning.</li>
+                  <li><strong>Send direct WhatsApp quiz links:</strong> Use 2-tap phone quizzes to recover the 21,931 teachers who stall before the final course test.</li>
+                  <li><strong>Distribute offline pocket summaries:</strong> Provide downloadable 1-page guides and audio summaries for teachers in remote blocks with unstable connectivity.</li>
+                  <li><strong>Recognize classroom trial:</strong> Grant digital completion badges when teachers present photos or student work from course activities during monthly cluster meetings.</li>
+                </ul>
+              </div>
+
+              <!-- What We CANNOT Do -->
+              <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
+                  <li><strong>Do not expect video watching alone to change teaching:</strong> Field research confirms digital courses alone produce 0.0% classroom lesson plan adoption.</li>
+                  <li><strong>Do not require video uploads from teachers:</strong> Demanding high-bandwidth file uploads in rural schools causes 40% of participants to abandon the platform.</li>
+                  <li><strong>Do not rely on quiz scores as proof of teaching quality:</strong> Passing an exit quiz on a phone indicates knowledge recall, not actual classroom application.</li>
+                  <li><strong>Do not launch long multi-course series without in-person syncs:</strong> Releasing 6 sequential courses without cluster review leads to an 84.4% drop-off by Course 4.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.75rem; font-size: 0.72rem; color: var(--text-muted); background: var(--surface-subtle); padding: 6px 12px; border-radius: 6px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+              <span>Key Ground Fact: Digital courses work only when paired with in-person practice circles.</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-main);">Verified Benefit: +21,931 Recoverable Teachers</span>
+            </div>
+          </div>
+
+          <!-- CARD 2: DISTRICT ORIENTATION (DO) -->
+          <div class="playbook-card" data-category="do" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; box-shadow: var(--shadow-card);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 800; background: var(--purple-subtle); color: var(--purple-primary); padding: 2px 7px; border-radius: 4px;">INTERVENTION 2</span>
+                <span style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-left: 0.5rem;">District Orientation (DO Master Trainer Cadre)</span>
+              </div>
+              <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); background: var(--surface-subtle); padding: 4px 8px; border-radius: 6px;">
+                Scope: 8,459 Master Trainers | Session Interactivity Score: 1.37 / 4.0
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+              <!-- What We CAN Do -->
+              <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
+                  <li><strong>Run physical classroom simulations:</strong> Have master trainers rehearse live demonstrations on blackboards with peer role-playing before going to clusters.</li>
+                  <li><strong>Enforce Single-Cycle Cadre Fidelity:</strong> Require master trainers who attend the August orientation to facilitate the August Shaikshik Samwaad only.</li>
+                  <li><strong>Provide 1-page session scripts:</strong> Replace thick training manuals with a 1-page timeline showing exact 15-minute group activities and prompt questions.</li>
+                  <li><strong>Assess practical delivery:</strong> Evaluate master trainers on whether they can demonstrate manipulatives rather than testing their slide recall.</li>
+                </ul>
+              </div>
+
+              <!-- What We CANNOT Do -->
+              <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
+                  <li><strong>Do not allow cross-cycle carryover:</strong> Never let trainers certified six months earlier lead sessions without attending the current month orientation.</li>
+                  <li><strong>Do not rely on slide lecture monologues:</strong> Lecturing from slides caused session interactivity to collapse to 1.37 out of 4.0 in state evaluations.</li>
+                  <li><strong>Do not conduct orientation without tactile kits:</strong> Training without physical kits prevents trainers from modeling hands-on tools in cluster meetings.</li>
+                  <li><strong>Do not treat cascading as automatic:</strong> Expecting orientation content to cascade naturally without structured observation guides leaves 42.17% of clusters without support.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.75rem; font-size: 0.72rem; color: var(--text-muted); background: var(--surface-subtle); padding: 6px 12px; border-radius: 6px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+              <span>Key Ground Fact: Trainers can only facilitate effectively in the exact cycle they were oriented.</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-main);">Compliance Rule: Single-Cycle Cadre Fidelity Invariant</span>
+            </div>
+          </div>
+
+          <!-- CARD 3: SHAIKSHIK SAMWAAD (CLSS) -->
+          <div class="playbook-card" data-category="clss" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; box-shadow: var(--shadow-card);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px;">INTERVENTION 3</span>
+                <span style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-left: 0.5rem;">Shaikshik Samwaad (Monthly Cluster Peer Learning)</span>
+              </div>
+              <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); background: var(--surface-subtle); padding: 4px 8px; border-radius: 6px;">
+                Scope: 58,356 Unique Teachers | Peer Vitality: 72.73%
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+              <!-- What We CAN Do -->
+              <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
+                  <li><strong>Institutionalize peer learning pods:</strong> Protect 90 minutes of the monthly cluster meeting for small groups of 4 to 5 teachers to solve shared classroom challenges.</li>
+                  <li><strong>Shift meeting dates away from exams and harvest:</strong> Scheduling cluster meetings away from October and November prevents attendance drops and recovers 5,873 teachers.</li>
+                  <li><strong>Equip language teachers with structured cards:</strong> Distribute printed 15-minute dialogue prompt cards for Hindi to bring Humanities adoption up from 0% toward STEM levels (87.5%).</li>
+                  <li><strong>Celebrate real classroom artifacts:</strong> Have teachers bring actual student notebooks or chart activities to meetings rather than delivering abstract speeches.</li>
+                </ul>
+              </div>
+
+              <!-- What We CANNOT Do -->
+              <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
+                  <li><strong>Do not convert meetings into administrative circular readings:</strong> Reading government circulars during cluster sessions destroys the 72.73% peer collaboration vitality.</li>
+                  <li><strong>Do not mandate open-ended discussions in multi-grade classes:</strong> Asking teachers in single-teacher schools to run unguided discussions causes total abandonment in class.</li>
+                  <li><strong>Do not require complex paper registers:</strong> Adding heavy documentation requirements turns cluster facilitators into clerks and cuts actual practice time.</li>
+                  <li><strong>Do not hold sessions during peak farming cycles:</strong> Scheduling cluster meetings during soybean harvesting forces rural teachers to take leave.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.75rem; font-size: 0.72rem; color: var(--text-muted); background: var(--surface-subtle); padding: 6px 12px; border-radius: 6px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+              <span>Key Ground Fact: Practical peer problem-solving drives 87.5% adoption in STEM; language needs structured dialogue cards.</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-main);">Potential Gain: +5,873 Teachers via Calendar Shift</span>
+            </div>
+          </div>
+
+          <!-- CARD 4: SCHOOL LEADERSHIP & CONTINUOUS MENTORING -->
+          <div class="playbook-card" data-category="mentoring" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; box-shadow: var(--shadow-card);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 800; background: var(--amber-subtle); color: var(--amber-primary); padding: 2px 7px; border-radius: 4px;">INTERVENTION 4</span>
+                <span style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-left: 0.5rem;">School Leadership &amp; Continuous Mentoring</span>
+              </div>
+              <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); background: var(--surface-subtle); padding: 4px 8px; border-radius: 6px;">
+                Scope: 52 Reporting Districts | Coaching Demand: 50.00% vs Inspection Fear: 20.00%
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+              <!-- What We CAN Do -->
+              <div style="background: #F0FDF4; border: 1px solid var(--emerald-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--emerald-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✓</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--emerald-primary); text-transform: uppercase;">What We CAN Do (High-Impact Solutions)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #166534; line-height: 1.6;">
+                  <li><strong>Train coordinators to co-teach lessons:</strong> Have Cluster Academic Coordinators step in to teach alongside the teacher, demonstrating classroom management directly.</li>
+                  <li><strong>Adopt a 3-question coaching debrief:</strong> Replace lengthy checklists with: (1) What went well? (2) Where did students struggle? (3) What will we try next Tuesday?</li>
+                  <li><strong>Protect Head Masters from clerical overload:</strong> Free school heads from routine survey reporting so they can spend 30 minutes daily supporting classroom teachers.</li>
+                  <li><strong>Conduct psychological safety reviews:</strong> Survey teachers anonymously to ensure visits are experienced as developmental support rather than administrative policing.</li>
+                </ul>
+              </div>
+
+              <!-- What We CANNOT Do -->
+              <div style="background: #FFF1F2; border: 1px solid var(--rose-border); border-radius: 8px; padding: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span style="background: var(--rose-primary); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;">✕</span>
+                  <span style="font-size: 0.85rem; font-weight: 800; color: var(--rose-primary); text-transform: uppercase;">What We CANNOT Do (Systemic Traps to Avoid)</span>
+                </div>
+                <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #9F1239; line-height: 1.6;">
+                  <li><strong>Do not weaponize visits with punitive inspection checklists:</strong> When visits feel like surveillance, teachers hide difficulties and revert to passive lecture methods.</li>
+                  <li><strong>Do not burden single-teacher school heads with data entry:</strong> Asking head masters who manage 3 grades simultaneously to maintain portals degrades classroom teaching.</li>
+                  <li><strong>Do not critique without modeling solutions:</strong> Pointing out classroom weaknesses without demonstrating the alternative in front of students breeds frustration.</li>
+                  <li><strong>Do not tie formative coaching logs to disciplinary actions:</strong> Reporting coaching difficulties to district administrative offices destroys teacher trust permanently.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.75rem; font-size: 0.72rem; color: var(--text-muted); background: var(--surface-subtle); padding: 6px 12px; border-radius: 6px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+              <span>Key Ground Fact: Decoupling mentoring from inspection fear unlocks the 50.0% latent demand for developmental coaching.</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-main);">Proven Impact: Eliminates 20.0% Surveillance Anxiety</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
     </main>
   </div>
     
@@ -8336,6 +8597,25 @@ function scrollToSection(sectionId) {
 
 
   
+  
+  // Filter Playbook Cards in Tab 6
+  function filterPlaybookCards(cat) {
+    const chips = ['all', 'digital', 'do', 'clss', 'mentoring'];
+    chips.forEach(c => {
+      const el = document.getElementById('playbook-filter-' + c);
+      if (el) el.classList.toggle('active', c === cat);
+    });
+
+    const cards = document.querySelectorAll('.playbook-card');
+    cards.forEach(card => {
+      if (cat === 'all' || card.dataset.category === cat) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
   </script>
   <div class="modal-backdrop" id="sourceModal" onclick="if(event.target === this) closeSourceModal()">
 <div class="modal-box">
