@@ -33,3 +33,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.log
+
+*.bak
+*_test.html
+
