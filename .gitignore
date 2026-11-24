@@ -1,0 +1,35 @@
+# Confidential Data Isolation - RSK TPD Dashboard
+# Absolute prohibition on committing raw organizational, teacher, or strategic data
+
+# Spreadsheets and raw data
+*.xlsx
+*.xls
+*.csv
+*.tsv
+participant_lists/
+raw_data/
+confidential/
+extracted/
+ToC_RF_Inputs/
+
+# Documents and presentations
+*.docx
+*.doc
+*.pptx
+*.ppt
+*.pdf
+
+# Compressed archives
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Python and system caches
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+Thumbs.db
+*.log
