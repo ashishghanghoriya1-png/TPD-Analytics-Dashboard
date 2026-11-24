@@ -2731,6 +2731,333 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </div>
     </div>
 
+    <!-- Indicator Shift Tracker: What Rose and What Fell Across Questions -->
+    <div class="panel" style="margin-bottom: 1.5rem;" id="indicator-shift-tracker">
+      <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+        <div>
+          <div class="panel-title" style="display: flex; align-items: center; gap: 0.5rem;">
+            <span>Indicator Shift Tracker: What Rose and What Fell Across Questions</span>
+            <span style="font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: #EEF2F6; color: #1E293B; font-weight: 700;">Plain English Data</span>
+          </div>
+          <div class="panel-desc">Track how teacher scores, satisfaction, and attendance shifted month over month across feedback forms, classroom topics, and digital courses.</div>
+        </div>
+        <!-- Filter Tabs for Indicator Views -->
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" role="tablist" aria-label="Shift Tracker Views">
+          <button id="btn-shift-clss" class="filter-pill active" onclick="switchShiftView('clss')" role="tab" aria-selected="true" aria-pressed="true" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--blue-primary); color: #FFFFFF; font-weight: 700; cursor: pointer;">Shaikshik Samwaad Forms</button>
+          <button id="btn-shift-pedagogy" class="filter-pill" onclick="switchShiftView('pedagogy')" role="tab" aria-selected="false" aria-pressed="false" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Classroom Teaching Topics</button>
+          <button id="btn-shift-digital" class="filter-pill" onclick="switchShiftView('digital')" role="tab" aria-selected="false" aria-pressed="false" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Digital Training Gains &amp; Drops</button>
+          <button id="btn-shift-inperson" class="filter-pill" onclick="switchShiftView('inperson')" role="tab" aria-selected="false" aria-pressed="false" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">In-Person Training Feedback</button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Shaikshik Samwaad (CLSS) Recurring Questions -->
+      <div id="view-shift-clss" style="display: block;">
+        <div style="padding: 1rem 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--surface-border);">
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            These four pointers were asked identically across every monthly feedback form. They show broad satisfaction and relevance staying strong, while attendance fluctuated due to seasonal farm harvests and festivals.
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Card 1: Relevance -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Training Relevance Rating</span>
+              <span style="background: #DCFCE7; color: #15803D; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Rose +8.0%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono);">4.97</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">out of 5.00</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Baseline: 4.60 in August 2025 to 4.97 in August and September 2026.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              Teachers reported that discussion topics became closer to their day-to-day classroom syllabus needs over time.
+            </div>
+          </div>
+
+          <!-- Card 2: Satisfaction -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Teacher Satisfaction Rating</span>
+              <span style="background: #DCFCE7; color: #15803D; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Rose +3.0%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono);">4.80</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">out of 5.00</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Baseline: 4.66 in August 2025 to 4.80 in November 2025.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              Session ratings remained steady above 4.6 across all months, showing that peer dialogue format is popular among teachers.
+            </div>
+          </div>
+
+          <!-- Card 3: Agreement Rate -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Practice Agreement Rate</span>
+              <span style="background: #FEE2E2; color: #B91C1C; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Fell -3.24%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono);">90.21%</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">positive answers</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Baseline: 93.45% in August 2025 down to 90.21% in January 2026.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              This small drop happened because observer grading criteria became stricter as sessions introduced harder pedagogical topics.
+            </div>
+          </div>
+
+          <!-- Card 4: Attendance Volume -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Attendance Volume Shift</span>
+              <span style="background: #FEF3C7; color: #B45309; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Seasonal Swing</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono);">17,737</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">teachers in Dec</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Drop to 13,658 in Nov (-38.3%), then rebound to 17,737 in Dec (+29.9%).</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              November dip matched the soybean harvest and Diwali break. Attendance recovered immediately in December once schools resumed normal schedule.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 2: Classroom Teaching Focus by Month -->
+      <div id="view-shift-pedagogy" style="display: none;">
+        <div style="padding: 1rem 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--surface-border);">
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            In Shaikshik Samwaad, the main teaching question changed every month to match that month's curriculum theme. Below is the verified practice score for each topic, ranked from highest adoption to lowest adoption.
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Topic 1: Lesson Synthesis -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #10B981; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Lesson Synthesis &amp; Closure</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #047857; background: #D1FAE5; padding: 2px 6px; border-radius: 4px;">December 2025</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #047857; font-family: var(--font-mono); margin-bottom: 0.25rem;">89.2%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: Highest adoption among all classroom practices.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Teachers found summarizing key learning points at the end of class easy to do, and 89.2% of observers verified this practice in action.
+            </div>
+          </div>
+
+          <!-- Topic 2: Seating Arrangement -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #3B82F6; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Seating Arrangement for Peer Work</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #1D4ED8; background: #DBEAFE; padding: 2px 6px; border-radius: 4px;">August 2025</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #1D4ED8; font-family: var(--font-mono); margin-bottom: 0.25rem;">78.3%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: High adoption.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Rearranging benches into small groups was simple to organize, though crowded single-room schools had space limits.
+            </div>
+          </div>
+
+          <!-- Topic 3: Meaningful Homework -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #6366F1; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Meaningful Practice Homework</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #4338CA; background: #E0E7FF; padding: 2px 6px; border-radius: 4px;">November 2025</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #4338CA; font-family: var(--font-mono); margin-bottom: 0.25rem;">71.2%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: Moderate adoption.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Teachers assigned application questions rather than mechanical copying, but parent literacy remains a barrier for checking work at home.
+            </div>
+          </div>
+
+          <!-- Topic 4: Ability Grouping -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #F59E0B; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Ability-Based Student Grouping</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #B45309; background: #FEF3C7; padding: 2px 6px; border-radius: 4px;">January 2026</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #B45309; font-family: var(--font-mono); margin-bottom: 0.25rem;">63.8%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: Lower adoption. Multi-grade challenge.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Teachers with two or three grades in one classroom found it difficult to divide their teaching time across multiple learning levels at once.
+            </div>
+          </div>
+
+          <!-- Topic 5: Concrete TLM -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #F97316; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Hands-On Learning Kits (TLM)</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #C2410C; background: #FFEDD5; padding: 2px 6px; border-radius: 4px;">September 2026</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #C2410C; font-family: var(--font-mono); margin-bottom: 0.25rem;">61.2%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: Lower adoption. Supply constraints.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Math kits and flashcards helped students understand foundational math, but 38.8% of classrooms reported missing or damaged kit parts.
+            </div>
+          </div>
+
+          <!-- Topic 6: Safe Climate -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #EF4444; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Safe &amp; Fear-Free Learning Climate</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #B91C1C; background: #FEE2E2; padding: 2px 6px; border-radius: 4px;">August 2026</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #B91C1C; font-family: var(--font-mono); margin-bottom: 0.25rem;">48.0%</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">Rank: Critical gap. Needs direct coaching.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Less than half of classrooms showed children freely asking questions or making mistakes without fear of reprimand. This needs prioritized mentor visits.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 3: Digital Training Learning Gains & Course Cliffs -->
+      <div id="view-shift-digital" style="display: none;">
+        <div style="padding: 1rem 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--surface-border);">
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            Digital course data shows sharp differences in learning gains and completion rates. While early foundational courses saw high interest, rigid quiz rules in middle courses caused dropouts before recovery in final courses.
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Card 1: Course 3 Gain -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Mission Ankur Math: Course 3</span>
+              <span style="background: #DCFCE7; color: #15803D; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Highest Gain +20.3%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: #15803D; font-family: var(--font-mono);">+20.3%</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">test score jump</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Pre-Test: 37.1% to Post-Test: 57.4%.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              Short 3-minute video demonstrations of place value activities produced the largest verified teacher understanding boost across all digital modules.
+            </div>
+          </div>
+
+          <!-- Card 2: Course 4 Cliff -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Course 4 Completion Cliff</span>
+              <span style="background: #FEE2E2; color: #B91C1C; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Fell -57.0%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: #B91C1C; font-family: var(--font-mono);">21.21%</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">completion rate</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Course 1 was 78.2% down to 21.21% in Course 4.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              Mandatory passing cutoffs on multi-step division quizzes locked teachers out without giving feedback on which answer was incorrect.
+            </div>
+          </div>
+
+          <!-- Card 3: Course 6 Rebound -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Course 6 Mastery &amp; Rebound</span>
+              <span style="background: #DBEAFE; color: #1D4ED8; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Rebound 69.99%</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: #1D4ED8; font-family: var(--font-mono);">62.04%</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">average post score</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">Highest post-test score across the entire math series.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              After district mentors provided in-person review sessions, completion bounced back to 69.99% and teachers recorded their highest test scores.
+            </div>
+          </div>
+
+          <!-- Card 4: PSP Courses 1-3 -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">PSP Professional Courses 1 to 3</span>
+              <span style="background: #F1F5F9; color: #475569; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">Steady Cadre</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+              <span style="font-size: 1.6rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono);">88.4%</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">to 81.2% completion</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin: 0.4rem 0;">High course retention with average user rating of 4.52 out of 5.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); background: var(--surface-subtle); padding: 0.5rem; border-radius: 6px; line-height: 1.4;">
+              Pedagogy content without high-stakes quiz blocking maintained high voluntary completion across all three foundational courses.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 4: In-Person Training Feedback (STT 50,864 Records) -->
+      <div id="view-shift-inperson" style="display: none;">
+        <div style="padding: 1rem 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--surface-border);">
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            Survey responses from 50,864 teachers across 314 blocks highlight a sharp split between clear handbook materials and a lack of interactive practice time in physical training halls.
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Rating 1: Module Clarity -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #10B981; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Handbook Clarity &amp; Content Quality</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #047857; background: #D1FAE5; padding: 2px 6px; border-radius: 4px;">Strength</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #047857; font-family: var(--font-mono); margin-bottom: 0.25rem;">3.43 / 4.00</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">85.8% positive rating across 50,864 teachers.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Handouts, teacher guidebooks, and lesson step illustrations received high praise for clarity and readability.
+            </div>
+          </div>
+
+          <!-- Rating 2: Trainer Readiness -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #3B82F6; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Master Trainer Preparedness</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #1D4ED8; background: #DBEAFE; padding: 2px 6px; border-radius: 4px;">Strength</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #1D4ED8; font-family: var(--font-mono); margin-bottom: 0.25rem;">3.28 / 4.00</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">82.0% positive rating across 50,864 teachers.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              State and district resource persons were well prepared on theoretical topics and syllabus timelines.
+            </div>
+          </div>
+
+          <!-- Rating 3: Practical School Fit -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #F59E0B; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Practical Classroom Fit</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #B45309; background: #FEF3C7; padding: 2px 6px; border-radius: 4px;">Moderate</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #B45309; font-family: var(--font-mono); margin-bottom: 0.25rem;">2.89 / 4.00</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">72.3% positive rating. Gaps in rural school context.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Teachers noted that sample classroom scenarios often assumed ideal electricity, furniture, and single-grade teaching conditions.
+            </div>
+          </div>
+
+          <!-- Rating 4: Interactive Practice Time -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #EF4444; border-radius: 8px; padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-heading);">Interactive Practice &amp; Role-Play Time</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: #B91C1C; background: #FEE2E2; padding: 2px 6px; border-radius: 4px;">Severe Deficit</span>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #B91C1C; font-family: var(--font-mono); margin-bottom: 0.25rem;">1.37 / 4.00</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">34.2% rating. 65.8% reported lecture-only delivery.</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.4;">
+              Halls seated 80 to 120 teachers at once, turning workshops into one-way lectures with almost zero time for simulated teaching practice.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
     <!-- 52-District Performance & Risk Heatmap Grid -->
     <div class="panel" style="margin-bottom: 1.5rem;">
       <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem;">
@@ -8658,6 +8985,24 @@ function scrollToSection(sectionId) {
         card.style.display = 'block';
       } else {
         card.style.display = 'none';
+      }
+    });
+  }
+
+  
+  // Indicator Shift Tracker: View Switcher
+  function switchShiftView(viewId) {
+    const views = ['clss', 'pedagogy', 'digital', 'inperson'];
+    views.forEach(v => {
+      const btn = document.getElementById('btn-shift-' + v);
+      const viewEl = document.getElementById('view-shift-' + v);
+      const isActive = (v === viewId);
+      if (btn) {
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      }
+      if (viewEl) {
+        viewEl.style.display = isActive ? 'block' : 'none';
       }
     });
   }
