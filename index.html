@@ -2115,7 +2115,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <span class="badge-pill ver-badge" id="badgeSliceVer">Verified Government Teachers Only</span>
       </div>
 
-      <!-- Master Tab Navigation (7 Distinct Tabs) -->
+      <!-- Master Tab Navigation (8 Distinct Tabs) -->
       <div class="tab-nav-bar" id="mainTabNav">
         <button class="tab-nav-btn active" id="tab-btn-overview" data-tab="tab-overview" onclick="switchTab('tab-overview')">
           <span class="tab-num">1</span> Overview & Reach
@@ -2137,6 +2137,9 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </button>
         <button class="tab-nav-btn" id="tab-btn-replication" data-tab="tab-replication" onclick="switchTab('tab-replication')">
           <span class="tab-num">7</span> State Replication &amp; Peers
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-framework" data-tab="tab-framework" onclick="switchTab('tab-framework')">
+          <span class="tab-num">8</span> Theory of Change &amp; RF
         </button>
       </div>
     </div>
@@ -4488,6 +4491,483 @@ Action Steps for Peepul and Rajya Shiksha Kendra
         </div>
         <div id="stateProfileCard" style="padding: 1.25rem;">
           <!-- Dynamically populated by updateStateReadinessProfile() -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 8: THEORY OF CHANGE & RESULTS FRAMEWORK -->
+    <div id="tab-framework" class="tab-content">
+      
+      <!-- Top Title and Context Panel -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+          <div>
+            <div class="panel-title" style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>Theory of Change &amp; Results Framework (AY 2025-26 &amp; 2026-27)</span>
+              <span style="font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: #EEF2F6; color: #1E293B; font-weight: 700;">Official Strategy Matrix</span>
+            </div>
+            <div class="panel-desc">Multi-year monitoring and evaluation framework connecting training inputs to student learning outcomes across all three teacher professional development interventions.</div>
+          </div>
+          <!-- Quick Filter Pills for Results Framework -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" role="tablist" aria-label="Framework Filter">
+            <button class="filter-pill active" onclick="filterRfRows('all', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--blue-primary); color: #FFFFFF; font-weight: 700; cursor: pointer;">All Interventions (21)</button>
+            <button class="filter-pill" onclick="filterRfRows('clss', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Shaikshik Samwaad (CLSS)</button>
+            <button class="filter-pill" onclick="filterRfRows('digital', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Digital Training (DIKSHA)</button>
+            <button class="filter-pill" onclick="filterRfRows('inperson', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">In-Person Training</button>
+            <button class="filter-pill" onclick="filterRfRows('brief', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: #FEF3C7; color: #B45309; font-weight: 700; cursor: pointer;">Executive Decision Brief</button>
+          </div>
+        </div>
+
+        <!-- 4 Top Strategic Framework Metrics -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; padding: 1.25rem; background: #F8FAFC; border-top: 1px solid var(--surface-border);">
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">ToC Transmission Chain</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono); margin: 2px 0;">5 Stages</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Inputs, Outputs, Short-Term, Long-Term, and Student Impact.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Interventions Monitored</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #0284C7; font-family: var(--font-mono); margin: 2px 0;">3 Channels</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Cluster Samwaad, DIKSHA courses, and in-person workshops.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Cadre Fidelity Rule</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #16A34A; font-family: var(--font-mono); margin: 2px 0;">Single-Cycle</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Facilitators certified in DO lead clusters for that month only.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Economic Efficiency</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #059669; font-family: var(--font-mono); margin: 2px 0;">80% Savings</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Rs 210/month blended cost vs Rs 2,100/day residential cost.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: 5-Stage Theory of Change Visual Transmission Line -->
+      <div class="panel" style="margin-bottom: 1.5rem;" id="toc-visual-flow">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">The 5-Stage Theory of Change Transmission Line</div>
+            <div class="panel-desc">How program resources translate into classroom practice and verified student learning gains.</div>
+          </div>
+        </div>
+        <div style="padding: 1.25rem;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem;">
+            
+            <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-top: 4px solid #64748B; border-radius: 8px; padding: 0.85rem;">
+              <div style="font-size: 0.7rem; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 0.25rem;">Stage 1: Inputs</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.35rem;">Needs Analysis &amp; Modules</div>
+              <div style="font-size: 0.74rem; color: var(--text-body); line-height: 1.4;">
+                State needs assessments, teacher guidebooks (Margdarshika), observation rubrics, and short video lesson demonstrations.
+              </div>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-top: 4px solid #0284C7; border-radius: 8px; padding: 0.85rem;">
+              <div style="font-size: 0.7rem; font-weight: 800; color: #0369A1; text-transform: uppercase; margin-bottom: 0.25rem;">Stage 2: Outputs</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.35rem;">Training Delivery &amp; Cadre</div>
+              <div style="font-size: 0.74rem; color: var(--text-body); line-height: 1.4;">
+                State Resource Group orientations, 3,099 clusters running monthly Shaikshik Samwaad, and 5 approved digital courses.
+              </div>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-top: 4px solid #D97706; border-radius: 8px; padding: 0.85rem;">
+              <div style="font-size: 0.7rem; font-weight: 800; color: #B45309; text-transform: uppercase; margin-bottom: 0.25rem;">Stage 3: Short-Term</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.35rem;">Facilitator &amp; Teacher Knowledge</div>
+              <div style="font-size: 0.74rem; color: var(--text-body); line-height: 1.4;">
+                76% of facilitators identifying 6+ design principles, high orientation satisfaction (4.80/5.00), and +20.3% pre-to-post knowledge jumps.
+              </div>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-top: 4px solid #16A34A; border-radius: 8px; padding: 0.85rem;">
+              <div style="font-size: 0.7rem; font-weight: 800; color: #15803D; text-transform: uppercase; margin-bottom: 0.25rem;">Stage 4: Long-Term</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.35rem;">Classroom Practice Shifts</div>
+              <div style="font-size: 0.74rem; color: var(--text-body); line-height: 1.4;">
+                Teachers adopting lesson synthesis (89.2%), group seating (78.3%), and hands-on math kits (61.2%) verified through classroom observations.
+              </div>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-top: 4px solid #7C3AED; border-radius: 8px; padding: 0.85rem;">
+              <div style="font-size: 0.7rem; font-weight: 800; color: #6B21A8; text-transform: uppercase; margin-bottom: 0.25rem;">Stage 5: Final Impact</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.35rem;">Student Learning Outcomes</div>
+              <div style="font-size: 0.74rem; color: var(--text-body); line-height: 1.4;">
+                High-engagement classroom environments directly driving foundational literacy and numeracy gains on state competency assessments.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Interactive Results Framework Matrix -->
+      <div class="panel" style="margin-bottom: 1.5rem;" id="rf-matrix-panel">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; align-items: center;">
+          <div>
+            <div class="panel-title">Official Results Framework Matrix (AY 2025-26 &amp; 2026-27)</div>
+            <div class="panel-desc">Verified indicators, baselines, annual targets, achieved values, and verification instruments.</div>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">
+            Source: Rajya Shiksha Kendra MP &amp; Internal MEL Repository
+          </div>
+        </div>
+        <div style="overflow-x: auto; padding: 1rem 1.25rem;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.76rem; text-align: left;">
+            <thead>
+              <tr style="background: var(--surface-subtle); border-bottom: 2px solid var(--surface-border); color: var(--text-muted);">
+                <th style="padding: 8px 10px; font-weight: 700;">Nature</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Intervention</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Indicator &amp; Definition</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Baseline</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Target 25-26</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Achieved 25-26</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Target 26-27</th>
+                <th style="padding: 8px 10px; font-weight: 700;">Means of Verification</th>
+              </tr>
+            </thead>
+            <tbody id="rfTableBody">
+              
+              <!-- CLSS Rows -->
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">1.1) Number of planning documents prepared (Concept note, framework, Margdarshika)</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">3 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Signed Circular / RSK</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">2.1) Monitoring tools integrated on govt portal (Attendance, Observation, Feedback)</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">5</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">5 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">5</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">RSK MP Portal</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">7.4) % of participants who attend in-person District Orientation (DO)</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">70.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">90.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">95.2% (99/104)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">95.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Attendance Tracker</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">8.1) % of DO facilitators who can identify at least 6 design principles (out of 7)</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">70.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">70.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">76.0% (73/96)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">80.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Post-Orientation Assessment</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">11.1) Number of unique clusters conducting monthly Shaikshik Samwaad</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3,099</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">3,099 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3,099</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Portal Cluster Form Submissions</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">14.1) Average monthly teacher participation in Shaikshik Samwaad</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">15,000</td>
+                <td style="padding: 8px 10px; font-weight: 700;">22,000</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #D97706;">19,850 avg (peak 22,143)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">22,000</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">RSK Verified Attendance Roster</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">14.5) % of observed sessions meeting overall quality criteria on rubric</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">70.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">74.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">80.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Mentor Observation Rubric</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">15.1) % of teachers reporting trust in peer learning and feeling safe to share</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">40.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">70.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #DC2626;">48.0% (Deficit in field)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">95.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Classroom Observation &amp; Survey</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">CLSS</td>
+                <td style="padding: 8px 10px;">16.2) % of districts that conduct District Orientation (DO) every month</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">80.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">100.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">100.0% (52/52)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">100.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">DIET Meeting Records</td>
+              </tr>
+
+              <!-- Digital Rows -->
+              <tr class="rf-row" data-channel="digital" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">Digital</td>
+                <td style="padding: 8px 10px;">1.1) Compilation of need analysis report and concept notes</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">1 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Needs Analysis Report</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="digital" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">Digital</td>
+                <td style="padding: 8px 10px;">2.1) Number of digital courses created and approved by State</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">1</td>
+                <td style="padding: 8px 10px; font-weight: 700;">5</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">5 (Courses 1-5 released)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">5</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">DIKSHA Portal Registry</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="digital" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">Digital</td>
+                <td style="padding: 8px 10px;">Pre-to-post test score gain across digital courses</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">37.1%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">+15.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">+20.3% (Course 3 peak)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">+20.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Pre/Post Assessment Logs</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="digital" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">Digital</td>
+                <td style="padding: 8px 10px;">Course completion rate across foundational modules</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">50.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">75.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #D97706;">69.99% (rebound in C6)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">80.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">DIKSHA Portal Completion Records</td>
+              </tr>
+
+              <!-- In-Person Rows -->
+              <tr class="rf-row" data-channel="inperson" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">In-Person</td>
+                <td style="padding: 8px 10px;">1.1) Learning outcomes identified and approved for in-person training</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">1 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">RSK Approved Curriculum</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="inperson" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">In-Person</td>
+                <td style="padding: 8px 10px;">2.1) Teacher learning modules (Shikshak Margdarshika) printed and distributed</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">-</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">1 (100%)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">1</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Distribution Records</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="inperson" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #E0F2FE; color: #0369A1; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Output</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">In-Person</td>
+                <td style="padding: 8px 10px;">3.2) % of State Resource Groups (SRG) attending state-level training</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">80.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">90.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">94.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700;">95.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">State Training Cell Roster</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="inperson" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">In-Person</td>
+                <td style="padding: 8px 10px;">Handbook clarity and content quality score from teachers</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">2.50 / 4</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3.20 / 4</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">3.43 / 4.00</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3.50 / 4</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">50,864 Teacher Survey</td>
+              </tr>
+
+              <tr class="rf-row" data-channel="inperson" style="border-bottom: 1px solid var(--surface-border);">
+                <td style="padding: 8px 10px;"><span style="background: #DCFCE7; color: #15803D; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Outcome</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">In-Person</td>
+                <td style="padding: 8px 10px;">Active hands-on role-play and simulation practice in workshops</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">1.00 / 4</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3.00 / 4</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #DC2626;">1.37 / 4.00 (Critical Deficit)</td>
+                <td style="padding: 8px 10px; font-weight: 700;">3.20 / 4</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">Trainee Workshop Evaluation</td>
+              </tr>
+
+              <!-- Impact Row -->
+              <tr class="rf-row" data-channel="clss" style="border-bottom: 1px solid var(--surface-border); background: #FAF5FF;">
+                <td style="padding: 8px 10px;"><span style="background: #F3E8FF; color: #6B21A8; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">Impact</span></td>
+                <td style="padding: 8px 10px; font-weight: 600;">All</td>
+                <td style="padding: 8px 10px;">High-engagement classrooms and student learning outcome (SLO) gains</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">State Baseline</td>
+                <td style="padding: 8px 10px; font-weight: 700;">+10.0%</td>
+                <td style="padding: 8px 10px; font-weight: 700; color: #16A34A;">+8.5% FLN Mastery</td>
+                <td style="padding: 8px 10px; font-weight: 700;">+15.0%</td>
+                <td style="padding: 8px 10px; color: var(--text-muted);">State NAS &amp; District Assessments</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 3: Target vs Field Reality Triangulation Panel -->
+      <div class="panel" style="margin-bottom: 1.5rem;" id="triangulation-panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Target vs Field Reality Triangulation (Executive Accountability)</div>
+            <div class="panel-desc">Where the program exceeded official framework targets versus where field friction required management intervention.</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Positive Wins -->
+          <div style="background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #166534; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>✓</span> Program Areas Exceeding Framework Targets
+            </div>
+            <ul style="font-size: 0.76rem; color: #14532D; line-height: 1.5; margin: 0; padding-left: 1.1rem;">
+              <li style="margin-bottom: 0.4rem;"><strong>Lesson Synthesis:</strong> 89.2% verified classroom practice adoption in December 2025, beating the 80.0% target. Teachers demonstrated strong mastery in summarizing lesson takeaways.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Teacher Satisfaction:</strong> 4.80 out of 5.00 average rating in November 2025, exceeding the 4.50 framework benchmark. Peer dialogue format achieved voluntary teacher buy-in.</li>
+              <li><strong>Course 3 Knowledge Jump:</strong> Pre-to-post test gain reached +20.3%, beating the +15.0% target due to concise 3-minute video demonstrations of foundational math activities.</li>
+            </ul>
+          </div>
+
+          <!-- Bottlenecks & Corrective Action -->
+          <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #991B1B; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>⚠</span> Field Gaps and Management Corrective Actions
+            </div>
+            <ul style="font-size: 0.76rem; color: #7F1D1D; line-height: 1.5; margin: 0; padding-left: 1.1rem;">
+              <li style="margin-bottom: 0.4rem;"><strong>Safe Classroom Climate (48.0% vs 75% Target):</strong> Less than half of classrooms showed fear-free questioning. <em>Corrective Action:</em> Ring-fencing mentor coaching visits to schools scoring low on psychological safety rubrics.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Course 4 Quiz Cliff (21.21% vs 60% Target):</strong> Strict pass cutoffs locked teachers out without answers. <em>Corrective Action:</em> Eliminating lockout gates and adding immediate worked explanations.</li>
+              <li><strong>Workshop Practice Deficit (1.37 / 4.00 vs 3.00 Target):</strong> 100-person halls turned workshops into lectures. <em>Corrective Action:</em> Capping room sizes at 35 teachers and mandating 45 minutes of paired role-play.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 4: Unit Economics & Return on Investment Calculator -->
+      <div class="panel" style="margin-bottom: 1.5rem;" id="unit-economics-panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Unit Economics: Blended Tri-Intervention vs Traditional Training</div>
+            <div class="panel-desc">Economic comparison showing cost efficiency per teacher and return on public investment.</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; border-top: 4px solid #EF4444;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #991B1B; text-transform: uppercase;">Traditional Residential Workshop</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #991B1B; font-family: var(--font-mono); margin: 4px 0;">Rs 2,100</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">per teacher per day (travel, lodging, venue, meals)</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              Annual spend for 100,000 teachers over a 3-day cycle reaches Rs 63 Crores. Unreinforced memory decay drops retained practice to 18.3% within 90 days.
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; border-top: 4px solid #10B981;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #047857; text-transform: uppercase;">Blended Tri-Intervention Model</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #047857; font-family: var(--font-mono); margin: 4px 0;">Rs 210</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">per teacher per month (clusters, nudges, orientation)</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              Annual spend for 100,000 teachers over 10 active months is Rs 21 Crores. Continuous reinforcement cuts memory decay from 18.3% down to 1.7%.
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1rem; border-top: 4px solid #3B82F6;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #1D4ED8; text-transform: uppercase;">Net Economic Value to State</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #1D4ED8; font-family: var(--font-mono); margin: 4px 0;">Rs 42 Crores</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.5rem;">annual budget savings (66.7% reduction)</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              Saves public funds while providing ten continuous touchpoints instead of a single one-off annual lecture workshop.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 5: 1-Page Executive Decision Briefing -->
+      <div class="panel" style="margin-bottom: 1.5rem;" id="executive-brief-panel">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; align-items: center;">
+          <div>
+            <div class="panel-title">1-Page Executive Decision Brief</div>
+            <div class="panel-desc">Concise briefing distillation structured for three-minute leadership review.</div>
+          </div>
+          <button onclick="window.print()" style="padding: 5px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: #FFFFFF; font-weight: 700; cursor: pointer;">Print / Export Brief</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <!-- Quadrant 1 -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #0284C7; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #0369A1; text-transform: uppercase; margin-bottom: 0.25rem;">Quadrant 1: Scale &amp; Reach</div>
+            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.4rem;">Statewide Saturation Reached</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              216,954 verified teachers active across all 52 districts and 314 blocks. 3,099 clusters running monthly sessions with 100% District Orientation compliance.
+            </div>
+          </div>
+
+          <!-- Quadrant 2 -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #16A34A; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #15803D; text-transform: uppercase; margin-bottom: 0.25rem;">Quadrant 2: Classroom Wins</div>
+            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.4rem;">High Practice Adoption</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              89.2% adoption in lesson synthesis, 78.3% in group seating, and 61.2% in hands-on math kits. Course 3 produced a +20.3% understanding gain.
+            </div>
+          </div>
+
+          <!-- Quadrant 3 -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #EA580C; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #C2410C; text-transform: uppercase; margin-bottom: 0.25rem;">Quadrant 3: Vulnerabilities</div>
+            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.4rem;">Field Delivery Bottlenecks</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              48.0% safe classroom climate, 1.37 / 4.00 workshop practice rating, and Course 4 quiz completion cliff (21.21%). November harvest seasonal dip (-38.3%).
+            </div>
+          </div>
+
+          <!-- Quadrant 4 -->
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-left: 4px solid #7C3AED; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #6B21A8; text-transform: uppercase; margin-bottom: 0.25rem;">Quadrant 4: Decisions Required</div>
+            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.4rem;">Three Policy Approvals</div>
+            <div style="font-size: 0.75rem; color: var(--text-body); line-height: 1.45;">
+              1) Formally ring-fence mentor coaching days. 2) Cap workshop rooms at 35 teachers. 3) Replace quiz lockout cutoffs with immediate worked solutions.
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -9402,6 +9882,35 @@ function scrollToSection(sectionId) {
         </div>
       </div>
     `;
+  }
+
+
+  // Filter Results Framework Rows
+  function filterRfRows(channel, btn) {
+    const pills = btn.parentElement.querySelectorAll('.filter-pill');
+    pills.forEach(p => {
+      p.classList.remove('active');
+      p.style.background = 'var(--surface-subtle)';
+      p.style.color = 'var(--text-body)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--blue-primary)';
+    btn.style.color = '#FFFFFF';
+
+    if (channel === 'brief') {
+      const briefEl = document.getElementById('executive-brief-panel');
+      if (briefEl) briefEl.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    const rows = document.querySelectorAll('.rf-row');
+    rows.forEach(r => {
+      if (channel === 'all' || r.dataset.channel === channel) {
+        r.style.display = '';
+      } else {
+        r.style.display = 'none';
+      }
+    });
   }
 
   // Indicator Shift Tracker: View Switcher
