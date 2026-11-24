@@ -2115,7 +2115,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <span class="badge-pill ver-badge" id="badgeSliceVer">Verified Government Teachers Only</span>
       </div>
 
-      <!-- Master Tab Navigation (6 Distinct Tabs) -->
+      <!-- Master Tab Navigation (7 Distinct Tabs) -->
       <div class="tab-nav-bar" id="mainTabNav">
         <button class="tab-nav-btn active" id="tab-btn-overview" data-tab="tab-overview" onclick="switchTab('tab-overview')">
           <span class="tab-num">1</span> Overview & Reach
@@ -2134,6 +2134,9 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </button>
         <button class="tab-nav-btn" id="tab-btn-playbook" data-tab="tab-playbook" onclick="switchTab('tab-playbook')">
           <span class="tab-num">6</span> Action Playbook
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-replication" data-tab="tab-replication" onclick="switchTab('tab-replication')">
+          <span class="tab-num">7</span> State Replication &amp; Peers
         </button>
       </div>
     </div>
@@ -4182,6 +4185,312 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 
         </div>
       </div>
+    </div>
+
+    <!-- TAB 7: PEER MODELS & STATE REPLICATION BLUEPRINT -->
+    <div id="tab-replication" class="tab-content">
+      
+      <!-- Top Title and Context Panel -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+          <div>
+            <div class="panel-title" style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>Peer Models &amp; Multi-State Replication Blueprint</span>
+              <span style="font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: #EEF2F6; color: #1E293B; font-weight: 700;">Strategic Analysis</span>
+            </div>
+            <div class="panel-desc">Comparative analysis of major Indian teacher professional development models and the 5-step roadmap to replicate the Madhya Pradesh tri-intervention system in other states.</div>
+          </div>
+          <!-- Quick Filter Pills for Sector Benchmarks -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" role="tablist" aria-label="Peer Filter">
+            <button class="filter-pill active" onclick="filterPeerCards('all', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--blue-primary); color: #FFFFFF; font-weight: 700; cursor: pointer;">All Peers (6)</button>
+            <button class="filter-pill" onclick="filterPeerCards('governance', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Governance &amp; Accountability</button>
+            <button class="filter-pill" onclick="filterPeerCards('motivation', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Teacher Motivation</button>
+            <button class="filter-pill" onclick="filterPeerCards('language', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Language &amp; MLE</button>
+            <button class="filter-pill" onclick="filterPeerCards('system', this)" style="padding: 6px 12px; font-size: 0.76rem; border-radius: 6px; border: 1px solid var(--surface-border); background: var(--surface-subtle); color: var(--text-body); font-weight: 700; cursor: pointer;">Middle-Tier &amp; Tech</button>
+          </div>
+        </div>
+
+        <!-- 4 Key Strategic Metrics -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; padding: 1.25rem; background: #F8FAFC; border-top: 1px solid var(--surface-border);">
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Peer Organizations Audited</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-heading); font-family: var(--font-mono); margin: 2px 0;">6 Systems</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">CSF, STiR, LLF, LFE, Kaivalya, and Madhi models.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">States Under Comparison</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #0284C7; font-family: var(--font-mono); margin: 2px 0;">7 States</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">MP, Haryana, UP, Delhi, Maharashtra, Chhattisgarh, TN.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Core Invariant Rule</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #16A34A; font-family: var(--font-mono); margin: 2px 0;">Single-Cycle</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Facilitators certified in DO only train for that exact month.</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 0.85rem;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Replication Horizon</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #EA580C; font-family: var(--font-mono); margin: 2px 0;">5 Phases</div>
+            <div style="font-size: 0.72rem; color: var(--text-body);">Diagnostic, room sizing, digital, 3-district pilot, policy law.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: Comparative Sector Analysis (Cards for 6 Organizations) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;" id="peerCardsGrid">
+        
+        <!-- Peer 1: CSF -->
+        <div class="peer-card" data-category="governance" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #0284C7;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">Central Square Foundation (CSF)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Haryana (NIPUN Haryana) &amp; Uttar Pradesh</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #E0F2FE; color: #0369A1;">Governance</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Instituted monthly governance reviews chaired directly by Deputy Commissioners (District Collectors). Produced scripted daily teacher guides with lesson steps broken down to the 10-minute mark to reduce teacher cognitive burden.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> High administrative pressure created compliance-driven reporting where teachers hurried through steps to meet checklist criteria rather than checking student comprehension.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Administrative authority guarantees attendance, but must be paired with fear-free peer reflection so teachers admit what they do not understand.
+          </div>
+        </div>
+
+        <!-- Peer 2: STiR Education -->
+        <div class="peer-card" data-category="motivation" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #16A34A;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">STiR Education (Centre for Intrinsic Motivation)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Delhi, Karnataka, Tamil Nadu</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #DCFCE7; color: #15803D;">Motivation</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Centered their entire design on intrinsic teacher motivation. Built monthly Teacher Communities of Practice into official school timetables, measuring teacher autonomy, classroom curiosity, and peer recognition.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> Kept top-down assessment and testing out of meetings to protect trust, which made it difficult to establish a direct causal link to student foundational literacy and numeracy gains.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Peer dialogue builds strong teacher ownership, but needs structured classroom pedagogical targets (like ability grouping and lesson synthesis) to shift learning outcomes.
+          </div>
+        </div>
+
+        <!-- Peer 3: LLF -->
+        <div class="peer-card" data-category="language" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #D97706;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">Language &amp; Learning Foundation (LLF)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Uttar Pradesh, Chhattisgarh, Rajasthan</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #FEF3C7; color: #B45309;">Language</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Deep linguistic focus. Designed Multilingual Education (MLE) materials in tribal areas (such as Halbi and Gondi), training teachers to use home languages as a bridge to formal Hindi. Deployed external observation tools with spot-checks.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> Highly tailored linguistic design is labor-intensive and slower to scale across diverse secondary school cadres covering science and mathematics.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Tribal belts in new states (such as Bastar in Chhattisgarh or Santhal Parganas in Jharkhand) require mother-tongue bridge modules rather than uniform standard language guides.
+          </div>
+        </div>
+
+        <!-- Peer 4: LFE -->
+        <div class="peer-card" data-category="system" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #7C3AED;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">Leadership for Equity (LFE)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Maharashtra, Andhra Pradesh</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #F3E8FF; color: #6B21A8;">Middle-Tier</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Embedded entirely within existing government institutions (DIETs, SCERT, Kendra Pramukhs). Refused to hire large parallel external field teams, focusing instead on rewriting administrative job descriptions and training state officials.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> Visible field momentum is slower because delivery moves at the pace of government administrative approvals and civil service posting cycles.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Long-term survival requires codifying teacher training rhythms into state service rules so the system continues when project support ends.
+          </div>
+        </div>
+
+        <!-- Peer 5: Kaivalya -->
+        <div class="peer-card" data-category="system" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #EA580C;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">Kaivalya Education Foundation (Piramal)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Bihar, Rajasthan, Aspirational Districts</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #FFEDD5; color: #C2410C;">Leadership</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Deployed the Gandhi Fellowship model, placing young graduates in rural blocks to live in communities and coach school Headmasters on instructional leadership and school management.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> High operational overhead to recruit, house, and support hundreds of external fellows across remote districts; risk of program fade once fellows graduate.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Strengthen the existing school Headmaster as an instructional coach rather than relying on outside contractual workers.
+          </div>
+        </div>
+
+        <!-- Peer 6: Madhi Foundation -->
+        <div class="peer-card" data-category="system" style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.25rem; border-top: 4px solid #0D9488;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-heading);">Madhi Foundation</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">State Footprint: Tamil Nadu (Ennum Ezhuthum Mission)</div>
+            </div>
+            <span style="font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; background: #CCFBF1; color: #0F766E;">Digital Tracking</span>
+          </div>
+          <div style="margin: 0.75rem 0; font-size: 0.78rem; color: var(--text-body); line-height: 1.45;">
+            <strong>What they did differently:</strong> Complete digital tracking through the Palli Parvai app. Mentors receive automated weekly schedules that route them specifically to classrooms where student milestone mastery is falling behind.
+          </div>
+          <div style="padding: 0.6rem; background: #FEF2F2; border-radius: 6px; font-size: 0.74rem; color: #991B1B; margin-bottom: 0.5rem;">
+            <strong>Trade-off:</strong> Requires 100% device ownership and dependable connectivity; teachers report survey fatigue when daily reporting burdens become too heavy.
+          </div>
+          <div style="padding: 0.6rem; background: var(--surface-subtle); border-radius: 6px; font-size: 0.74rem; color: var(--text-body);">
+            <strong>Takeaway for Replication:</strong> Automated mentor dispatching based on real classroom data eliminates wasted travel time and targets help where teachers need it most.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SECTION 2: What Stays Local vs The Replicable Core -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">The Replication Boundary: What Stays Local vs What Can Be Exported</div>
+            <div class="panel-desc">Attempting to copy state-specific acronyms leads to bureaucratic rejection. Successful expansion requires exporting the delivery engine while adopting the new state's administrative hierarchy.</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1.25rem;">
+          
+          <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #991B1B; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>✕</span> What Cannot Be Directly Copied (Local Boundary)
+            </div>
+            <ul style="font-size: 0.76rem; color: #7F1D1D; line-height: 1.5; margin: 0; padding-left: 1.1rem;">
+              <li style="margin-bottom: 0.4rem;"><strong>Administrative Titles:</strong> Terms like Jan Shikshak, BAC, CAC, and RSK are specific to Madhya Pradesh and mean nothing in states using ARP, CRP, or Kendra Pramukh cadres.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Large Lecture Workshops:</strong> Exporting physical workshops with 80 to 120 teachers guarantees low peer practice (1.37 out of 4.00) and poor classroom translation.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Punitive Digital Quizzes:</strong> High-stakes pass cutoffs without answer explanations trigger completion drops like Course 4 in MP (down to 21.21%).</li>
+              <li><strong>Generic Dialect Materials:</strong> Standardized text without local tribal language adaptations fails in indigenous belts.</li>
+            </ul>
+          </div>
+
+          <div style="background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px; padding: 1rem;">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #166534; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>✓</span> The Replicable Core (The Delivery Engine)
+            </div>
+            <ul style="font-size: 0.76rem; color: #14532D; line-height: 1.5; margin: 0; padding-left: 1.1rem;">
+              <li style="margin-bottom: 0.4rem;"><strong>Tri-Intervention Cadence:</strong> Monthly District Orientation feeding into monthly cluster workshops (Shaikshik Samwaad) backed by weekly digital micro-nudges.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Single-Cycle Cadre Fidelity:</strong> Strict policy that facilitators certified in DO for that month lead that month's cluster sessions, reducing decay from 18.3% down to 1.7%.</li>
+              <li style="margin-bottom: 0.4rem;"><strong>Room Cap at 30 to 35:</strong> Mandating smaller cluster rooms with at least 45 minutes of active peer role-play per session.</li>
+              <li><strong>TabFM Risk-Based Mentoring:</strong> Triaging mentor visits using attendance drops, quiz dropouts, and classroom observation rubrics.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 3: The 5-Step Replication Roadmap (Year 1 Blueprint) -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">The 5-Step Replication Roadmap (Year 1 Blueprint)</div>
+            <div class="panel-desc">A structured operational sequence to establish the tri-intervention system in any new state government.</div>
+          </div>
+        </div>
+        <div style="padding: 1.25rem;">
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <!-- Step 1 -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--surface-subtle); border-radius: 8px; border-left: 4px solid #0284C7;">
+              <div style="background: #0284C7; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.25rem;">Months 1 to 2: Middle-Tier Cadre Diagnostic &amp; Institutional Anchoring</div>
+                <div style="font-size: 0.76rem; color: var(--text-body); line-height: 1.45;">
+                  Audit the state's existing academic coaching hierarchy (such as ARPs in UP or Kendra Pramukhs in Maharashtra). Review their current workload to ensure academic coaching days are formally ring-fenced by the State Education Secretary, preventing mentors from being diverted to non-academic administrative duties.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--surface-subtle); border-radius: 8px; border-left: 4px solid #16A34A;">
+              <div style="background: #16A34A; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.25rem;">Months 3 to 4: Re-Engineer Cluster Delivery to End Lecture Halls</div>
+                <div style="font-size: 0.76rem; color: var(--text-body); line-height: 1.45;">
+                  Redesign workshop session plans so room sizes never exceed 30 to 35 teachers. Allocate 40% of session time to paired teacher role-play and lesson plan practice, ending the passive lecture format that caused peer practice scores to drop to 1.37 out of 4.00 in physical training surveys.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--surface-subtle); border-radius: 8px; border-left: 4px solid #D97706;">
+              <div style="background: #D97706; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.25rem;">Months 5 to 6: Digital Learning Safeguards &amp; Micro-Nudges</div>
+                <div style="font-size: 0.76rem; color: var(--text-body); line-height: 1.45;">
+                  Build 3 to 5 minute video demonstrations focused on foundational skills. Eliminate lockout passing cutoffs on course quizzes; instead, provide immediate worked solutions and explanations so teachers can learn from incorrect answers rather than dropping out. Deliver reminders through official WhatsApp channels.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--surface-subtle); border-radius: 8px; border-left: 4px solid #7C3AED;">
+              <div style="background: #7C3AED; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.25rem;">Months 7 to 10: Controlled Proof-of-Concept Pilot in 3 to 5 Districts</div>
+                <div style="font-size: 0.76rem; color: var(--text-body); line-height: 1.45;">
+                  Select 3 to 5 contrasting districts (one high-performing urban district, one remote rural district, and one tribal multilingual district). Enforce Single-Cycle Cadre Fidelity strictly, ensuring facilitators certified in District Orientation are the ones leading cluster sessions. Deploy a lightweight digital observation tool for mentors.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--surface-subtle); border-radius: 8px; border-left: 4px solid #EA580C;">
+              <div style="background: #EA580C; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.25rem;">Months 11 to 12+: Statewide Policy Institutionalization &amp; Budget Anchoring</div>
+                <div style="font-size: 0.76rem; color: var(--text-body); line-height: 1.45;">
+                  Embed the monthly cluster calendar into the official Gazetted State Academic Calendar. Anchor recurring program costs directly into the annual Samagra Shiksha Project Approval Board (PAB) budget, transitioning the program into a permanent state budget line that operates without external project funding.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 4: State Readiness Profiler -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+          <div>
+            <div class="panel-title">Target State Readiness Profiler &amp; Cadre Mapping</div>
+            <div class="panel-desc">Select a target state to examine administrative equivalents, primary operational bottlenecks, and recommended pilot districts.</div>
+          </div>
+          <div>
+            <select id="stateSelect" onchange="updateStateReadinessProfile(this.value)" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--surface-border); font-size: 0.8rem; font-weight: 700; background: #FFFFFF; color: var(--text-heading); outline: none; cursor: pointer;">
+              <option value="UP">Uttar Pradesh (570,000 Teachers)</option>
+              <option value="BIHAR">Bihar (380,000 Teachers)</option>
+              <option value="RAJASTHAN">Rajasthan (240,000 Teachers)</option>
+              <option value="MAHARASHTRA">Maharashtra (310,000 Teachers)</option>
+              <option value="CHHATTISGARH">Chhattisgarh (160,000 Teachers)</option>
+            </select>
+          </div>
+        </div>
+        <div id="stateProfileCard" style="padding: 1.25rem;">
+          <!-- Dynamically populated by updateStateReadinessProfile() -->
+        </div>
+      </div>
+
     </div>
 
     </main>
@@ -7698,6 +8007,9 @@ Action Steps for Peepul and Rajya Shiksha Kendra
     if (tabId === 'tab-trends' && typeof renderMonthlyTimeline === 'function') {
       renderMonthlyTimeline();
     }
+    if (tabId === 'tab-replication' && typeof updateStateReadinessProfile === 'function') {
+      updateStateReadinessProfile(document.getElementById('stateSelect')?.value || 'UP');
+    }
 
     // 4. Smoothly scroll to the master control bar if user is far down
     const masterBar = document.getElementById('masterControlBar');
@@ -8990,6 +9302,108 @@ function scrollToSection(sectionId) {
   }
 
   
+
+  // Filter Peer Benchmark Cards
+  function filterPeerCards(category, btn) {
+    const pills = btn.parentElement.querySelectorAll('.filter-pill');
+    pills.forEach(p => {
+      p.classList.remove('active');
+      p.style.background = 'var(--surface-subtle)';
+      p.style.color = 'var(--text-body)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--blue-primary)';
+    btn.style.color = '#FFFFFF';
+
+    const cards = document.querySelectorAll('.peer-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Target State Readiness Profiler Data
+  const STATE_READINESS_DATA = {
+    'UP': {
+      name: 'Uttar Pradesh',
+      teachers: '570,000+ Government Teachers',
+      cadre: 'Academic Resource Persons (ARPs) & State Resource Groups (SRGs)',
+      bottleneck: 'Vast geography across 75 districts; risk of ARP diversion to non-academic election and census duties.',
+      pilot: 'Varanasi, Lucknow, Sitapur, Mirzapur, and Bahraich (covering urban, rural, and aspirational zones).',
+      adaptations: 'Align cluster dates directly with existing monthly Sankul meetings; integrate with NIPUN Lakshya App.'
+    },
+    'BIHAR': {
+      name: 'Bihar',
+      teachers: '380,000+ Government Teachers',
+      cadre: 'Key Resource Persons (KRPs) & Block Education Officers (BEOs)',
+      bottleneck: 'High teacher vacancy and multi-grade classroom density; single-room school limitations.',
+      pilot: 'Patna, Gaya, Purnea, Muzaffarpur, and Banka.',
+      adaptations: 'Prioritize ability-based grouping and simple seating arrangements before rolling out multi-grade TLM.'
+    },
+    'RAJASTHAN': {
+      name: 'Rajasthan',
+      teachers: '240,000+ Government Teachers',
+      cadre: 'Cluster Reference Persons (CRPs) & PEEOs (Panchayat Elementary Education Officers)',
+      bottleneck: 'Desert geography with extreme cluster travel distances; low mobile network coverage in western blocks.',
+      pilot: 'Jaipur, Barmer, Udaipur, Bikaner, and Jhalawar.',
+      adaptations: 'Offline DIKSHA downloads; mother-tongue bridge modules for Marwari and Mewari dialects.'
+    },
+    'MAHARASHTRA': {
+      name: 'Maharashtra',
+      teachers: '310,000+ Government Teachers',
+      cadre: 'Kendra Pramukhs (Cluster Heads) & DIET Senior Lecturers',
+      bottleneck: 'Strong regional teacher associations requiring early collaborative co-design of observation rubrics.',
+      pilot: 'Pune, Nashik, Gadchiroli, Solapur, and Amravati.',
+      adaptations: 'Embed peer cluster guidelines into existing Kendra Pramukh administrative rules; bilingual Marathi guides.'
+    },
+    'CHHATTISGARH': {
+      name: 'Chhattisgarh',
+      teachers: '160,000+ Government Teachers',
+      cadre: 'Cluster Academic Coordinators (CACs) & Sankul Coordinators',
+      bottleneck: 'High concentration of tribal communities where home languages diverge sharply from school Hindi.',
+      pilot: 'Raipur, Bastar, Surguja, Dantewada, and Bilaspur.',
+      adaptations: 'Integrate Multilingual Education (MLE) frameworks with Halbi and Gondi language bridges.'
+    }
+  };
+
+  function updateStateReadinessProfile(stateCode) {
+    const data = STATE_READINESS_DATA[stateCode] || STATE_READINESS_DATA['UP'];
+    const container = document.getElementById('stateProfileCard');
+    if (!container) return;
+    container.innerHTML = `
+      <div style="background: #FFFFFF; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-heading);">${data.name}</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">${data.teachers}</div>
+          </div>
+          <span style="font-size: 0.72rem; font-weight: 800; background: #E0F2FE; color: #0369A1; padding: 3px 8px; border-radius: 4px;">Target State Blueprint</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem;">
+          <div style="padding: 0.75rem; background: var(--surface-subtle); border-radius: 6px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Equivalent Cadre Mapping</div>
+            <div style="font-size: 0.78rem; font-weight: 600; color: var(--text-heading); margin-top: 4px;">${data.cadre}</div>
+          </div>
+          <div style="padding: 0.75rem; background: #FEF2F2; border-radius: 6px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #991B1B; text-transform: uppercase;">Primary Operational Bottleneck</div>
+            <div style="font-size: 0.78rem; color: #7F1D1D; margin-top: 4px;">${data.bottleneck}</div>
+          </div>
+          <div style="padding: 0.75rem; background: #F0FDF4; border-radius: 6px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #166534; text-transform: uppercase;">Recommended Pilot Districts</div>
+            <div style="font-size: 0.78rem; color: #14532D; margin-top: 4px;">${data.pilot}</div>
+          </div>
+          <div style="padding: 0.75rem; background: #FFFBEB; border-radius: 6px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #B45309; text-transform: uppercase;">Essential State Adaptations</div>
+            <div style="font-size: 0.78rem; color: #78350F; margin-top: 4px;">${data.adaptations}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   // Indicator Shift Tracker: View Switcher
   function switchShiftView(viewId) {
     const views = ['clss', 'pedagogy', 'digital', 'inperson'];
