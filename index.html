@@ -3029,6 +3029,12 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       <option value="relevance_rating">Category: Relevance Rating (out of 5.00)</option>
       <option value="teachers">Category: Session Turnout (Participants)</option>
     </select>
+    <select id="pedRoleSelect" onchange="onPedRoleChange()" style="display: none; padding: 5px 12px; border-radius: 9999px; border: 1px solid var(--surface-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; cursor: pointer;">
+      <option value="ALL">Role: All Recurring Questions</option>
+      <option value="PARTICIPANT">Role: Participant (Teachers)</option>
+      <option value="FACILITATOR">Role: Facilitator (DO Cadre)</option>
+      <option value="MONITOR">Role: Monitor (Observers)</option>
+    </select>
     <select id="pedSameQuestionSelect" onchange="renderPedagogyTrend()" style="display: none; padding: 5px 12px; border-radius: 9999px; border: 1px solid var(--purple-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; cursor: pointer; max-width: 320px;">
       <option value="q92_relevance">Q92 / Q131: Classroom Relevance Rating (1 to 5)</option>
       <option value="q93_satisfaction">Q93: Overall Session Satisfaction (1 to 5)</option>
@@ -10277,6 +10283,8 @@ Exact model predictions testing each concrete intervention across the state teac
 
   const SAME_QUESTION_DATA = {
     'q92_relevance': {
+      role: 'PARTICIPANT',
+      label: 'Q92 / Q131: Classroom Relevance Rating (1 to 5)',
       qid: 'Q92 / Q131 (Likert 1 to 5)',
       prompt: 'How relevant did you find today\'s Shaikshik Samwaad topic to your current classroom needs?',
       unit: 'rating',
@@ -10292,6 +10300,8 @@ Exact model predictions testing each concrete intervention across the state teac
       ]
     },
     'q93_satisfaction': {
+      role: 'PARTICIPANT',
+      label: 'Q93: Overall Session Satisfaction (1 to 5)',
       qid: 'Q93 (Likert 1 to 5)',
       prompt: 'Rate your overall experience and trust in today\'s Shaikshik Samwaad session.',
       unit: 'rating',
@@ -10307,6 +10317,8 @@ Exact model predictions testing each concrete intervention across the state teac
       ]
     },
     'high_agreement': {
+      role: 'PARTICIPANT',
+      label: 'Core Questions: High Agreement % (4-5 Rating)',
       qid: 'Core Session Questions (4 or 5 Rating Share %)',
       prompt: 'Percentage of teachers giving high agreement (4 or 5 out of 5) across recurring session feedback items.',
       unit: 'pct',
@@ -10322,6 +10334,8 @@ Exact model predictions testing each concrete intervention across the state teac
       ]
     },
     'participants': {
+      role: 'PARTICIPANT',
+      label: 'Participant Teachers Count (Monthly Turnout)',
       qid: 'Q72 / Attendance (Participant Teachers)',
       prompt: 'Total verified teachers attending monthly Shaikshik Samwaad cluster sessions.',
       unit: 'count',
@@ -10336,7 +10350,26 @@ Exact model predictions testing each concrete intervention across the state teac
         { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 23169 }
       ]
     },
+    'do_attended_pct': {
+      role: 'FACILITATOR',
+      label: 'Q70 / DO Cadre: Attended Monthly DO Training (%)',
+      qid: 'Q70 / DO Cadre Compliance (% Yes)',
+      prompt: 'Did the facilitator attend this month\'s District Orientation (DO) before leading the cluster session?',
+      unit: 'pct',
+      color: '#B25000',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 94.71 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 92.40 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 91.08 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 92.53 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 92.32 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 92.11 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 91.79 }
+      ]
+    },
     'facilitators': {
+      role: 'FACILITATOR',
+      label: 'Active Facilitators Count (Jan Shikshak / DO)',
       qid: 'Facilitator Attendance (DO-Trained Cadre)',
       prompt: 'Total Jan Shikshaks and facilitators leading monthly Shaikshik Samwaad sessions.',
       unit: 'count',
@@ -10352,6 +10385,8 @@ Exact model predictions testing each concrete intervention across the state teac
       ]
     },
     'monitors': {
+      role: 'MONITOR',
+      label: 'Active Monitors / Observers Count',
       qid: 'Observer / Monitor Submissions',
       prompt: 'Total cluster monitors observing and submitting live session fidelity forms.',
       unit: 'count',
@@ -10368,6 +10403,27 @@ Exact model predictions testing each concrete intervention across the state teac
     }
   };
 
+  function onPedRoleChange() {
+    const role = document.getElementById('pedRoleSelect')?.value || 'ALL';
+    const qSel = document.getElementById('pedSameQuestionSelect');
+    if (!qSel) return;
+    const prevVal = qSel.value;
+    qSel.innerHTML = '';
+    Object.keys(SAME_QUESTION_DATA).forEach(k => {
+      const item = SAME_QUESTION_DATA[k];
+      if (role === 'ALL' || item.role === role) {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = item.label;
+        qSel.appendChild(opt);
+      }
+    });
+    if ([...qSel.options].some(o => o.value === prevVal)) {
+      qSel.value = prevVal;
+    }
+    renderPedagogyTrend();
+  }
+
   function setPedAnalysisMode(mode, btn) {
     pedAnalysisMode = mode;
     document.querySelectorAll('#pedModeToggle .shift-pill').forEach(b => b.classList.remove('active'));
@@ -10375,14 +10431,18 @@ Exact model predictions testing each concrete intervention across the state teac
     const isSameQ = (mode === 'same_question');
     const cadreSel = document.getElementById('pedCadreSelect');
     const metricSel = document.getElementById('pedMetricSelect');
+    const roleSel = document.getElementById('pedRoleSelect');
     const sameSel = document.getElementById('pedSameQuestionSelect');
     const promptBox = document.getElementById('pedQuestionPromptBox');
     if (cadreSel) cadreSel.style.display = isSameQ ? 'none' : 'inline-block';
     if (metricSel) metricSel.style.display = isSameQ ? 'none' : 'inline-block';
+    if (roleSel) roleSel.style.display = isSameQ ? 'inline-block' : 'none';
     if (sameSel) sameSel.style.display = isSameQ ? 'inline-block' : 'none';
     if (promptBox) promptBox.style.display = isSameQ ? 'block' : 'none';
-    renderPedagogyTrend();
+    if (isSameQ) onPedRoleChange();
+    else renderPedagogyTrend();
   }
+
   const PEDAGOGY_CYCLE_DATA = {
     'CLSS': [
       { cycle: 'Sep 2024', ay: 'AY 2024-25', theme: 'Orientation Setup', teachers: 25949, score: 86.2, ped_align: 82.0, relevance_pct: 90.0, relevance_rating: 4.55 },
