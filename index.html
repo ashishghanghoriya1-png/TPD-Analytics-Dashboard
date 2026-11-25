@@ -2298,9 +2298,9 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <div id="tab-clss" class="tab-content active">
       <div class="kpi-mini-strip" id="clss-kpi-strip">
         <div class="kpi-mini-card" style="border-top: 3px solid var(--purple-primary);">
-          <div class="kpi-mini-label">Shaikshik Samwaad Turnout</div>
-          <div class="kpi-mini-val" id="clss-kpi-attendance">22,143</div>
-          <div class="kpi-mini-sub" id="clss-kpi-attendance-sub">Peak monthly turnout (All Years: 51,659 unique)</div>
+          <div class="kpi-mini-label">Unique Shaikshik Samwaad Teachers</div>
+          <div class="kpi-mini-val" id="clss-kpi-attendance">51,659</div>
+          <div class="kpi-mini-sub" id="clss-kpi-attendance-sub">Unique verified teachers across all 11 CLSS rounds (Avg monthly: 19,850)</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--emerald-primary);">
           <div class="kpi-mini-label">Active Cluster Coverage</div>
@@ -9885,14 +9885,14 @@ Exact model predictions testing each concrete intervention across the state teac
 
   // Sync Top Master Slicer to Tab 1 (CLSS) KPIs so Year/Era/Status changes immediately reflect on Tab 1
   const CLSS_YEAR_KPI_MAP = {
-    'ALL': { att: '22,143', sub: 'Peak monthly turnout (51,659 unique teachers across all cycles)', clusters: '3,099', csub: '100% of 52 districts active' },
-    'AY 2022-23': { att: '0 (Pre-Launch)', sub: 'CLSS launched in AY 2024-25; AY 2022-23 focused on Digital C1', clusters: 'N/A', csub: 'Covid-era online focus' },
-    'AY 2023-24': { att: '0 (Prep Phase)', sub: 'DO & Pedagogy prep phase prior to state CLSS rollout', clusters: 'N/A', csub: 'Pre-CLSS cycle' },
-    'AY 2024-25': { att: '28,547', sub: 'Peak Jan 2025 turnout (52,871 consolidated unique teachers)', clusters: '3,099', csub: 'Sep, Oct, Dec 2024 & Jan 2025' },
-    'AY 2025-26': { att: '25,512', sub: 'Peak Aug 2025 turnout (42,583 consolidated unique teachers)', clusters: '3,099', csub: 'Aug, Sep, Nov, Dec 2025 & Jan 2026' },
-    'AY 2026-27': { att: '23,785', sub: 'Peak Aug 2026 turnout (33,607 consolidated unique teachers)', clusters: '3,099', csub: 'Aug & Sep 2026 active cycles' },
-    'COVID': { att: '0 (Pre-Launch)', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: 'N/A', csub: 'Digital-only period' },
-    'POST_COVID': { att: '28,547', sub: 'Post-Covid peak across 11 monthly cluster rounds', clusters: '3,099', csub: '100% of 52 districts active' }
+    'ALL': { att: '51,659', sub: 'Unique verified teachers across all 11 CLSS rounds (Avg monthly: 19,850)', clusters: '3,099', csub: '100% of 52 districts active' },
+    'AY 2022-23': { att: '0', sub: 'CLSS launched in AY 2024-25; AY 2022-23 ran Digital C1 only', clusters: '0', csub: 'Pre-CLSS period' },
+    'AY 2023-24': { att: '0', sub: 'DO & Pedagogy prep phase prior to state CLSS rollout', clusters: '0', csub: 'Pre-CLSS period' },
+    'AY 2024-25': { att: '52,871', sub: 'Consolidated AY 2024-25 participants (Peak Jan 2025: 28,547)', clusters: '3,099', csub: 'Sep, Oct, Dec 2024 & Jan 2025' },
+    'AY 2025-26': { att: '42,583', sub: 'Unique verified teachers in AY 2025-26 (Peak Aug 2025: 25,512)', clusters: '3,099', csub: 'Aug, Sep, Nov, Dec 2025 & Jan 2026' },
+    'AY 2026-27': { att: '33,607', sub: 'Unique verified teachers in AY 2026-27 (Peak Aug 2026: 23,785)', clusters: '3,099', csub: 'Aug & Sep 2026 active cycles' },
+    'COVID': { att: '0', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: '0', csub: 'Digital-only period' },
+    'POST_COVID': { att: '51,659', sub: 'Post-Covid unique verified teachers across all 11 CLSS rounds', clusters: '3,099', csub: '100% of 52 districts active' }
   };
 
   let selectedInPersonKey = 'ALL_INPERSON';
