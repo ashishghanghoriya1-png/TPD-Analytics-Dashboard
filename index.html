@@ -2227,27 +2227,31 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <select id="selectDigitalCourse" onchange="onDigitalCourseSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--blue-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 340px;">
         <option value="ALL_DIGITAL">All 19 Online Courses (727k enrollments)</option>
         <optgroup label="Covid Online Courses (Before Apr 2023)">
-          <option value="MA_C1">Mission Ankur Course 1</option>
-          <option value="PSP_1">Professional Support Program Course 1</option>
-          <option value="PSP_2">Professional Support Program Course 2</option>
+          <option value="MA_C1">Mission Ankur Course 1 (133,811)</option>
+          <option value="PSP_1">PSP Course 1 (25,572)</option>
+          <option value="PSP_2">PSP Course 2 (13,784)</option>
         </optgroup>
-        <optgroup label="Post-Covid Online Courses (Fresh Start Apr 2023 onwards)">
-          <option value="MA_C2">Mission Ankur Course 2</option>
-          <option value="MA_C3">Mission Ankur Course 3</option>
-          <option value="MA_C4">Mission Ankur Course 4</option>
-          <option value="MA_C5">Mission Ankur Course 5</option>
-          <option value="FLN_1">FLN Literacy Course 1</option>
-          <option value="FLN_2">FLN Numeracy Course 1</option>
-          <option value="PED_1">Foundational Pedagogy</option>
-          <option value="LEAD_1">School Leadership Series 1</option>
-          <option value="LEAD_2">School Leadership Series 2</option>
-          <option value="DIG_LIT">Digital Literacy for Educators</option>
-          <option value="INCL_ED">Inclusive Education Modules</option>
-          <option value="ASSESS_1">Formative Assessment in Practice</option>
-          <option value="MATH_PED">Early Grade Mathematics</option>
-          <option value="LANG_PED">Language and Reading Acquisition</option>
-          <option value="NEP_2020">NEP 2020 Implementation Toolkit</option>
-          <option value="CYBER_SEC">Cyber Safety for Schools</option>
+        <optgroup label="Post-Covid Mission Ankur (Math FLN)">
+          <option value="MA_C2">Mission Ankur Course 2 (125,956)</option>
+          <option value="MA_C3">Mission Ankur Course 3 (80,051)</option>
+          <option value="MA_C4">Mission Ankur Course 4 (30,378)</option>
+          <option value="MA_C5">Mission Ankur Course 5 (29,311)</option>
+          <option value="MA_C6">Mission Ankur Course 6 (20,240)</option>
+        </optgroup>
+        <optgroup label="Post-Covid PSP &amp; National Assessments">
+          <option value="PSP_3">PSP Course 3 (13,157)</option>
+          <option value="PSP_4">PSP Course 4 (34,718)</option>
+          <option value="PSP_5">PSP Course 5 (7,916)</option>
+          <option value="NAS">NAS Assessment Course (46,233)</option>
+          <option value="PLC">PLC Digital Course (129,818)</option>
+        </optgroup>
+        <optgroup label="Post-Covid ECE Foundation Series">
+          <option value="ECE_1">ECE Course 1 (18,131)</option>
+          <option value="ECE_2">ECE Course 2 (16,420)</option>
+          <option value="ECE_3">ECE Course 3 (14,890)</option>
+          <option value="ECE_4">ECE Course 4 (13,210)</option>
+          <option value="ECE_5">ECE Course 5 (11,980)</option>
+          <option value="ECE_6">ECE Course 6 (10,450)</option>
         </optgroup>
       </select>
         </div>
@@ -3363,26 +3367,26 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 </div>
 </div>
 <!-- 4 Summary KPI Mini-Cards -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem;">
-<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Highest Completion Rate</div>
-<div style="font-size: 1.45rem; font-weight: 800; color: var(--blue-primary); font-family: var(--font-mono); margin: 3px 0;">85.6%</div>
-<div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 1 (114,575 completions)</div>
+<div id="dig-kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem;">
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 14px;">
+<div id="dig-kpi-1-label" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Highest Completion Rate</div>
+<div id="dig-kpi-1-val" style="font-size: 1.45rem; font-weight: 800; color: var(--blue-primary); font-family: var(--font-mono); margin: 3px 0;">85.6%</div>
+<div id="dig-kpi-1-sub" style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 1 (114,575 completions)</div>
 </div>
-<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top Subject Gain (PSP)</div>
-<div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.9%</div>
-<div style="font-size: 0.74rem; color: var(--text-body);">PSP Course 2 (Pre: 44.6% to Post: 65.5%)</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 14px;">
+<div id="dig-kpi-2-label" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top Subject Gain (PSP)</div>
+<div id="dig-kpi-2-val" style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.9%</div>
+<div id="dig-kpi-2-sub" style="font-size: 0.74rem; color: var(--text-body);">PSP Course 2 (Pre: 44.6% to Post: 65.5%)</div>
 </div>
-<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top FLN Gain (Mission Ankur)</div>
-<div style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.3%</div>
-<div style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 14px;">
+<div id="dig-kpi-3-label" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Top FLN Gain (Mission Ankur)</div>
+<div id="dig-kpi-3-val" style="font-size: 1.45rem; font-weight: 800; color: var(--emerald-primary); font-family: var(--font-mono); margin: 3px 0;">+20.3%</div>
+<div id="dig-kpi-3-sub" style="font-size: 0.74rem; color: var(--text-body);">Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)</div>
 </div>
-<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 8px; padding: 12px 14px;">
-<div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Peak Assessment Mastery</div>
-<div style="font-size: 1.45rem; font-weight: 800; color: var(--purple-primary); font-family: var(--font-mono); margin: 3px 0;">83.4%</div>
-<div style="font-size: 0.74rem; color: var(--text-body);">National Achievement Survey (NAS Post-Test)</div>
+<div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 14px;">
+<div id="dig-kpi-4-label" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Peak Assessment Mastery</div>
+<div id="dig-kpi-4-val" style="font-size: 1.45rem; font-weight: 800; color: var(--purple-primary); font-family: var(--font-mono); margin: 3px 0;">83.4%</div>
+<div id="dig-kpi-4-sub" style="font-size: 0.74rem; color: var(--text-body);">National Achievement Survey (NAS Post-Test)</div>
 </div>
 </div>
 <!-- Thematic Assessment Score Table -->
@@ -9235,6 +9239,10 @@ Exact model predictions testing each concrete intervention across the state teac
       selectedYear = 'ALL';
       currentYear = 'ALL';
     }
+    const digSel = document.getElementById('selectDigitalCourse');
+    if (digSel) digSel.value = 'ALL_DIGITAL';
+    selectedDigitalCourseKey = 'ALL_DIGITAL';
+    if (typeof syncTab2DigitalKpis === 'function') syncTab2DigitalKpis('ALL_DIGITAL');
     syncChildSlicers();
     applySlicers();
   }
@@ -9524,8 +9532,49 @@ Exact model predictions testing each concrete intervention across the state teac
 
   let selectedDigitalCourseKey = 'ALL_DIGITAL';
 
+  function syncTab2DigitalKpis(courseKey) {
+    const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    const grid = document.getElementById('dig-kpi-grid');
+    if (courseKey === 'ALL_DIGITAL' || !DIGITAL_COURSE_SLICES[courseKey]) {
+      setTxt('dig-kpi-1-label', 'Highest Completion Rate');
+      setTxt('dig-kpi-1-val', '85.6%');
+      setTxt('dig-kpi-1-sub', 'Mission Ankur Course 1 (114,575 completions)');
+      setTxt('dig-kpi-2-label', 'Top Subject Gain (PSP)');
+      setTxt('dig-kpi-2-val', '+20.9%');
+      setTxt('dig-kpi-2-sub', 'PSP Course 2 (Pre: 44.6% to Post: 65.5%)');
+      setTxt('dig-kpi-3-label', 'Top FLN Gain (Mission Ankur)');
+      setTxt('dig-kpi-3-val', '+20.3%');
+      setTxt('dig-kpi-3-sub', 'Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)');
+      setTxt('dig-kpi-4-label', 'Peak Assessment Mastery');
+      setTxt('dig-kpi-4-val', '83.4%');
+      setTxt('dig-kpi-4-sub', 'National Achievement Survey (NAS Post-Test)');
+    } else {
+      const c = DIGITAL_COURSE_SLICES[courseKey];
+      setTxt('dig-kpi-1-label', 'Enrolled in Selected Course');
+      setTxt('dig-kpi-1-val', c.enrolled);
+      setTxt('dig-kpi-1-sub', c.name);
+      setTxt('dig-kpi-2-label', 'Course Completion Rate');
+      setTxt('dig-kpi-2-val', c.compRate);
+      setTxt('dig-kpi-2-sub', c.compNum.toLocaleString() + ' teachers completed');
+      setTxt('dig-kpi-3-label', 'Pre-to-Post Learning Gain');
+      setTxt('dig-kpi-3-val', c.gain);
+      setTxt('dig-kpi-3-sub', 'Pre: ' + c.preScore + ' to Post: ' + c.postScore);
+      setTxt('dig-kpi-4-label', 'Post-Test Mastery Score');
+      setTxt('dig-kpi-4-val', c.postScore);
+      setTxt('dig-kpi-4-sub', c.source);
+    }
+    if (grid && typeof gsap !== 'undefined') {
+      if (typeof prefersReducedMotion === 'function' && prefersReducedMotion()) {
+        gsap.fromTo(grid, { opacity: 0.7 }, { opacity: 1, duration: 0.12 });
+      } else {
+        gsap.fromTo(grid.children, { opacity: 0.4, y: 6 }, { opacity: 1, y: 0, duration: 0.24, stagger: 0.04, ease: 'power2.out' });
+      }
+    }
+  }
+
   function onDigitalCourseSelect(courseKey) {
     selectedDigitalCourseKey = courseKey;
+    syncTab2DigitalKpis(courseKey);
     if (typeof gsap !== 'undefined') {
       gsap.killTweensOf(['#kpi-total', '#kpi-retained', '#kpi-active2026', '#kpi-digital', '#kpi-districts', '#kpi-inperson', '#kpi-clss', '#kpi-do', '#kpi-pedagogy', '#kpi-feedback', '#kpi-relevance', '#kpi-multiprog']);
     }
