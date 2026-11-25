@@ -2171,61 +2171,60 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 </div>
 </header>
       
-  <!-- Unified Non-Repeating Master Control Bar -->
-  <div class="master-control-bar" id="masterControlBar">
-    <!-- Master Slicers Row -->
-    <div class="master-slicers-container">
-      <!-- Period Slicer -->
-      <div class="slicer-group">
-        <span class="slicer-group-title">PERIOD:</span>
-        <div class="slicer-btn-group" id="topEraSlicers">
-          <button class="era-pill active" data-era="ALL" onclick="selectEra('ALL')">All Periods</button>
-          <button class="era-pill" data-era="COVID" onclick="selectEra('COVID')">Covid (Pre-Apr 2023)</button>
-          <button class="era-pill" data-era="POST_COVID" onclick="selectEra('POST_COVID')">Post-Covid Fresh Start</button>
-        </div>
+  <!-- Unified 2-Line Apple Control Bar -->
+  <div class="master-control-bar" id="masterControlBar" style="padding: 0.5rem 0.9rem; margin-bottom: 1rem;">
+    <!-- LINE 1: 4 Intervention Tabs + Compact Utilities -->
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; padding-bottom: 0.45rem; border-bottom: 1px solid var(--surface-border);">
+      <div class="tab-nav-bar" id="mainTabNav" style="margin: 0; border: none; padding: 0;">
+        <button class="tab-nav-btn active" id="tab-btn-clss" data-tab="tab-clss" onclick="switchTab('tab-clss')">
+          <span class="tab-num">1</span> Shaikshik Samwaad (CLSS)
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-digital" data-tab="tab-digital" onclick="switchTab('tab-digital')">
+          <span class="tab-num">2</span> Digital Training (DIKSHA)
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-inperson" data-tab="tab-inperson" onclick="switchTab('tab-inperson')">
+          <span class="tab-num">3</span> In-Person Training &amp; Voices
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-strategy" data-tab="tab-strategy" onclick="switchTab('tab-strategy')">
+          <span class="tab-num">4</span> Strategy, Retention &amp; Replication
+        </button>
       </div>
 
-      <!-- Academic Year Slicer -->
-      <div class="slicer-group">
-        <span class="slicer-group-title">YEAR:</span>
-        <div class="slicer-btn-group" id="masterYearSlicers">
-          <button class="slicer-pill active" data-slicer-year="ALL" onclick="selectYear('ALL')"><span>All Years</span><span class="slicer-badge">216k</span></button>
-          <button class="slicer-pill" data-slicer-year="AY 2022-23" onclick="selectYear('AY 2022-23')"><span>2022-23</span><span class="slicer-badge">131k</span></button>
-          <button class="slicer-pill" data-slicer-year="AY 2023-24" onclick="selectYear('AY 2023-24')"><span>2023-24</span><span class="slicer-badge">126k</span></button>
-          <button class="slicer-pill" data-slicer-year="AY 2024-25" onclick="selectYear('AY 2024-25')"><span>2024-25</span><span class="slicer-badge">136k</span></button>
-          <button class="slicer-pill" data-slicer-year="AY 2025-26" onclick="selectYear('AY 2025-26')"><span>2025-26</span><span class="slicer-badge">132k</span></button>
-          <button class="slicer-pill" data-slicer-year="AY 2026-27" onclick="selectYear('AY 2026-27')"><span>2026-27</span><span class="slicer-badge">113k</span></button>
-        </div>
-      </div>
-
-      <!-- Training Type Slicer -->
-      <div class="slicer-group">
-        <span class="slicer-group-title">PROGRAM:</span>
-        <div class="slicer-btn-group" id="masterInvSlicers">
-          <button class="slicer-pill active" data-slicer-inv="ALL" onclick="selectIntervention('ALL')"><span>All Programs</span><span class="slicer-badge">212k</span></button>
-          <button class="slicer-pill" data-slicer-inv="DIGITAL" onclick="selectIntervention('DIGITAL')"><span>Online Courses</span><span class="slicer-badge">177k</span></button>
-          <button class="slicer-pill" data-slicer-inv="CLSS" onclick="selectIntervention('CLSS')"><span>Shaikshik Samwaad</span><span class="slicer-badge">52k</span></button>
-          <button class="slicer-pill" data-slicer-inv="DO" onclick="selectIntervention('DO')"><span>District Trainers</span><span class="slicer-badge">8.5k</span></button>
-          <button class="slicer-pill" data-slicer-inv="INPERSON" onclick="selectIntervention('INPERSON')"><span>In-Person</span><span class="slicer-badge">69k</span></button>
-        </div>
-      </div>
-
-      <!-- Verification Status & Actions -->
-      <div class="slicer-group" style="margin-left: auto;">
-        <span class="slicer-group-title">STATUS:</span>
-        <div class="slicer-btn-group" id="masterVerSlicers">
-          <button class="slicer-pill active" data-slicer-ver="VERIFIED" onclick="selectVerification('VERIFIED')">Verified Teachers</button>
-          <button class="slicer-pill" data-slicer-ver="ALL_ACCOUNTS" onclick="selectVerification('ALL_ACCOUNTS')">All Records</button>
-        </div>
-        <button class="slicer-reset-btn" onclick="resetAllSlicers()" title="Reset all slicers to defaults">Reset Filters</button>
-        <button class="slicer-reset-btn" onclick="openSourceModal()" style="border-color: #BAE6FD; color: #0284C7; font-weight: 700;">Inspect Sources</button>
+      <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+        <button type="button" class="slicer-pill active" id="btnVerifiedToggle" onclick="toggleVerifiedStatus()" title="Toggle Verified Government Teachers vs All Records" style="font-size: 0.74rem; padding: 5px 11px;">Verified Only</button>
+        <button type="button" class="slicer-reset-btn" onclick="openSourceModal()" style="font-size: 0.74rem; padding: 5px 11px; border-radius: 9999px; border-color: var(--blue-border); color: var(--blue-primary); font-weight: 700;">Inspect Sources</button>
+        <button type="button" class="slicer-reset-btn" onclick="resetAllSlicers()" style="font-size: 0.74rem; padding: 5px 11px; border-radius: 9999px;" title="Reset filters to defaults">Reset</button>
       </div>
     </div>
 
-    <!-- Nested Digital Dropdown (visible when Online Courses is selected) -->
-    <div id="nestedDigitalContainer" style="display: none; padding-top: 0.65rem; border-top: 1px dashed var(--surface-border); margin-top: 0.25rem; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-      <span style="font-size: 0.72rem; font-weight: 700; color: var(--blue-primary); letter-spacing: 0.04em;">FILTER SPECIFIC ONLINE COURSE:</span>
-      <select id="selectDigitalCourse" onchange="onDigitalCourseSelect(this.value)" style="padding: 4px 10px; border-radius: 6px; border: 1px solid var(--blue-border); font-size: 0.78rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 480px;">
+    <!-- LINE 2: Unified Time Slicer + Active Tab Contextual Sub-Filter -->
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; padding-top: 0.45rem;">
+      <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+        <span class="slicer-group-title" style="margin-right: 0.15rem;">TIME:</span>
+        <div class="slicer-btn-group" id="unifiedTimeSlicers">
+          <button type="button" class="slicer-pill active" data-time="ALL" onclick="selectUnifiedTime('ALL')">All Years</button>
+          <button type="button" class="slicer-pill" data-time="AY 2022-23" onclick="selectUnifiedTime('AY 2022-23')">2022-23 (Covid)</button>
+          <button type="button" class="slicer-pill" data-time="AY 2023-24" onclick="selectUnifiedTime('AY 2023-24')">2023-24</button>
+          <button type="button" class="slicer-pill" data-time="AY 2024-25" onclick="selectUnifiedTime('AY 2024-25')">2024-25</button>
+          <button type="button" class="slicer-pill" data-time="AY 2025-26" onclick="selectUnifiedTime('AY 2025-26')">2025-26</button>
+          <button type="button" class="slicer-pill" data-time="AY 2026-27" onclick="selectUnifiedTime('AY 2026-27')">2026-27</button>
+          <button type="button" class="slicer-pill" data-time="POST_COVID" onclick="selectUnifiedTime('POST_COVID')">Post-Covid (2023-27)</button>
+        </div>
+      </div>
+
+      <!-- Contextual Sub-Filter (only active tab's sub-filter is shown) -->
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div id="ctxClssFilter" style="display: flex; align-items: center; gap: 0.45rem;">
+          <span style="font-size: 0.7rem; font-weight: 700; color: var(--purple-primary);">CADRE:</span>
+          <select id="selectClssCadre" onchange="onClssCadreSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--purple-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer;">
+            <option value="CLSS">Cluster Teachers (CLSS: 51,659)</option>
+            <option value="DO">District Trainers (DO Cadre: 8,459)</option>
+          </select>
+        </div>
+
+        <div id="ctxDigitalFilter" style="display: none; align-items: center; gap: 0.45rem;">
+          <span style="font-size: 0.7rem; font-weight: 700; color: var(--blue-primary);">COURSE:</span>
+          <select id="selectDigitalCourse" onchange="onDigitalCourseSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--blue-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 340px;">
         <option value="ALL_DIGITAL">All 19 Online Courses (727k enrollments)</option>
         <optgroup label="Covid Online Courses (Before Apr 2023)">
           <option value="MA_C1">Mission Ankur Course 1</option>
@@ -2251,50 +2250,26 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <option value="CYBER_SEC">Cyber Safety for Schools</option>
         </optgroup>
       </select>
-    </div>
+        </div>
 
-    <!-- Nested In-Person Program Dropdown (visible when In-Person is selected) -->
-    <div id="nestedInPersonContainer" style="display: none; padding-top: 0.65rem; border-top: 1px dashed var(--surface-border); margin-top: 0.25rem; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-      <span style="font-size: 0.72rem; font-weight: 700; color: var(--amber-primary); letter-spacing: 0.04em;">FILTER IN-PERSON INTERVENTION:</span>
-      <select id="selectInPersonProgram" onchange="onInPersonProgramSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--amber-border); font-size: 0.78rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 480px;">
-        <option value="ALL_INPERSON">All In-Person Interventions (68,846 verified)</option>
-        <option value="GEN_PED">General Pedagogy (BTT, AY 2023-24: 6,541 verified)</option>
-        <option value="SUBJECT_PED">Subject Pedagogy (Maths/Sci/SSt, AY 2024-25: 41,883 verified)</option>
-        <option value="CRO_SRG">CRO SRG Leadership Trainers (Batch 1-7, AY 2024-25: 263 trainers)</option>
-      </select>
-    </div>
+        <div id="ctxInPersonFilter" style="display: none; align-items: center; gap: 0.45rem;">
+          <span style="font-size: 0.7rem; font-weight: 700; color: var(--amber-primary);">WORKSHOP:</span>
+          <select id="selectInPersonProgram" onchange="onInPersonProgramSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--amber-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 360px;">
+            <option value="ALL_INPERSON">All In-Person Workshops (68,846)</option>
+            <option value="GEN_PED">General Pedagogy (BTT 23-24: 6,541)</option>
+            <option value="SUBJECT_PED">Subject Pedagogy (24-25: 41,883)</option>
+            <option value="CRO_SRG">CRO SRG Trainers (24-25: 263)</option>
+          </select>
+        </div>
 
-    <!-- Active Slice Badges & Master Tab Navigation Row -->
-    <div class="master-nav-row">
-      <div class="active-slice-badges">
-        <span class="slice-badge-tag">ACTIVE SLICE:</span>
-        <span class="badge-pill era-badge" id="badgeSliceEra">MASTER PERIOD: All Periods (2022 to 2026)</span>
-        <span class="badge-pill year-badge" id="badgeSliceYear">Academic Year: All Academic Years</span>
-        <span class="badge-pill inv-badge" id="badgeSliceInv">Program: All 19 Programs</span>
-        <span class="badge-pill ver-badge" id="badgeSliceVer">Verified Government Teachers Only</span>
-      </div>
-
-      <!-- Master Tab Navigation (8 Distinct Tabs) -->
-      <div class="tab-nav-bar" id="mainTabNav">
-        <button class="tab-nav-btn active" id="tab-btn-clss" data-tab="tab-clss" onclick="switchTab('tab-clss')">
-          <span class="tab-num">1</span> Shaikshik Samwaad (CLSS)
-        </button>
-        <button class="tab-nav-btn" id="tab-btn-digital" data-tab="tab-digital" onclick="switchTab('tab-digital')">
-          <span class="tab-num">2</span> Digital Training (DIKSHA)
-        </button>
-        <button class="tab-nav-btn" id="tab-btn-inperson" data-tab="tab-inperson" onclick="switchTab('tab-inperson')">
-          <span class="tab-num">3</span> In-Person Training &amp; Voices
-        </button>
-        <button class="tab-nav-btn" id="tab-btn-strategy" data-tab="tab-strategy" onclick="switchTab('tab-strategy')">
-          <span class="tab-num">4</span> Strategy, Retention &amp; Replication
-        </button>
+        <div id="ctxStrategyFilter" style="display: none; align-items: center;">
+          <span style="font-size: 0.74rem; font-weight: 600; color: var(--text-muted);">Statewide Macro View (19 Programs)</span>
+        </div>
       </div>
     </div>
   </div>
 
-      
-    
-    <!-- TAB 1: SHAIKSHIK SAMWAAD (CLSS) -->
+  <!-- TAB 1: SHAIKSHIK SAMWAAD (CLSS) -->
         <div id="tab-clss" class="tab-content active">
       <div class="kpi-mini-strip" id="clss-kpi-strip">
         <div class="kpi-mini-card" style="border-top: 3px solid var(--purple-primary);">
@@ -9097,7 +9072,23 @@ Exact model predictions testing each concrete intervention across the state teac
 
   
   // --- TAB NAVIGATION SYSTEM ---
+  let activeTabId = 'tab-clss';
+
+  function syncContextualFilter(tabId) {
+    const map = {
+      'tab-clss': 'ctxClssFilter',
+      'tab-digital': 'ctxDigitalFilter',
+      'tab-inperson': 'ctxInPersonFilter',
+      'tab-strategy': 'ctxStrategyFilter'
+    };
+    Object.values(map).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = (id === map[tabId]) ? 'flex' : 'none';
+    });
+  }
+
   function switchTab(tabId) {
+    activeTabId = tabId;
     // 1. Update button states
     document.querySelectorAll('.tab-nav-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.tab === tabId);
@@ -9108,7 +9099,18 @@ Exact model predictions testing each concrete intervention across the state teac
       container.classList.toggle('active', container.id === tabId);
     });
 
-    // 3. Re-render charts for newly visible containers to avoid zero-dimension SVG glitches
+    // 3. Sync active intervention & contextual sub-filter to this tab
+    const tabToInv = {
+      'tab-clss': (document.getElementById('selectClssCadre')?.value || 'CLSS'),
+      'tab-digital': 'DIGITAL',
+      'tab-inperson': 'INPERSON',
+      'tab-strategy': 'ALL'
+    };
+    selectedIntervention = tabToInv[tabId] || 'ALL';
+    syncContextualFilter(tabId);
+    if (typeof applySlicers === 'function') applySlicers();
+
+    // 4. Re-render charts for newly visible containers to avoid zero-dimension SVG glitches
     if (tabId === 'tab-clss' && typeof renderMonthlyTimeline === 'function') {
       renderMonthlyTimeline();
     }
@@ -9119,7 +9121,7 @@ Exact model predictions testing each concrete intervention across the state teac
       }
     }
 
-    // 4. Apple-calm card settle on newly visible tab
+    // 5. Apple-calm card settle on newly visible tab
     const activeContainer = document.getElementById(tabId);
     if (activeContainer && typeof gsap !== 'undefined') {
       const targets = activeContainer.querySelectorAll(':scope > .kpi-mini-strip > .kpi-mini-card, :scope > .panel');
@@ -9132,7 +9134,7 @@ Exact model predictions testing each concrete intervention across the state teac
       }
     }
 
-    // 5. Smoothly scroll to the master control bar if user is far down
+    // 6. Smoothly scroll to the master control bar if user is far down
     const masterBar = document.getElementById('masterControlBar');
     if (masterBar && window.scrollY > masterBar.offsetTop + 100) {
       window.scrollTo({ top: masterBar.offsetTop - 15, behavior: 'smooth' });
@@ -9206,6 +9208,7 @@ Exact model predictions testing each concrete intervention across the state teac
   }
 
   function resetAllSlicers() {
+    activeTimeKey = 'ALL';
     selectedEra = 'ALL';
     selectedYear = 'ALL';
     selectedIntervention = 'ALL';
@@ -9524,51 +9527,60 @@ Exact model predictions testing each concrete intervention across the state teac
   }
 
 
+  let activeTimeKey = 'ALL';
+
+  function selectUnifiedTime(timeKey) {
+    activeTimeKey = String(timeKey);
+    if (activeTimeKey === 'ALL') {
+      selectedEra = 'ALL';
+      selectedYear = 'ALL';
+      currentYear = 'ALL';
+    } else if (activeTimeKey === 'POST_COVID') {
+      selectedEra = 'POST_COVID';
+      selectedYear = 'ALL';
+      currentYear = 'ALL';
+    } else if (activeTimeKey === 'AY 2022-23') {
+      selectedEra = 'COVID';
+      selectedYear = 'AY 2022-23';
+      currentYear = 'AY 2022-23';
+    } else {
+      selectedEra = 'POST_COVID';
+      selectedYear = activeTimeKey;
+      currentYear = activeTimeKey;
+    }
+    syncChildSlicers();
+    applySlicers();
+  }
+
+  function toggleVerifiedStatus() {
+    selectedVerification = (selectedVerification === 'VERIFIED') ? 'ALL_ACCOUNTS' : 'VERIFIED';
+    applySlicers();
+  }
+
+  function onClssCadreSelect(cadreVal) {
+    selectedIntervention = cadreVal || 'CLSS';
+    const attEl = document.getElementById('clss-kpi-attendance');
+    const attSubEl = document.getElementById('clss-kpi-attendance-sub');
+    if (selectedIntervention === 'DO' && attEl) {
+      attEl.textContent = '8,459';
+      if (attSubEl) attSubEl.textContent = 'Unique verified District Orientation (DO) cadre trainers';
+    } else if (typeof updateInterventionTabKpis === 'function') {
+      updateInterventionTabKpis(selectedYear, selectedEra, selectedVerification);
+    }
+    applySlicers();
+  }
+
   function applySlicers() {
-    // 0. Update Era Buttons (Both Top and Sidebar)
-    document.querySelectorAll('#topEraSlicers .era-pill').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.era === selectedEra);
+    // 0-3. Sync Unified Time Pills & Verified Toggle
+    document.querySelectorAll('#unifiedTimeSlicers .slicer-pill').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.time === activeTimeKey);
     });
-    document.querySelectorAll('#sideEraSlicers .slicer-pill').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.slicerEra === selectedEra);
-    });
-
-    // 1. Update Sidebar Year Buttons
-    document.querySelectorAll('#masterYearSlicers .slicer-pill, #sideYearSlicers .slicer-pill').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.slicerYear === selectedYear);
-    });
-
-    // 2. Update Sidebar Intervention Buttons
-    document.querySelectorAll('#masterInvSlicers .slicer-pill, #sideInvSlicers .slicer-pill').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.slicerInv === selectedIntervention);
-    });
-
-    // Toggle Nested Digital Dropdown visibility
-    const nestedDig = document.getElementById('nestedDigitalContainer');
-    if (nestedDig) {
-      nestedDig.style.display = selectedIntervention === 'DIGITAL' ? 'block' : 'none';
-      if (selectedIntervention !== 'DIGITAL') {
-        const digSelect = document.getElementById('selectDigitalCourse');
-        if (digSelect) digSelect.value = 'ALL_DIGITAL';
-        selectedDigitalCourseKey = 'ALL_DIGITAL';
-      }
+    const verBtn = document.getElementById('btnVerifiedToggle');
+    if (verBtn) {
+      const isVer = (selectedVerification === 'VERIFIED');
+      verBtn.classList.toggle('active', isVer);
+      verBtn.textContent = isVer ? 'Verified Only' : 'All Records (Unverified Incl.)';
     }
-
-    // Toggle Nested In-Person Dropdown visibility
-    const nestedInp = document.getElementById('nestedInPersonContainer');
-    if (nestedInp) {
-      nestedInp.style.display = selectedIntervention === 'INPERSON' ? 'flex' : 'none';
-      if (selectedIntervention !== 'INPERSON') {
-        const inpSelect = document.getElementById('selectInPersonProgram');
-        if (inpSelect) inpSelect.value = 'ALL_INPERSON';
-        selectedInPersonKey = 'ALL_INPERSON';
-      }
-    }
-
-    // 3. Update Sidebar Verification Buttons
-    document.querySelectorAll('#masterVerSlicers .slicer-pill, #sideVerSlicers .slicer-pill').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.slicerVer === selectedVerification);
-    });
 
     // 4. Update Top Active Filter Chips
     const badgeYear = document.getElementById('badgeSliceYear');
