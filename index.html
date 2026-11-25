@@ -3002,80 +3002,58 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
     </div>
 
     <div class="panel" id="pedagogy-panel">
-<div class="panel-header">
-<div>
-<div class="panel-title">District Teaching Scores and Feedback</div>
-<div class="panel-desc">
-          Teacher quiz scores, practical classroom relevance, and daily teaching logs across all 7 rounds.
-        </div>
+<div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: flex-start;">
+  <div>
+    <div class="panel-title">District Teaching Scores and Feedback</div>
+    <div class="panel-desc">
+      Compare how the same question category or score developed across sessions over the year.
+    </div>
+  </div>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+    <select id="pedCadreSelect" onchange="renderPedagogyTrend()" style="padding: 5px 12px; border-radius: 9999px; border: 1px solid var(--surface-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; cursor: pointer;">
+      <option value="CLSS">Cadre: CLSS Teachers (11 Rounds)</option>
+      <option value="DO">Cadre: DO District Trainers (7 Rounds)</option>
+    </select>
+    <select id="pedMetricSelect" onchange="renderPedagogyTrend()" style="padding: 5px 12px; border-radius: 9999px; border: 1px solid var(--blue-border); font-size: 0.76rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; cursor: pointer;">
+      <option value="score">Category: Composite Teaching Score (0 to 100)</option>
+      <option value="ped_align">Category: Classroom Practice Alignment (%)</option>
+      <option value="relevance_pct">Category: Practical Relevance (%)</option>
+      <option value="relevance_rating">Category: Relevance Rating (out of 5.00)</option>
+      <option value="teachers">Category: Session Turnout (Participants)</option>
+    </select>
+    <button type="button" class="dl-btn" onclick="downloadDistrictPedagogyXlsx()" style="padding: 5px 12px; font-size: 0.75rem;">
+      Download Excel
+    </button>
+    <button type="button" class="dl-btn" onclick="downloadClssQualitativeSummaryXlsx()" style="padding: 5px 12px; font-size: 0.75rem;">
+      Download Qualitative Summary
+    </button>
+  </div>
 </div>
-<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-<button type="button" class="dl-btn" onclick="downloadDistrictPedagogyXlsx()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
-          Download District &amp; Pedagogy Scores (Excel)
-        </button>
-<button type="button" class="dl-btn" onclick="downloadClssQualitativeSummaryXlsx()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
-          Download Qualitative Theme Summary (Excel)
-        </button>
+
+<!-- Year Filter Pills + Trend Verdict -->
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+  <div id="pedYearFilterPills" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+    <button type="button" class="shift-pill active" data-ped-year="ALL" onclick="setPedYearFilter('ALL', this)">All Rounds</button>
+    <button type="button" class="shift-pill" data-ped-year="AY 2024-25" onclick="setPedYearFilter('AY 2024-25', this)">AY 2024-25</button>
+    <button type="button" class="shift-pill" data-ped-year="AY 2025-26" onclick="setPedYearFilter('AY 2025-26', this)">AY 2025-26</button>
+    <button type="button" class="shift-pill" data-ped-year="AY 2026-27" onclick="setPedYearFilter('AY 2026-27', this)">AY 2026-27</button>
+  </div>
+  <div id="pedTrendVerdict" style="font-size: 0.78rem; font-weight: 700; font-family: var(--font-mono); background: var(--surface-subtle); border: 1px solid var(--surface-border); padding: 4px 12px; border-radius: 9999px; color: var(--text-main);">
+    Loading trend...
+  </div>
 </div>
+
+<!-- Session-by-Session SVG Trend Graph -->
+<div style="position: relative; width: 100%; background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 14px; padding: 0.75rem; margin-bottom: 1rem;">
+  <div id="pedTrendTooltip" style="position: absolute; display: none; background: rgba(29, 29, 31, 0.94); color: #FFFFFF; padding: 6px 10px; border-radius: 8px; font-size: 0.74rem; font-family: var(--font-mono); pointer-events: none; z-index: 40;"></div>
+  <svg id="pedagogyTrendSvg" viewBox="0 0 920 220" style="width: 100%; height: 220px; display: block;"></svg>
 </div>
-<!-- Cycle Scores Grid -->
-<div class="ped-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
-<div class="ped-card" style="border-top: 3px solid #0284C7;">
-<div class="ped-card-cycle">Sep 2024 (24-25)</div>
-<div class="ped-card-score">86.2</div>
-<div class="ped-card-theme">Orientation Setup</div>
+
+<!-- Synchronized Cycle Cards Grid -->
+<div class="ped-grid" id="pedCardsGrid" style="grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));">
+  <!-- Rendered dynamically by renderPedagogyTrend() -->
 </div>
-<div class="ped-card" style="border-top: 3px solid #0284C7;">
-<div class="ped-card-cycle">Oct 2024 (24-25)</div>
-<div class="ped-card-score">84.8</div>
-<div class="ped-card-theme">Facilitation Balance</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #0284C7;">
-<div class="ped-card-cycle">Dec 2024 (24-25)</div>
-<div class="ped-card-score">88.4</div>
-<div class="ped-card-theme">Constructive Feedback</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #0284C7;">
-<div class="ped-card-cycle">Jan 2025 (24-25)</div>
-<div class="ped-card-score">85.1</div>
-<div class="ped-card-theme">Lesson Consolidation</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
-<div class="ped-card-cycle">Aug 2025 (25-26)</div>
-<div class="ped-card-score">87.3</div>
-<div class="ped-card-theme">Classroom Setup &amp; Seating</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
-<div class="ped-card-cycle">Sep 2025 (25-26)</div>
-<div class="ped-card-score">85.6</div>
-<div class="ped-card-theme">Prior Knowledge &amp; Group Work</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
-<div class="ped-card-cycle">Nov 2025 (25-26)</div>
-<div class="ped-card-score">84.6</div>
-<div class="ped-card-theme">Purposeful Homework</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
-<div class="ped-card-cycle">Dec 2025 (25-26)</div>
-<div class="ped-card-score">92.6</div>
-<div class="ped-card-theme">Formative Review &amp; Synthesis</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #8B5CF6;">
-<div class="ped-card-cycle">Jan 2026 (25-26)</div>
-<div class="ped-card-score">82.5</div>
-<div class="ped-card-theme">Targeted Ability Revision</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #10B981;">
-<div class="ped-card-cycle">Aug 2026 (26-27)</div>
-<div class="ped-card-score">75.3</div>
-<div class="ped-card-theme">Safe Climate &amp; Engagement</div>
-</div>
-<div class="ped-card" style="border-top: 3px solid #10B981;">
-<div class="ped-card-cycle">Sep 2026 (26-27)</div>
-<div class="ped-card-score">80.6</div>
-<div class="ped-card-theme">Concrete TLM Usage</div>
-</div>
-</div>
+
 <!-- Thematic & Qualitative Details -->
 <div class="ped-detail-grid">
 <!-- 5 Core Themes -->
@@ -10226,8 +10204,152 @@ Exact model predictions testing each concrete intervention across the state teac
     updateSimulator();
   }
 
+  // --- DISTRICT TEACHING SCORES: SESSION TREND SLICER & SVG GRAPH ---
+  let activePedYear = 'ALL';
+  const PEDAGOGY_CYCLE_DATA = {
+    'CLSS': [
+      { cycle: 'Sep 2024', ay: 'AY 2024-25', theme: 'Orientation Setup', teachers: 25949, score: 86.2, ped_align: 82.0, relevance_pct: 90.0, relevance_rating: 4.55 },
+      { cycle: 'Oct 2024', ay: 'AY 2024-25', theme: 'Facilitation Balance', teachers: 24995, score: 84.8, ped_align: 80.5, relevance_pct: 90.2, relevance_rating: 4.58 },
+      { cycle: 'Dec 2024', ay: 'AY 2024-25', theme: 'Constructive Feedback', teachers: 25273, score: 88.4, ped_align: 84.1, relevance_pct: 91.5, relevance_rating: 4.62 },
+      { cycle: 'Jan 2025', ay: 'AY 2024-25', theme: 'Lesson Consolidation', teachers: 28547, score: 85.1, ped_align: 81.2, relevance_pct: 91.0, relevance_rating: 4.60 },
+      { cycle: 'Aug 2025', ay: 'AY 2025-26', theme: 'Classroom Setup & Seating', teachers: 25512, score: 87.3, ped_align: 78.3, relevance_pct: 90.5, relevance_rating: 4.60 },
+      { cycle: 'Sep 2025', ay: 'AY 2025-26', theme: 'Prior Knowledge & Group Work', teachers: 22139, score: 85.6, ped_align: 73.1, relevance_pct: 91.8, relevance_rating: 4.63 },
+      { cycle: 'Nov 2025', ay: 'AY 2025-26', theme: 'Purposeful Homework', teachers: 13658, score: 84.6, ped_align: 71.2, relevance_pct: 91.2, relevance_rating: 4.59 },
+      { cycle: 'Dec 2025', ay: 'AY 2025-26', theme: 'Formative Review & Synthesis', teachers: 17737, score: 92.6, ped_align: 89.2, relevance_pct: 92.9, relevance_rating: 4.65 },
+      { cycle: 'Jan 2026', ay: 'AY 2025-26', theme: 'Targeted Ability Revision', teachers: 18221, score: 82.5, ped_align: 63.8, relevance_pct: 93.3, relevance_rating: 4.66 },
+      { cycle: 'Aug 2026', ay: 'AY 2026-27', theme: 'Safe Climate & Engagement', teachers: 23785, score: 75.3, ped_align: 48.0, relevance_pct: 91.0, relevance_rating: 4.60 },
+      { cycle: 'Sep 2026', ay: 'AY 2026-27', theme: 'Concrete TLM Usage', teachers: 23169, score: 80.6, ped_align: 61.2, relevance_pct: 91.0, relevance_rating: 4.60 }
+    ],
+    'DO': [
+      { cycle: 'Aug 2025', ay: 'AY 2025-26', theme: 'DO Cadre Orientation', teachers: 4833, score: 88.0, ped_align: 76.0, relevance_pct: 94.0, relevance_rating: 4.72 },
+      { cycle: 'Sep 2025', ay: 'AY 2025-26', theme: 'Group Dynamics Prep', teachers: 4280, score: 87.2, ped_align: 74.5, relevance_pct: 94.5, relevance_rating: 4.74 },
+      { cycle: 'Nov 2025', ay: 'AY 2025-26', theme: 'Homework Facilitation Prep', teachers: 3205, score: 85.4, ped_align: 72.0, relevance_pct: 93.8, relevance_rating: 4.70 },
+      { cycle: 'Dec 2025', ay: 'AY 2025-26', theme: 'Synthesis Facilitation', teachers: 3990, score: 90.1, ped_align: 81.0, relevance_pct: 95.2, relevance_rating: 4.78 },
+      { cycle: 'Jan 2026', ay: 'AY 2025-26', theme: 'Ability Grouping Prep', teachers: 3944, score: 86.5, ped_align: 75.0, relevance_pct: 95.0, relevance_rating: 4.76 },
+      { cycle: 'Aug 2026', ay: 'AY 2026-27', theme: 'Psychological Safety Prep', teachers: 4434, score: 89.0, ped_align: 76.0, relevance_pct: 96.0, relevance_rating: 4.80 },
+      { cycle: 'Sep 2026', ay: 'AY 2026-27', theme: 'TLM Demonstration Prep', teachers: 4351, score: 89.4, ped_align: 77.5, relevance_pct: 96.2, relevance_rating: 4.82 }
+    ]
+  };
+
+  function setPedYearFilter(yr, btn) {
+    activePedYear = yr;
+    document.querySelectorAll('#pedYearFilterPills .shift-pill').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderPedagogyTrend();
+  }
+
+  function formatPedVal(val, metric) {
+    if (metric === 'ped_align' || metric === 'relevance_pct') return val.toFixed(1) + '%';
+    if (metric === 'relevance_rating') return val.toFixed(2) + ' / 5';
+    if (metric === 'teachers') return Math.round(val).toLocaleString();
+    return val.toFixed(1);
+  }
+
+  function renderPedagogyTrend() {
+    const cadre = document.getElementById('pedCadreSelect')?.value || 'CLSS';
+    const metric = document.getElementById('pedMetricSelect')?.value || 'score';
+    const svg = document.getElementById('pedagogyTrendSvg');
+    const grid = document.getElementById('pedCardsGrid');
+    const verdict = document.getElementById('pedTrendVerdict');
+    const tooltip = document.getElementById('pedTrendTooltip');
+    if (!svg || !grid) return;
+
+    const raw = PEDAGOGY_CYCLE_DATA[cadre] || PEDAGOGY_CYCLE_DATA['CLSS'];
+    const rows = raw.filter(r => activePedYear === 'ALL' || r.ay === activePedYear);
+    if (!rows.length) {
+      svg.innerHTML = '<text x="460" y="110" text-anchor="middle" fill="#6E6E73" font-size="13">No rounds recorded for this selection</text>';
+      grid.innerHTML = '';
+      if (verdict) verdict.textContent = 'No rounds in selected period';
+      return;
+    }
+
+    const vals = rows.map(r => r[metric]);
+    const minV = Math.min(...vals);
+    const maxV = Math.max(...vals);
+    const padSpan = (maxV - minV) || (maxV * 0.1) || 1;
+    const yMin = Math.max(0, minV - padSpan * 0.25);
+    const yMax = maxV + padSpan * 0.2;
+
+    const W = 920, H = 220, padL = 58, padR = 28, padT = 22, padB = 36;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+
+    const coords = rows.map((r, idx) => {
+      const x = rows.length === 1 ? padL + plotW / 2 : padL + (idx / (rows.length - 1)) * plotW;
+      const y = padT + plotH - ((r[metric] - yMin) / (yMax - yMin)) * plotH;
+      return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10, row: r };
+    });
+
+    const colorMap = {
+      'score': '#0071E3',
+      'ped_align': '#D70015',
+      'relevance_pct': '#248A3D',
+      'relevance_rating': '#5E5CE6',
+      'teachers': '#B25000'
+    };
+    const strokeCol = colorMap[metric] || '#0071E3';
+
+    const lineD = coords.map((c, i) => (i === 0 ? 'M' : 'L') + c.x + ',' + c.y).join(' ');
+    const areaD = lineD + ` L${coords[coords.length - 1].x},${padT + plotH} L${coords[0].x},${padT + plotH} Z`;
+
+    let svgHtml = `<defs><linearGradient id="pedAreaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeCol}" stop-opacity="0.18"/><stop offset="100%" stop-color="${strokeCol}" stop-opacity="0.01"/></linearGradient></defs>`;
+    for (let g = 0; g <= 3; g++) {
+      const gy = padT + (g / 3) * plotH;
+      const gv = yMax - (g / 3) * (yMax - yMin);
+      svgHtml += `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="rgba(0,0,0,0.06)" stroke-dasharray="3 3"/>`;
+      svgHtml += `<text x="${padL - 8}" y="${gy + 4}" text-anchor="end" fill="#6E6E73" font-size="10" font-family="JetBrains Mono">${formatPedVal(gv, metric)}</text>`;
+    }
+    svgHtml += `<path d="${areaD}" fill="url(#pedAreaGrad)"/>`;
+    svgHtml += `<path d="${lineD}" fill="none" stroke="${strokeCol}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    coords.forEach((c, idx) => {
+      svgHtml += `<text x="${c.x}" y="${H - 12}" text-anchor="middle" fill="#6E6E73" font-size="10" font-weight="600">${c.row.cycle}</text>`;
+      svgHtml += `<circle class="ped-node" cx="${c.x}" cy="${c.y}" r="5.5" fill="#FFFFFF" stroke="${strokeCol}" stroke-width="2.5" data-idx="${idx}" style="cursor:pointer;"/>`;
+    });
+    svg.innerHTML = svgHtml;
+
+    // Bind hover tooltips
+    svg.querySelectorAll('circle.ped-node').forEach(node => {
+      node.addEventListener('mouseenter', (ev) => {
+        const idx = parseInt(node.getAttribute('data-idx'), 10);
+        const item = coords[idx]?.row;
+        if (!item || !tooltip) return;
+        tooltip.innerHTML = `<strong>${item.cycle} (${item.ay})</strong><br>${item.theme}<br>Value: ${formatPedVal(item[metric], metric)}`;
+        tooltip.style.display = 'block';
+        const rect = svg.parentElement.getBoundingClientRect();
+        tooltip.style.left = Math.min(rect.width - 200, Math.max(8, ev.clientX - rect.left + 10)) + 'px';
+        tooltip.style.top = Math.max(8, ev.clientY - rect.top - 48) + 'px';
+      });
+      node.addEventListener('mouseleave', () => { if (tooltip) tooltip.style.display = 'none'; });
+    });
+
+    // Verdict pill
+    if (verdict) {
+      const first = vals[0], last = vals[vals.length - 1];
+      const diff = last - first;
+      const sign = diff >= 0 ? '+' : '';
+      const diffTxt = metric === 'teachers' ? (sign + Math.round(diff).toLocaleString()) : (sign + diff.toFixed(1));
+      verdict.textContent = `${rows[0].cycle} -> ${rows[rows.length - 1].cycle}: ${formatPedVal(first, metric)} to ${formatPedVal(last, metric)} (${diffTxt})`;
+    }
+
+    // Render synchronized cards
+    grid.innerHTML = '';
+    rows.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'ped-card';
+      card.style.borderTop = `3px solid ${strokeCol}`;
+      card.innerHTML = `
+        <div class="ped-card-cycle">${r.cycle} (${r.ay.replace('AY ', '')})</div>
+        <div class="ped-card-score" style="color: ${strokeCol};">${formatPedVal(r[metric], metric)}</div>
+        <div class="ped-card-theme">${r.theme}</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     renderDistrictCards(districtRankingsData);
+    renderPedagogyTrend();
     updateSimulator();
     init3DTilt();
     syncChildSlicers();
