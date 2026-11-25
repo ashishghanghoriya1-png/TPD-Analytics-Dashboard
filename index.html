@@ -10154,6 +10154,20 @@ Exact model predictions testing each concrete intervention across the state teac
     'Sep 2026': { att: '23,169', doAtt: '4,351', score: '80.6%', align: '61.2%', theme: 'Concrete TLM Usage (AY 26-27)' }
   };
 
+  const MONTH_TO_YEAR_MAP = {
+    'Sep 2024': { year: 'AY 2024-25', inpersonTrack: 'SUBJECT_PED', inpersonCount: 41883 },
+    'Oct 2024': { year: 'AY 2024-25', inpersonTrack: 'SUBJECT_PED', inpersonCount: 41883 },
+    'Dec 2024': { year: 'AY 2024-25', inpersonTrack: 'SUBJECT_PED', inpersonCount: 41883 },
+    'Jan 2025': { year: 'AY 2024-25', inpersonTrack: 'SUBJECT_PED', inpersonCount: 41883 },
+    'Aug 2025': { year: 'AY 2025-26', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Sep 2025': { year: 'AY 2025-26', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Nov 2025': { year: 'AY 2025-26', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Dec 2025': { year: 'AY 2025-26', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Jan 2026': { year: 'AY 2025-26', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Aug 2026': { year: 'AY 2026-27', inpersonTrack: 'NONE', inpersonCount: 0 },
+    'Sep 2026': { year: 'AY 2026-27', inpersonTrack: 'NONE', inpersonCount: 0 }
+  };
+
   function syncMonthDropdownOptions() {
     const sel = document.getElementById('monthSlicerSelect');
     if (!sel) return;
@@ -10308,8 +10322,12 @@ Exact model predictions testing each concrete intervention across the state teac
     if (badgeVer) badgeVer.textContent = selectedVerification === 'VERIFIED' ? 'Verified Government Teachers Only' : 'All App Accounts (Including Unmapped)';
 
     // 5. Look up slice data
+    const mInfoTop = (activeMonthKey !== 'ALL' && CLSS_MONTH_KPI_MAP[activeMonthKey]) ? CLSS_MONTH_KPI_MAP[activeMonthKey] : null;
+    const mMetaTop = (activeMonthKey !== 'ALL' && MONTH_TO_YEAR_MAP[activeMonthKey]) ? MONTH_TO_YEAR_MAP[activeMonthKey] : null;
     let activeSliceKey = selectedYear;
-    if (selectedYear === 'ALL' && selectedEra !== 'ALL') {
+    if (selectedYear === 'ALL' && mMetaTop) {
+      activeSliceKey = mMetaTop.year;
+    } else if (selectedYear === 'ALL' && selectedEra !== 'ALL') {
       activeSliceKey = selectedEra;
     }
     const yrObj = slicerData[activeSliceKey] || slicerData[selectedYear] || slicerData['ALL'];
@@ -10319,7 +10337,9 @@ Exact model predictions testing each concrete intervention across the state teac
     const statusTextEl = document.getElementById('yearStatusText');
     if (statusTextEl) {
       if (selectedVerification === 'VERIFIED') {
-        statusTextEl.textContent = slice.verifiedTeachers + ' Verified Government Teachers | ' + (selectedYear === 'ALL' ? 'All 5 Academic Years' : selectedYear) + ' | ' + invNames[selectedIntervention];
+        const yrLabel = selectedYear === 'ALL' ? (mMetaTop ? mMetaTop.year : 'All 5 Academic Years') : selectedYear;
+        const mSuffix = mInfoTop ? (' | Month: ' + activeMonthKey + ' (' + mInfoTop.theme + ')') : '';
+        statusTextEl.textContent = slice.verifiedTeachers + ' Verified Government Teachers | ' + yrLabel + mSuffix + ' | ' + invNames[selectedIntervention];
       } else {
         statusTextEl.textContent = 'All Compiled Records: 920,559 activity records (129,134 unmapped entries across 84,559 unique accounts)';
       }
@@ -10382,19 +10402,43 @@ Exact model predictions testing each concrete intervention across the state teac
     updateCard('kpi-districts', 'kpi-districts-meta', slice.districts, slice.districtsMeta);
 
     // Card 5: Online Learners
-    updateCard('kpi-digital', 'kpi-digital-meta', slice.digital, slice.digitalMeta, slice.digitalNum);
+    const c5Meta = mInfoTop ? ('Active in ' + activeMonthKey + ' (' + slice.digitalMeta + ')') : slice.digitalMeta;
+    updateCard('kpi-digital', 'kpi-digital-meta', slice.digital, c5Meta, slice.digitalNum);
 
     // Card 6: In-Person Attendees
-    updateCard('kpi-inperson', 'kpi-inperson-meta', slice.inperson, slice.inpersonMeta, slice.inpersonNum);
+    if (mMetaTop) {
+      if (mMetaTop.inpersonTrack === 'SUBJECT_PED') {
+        updateCard('kpi-inperson', 'kpi-inperson-meta', '41,883', 'STT Subject Pedagogy window (Jun 2024 to Jan 2025) includes ' + activeMonthKey, 41883);
+      } else {
+        updateCard('kpi-inperson', 'kpi-inperson-meta', '0', 'No standalone BTT/STT workshop batch in ' + activeMonthKey, 0);
+      }
+    } else {
+      updateCard('kpi-inperson', 'kpi-inperson-meta', slice.inperson, slice.inpersonMeta, slice.inpersonNum);
+    }
 
     // Card 7: Cluster Meetings
-    updateCard('kpi-clss', 'kpi-clss-meta', slice.clss, slice.clssMeta, slice.clssNum);
+    if (mInfoTop) {
+      const clssNum = parseInt(mInfoTop.att.replace(/[^0-9]/g, ''), 10) || 0;
+      updateCard('kpi-clss', 'kpi-clss-meta', mInfoTop.att, 'CLSS Teachers in ' + activeMonthKey + ' (' + mInfoTop.theme + ')', clssNum);
+    } else {
+      updateCard('kpi-clss', 'kpi-clss-meta', slice.clss, slice.clssMeta, slice.clssNum);
+    }
 
     // Card 8: District Trainers
-    updateCard('kpi-do', 'kpi-do-meta', slice.do, slice.doMeta, slice.doNum);
+    if (mInfoTop) {
+      const doNum = mInfoTop.doAtt === 'N/A' ? 0 : (parseInt(mInfoTop.doAtt.replace(/[^0-9]/g, ''), 10) || 0);
+      updateCard('kpi-do', 'kpi-do-meta', mInfoTop.doAtt, 'DO Facilitators for ' + activeMonthKey, doNum);
+    } else {
+      updateCard('kpi-do', 'kpi-do-meta', slice.do, slice.doMeta, slice.doNum);
+    }
 
     // Card 9: Pedagogy Test Score
-    updateCard('kpi-pedagogy', 'kpi-pedagogy-meta', slice.pedagogy, slice.pedagogyMeta, slice.pedagogyNum, true);
+    if (mInfoTop) {
+      const pedNum = parseFloat(mInfoTop.score.replace(/[^0-9.]/g, '')) || 0;
+      updateCard('kpi-pedagogy', 'kpi-pedagogy-meta', mInfoTop.score, activeMonthKey + ' Round Pedagogy Score (Alignment: ' + mInfoTop.align + ')', pedNum, true);
+    } else {
+      updateCard('kpi-pedagogy', 'kpi-pedagogy-meta', slice.pedagogy, slice.pedagogyMeta, slice.pedagogyNum, true);
+    }
 
     // Card 10: Classroom Practice Reports
     updateCard('kpi-feedback', 'kpi-feedback-meta', slice.feedback, slice.feedbackMeta, slice.feedbackNum);
@@ -10812,20 +10856,46 @@ Exact model predictions testing each concrete intervention across the state teac
       if (typeof renderPedagogyTrend === 'function') renderPedagogyTrend();
     }
 
-    // 2. Update Tab 2 (Digital) KPI cards by TIME slice when ALL_DIGITAL is active
+    const mMetaTab = (activeMonthKey !== 'ALL' && MONTH_TO_YEAR_MAP[activeMonthKey]) ? MONTH_TO_YEAR_MAP[activeMonthKey] : null;
+
+    // 2. Update Tab 2 (Digital) KPI cards by TIME + MONTH slice when ALL_DIGITAL is active
     const digSelVal = document.getElementById('selectDigitalCourse')?.value || 'ALL_DIGITAL';
     if (digSelVal === 'ALL_DIGITAL') {
-      const dInfo = DIGITAL_YEAR_KPI_MAP[key] || DIGITAL_YEAR_KPI_MAP['ALL'];
-      setTxt('dig-kpi-1-label', dInfo.l1); setTxt('dig-kpi-1-val', dInfo.v1); setTxt('dig-kpi-1-sub', dInfo.s1);
+      const effDigKey = (mMetaTab && (key === 'ALL' || key === 'POST_COVID')) ? mMetaTab.year : key;
+      const dInfo = DIGITAL_YEAR_KPI_MAP[effDigKey] || DIGITAL_YEAR_KPI_MAP['ALL'];
+      const dSub1 = mMetaTab ? ('Active in ' + activeMonthKey + ' (' + dInfo.s1 + ')') : dInfo.s1;
+      setTxt('dig-kpi-1-label', dInfo.l1); setTxt('dig-kpi-1-val', dInfo.v1); setTxt('dig-kpi-1-sub', dSub1);
       setTxt('dig-kpi-2-label', dInfo.l2); setTxt('dig-kpi-2-val', dInfo.v2); setTxt('dig-kpi-2-sub', dInfo.s2);
       setTxt('dig-kpi-3-label', dInfo.l3); setTxt('dig-kpi-3-val', dInfo.v3); setTxt('dig-kpi-3-sub', dInfo.s3);
       setTxt('dig-kpi-4-label', dInfo.l4); setTxt('dig-kpi-4-val', dInfo.v4); setTxt('dig-kpi-4-sub', dInfo.s4);
     }
 
-    // 3. Update Tab 3 (In-Person) KPI cards by TIME slice when ALL_INPERSON is active
+    // 3. Update Tab 3 (In-Person) KPI cards by TIME + MONTH slice when ALL_INPERSON is active
     const inpSelVal = document.getElementById('selectInPersonProgram')?.value || 'ALL_INPERSON';
     if (inpSelVal === 'ALL_INPERSON') {
-      if (key === 'AY 2023-24') {
+      if (mMetaTab) {
+        if (mMetaTab.inpersonTrack === 'SUBJECT_PED') {
+          onInPersonProgramSelect('SUBJECT_PED', true);
+          setTxt('inperson-kpi-sub', 'Active in ' + activeMonthKey + ' (Months: Jun 2024 to Jan 2025)');
+          setTxt('inperson-ctx-title', 'Subject Pedagogy (STT) Active in ' + activeMonthKey + ' (Jun 2024 to Jan 2025)');
+        } else {
+          setTxt('inperson-kpi-label', 'In-Person Workshop Participants');
+          setTxt('inperson-kpi-participants', '0');
+          setTxt('inperson-kpi-sub', 'No standalone state BTT/STT workshop batch in ' + activeMonthKey);
+          setTxt('inperson-kpi-surveys-label', 'Survey Records');
+          setTxt('inperson-kpi-surveys', '0');
+          setTxt('inperson-kpi-surveys-sub', 'Workshops ran in Oct 2023 to Feb 2024 (BTT) and Jun 2024 to Jan 2025 (STT)');
+          setTxt('inperson-kpi-clarity-label', 'Handbook Clarity');
+          setTxt('inperson-kpi-clarity', 'N/A');
+          setTxt('inperson-kpi-clarity-sub', 'No BTT/STT batch in ' + activeMonthKey);
+          setTxt('inperson-kpi-practice-label', 'Hands-On Role-Play');
+          setTxt('inperson-kpi-practice', 'N/A');
+          setTxt('inperson-kpi-practice-sub', 'Select All Months or Sep 2024 to Jan 2025');
+          setTxt('inperson-ctx-title', 'No In-Person Workshop Batch in ' + activeMonthKey);
+          setTxt('inperson-ctx-badge', '0 Workshops');
+          setTxt('inperson-ctx-desc', 'Standalone face-to-face pedagogy workshops ran in Oct 2023 to Feb 2024 (BTT) and Jun 2024 to Jan 2025 (STT & CRO SRG).');
+        }
+      } else if (key === 'AY 2023-24') {
         onInPersonProgramSelect('GEN_PED', true);
       } else if (key === 'AY 2024-25') {
         onInPersonProgramSelect('SUBJECT_PED', true);
@@ -11485,6 +11555,7 @@ Exact model predictions testing each concrete intervention across the state teac
   window.addEventListener('DOMContentLoaded', () => {
     renderDistrictCards(districtRankingsData);
     renderPedagogyTrend();
+    syncMonthDropdownOptions();
     updateSimulator();
     init3DTilt();
     syncChildSlicers();
