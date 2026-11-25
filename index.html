@@ -2228,6 +2228,9 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <button type="button" class="slicer-pill" data-time="AY 2026-27" onclick="selectUnifiedTime('AY 2026-27')">2026-27</button>
           <button type="button" class="slicer-pill" data-time="POST_COVID" onclick="selectUnifiedTime('POST_COVID')">Post-Covid (2023-27)</button>
         </div>
+        <select id="monthSlicerSelect" onchange="selectMonth(this.value)" aria-label="Select Month" style="padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--surface-border); font-size: 0.74rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; cursor: pointer; margin-left: 0.25rem;">
+          <option value="ALL">All Months</option>
+        </select>
       </div>
 
       <!-- Contextual Sub-Filter (only active tab's sub-filter is shown) -->
@@ -9279,6 +9282,8 @@ Exact model predictions testing each concrete intervention across the state teac
     if (digSel) digSel.value = 'ALL_DIGITAL';
     selectedDigitalCourseKey = 'ALL_DIGITAL';
     if (typeof syncTab2DigitalKpis === 'function') syncTab2DigitalKpis('ALL_DIGITAL');
+    activeMonthKey = 'ALL';
+    syncMonthDropdownOptions();
     syncChildSlicers();
     applySlicers();
   }
@@ -9291,6 +9296,8 @@ Exact model predictions testing each concrete intervention across the state teac
     } else if (['AY 2023-24', 'AY 2024-25', 'AY 2025-26', 'AY 2026-27'].includes(selectedYear)) {
       selectedEra = 'POST_COVID';
     }
+    activeMonthKey = 'ALL';
+    syncMonthDropdownOptions();
     syncChildSlicers();
     applySlicers();
   }
@@ -9312,6 +9319,8 @@ Exact model predictions testing each concrete intervention across the state teac
     if (targetTab && typeof switchTab === 'function') {
       switchTab(targetTab);
     }
+    activeMonthKey = 'ALL';
+    syncMonthDropdownOptions();
     syncChildSlicers();
     applySlicers();
   }
@@ -9323,6 +9332,8 @@ Exact model predictions testing each concrete intervention across the state teac
 
   function resetAllSlicers() {
     activeTimeKey = 'ALL';
+    activeMonthKey = 'ALL';
+    syncMonthDropdownOptions();
     selectedEra = 'ALL';
     selectedYear = 'ALL';
     selectedIntervention = 'ALL';
@@ -9683,6 +9694,82 @@ Exact model predictions testing each concrete intervention across the state teac
 
 
   let activeTimeKey = 'ALL';
+  let activeMonthKey = 'ALL';
+
+  const MONTH_OPTIONS_BY_TIME = {
+    'ALL': [
+      { v: 'ALL', lbl: 'All Months (11 CLSS Rounds)' },
+      { v: 'Sep 2024', lbl: 'Sep 2024 (AY 24-25)' }, { v: 'Oct 2024', lbl: 'Oct 2024 (AY 24-25)' },
+      { v: 'Dec 2024', lbl: 'Dec 2024 (AY 24-25)' }, { v: 'Jan 2025', lbl: 'Jan 2025 (AY 24-25)' },
+      { v: 'Aug 2025', lbl: 'Aug 2025 (AY 25-26)' }, { v: 'Sep 2025', lbl: 'Sep 2025 (AY 25-26)' },
+      { v: 'Nov 2025', lbl: 'Nov 2025 (AY 25-26)' }, { v: 'Dec 2025', lbl: 'Dec 2025 (AY 25-26)' },
+      { v: 'Jan 2026', lbl: 'Jan 2026 (AY 25-26)' },
+      { v: 'Aug 2026', lbl: 'Aug 2026 (AY 26-27)' }, { v: 'Sep 2026', lbl: 'Sep 2026 (AY 26-27)' }
+    ],
+    'AY 2022-23': [{ v: 'ALL', lbl: 'Months: Dec 2022 - Mar 2023 (Digital)' }],
+    'AY 2023-24': [{ v: 'ALL', lbl: 'Months: Apr 2023 - Mar 2024' }],
+    'AY 2024-25': [
+      { v: 'ALL', lbl: 'All 4 Months (Sep 2024 - Jan 2025)' },
+      { v: 'Sep 2024', lbl: 'Sep 2024' }, { v: 'Oct 2024', lbl: 'Oct 2024' },
+      { v: 'Dec 2024', lbl: 'Dec 2024' }, { v: 'Jan 2025', lbl: 'Jan 2025' }
+    ],
+    'AY 2025-26': [
+      { v: 'ALL', lbl: 'All 5 Months (Aug 2025 - Jan 2026)' },
+      { v: 'Aug 2025', lbl: 'Aug 2025' }, { v: 'Sep 2025', lbl: 'Sep 2025' },
+      { v: 'Nov 2025', lbl: 'Nov 2025' }, { v: 'Dec 2025', lbl: 'Dec 2025' },
+      { v: 'Jan 2026', lbl: 'Jan 2026' }
+    ],
+    'AY 2026-27': [
+      { v: 'ALL', lbl: 'All 2 Months (Aug - Sep 2026)' },
+      { v: 'Aug 2026', lbl: 'Aug 2026' }, { v: 'Sep 2026', lbl: 'Sep 2026' }
+    ],
+    'POST_COVID': [
+      { v: 'ALL', lbl: 'All Post-Covid Months (11 Rounds)' },
+      { v: 'Sep 2024', lbl: 'Sep 2024' }, { v: 'Oct 2024', lbl: 'Oct 2024' },
+      { v: 'Dec 2024', lbl: 'Dec 2024' }, { v: 'Jan 2025', lbl: 'Jan 2025' },
+      { v: 'Aug 2025', lbl: 'Aug 2025' }, { v: 'Sep 2025', lbl: 'Sep 2025' },
+      { v: 'Nov 2025', lbl: 'Nov 2025' }, { v: 'Dec 2025', lbl: 'Dec 2025' },
+      { v: 'Jan 2026', lbl: 'Jan 2026' }, { v: 'Aug 2026', lbl: 'Aug 2026' }, { v: 'Sep 2026', lbl: 'Sep 2026' }
+    ]
+  };
+
+  const CLSS_MONTH_KPI_MAP = {
+    'Sep 2024': { att: '25,949', doAtt: 'N/A', score: '86.2%', align: '82.0%', theme: 'Orientation Setup (AY 24-25)' },
+    'Oct 2024': { att: '24,995', doAtt: 'N/A', score: '84.8%', align: '80.5%', theme: 'Facilitation Balance (AY 24-25)' },
+    'Dec 2024': { att: '25,273', doAtt: 'N/A', score: '88.4%', align: '84.1%', theme: 'Constructive Feedback (AY 24-25)' },
+    'Jan 2025': { att: '28,547', doAtt: 'N/A', score: '85.1%', align: '81.2%', theme: 'Lesson Consolidation (AY 24-25)' },
+    'Aug 2025': { att: '25,512', doAtt: '4,833', score: '87.3%', align: '78.3%', theme: 'Classroom Setup & Seating (AY 25-26)' },
+    'Sep 2025': { att: '22,139', doAtt: '4,280', score: '85.6%', align: '73.1%', theme: 'Prior Knowledge & Group Work (AY 25-26)' },
+    'Nov 2025': { att: '13,658', doAtt: '3,205', score: '84.6%', align: '71.2%', theme: 'Purposeful Homework - Harvest Dip (AY 25-26)' },
+    'Dec 2025': { att: '17,737', doAtt: '3,990', score: '92.6%', align: '89.2%', theme: 'Formative Review & Lesson Closure (AY 25-26)' },
+    'Jan 2026': { att: '18,020', doAtt: '3,944', score: '82.5%', align: '63.8%', theme: 'Targeted Ability Revision (AY 25-26)' },
+    'Aug 2026': { att: '23,785', doAtt: '4,434', score: '75.3%', align: '48.0%', theme: 'Safe Climate & Engagement (AY 26-27)' },
+    'Sep 2026': { att: '23,169', doAtt: '4,351', score: '80.6%', align: '61.2%', theme: 'Concrete TLM Usage (AY 26-27)' }
+  };
+
+  function syncMonthDropdownOptions() {
+    const sel = document.getElementById('monthSlicerSelect');
+    if (!sel) return;
+    const opts = MONTH_OPTIONS_BY_TIME[activeTimeKey] || MONTH_OPTIONS_BY_TIME['ALL'];
+    sel.innerHTML = '';
+    opts.forEach(o => {
+      const opt = document.createElement('option');
+      opt.value = o.v;
+      opt.textContent = o.lbl;
+      sel.appendChild(opt);
+    });
+    if ([...sel.options].some(o => o.value === activeMonthKey)) {
+      sel.value = activeMonthKey;
+    } else {
+      activeMonthKey = 'ALL';
+      sel.value = 'ALL';
+    }
+  }
+
+  function selectMonth(mKey) {
+    activeMonthKey = mKey || 'ALL';
+    applySlicers();
+  }
 
   function selectUnifiedTime(timeKey) {
     activeTimeKey = String(timeKey);
@@ -9703,6 +9790,8 @@ Exact model predictions testing each concrete intervention across the state teac
       selectedYear = activeTimeKey;
       currentYear = activeTimeKey;
     }
+    activeMonthKey = 'ALL';
+    syncMonthDropdownOptions();
     syncChildSlicers();
     applySlicers();
   }
@@ -10135,7 +10224,7 @@ Exact model predictions testing each concrete intervention across the state teac
       badge: 'General Pedagogy (BTT 23-24)',
       label: 'General Pedagogy (BTT) Teachers',
       val: '6,541',
-      sub: 'Verified employee codes out of 6,562 raw training logs',
+      sub: 'Months: Oct 2023 to Feb 2024 (6,562 raw BTT logs)',
       surveysLabel: 'MIS Training Records',
       surveys: '6,562',
       surveysSub: 'Source: Gen Ped 23-24/Master file_BTT_MIS.xlsx',
@@ -10153,7 +10242,7 @@ Exact model predictions testing each concrete intervention across the state teac
       badge: 'Subject Pedagogy (24-25)',
       label: 'Subject Pedagogy Teachers',
       val: '41,883',
-      sub: 'Maths, Science & Social Science face-to-face workshops',
+      sub: 'Months: Jun 2024 to Jan 2025 (Maths, Sci & SSt workshops)',
       surveysLabel: 'STT Feedback Forms',
       surveys: '50,864',
       surveysSub: 'Subject Teacher Training survey responses analyzed',
@@ -10232,11 +10321,11 @@ Exact model predictions testing each concrete intervention across the state teac
   const DIGITAL_YEAR_KPI_MAP = {
     'ALL': { l1: 'Highest Completion Rate', v1: '85.6%', s1: 'Mission Ankur Course 1 (114,575 completions)', l2: 'Top Subject Gain (PSP)', v2: '+20.9%', s2: 'PSP Course 2 (Pre: 44.6% to Post: 65.5%)', l3: 'Top FLN Gain (Mission Ankur)', v3: '+20.3%', s3: 'Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)', l4: 'Peak Assessment Mastery', v4: '83.4%', s4: 'National Achievement Survey (NAS Post-Test)' },
     'POST_COVID': { l1: 'Post-Covid Digital Learners', v1: '142,300', s1: 'Completed MA C2-C6, PSP 3-5, ECE, NAS & PLC', l2: 'Top FLN Gain (Course 3)', v2: '+20.3%', s2: 'Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)', l3: 'Course 6 Mentor Rebound', v3: '69.99%', s3: 'Recovered from 21.21% cliff in Course 4', l4: 'Peak Assessment Mastery', v4: '83.4%', s4: 'National Achievement Survey (NAS Post-Test)' },
-    'AY 2022-23': { l1: 'AY 2022-23 Digital Learners', v1: '130,854', s1: 'Mission Ankur Course 1 & PSP 1-2 (Covid Era)', l2: 'Course 1 Completion Rate', v2: '85.6%', s2: '114,575 completions in Mission Ankur Course 1', l3: 'PSP Course 2 Gain', v3: '+20.9%', s3: 'Pre: 44.6% to Post: 65.5%', l4: 'Course 1 Post-Test Avg', v4: '44.5%', s4: 'Foundational primary math baseline' },
-    'AY 2023-24': { l1: 'AY 2023-24 Digital Learners', v1: '125,100', s1: 'Mission Ankur C2, C3 & PSP 3 active', l2: 'Course 2 Completion Rate', v2: '81.0%', s2: '102,081 completions in Number Sense', l3: 'Course 3 Learning Gain', v3: '+20.3%', s3: 'Pre: 49.2% to Post: 69.4% (Place Value)', l4: 'Course 3 Post-Test Avg', v4: '69.4%', s4: 'Highest FLN knowledge gain in portfolio' },
-    'AY 2024-25': { l1: 'AY 2024-25 Digital Learners', v1: '98,400', s1: 'Mission Ankur C4-C6, PSP 4 & ECE C1-C6', l2: 'Course 4 Assessment Cliff', v2: '21.21%', s2: '57-pt completion drop on strict quiz cutoff', l3: 'Course 6 Mentor Rebound', v3: '69.99%', s3: '62.04% post-test score with mentor review', l4: 'ECE Series Learners', v4: '24,700', s4: 'Early Childhood Education Modules 1 to 6' },
-    'AY 2025-26': { l1: 'AY 2025-26 Digital Learners', v1: '95,604', s1: 'PLC Digital Course active statewide', l2: 'PLC Total Enrollments', v2: '129,818', s2: 'Professional Learning Communities online', l3: 'PLC Certified Teachers', v3: '54,834', s3: 'Verified completions through Mar 2026', l4: 'PLC Post-Test Avg', v4: '57.2%', s4: 'Statewide peer learning digital module' },
-    'AY 2026-27': { l1: 'AY 2026-27 Digital Learners', v1: '46,233', s1: 'NAS Assessment Course & PSP Course 5', l2: 'NAS Completion Rate', v2: '74.2%', s2: 'National Achievement Survey readiness', l3: 'PSP Course 5 Reach', v3: '7,916', s3: 'Latest subject pedagogy online batch', l4: 'NAS Post-Test Mastery', v4: '83.4%', s4: 'Highest post-test mastery score' },
+    'AY 2022-23': { l1: 'AY 2022-23 Digital Learners', v1: '130,854', s1: 'Months: Dec 2022 to Mar 2023 (MA C1 & PSP 1-2)', l2: 'Course 1 Completion Rate', v2: '85.6%', s2: '114,575 completions in Mission Ankur Course 1', l3: 'PSP Course 2 Gain', v3: '+20.9%', s3: 'Pre: 44.6% to Post: 65.5%', l4: 'Course 1 Post-Test Avg', v4: '44.5%', s4: 'Foundational primary math baseline' },
+    'AY 2023-24': { l1: 'AY 2023-24 Digital Learners', v1: '125,100', s1: 'Months: Apr 2023 to Mar 2024 (MA C2, C3 & PSP 3)', l2: 'Course 2 Completion Rate', v2: '81.0%', s2: '102,081 completions in Number Sense', l3: 'Course 3 Learning Gain', v3: '+20.3%', s3: 'Pre: 49.2% to Post: 69.4% (Place Value)', l4: 'Course 3 Post-Test Avg', v4: '69.4%', s4: 'Highest FLN knowledge gain in portfolio' },
+    'AY 2024-25': { l1: 'AY 2024-25 Digital Learners', v1: '98,400', s1: 'Months: Jul 2024 to Feb 2025 (MA C4-C6, PSP 4 & ECE)', l2: 'Course 4 Assessment Cliff', v2: '21.21%', s2: '57-pt completion drop on strict quiz cutoff', l3: 'Course 6 Mentor Rebound', v3: '69.99%', s3: '62.04% post-test score with mentor review', l4: 'ECE Series Learners', v4: '24,700', s4: 'Early Childhood Education Modules 1 to 6' },
+    'AY 2025-26': { l1: 'AY 2025-26 Digital Learners', v1: '95,604', s1: 'Months: Apr 2025 to Mar 2026 (PLC Digital Course)', l2: 'PLC Total Enrollments', v2: '129,818', s2: 'Professional Learning Communities online', l3: 'PLC Certified Teachers', v3: '54,834', s3: 'Verified completions through Mar 2026', l4: 'PLC Post-Test Avg', v4: '57.2%', s4: 'Statewide peer learning digital module' },
+    'AY 2026-27': { l1: 'AY 2026-27 Digital Learners', v1: '46,233', s1: 'Months: Apr 2026 to Sep 2026 (NAS & PSP 5)', l2: 'NAS Completion Rate', v2: '74.2%', s2: 'National Achievement Survey readiness', l3: 'PSP Course 5 Reach', v3: '7,916', s3: 'Latest subject pedagogy online batch', l4: 'NAS Post-Test Mastery', v4: '83.4%', s4: 'Highest post-test mastery score' },
     'COVID': { l1: 'Covid-Era Digital Learners', v1: '130,854', s1: 'Before Apr 2023: MA C1, PSP 1 & PSP 2', l2: 'Course 1 Completion Rate', v2: '85.6%', s2: '114,575 completions in Mission Ankur C1', l3: 'PSP Course 2 Gain', v3: '+20.9%', s3: 'Pre: 44.6% to Post: 65.5%', l4: 'Course 1 Post-Test Avg', v4: '44.5%', s4: 'Foundational primary math baseline' }
   };
 
@@ -10247,7 +10336,36 @@ Exact model predictions testing each concrete intervention across the state teac
 
     // 1. Update Tab 1 (CLSS vs DO) all 4 KPI cards
     const activeCadre = document.getElementById('selectClssCadre')?.value || 'CLSS';
-    if (activeCadre === 'DO') {
+    if (activeMonthKey !== 'ALL' && CLSS_MONTH_KPI_MAP[activeMonthKey]) {
+      const mInfo = CLSS_MONTH_KPI_MAP[activeMonthKey];
+      if (activeCadre === 'DO') {
+        setTxt('clss-kpi-attendance-label', 'DO Cadre (' + activeMonthKey + ')');
+        setTxt('clss-kpi-attendance', mInfo.doAtt);
+        setTxt('clss-kpi-attendance-sub', 'Monthly DO-trained facilitators for ' + activeMonthKey);
+        setTxt('clss-kpi-clusters-label', 'DO Centers Active');
+        setTxt('clss-kpi-clusters', mInfo.doAtt === 'N/A' ? 'N/A' : '52 / 52');
+        setTxt('clss-kpi-clusters-sub', mInfo.theme);
+        setTxt('clss-kpi-closure-label', 'Round Pedagogy Score');
+        setTxt('clss-kpi-closure', mInfo.score);
+        setTxt('clss-kpi-closure-sub', activeMonthKey + ' round composite score');
+        setTxt('clss-kpi-climate-label', 'Classroom Alignment');
+        setTxt('clss-kpi-climate', mInfo.align);
+        setTxt('clss-kpi-climate-sub', mInfo.theme);
+      } else {
+        setTxt('clss-kpi-attendance-label', 'CLSS Teachers (' + activeMonthKey + ')');
+        setTxt('clss-kpi-attendance', mInfo.att);
+        setTxt('clss-kpi-attendance-sub', 'Verified teachers attending ' + activeMonthKey + ' round');
+        setTxt('clss-kpi-clusters-label', 'Active Cluster Coverage');
+        setTxt('clss-kpi-clusters', '3,099');
+        setTxt('clss-kpi-clusters-sub', mInfo.theme);
+        setTxt('clss-kpi-closure-label', activeMonthKey + ' Pedagogy Score');
+        setTxt('clss-kpi-closure', mInfo.score);
+        setTxt('clss-kpi-closure-sub', 'Round quiz & evaluation score');
+        setTxt('clss-kpi-climate-label', activeMonthKey + ' Classroom Alignment');
+        setTxt('clss-kpi-climate', mInfo.align);
+        setTxt('clss-kpi-climate-sub', mInfo.theme);
+      }
+    } else if (activeCadre === 'DO') {
       const doInfo = DO_YEAR_KPI_MAP[key] || DO_YEAR_KPI_MAP['ALL'];
       setTxt('clss-kpi-attendance-label', 'District Orientation (DO) Trainers');
       setTxt('clss-kpi-attendance', ver === 'ALL_ACCOUNTS' ? doInfo.attAll : doInfo.att);
@@ -10700,6 +10818,7 @@ Exact model predictions testing each concrete intervention across the state teac
       qSel.value = prevVal;
     }
     renderPedagogyTrend();
+    syncMonthDropdownOptions();
   }
 
   function setPedAnalysisMode(mode, btn) {
