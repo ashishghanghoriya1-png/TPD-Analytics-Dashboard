@@ -10285,7 +10285,7 @@ Exact model predictions testing each concrete intervention across the state teac
     'q92_relevance': {
       role: 'PARTICIPANT',
       label: 'Q92 / Q131: Classroom Relevance Rating (1 to 5)',
-      qid: 'Q92 / Q131 (Likert 1 to 5)',
+      qid: 'Q92 / Q131 (Participant, Likert 1 to 5)',
       prompt: 'How relevant did you find today\'s Shaikshik Samwaad topic to your current classroom needs?',
       unit: 'rating',
       color: '#248A3D',
@@ -10301,8 +10301,8 @@ Exact model predictions testing each concrete intervention across the state teac
     },
     'q93_satisfaction': {
       role: 'PARTICIPANT',
-      label: 'Q93: Overall Session Satisfaction (1 to 5)',
-      qid: 'Q93 (Likert 1 to 5)',
+      label: 'Q93 / Q132: Overall Session Experience (1 to 5)',
+      qid: 'Q93 / Q132 (Participant, Likert 1 to 5)',
       prompt: 'Rate your overall experience and trust in today\'s Shaikshik Samwaad session.',
       unit: 'rating',
       color: '#0071E3',
@@ -10319,8 +10319,8 @@ Exact model predictions testing each concrete intervention across the state teac
     'high_agreement': {
       role: 'PARTICIPANT',
       label: 'Core Questions: High Agreement % (4-5 Rating)',
-      qid: 'Core Session Questions (4 or 5 Rating Share %)',
-      prompt: 'Percentage of teachers giving high agreement (4 or 5 out of 5) across recurring session feedback items.',
+      qid: 'Participant Core Rating Share (% Rating 4 or 5)',
+      prompt: 'Percentage of participating teachers giving high agreement (4 or 5 out of 5) across recurring session items.',
       unit: 'pct',
       color: '#D70015',
       points: [
@@ -10336,7 +10336,7 @@ Exact model predictions testing each concrete intervention across the state teac
     'participants': {
       role: 'PARTICIPANT',
       label: 'Participant Teachers Count (Monthly Turnout)',
-      qid: 'Q72 / Attendance (Participant Teachers)',
+      qid: 'Participant Turnout (Verified Teachers)',
       prompt: 'Total verified teachers attending monthly Shaikshik Samwaad cluster sessions.',
       unit: 'count',
       color: '#5E5CE6',
@@ -10352,25 +10352,93 @@ Exact model predictions testing each concrete intervention across the state teac
     },
     'do_attended_pct': {
       role: 'FACILITATOR',
-      label: 'Q70 / DO Cadre: Attended Monthly DO Training (%)',
-      qid: 'Q70 / DO Cadre Compliance (% Yes)',
+      label: 'Q115 / Q70: Attended Monthly DO Training (% Yes)',
+      qid: 'Q115 / Q70 (Facilitator, Yes/No)',
       prompt: 'Did the facilitator attend this month\'s District Orientation (DO) before leading the cluster session?',
       unit: 'pct',
       color: '#B25000',
       points: [
-        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 94.71 },
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 94.75 },
         { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 92.40 },
         { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 91.08 },
-        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 92.53 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 92.58 },
         { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 92.32 },
         { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 92.11 },
         { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 91.79 }
       ]
     },
+    'fac_mon_present_pct': {
+      role: 'FACILITATOR',
+      label: 'Q123 / Q76: Was a Monitor Present in Session? (% Yes)',
+      qid: 'Q123 / Q76 (Facilitator, Yes/No)',
+      prompt: 'Was an observer or monitor present during the cluster Shaikshik Samwaad session?',
+      unit: 'pct',
+      color: '#0071E3',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 67.70 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 60.30 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 56.50 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 61.53 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 57.91 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 67.26 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 65.46 }
+      ]
+    },
+    'fac_expected_avg': {
+      role: 'FACILITATOR',
+      label: 'Q120 / Q98: Expected Teachers per Cluster (Avg)',
+      qid: 'Q120 / Q98 (Facilitator, Numeric)',
+      prompt: 'Expected number of teachers assigned to attend each cluster Shaikshik Samwaad group.',
+      unit: 'rating',
+      color: '#6E6E73',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 15.91 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 15.34 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 14.11 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 14.15 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 14.40 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 14.55 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 14.38 }
+      ]
+    },
+    'fac_present_avg': {
+      role: 'FACILITATOR',
+      label: 'Q121 / Q72: Actual Teachers Present per Cluster (Avg)',
+      qid: 'Q121 / Q72 (Facilitator, Numeric)',
+      prompt: 'Actual number of teachers present in each cluster session as reported by facilitators.',
+      unit: 'rating',
+      color: '#248A3D',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 13.19 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 12.61 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 10.54 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 11.16 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 11.69 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 14.20 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 14.18 }
+      ]
+    },
+    'fac_attendance_ratio': {
+      role: 'FACILITATOR',
+      label: 'Cluster Turnout Fill Rate (Present / Expected %)',
+      qid: 'Q121/Q120 -> Q72/Q98 (Facilitator Ratio %)',
+      prompt: 'Percentage of expected cluster teachers who actually attended the session.',
+      unit: 'pct',
+      color: '#248A3D',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 82.90 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 82.20 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 74.70 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 78.87 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 81.18 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 97.59 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 98.61 }
+      ]
+    },
     'facilitators': {
       role: 'FACILITATOR',
-      label: 'Active Facilitators Count (Jan Shikshak / DO)',
-      qid: 'Facilitator Attendance (DO-Trained Cadre)',
+      label: 'Active Facilitators Count (Total)',
+      qid: 'Facilitator Submissions (Jan Shikshak / DO)',
       prompt: 'Total Jan Shikshaks and facilitators leading monthly Shaikshik Samwaad sessions.',
       unit: 'count',
       color: '#B25000',
@@ -10382,6 +10450,38 @@ Exact model predictions testing each concrete intervention across the state teac
         { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 4272 },
         { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 4816 },
         { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 4740 }
+      ]
+    },
+    'mon_present_avg': {
+      role: 'MONITOR',
+      label: 'Q139 / Q57: Observed Teachers Present per Cluster (Avg)',
+      qid: 'Q139 / Q57 (Monitor, Numeric)',
+      prompt: 'Number of participating teachers observed in the cluster session by the monitor.',
+      unit: 'rating',
+      color: '#5E5CE6',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 14.50 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 12.75 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 11.09 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 12.24 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 12.42 },
+        { cycle: 'Aug 2026', ay: 'AY 2026-27', val: 13.37 },
+        { cycle: 'Sep 2026', ay: 'AY 2026-27', val: 12.87 }
+      ]
+    },
+    'mon_rating': {
+      role: 'MONITOR',
+      label: 'Q144: Monitor Session Rating (0 to 5, AY 25-26)',
+      qid: 'Q144 (Monitor, Likert 0 to 5)',
+      prompt: 'Monitor overall rating of today\'s Shaikshik Samwaad session (AY 2025-26 5 rounds).',
+      unit: 'rating',
+      color: '#0071E3',
+      points: [
+        { cycle: 'Aug 2025', ay: 'AY 2025-26', val: 4.53 },
+        { cycle: 'Sep 2025', ay: 'AY 2025-26', val: 4.55 },
+        { cycle: 'Nov 2025', ay: 'AY 2025-26', val: 4.47 },
+        { cycle: 'Dec 2025', ay: 'AY 2025-26', val: 4.53 },
+        { cycle: 'Jan 2026', ay: 'AY 2025-26', val: 4.58 }
       ]
     },
     'monitors': {
