@@ -2253,6 +2253,17 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </select>
     </div>
 
+    <!-- Nested In-Person Program Dropdown (visible when In-Person is selected) -->
+    <div id="nestedInPersonContainer" style="display: none; padding-top: 0.65rem; border-top: 1px dashed var(--surface-border); margin-top: 0.25rem; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.72rem; font-weight: 700; color: var(--amber-primary); letter-spacing: 0.04em;">FILTER IN-PERSON INTERVENTION:</span>
+      <select id="selectInPersonProgram" onchange="onInPersonProgramSelect(this.value)" style="padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--amber-border); font-size: 0.78rem; font-weight: 600; color: var(--text-main); background: #FFFFFF; outline: none; cursor: pointer; max-width: 480px;">
+        <option value="ALL_INPERSON">All In-Person Interventions (68,846 verified)</option>
+        <option value="GEN_PED">General Pedagogy (BTT, AY 2023-24: 6,541 verified)</option>
+        <option value="SUBJECT_PED">Subject Pedagogy (Maths/Sci/SSt, AY 2024-25: 41,883 verified)</option>
+        <option value="CRO_SRG">CRO SRG Leadership Trainers (Batch 1-7, AY 2024-25: 263 trainers)</option>
+      </select>
+    </div>
+
     <!-- Active Slice Badges & Master Tab Navigation Row -->
     <div class="master-nav-row">
       <div class="active-slice-badges">
@@ -3805,6 +3816,28 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 
     <!-- TAB 3: IN-PERSON TRAINING & QUALITATIVE VOICES -->
     <div id="tab-inperson" class="tab-content">
+      <div class="kpi-mini-strip" id="inperson-kpi-strip">
+        <div class="kpi-mini-card" style="border-top: 3px solid var(--amber-primary);">
+          <div class="kpi-mini-label" id="inperson-kpi-label">Verified In-Person Participants</div>
+          <div class="kpi-mini-val" id="inperson-kpi-participants">68,846</div>
+          <div class="kpi-mini-sub" id="inperson-kpi-sub">General Pedagogy, Subject Pedagogy &amp; CRO SRG</div>
+        </div>
+        <div class="kpi-mini-card" style="border-top: 3px solid var(--blue-primary);">
+          <div class="kpi-mini-label">Survey &amp; Assessment Records</div>
+          <div class="kpi-mini-val" id="inperson-kpi-surveys">50,864</div>
+          <div class="kpi-mini-sub" id="inperson-kpi-surveys-sub">Verified participant feedback forms analyzed</div>
+        </div>
+        <div class="kpi-mini-card" style="border-top: 3px solid var(--emerald-primary);">
+          <div class="kpi-mini-label">Handbook &amp; Trainer Readiness</div>
+          <div class="kpi-mini-val" id="inperson-kpi-clarity">3.43 / 4.00</div>
+          <div class="kpi-mini-sub" id="inperson-kpi-clarity-sub">Trainer readiness rated 3.28 / 4.00 (82.0%)</div>
+        </div>
+        <div class="kpi-mini-card" style="border-top: 3px solid var(--rose-primary);">
+          <div class="kpi-mini-label">Hands-On Role-Play Rating</div>
+          <div class="kpi-mini-val" id="inperson-kpi-practice">1.37 / 4.00</div>
+          <div class="kpi-mini-sub">Critical gap in 100-teacher lecture halls</div>
+        </div>
+      </div>
       
     <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--amber-primary);">
       <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
@@ -9521,6 +9554,17 @@ Exact model predictions testing each concrete intervention across the state teac
       }
     }
 
+    // Toggle Nested In-Person Dropdown visibility
+    const nestedInp = document.getElementById('nestedInPersonContainer');
+    if (nestedInp) {
+      nestedInp.style.display = selectedIntervention === 'INPERSON' ? 'flex' : 'none';
+      if (selectedIntervention !== 'INPERSON') {
+        const inpSelect = document.getElementById('selectInPersonProgram');
+        if (inpSelect) inpSelect.value = 'ALL_INPERSON';
+        selectedInPersonKey = 'ALL_INPERSON';
+      }
+    }
+
     // 3. Update Sidebar Verification Buttons
     document.querySelectorAll('#masterVerSlicers .slicer-pill, #sideVerSlicers .slicer-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.slicerVer === selectedVerification);
@@ -9850,6 +9894,75 @@ Exact model predictions testing each concrete intervention across the state teac
     'COVID': { att: '0 (Pre-Launch)', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: 'N/A', csub: 'Digital-only period' },
     'POST_COVID': { att: '28,547', sub: 'Post-Covid peak across 11 monthly cluster rounds', clusters: '3,099', csub: '100% of 52 districts active' }
   };
+
+  let selectedInPersonKey = 'ALL_INPERSON';
+  const INPERSON_PROGRAM_SLICES = {
+    'ALL_INPERSON': {
+      badge: 'In-Person Workshops (All 3)',
+      label: 'Verified In-Person Participants',
+      val: '68,846',
+      sub: 'General Pedagogy (6,541), Subject Pedagogy (41,883) & CRO SRG (263)',
+      surveys: '50,864',
+      surveysSub: 'Verified participant feedback forms analyzed',
+      clarity: '3.43 / 4.00',
+      claritySub: 'Trainer readiness rated 3.28 / 4.00 (82.0%)'
+    },
+    'GEN_PED': {
+      badge: 'General Pedagogy (BTT 23-24)',
+      label: 'General Pedagogy (BTT) Teachers',
+      val: '6,541',
+      sub: 'Source: Gen Ped 23-24/Master file_BTT_MIS.xlsx (AY 2023-24)',
+      surveys: '6,562',
+      surveysSub: 'Total MIS training logs recorded across batches',
+      clarity: '3.35 / 4.00',
+      claritySub: 'Foundational classroom management & BTT alignment'
+    },
+    'SUBJECT_PED': {
+      badge: 'Subject Pedagogy (24-25)',
+      label: 'Subject Pedagogy Teachers',
+      val: '41,883',
+      sub: 'Source: Subject Training 24-25 (Maths, Science & Social Science)',
+      surveys: '50,864',
+      surveysSub: 'Subject Teacher Training (STT) feedback forms analyzed',
+      clarity: '3.43 / 4.00',
+      claritySub: 'Trainer readiness rated 3.28 / 4.00; practice 1.37 / 4.00'
+    },
+    'CRO_SRG': {
+      badge: 'CRO SRG Trainers (24-25)',
+      label: 'CRO SRG Leadership Trainers',
+      val: '263',
+      sub: 'Source: CRO SRG 24-25/CRO_SRG Training_Batch 1to7_ Assessment status.xlsx',
+      surveys: '263',
+      surveysSub: 'Batch 1 to 7 assessment status records',
+      clarity: '3.60 / 4.00',
+      claritySub: 'State & Cluster Resource Group leadership cadre'
+    }
+  };
+
+  function onInPersonProgramSelect(key) {
+    selectedInPersonKey = key || 'ALL_INPERSON';
+    const info = INPERSON_PROGRAM_SLICES[selectedInPersonKey] || INPERSON_PROGRAM_SLICES['ALL_INPERSON'];
+    const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    setTxt('inperson-kpi-label', info.label);
+    setTxt('inperson-kpi-participants', info.val);
+    setTxt('inperson-kpi-sub', info.sub);
+    setTxt('inperson-kpi-surveys', info.surveys);
+    setTxt('inperson-kpi-surveys-sub', info.surveysSub);
+    setTxt('inperson-kpi-clarity', info.clarity);
+    setTxt('inperson-kpi-clarity-sub', info.claritySub);
+
+    const badgeInv = document.getElementById('badgeSliceInv');
+    if (badgeInv) badgeInv.textContent = 'Program: ' + info.badge;
+
+    const strip = document.getElementById('inperson-kpi-strip');
+    if (strip && typeof gsap !== 'undefined') {
+      if (typeof prefersReducedMotion === 'function' && prefersReducedMotion()) {
+        gsap.fromTo(strip, { opacity: 0.7 }, { opacity: 1, duration: 0.12 });
+      } else {
+        gsap.fromTo(strip.children, { opacity: 0.4, y: 6 }, { opacity: 1, y: 0, duration: 0.24, stagger: 0.04, ease: 'power2.out' });
+      }
+    }
+  }
 
   function updateInterventionTabKpis(yr, era, ver) {
     let key = yr;
