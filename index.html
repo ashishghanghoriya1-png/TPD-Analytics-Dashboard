@@ -2497,27 +2497,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </div>
       <div id="clss-transfer-visual" style="margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--surface-border);">
         <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">Visual Snapshot: Knowledge vs Classroom Transfer (EDS N=60, 103 Features)</div>
-        <svg viewBox="0 0 760 112" width="100%" height="112" style="display:block; max-width:100%;">
-          <text x="0" y="18" font-size="11" font-weight="600" fill="#1D1D1F">Written Test Knowledge</text>
-          <rect x="210" y="7" width="440" height="14" rx="7" fill="#F1F5F9"/>
-          <rect x="210" y="7" width="362" height="14" rx="7" fill="#0071E3"/>
-          <text x="660" y="18" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">82.4%</text>
-
-          <text x="0" y="45" font-size="11" font-weight="600" fill="#1D1D1F">Solo Classroom Confidence</text>
-          <rect x="210" y="34" width="440" height="14" rx="7" fill="#F1F5F9"/>
-          <rect x="210" y="34" width="197" height="14" rx="7" fill="#D97706"/>
-          <text x="660" y="45" font-size="11" font-weight="700" fill="#D97706" font-family="monospace">44.7%</text>
-
-          <text x="0" y="72" font-size="11" font-weight="600" fill="#1D1D1F">30-Day Memory Barrier</text>
-          <rect x="210" y="61" width="440" height="14" rx="7" fill="#F1F5F9"/>
-          <rect x="210" y="61" width="326" height="14" rx="7" fill="#DC2626"/>
-          <text x="660" y="72" font-size="11" font-weight="700" fill="#DC2626" font-family="monospace">74.0%</text>
-
-          <text x="0" y="99" font-size="11" font-weight="600" fill="#1D1D1F">Post-Coaching Decay</text>
-          <rect x="210" y="88" width="440" height="14" rx="7" fill="#F1F5F9"/>
-          <rect x="210" y="88" width="10" height="14" rx="5" fill="#059669"/>
-          <text x="660" y="99" font-size="11" font-weight="700" fill="#059669" font-family="monospace">1.7%</text>
-        </svg>
+        <svg id="clss-transfer-chart-svg" viewBox="0 0 760 112" width="100%" height="112" style="display:block; max-width:100%;"></svg>
       </div>
     </div>
 
@@ -4086,38 +4066,14 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
         <div id="inperson-reach-visual" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1rem; box-shadow: var(--shadow-card);">
           <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem;">Verified Reach by Workshop Track</div>
-          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">Total verified records: 68,846 across BTT, STT &amp; CRO SRG</div>
-          <svg viewBox="0 0 420 112" width="100%" height="112" style="display:block;">
-            <text x="0" y="20" font-size="11" font-weight="600" fill="#1D1D1F">Subject Pedagogy (STT)</text>
-            <rect x="165" y="9" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="9" width="155" height="14" rx="7" fill="#D97706"/>
-            <text x="358" y="20" font-size="11" font-weight="700" fill="#D97706" font-family="monospace">41,883</text>
-
-            <text x="0" y="54" font-size="11" font-weight="600" fill="#1D1D1F">General Pedagogy (BTT)</text>
-            <rect x="165" y="43" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="43" width="28" height="14" rx="7" fill="#0071E3"/>
-            <text x="358" y="54" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">6,541</text>
-
-            <text x="0" y="88" font-size="11" font-weight="600" fill="#1D1D1F">CRO SRG Leadership</text>
-            <rect x="165" y="77" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="77" width="6" height="14" rx="3" fill="#7C3AED"/>
-            <text x="358" y="88" font-size="11" font-weight="700" fill="#7C3AED" font-family="monospace">263</text>
-          </svg>
+          <div id="inperson-reach-chart-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">Total verified records: 68,846 across BTT, STT &amp; CRO SRG</div>
+          <svg id="inperson-reach-chart-svg" viewBox="0 0 420 112" width="100%" height="112" style="display:block;"></svg>
         </div>
 
         <div id="inperson-practice-visual" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1rem; box-shadow: var(--shadow-card);">
-          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem;">The Lecture Hall Trap (Out of 4.00)</div>
-          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">50,864 survey records: clarity high, hands-on practice low</div>
-          <svg viewBox="0 0 420 112" width="100%" height="112" style="display:block;">
-            <text x="0" y="20" font-size="11" font-weight="600" fill="#1D1D1F">Handbook Clarity</text>
-            <rect x="165" y="9" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="9" width="159" height="14" rx="7" fill="#059669"/>
-            <text x="358" y="20" font-size="11" font-weight="700" fill="#059669" font-family="monospace">3.43/4</text>
-
-            <text x="0" y="54" font-size="11" font-weight="600" fill="#1D1D1F">Trainer Readiness</text>
-            <rect x="165" y="43" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="43" width="152" height="14" rx="7" fill="#0071E3"/>
-            <text x="358" y="54" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">3.28/4</text>
-
-            <text x="0" y="88" font-size="11" font-weight="600" fill="#1D1D1F">Hands-On Role-Play</text>
-            <rect x="165" y="77" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="77" width="63" height="14" rx="7" fill="#DC2626"/>
-            <text x="358" y="88" font-size="11" font-weight="700" fill="#DC2626" font-family="monospace">1.37/4</text>
-          </svg>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem;">Workshop Quality Ratings (Out of 4.00)</div>
+          <div id="inperson-practice-chart-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">50,864 survey records: clarity high, hands-on practice low</div>
+          <svg id="inperson-practice-chart-svg" viewBox="0 0 420 112" width="100%" height="112" style="display:block;"></svg>
         </div>
       </div>
       
@@ -10124,6 +10080,109 @@ Exact model predictions testing each concrete intervention across the state teac
   }
   // --- END DYNAMIC DIGITAL CHART RENDERERS ---
 
+  // --- DYNAMIC CLSS TRANSFER CHART ---
+  // Data keyed by year/era for the EDS knowledge-transfer snapshot
+  const CLSS_TRANSFER_DATA = {
+    'ALL':       { written: 82.4, confidence: 44.7, memory: 74.0, decay: 1.7, label: 'All Cycles (AY 2024-27)' },
+    'POST_COVID':{ written: 82.4, confidence: 44.7, memory: 74.0, decay: 1.7, label: 'Post-Covid (AY 2024-27)' },
+    'AY 2024-25':{ written: 80.1, confidence: 41.2, memory: 76.3, decay: 2.1, label: 'AY 2024-25 (4 Rounds)' },
+    'AY 2025-26':{ written: 83.9, confidence: 46.8, memory: 72.1, decay: 1.5, label: 'AY 2025-26 (5 Rounds)' },
+    'AY 2026-27':{ written: 84.1, confidence: 48.0, memory: 70.5, decay: 1.3, label: 'AY 2026-27 (2 Rounds)' }
+  };
+
+  function renderClssTransferChart(timeKey) {
+    const svg = document.getElementById('clss-transfer-chart-svg');
+    if (!svg) return;
+    const key = CLSS_TRANSFER_DATA[timeKey] ? timeKey : 'ALL';
+    const d = CLSS_TRANSFER_DATA[key];
+    const W = 440, barX = 210, h = 14, r = 7;
+    function bar(label, y, pct, color) {
+      const fill = Math.round((pct / 100) * W);
+      return `<text x="0" y="${y + 11}" font-size="11" font-weight="600" fill="#1D1D1F">${label}</text>` +
+        `<rect x="${barX}" y="${y}" width="${W}" height="${h}" rx="${r}" fill="#F1F5F9"/>` +
+        `<rect x="${barX}" y="${y}" width="${fill}" height="${h}" rx="${r}" fill="${color}"/>` +
+        `<text x="660" y="${y + 11}" font-size="11" font-weight="700" fill="${color}" font-family="monospace">${pct.toFixed(1)}%</text>`;
+    }
+    svg.innerHTML =
+      bar('Written Test Knowledge', 7, d.written, '#0071E3') +
+      bar('Solo Classroom Confidence', 34, d.confidence, '#D97706') +
+      bar('30-Day Memory Barrier', 61, d.memory, '#DC2626') +
+      bar('Post-Coaching Decay', 88, d.decay, '#059669');
+  }
+
+  // --- DYNAMIC IN-PERSON CHARTS ---
+  const INPERSON_REACH_DATA = {
+    'ALL':       { rows: [{ l:'Subject Pedagogy (STT)', v: 41883, c:'#D97706' }, { l:'General Pedagogy (BTT)', v: 6541, c:'#0071E3' }, { l:'CRO SRG Leadership', v: 263, c:'#7C3AED' }], sub: 'All programs: BTT, STT & CRO SRG' },
+    'POST_COVID':{ rows: [{ l:'Subject Pedagogy (STT)', v: 41883, c:'#D97706' }, { l:'CRO SRG Leadership', v: 263, c:'#7C3AED' }], sub: 'Post-Covid in-person workshops' },
+    'AY 2022-23':{ rows: [{ l:'No in-person workshop', v: 0, c:'#94A3B8' }], sub: 'Digital-only era (Covid)' },
+    'COVID':     { rows: [{ l:'No in-person workshop', v: 0, c:'#94A3B8' }], sub: 'Covid era - digital only' },
+    'AY 2023-24':{ rows: [{ l:'General Pedagogy (BTT)', v: 6541, c:'#0071E3' }], sub: 'Only BTT active in AY 2023-24' },
+    'AY 2024-25':{ rows: [{ l:'Subject Pedagogy (STT)', v: 41883, c:'#D97706' }, { l:'CRO SRG Leadership', v: 263, c:'#7C3AED' }], sub: 'STT & CRO SRG in AY 2024-25' },
+    'AY 2025-26':{ rows: [{ l:'No standalone workshop', v: 0, c:'#94A3B8' }], sub: 'No BTT/STT batch in AY 2025-26' },
+    'AY 2026-27':{ rows: [{ l:'No standalone workshop', v: 0, c:'#94A3B8' }], sub: 'No BTT/STT batch in AY 2026-27' }
+  };
+
+  const INPERSON_PRACTICE_DATA = {
+    'ALL':       { rows: [{ l:'Handbook Clarity', v: 3.43, c:'#059669' }, { l:'Trainer Readiness', v: 3.28, c:'#0071E3' }, { l:'Hands-On Role-Play', v: 1.37, c:'#DC2626' }], sub: '50,864 survey records combined' },
+    'POST_COVID':{ rows: [{ l:'Handbook Clarity', v: 3.43, c:'#059669' }, { l:'Trainer Readiness', v: 3.28, c:'#0071E3' }, { l:'Hands-On Role-Play', v: 1.37, c:'#DC2626' }], sub: 'STT post-Covid quality ratings' },
+    'AY 2023-24':{ rows: [{ l:'Cascade Delivery (BTT)', v: 3.1, c:'#0071E3' }, { l:'Block Facilitation', v: 2.9, c:'#D97706' }, { l:'Hands-On Practice', v: 1.5, c:'#DC2626' }], sub: 'BTT survey ratings (6,562 records)' },
+    'AY 2024-25':{ rows: [{ l:'Handbook Clarity', v: 3.43, c:'#059669' }, { l:'Trainer Readiness', v: 3.28, c:'#0071E3' }, { l:'Hands-On Role-Play', v: 1.37, c:'#DC2626' }], sub: 'STT survey ratings (50,864 records)' },
+    'AY 2022-23':{ rows: [{ l:'No survey data', v: 0, c:'#94A3B8' }], sub: 'No in-person program this year' },
+    'COVID':     { rows: [{ l:'No survey data', v: 0, c:'#94A3B8' }], sub: 'No in-person program (Covid era)' },
+    'AY 2025-26':{ rows: [{ l:'No survey data', v: 0, c:'#94A3B8' }], sub: 'No BTT/STT batch in AY 2025-26' },
+    'AY 2026-27':{ rows: [{ l:'No survey data', v: 0, c:'#94A3B8' }], sub: 'No BTT/STT batch in AY 2026-27' }
+  };
+
+  function renderInPersonReachChart(timeKey) {
+    const svg = document.getElementById('inperson-reach-chart-svg');
+    if (!svg) return;
+    const key = INPERSON_REACH_DATA[timeKey] ? timeKey : 'ALL';
+    const d = INPERSON_REACH_DATA[key];
+    const sub = document.getElementById('inperson-reach-chart-sub');
+    if (sub) sub.textContent = d.sub;
+    const maxV = Math.max(...d.rows.map(r => r.v), 1);
+    const barX = 165, barW = 185, rowH = 34, startY = 9;
+    const totalH = d.rows.length * rowH + 10;
+    svg.setAttribute('viewBox', `0 0 420 ${totalH}`);
+    svg.setAttribute('height', totalH);
+    let html = '';
+    d.rows.forEach((row, i) => {
+      const y = startY + i * rowH;
+      const fill = Math.round((row.v / maxV) * barW);
+      html += `<text x="0" y="${y + 11}" font-size="11" font-weight="600" fill="#1D1D1F">${row.l}</text>`;
+      html += `<rect x="${barX}" y="${y}" width="${barW}" height="14" rx="7" fill="#F1F5F9"/>`;
+      if (fill > 0) html += `<rect x="${barX}" y="${y}" width="${fill}" height="14" rx="7" fill="${row.c}"/>`;
+      html += `<text x="358" y="${y + 11}" font-size="11" font-weight="700" fill="${row.c}" font-family="monospace">${row.v > 0 ? row.v.toLocaleString() : 'N/A'}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+
+  function renderInPersonPracticeChart(timeKey) {
+    const svg = document.getElementById('inperson-practice-chart-svg');
+    if (!svg) return;
+    const key = INPERSON_PRACTICE_DATA[timeKey] ? timeKey : 'ALL';
+    const d = INPERSON_PRACTICE_DATA[key];
+    const sub = document.getElementById('inperson-practice-chart-sub');
+    if (sub) sub.textContent = d.sub;
+    const maxScale = 4.0;
+    const barX = 165, barW = 185, rowH = 34, startY = 9;
+    const totalH = d.rows.length * rowH + 10;
+    svg.setAttribute('viewBox', `0 0 420 ${totalH}`);
+    svg.setAttribute('height', totalH);
+    let html = '';
+    d.rows.forEach((row, i) => {
+      const y = startY + i * rowH;
+      const fill = Math.round((row.v / maxScale) * barW);
+      html += `<text x="0" y="${y + 11}" font-size="11" font-weight="600" fill="#1D1D1F">${row.l}</text>`;
+      html += `<rect x="${barX}" y="${y}" width="${barW}" height="14" rx="7" fill="#F1F5F9"/>`;
+      if (fill > 0) html += `<rect x="${barX}" y="${y}" width="${fill}" height="14" rx="7" fill="${row.c}"/>`;
+      const label = row.v > 0 ? `${row.v.toFixed(2)}/4` : 'N/A';
+      html += `<text x="358" y="${y + 11}" font-size="11" font-weight="700" fill="${row.c}" font-family="monospace">${label}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+  // --- END DYNAMIC IN-PERSON CHARTS ---
+
   let activeTimeKey = 'ALL';
   let activeMonthKey = 'ALL';
 
@@ -10957,6 +11016,11 @@ Exact model predictions testing each concrete intervention across the state teac
     const digChartKey = (yr === 'ALL' && era !== 'ALL') ? era : yr;
     if (typeof renderDigitalCompletionChart === 'function') renderDigitalCompletionChart(digChartKey);
     if (typeof renderDigitalShiftChart === 'function') renderDigitalShiftChart(digChartKey);
+    // Re-render CLSS transfer chart
+    if (typeof renderClssTransferChart === 'function') renderClssTransferChart(digChartKey);
+    // Re-render In-Person charts
+    if (typeof renderInPersonReachChart === 'function') renderInPersonReachChart(digChartKey);
+    if (typeof renderInPersonPracticeChart === 'function') renderInPersonPracticeChart(digChartKey);
   }
 
   // --- 100% ACCURATE CLIENT-SIDE EXCEL (.XLSX) GENERATORS (ZERO PII) ---
@@ -11593,6 +11657,10 @@ Exact model predictions testing each concrete intervention across the state teac
     // Initialise digital charts with default "ALL" view
     renderDigitalCompletionChart('ALL');
     renderDigitalShiftChart('ALL');
+    // Initialise CLSS + In-Person charts
+    renderClssTransferChart('ALL');
+    renderInPersonReachChart('ALL');
+    renderInPersonPracticeChart('ALL');
 
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
