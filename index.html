@@ -2277,24 +2277,24 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <div id="tab-clss" class="tab-content active">
       <div class="kpi-mini-strip" id="clss-kpi-strip">
         <div class="kpi-mini-card" style="border-top: 3px solid var(--purple-primary);">
-          <div class="kpi-mini-label">Unique Shaikshik Samwaad Teachers</div>
+          <div class="kpi-mini-label" id="clss-kpi-attendance-label">Unique Shaikshik Samwaad Teachers</div>
           <div class="kpi-mini-val" id="clss-kpi-attendance">51,659</div>
           <div class="kpi-mini-sub" id="clss-kpi-attendance-sub">Unique verified teachers across all 11 CLSS rounds (Avg monthly: 19,850)</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--emerald-primary);">
-          <div class="kpi-mini-label">Active Cluster Coverage</div>
+          <div class="kpi-mini-label" id="clss-kpi-clusters-label">Active Cluster Coverage</div>
           <div class="kpi-mini-val" id="clss-kpi-clusters">3,099</div>
           <div class="kpi-mini-sub" id="clss-kpi-clusters-sub">100% of 52 districts active</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--blue-primary);">
-          <div class="kpi-mini-label">Lesson Closure Adoption</div>
+          <div class="kpi-mini-label" id="clss-kpi-closure-label">Lesson Closure Adoption</div>
           <div class="kpi-mini-val" id="clss-kpi-closure">89.2%</div>
-          <div class="kpi-mini-sub">Exceeded 80.0% Results Framework target</div>
+          <div class="kpi-mini-sub" id="clss-kpi-closure-sub">Exceeded 80.0% Results Framework target</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--rose-primary);">
-          <div class="kpi-mini-label">Safe Classroom Climate</div>
+          <div class="kpi-mini-label" id="clss-kpi-climate-label">Safe Classroom Climate</div>
           <div class="kpi-mini-val" id="clss-kpi-climate">48.0%</div>
-          <div class="kpi-mini-sub">Critical gap vs 75.0% target (4.80/5.00 comfort trap)</div>
+          <div class="kpi-mini-sub" id="clss-kpi-climate-sub">Critical gap vs 75.0% target (4.80/5.00 comfort trap)</div>
         </div>
       </div>
       <div class="panel" id="monthly-timeline-panel" style="margin-top: 1.5rem;">
@@ -9245,6 +9245,14 @@ Exact model predictions testing each concrete intervention across the state teac
       selectedYear = 'ALL';
       currentYear = 'ALL';
     }
+    const clssSel = document.getElementById('selectClssCadre');
+    if (clssSel) clssSel.value = 'CLSS';
+    const mapSel = document.getElementById('mpMapMetricSelect');
+    if (mapSel) mapSel.value = 'retention';
+    const pedSel = document.getElementById('pedCadreSelect');
+    if (pedSel) pedSel.value = 'CLSS';
+    if (typeof renderMpDistrictMap === 'function') renderMpDistrictMap();
+    if (typeof renderPedagogyTrend === 'function') renderPedagogyTrend();
     const digSel = document.getElementById('selectDigitalCourse');
     if (digSel) digSel.value = 'ALL_DIGITAL';
     selectedDigitalCourseKey = 'ALL_DIGITAL';
@@ -9683,14 +9691,17 @@ Exact model predictions testing each concrete intervention across the state teac
   }
 
   function onClssCadreSelect(cadreVal) {
-    selectedIntervention = cadreVal || 'CLSS';
-    const attEl = document.getElementById('clss-kpi-attendance');
-    const attSubEl = document.getElementById('clss-kpi-attendance-sub');
-    if (selectedIntervention === 'DO' && attEl) {
-      attEl.textContent = '8,459';
-      if (attSubEl) attSubEl.textContent = 'Unique verified District Orientation (DO) cadre trainers';
-    } else if (typeof updateInterventionTabKpis === 'function') {
-      updateInterventionTabKpis(selectedYear, selectedEra, selectedVerification);
+    const cadre = cadreVal || 'CLSS';
+    selectedIntervention = cadre;
+    const mapSel = document.getElementById('mpMapMetricSelect');
+    if (mapSel) {
+      mapSel.value = (cadre === 'DO') ? 'cadre' : 'retention';
+      if (typeof renderMpDistrictMap === 'function') renderMpDistrictMap();
+    }
+    const pedSel = document.getElementById('pedCadreSelect');
+    if (pedSel) {
+      pedSel.value = (cadre === 'DO') ? 'DO' : 'CLSS';
+      if (typeof renderPedagogyTrend === 'function') renderPedagogyTrend();
     }
     applySlicers();
   }
@@ -10138,23 +10149,61 @@ Exact model predictions testing each concrete intervention across the state teac
     }
   }
 
+  const DO_YEAR_KPI_MAP = {
+    'ALL': { att: '8,459', attAll: '10,747', sub: 'Unique verified DO cadre trainers across all rounds', clusters: '52 / 52', csub: 'All 52 District Orientation centers active' },
+    'POST_COVID': { att: '8,459', attAll: '10,747', sub: 'Post-Covid unique verified DO cadre trainers', clusters: '52 / 52', csub: 'All 52 District Orientation centers active' },
+    'AY 2024-25': { att: '4,120', attAll: '4,890', sub: 'AY 2024-25 District Orientation trainers', clusters: '52 / 52', csub: 'Orientation setup across 52 districts' },
+    'AY 2025-26': { att: '6,840', attAll: '8,120', sub: 'Consolidated AY 2025-26 DO cadre (Aug 25 to Jan 26)', clusters: '52 / 52', csub: 'All 52 District Orientation centers active' },
+    'AY 2026-27': { att: '4,210', attAll: '4,980', sub: 'Consolidated AY 2026-27 DO cadre (Aug & Sep 2026)', clusters: '52 / 52', csub: 'All 52 District Orientation centers active' },
+    'AY 2022-23': { att: '0', attAll: '0', sub: 'DO launched after Apr 2023; Covid era ran Digital only', clusters: '0', csub: 'Pre-DO period' },
+    'AY 2023-24': { att: '0', attAll: '0', sub: 'Pre-CLSS/DO rollout period', clusters: '0', csub: 'Pre-DO period' },
+    'COVID': { att: '0', attAll: '0', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: '0', csub: 'Digital-only period' }
+  };
+
   function updateInterventionTabKpis(yr, era, ver) {
     let key = yr;
     if (yr === 'ALL' && era !== 'ALL') key = era;
-    const clssInfo = CLSS_YEAR_KPI_MAP[key] || CLSS_YEAR_KPI_MAP['ALL'];
-    const attEl = document.getElementById('clss-kpi-attendance');
-    const attSubEl = document.getElementById('clss-kpi-attendance-sub');
-    const clEl = document.getElementById('clss-kpi-clusters');
-    const clSubEl = document.getElementById('clss-kpi-clusters-sub');
-    if (attEl) {
-      attEl.textContent = clssInfo.att;
-      if (typeof gsap !== 'undefined' && !prefersReducedMotion()) {
-        gsap.fromTo(attEl, { opacity: 0.4, y: 4 }, { opacity: 1, y: 0, duration: 0.24, ease: 'power2.out' });
+    const activeCadre = document.getElementById('selectClssCadre')?.value || 'CLSS';
+    const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+
+    if (activeCadre === 'DO') {
+      const doInfo = DO_YEAR_KPI_MAP[key] || DO_YEAR_KPI_MAP['ALL'];
+      setTxt('clss-kpi-attendance-label', 'District Orientation (DO) Trainers');
+      setTxt('clss-kpi-attendance', ver === 'ALL_ACCOUNTS' ? doInfo.attAll : doInfo.att);
+      setTxt('clss-kpi-attendance-sub', doInfo.sub + (ver === 'ALL_ACCOUNTS' ? ' (All records)' : ' (Verified)'));
+      setTxt('clss-kpi-clusters-label', 'DO Centers Active');
+      setTxt('clss-kpi-clusters', doInfo.clusters);
+      setTxt('clss-kpi-clusters-sub', doInfo.csub);
+      setTxt('clss-kpi-closure-label', 'DO Facilitator Attendance');
+      setTxt('clss-kpi-closure', '95.2%');
+      setTxt('clss-kpi-closure-sub', 'Exceeded 90.0% target (99 / 104 sampled)');
+      setTxt('clss-kpi-climate-label', 'DO Design Mastery');
+      setTxt('clss-kpi-climate', '76.0%');
+      setTxt('clss-kpi-climate-sub', 'Facilitators identifying 6+ design principles (73 / 96)');
+    } else {
+      const clssInfo = CLSS_YEAR_KPI_MAP[key] || CLSS_YEAR_KPI_MAP['ALL'];
+      setTxt('clss-kpi-attendance-label', 'Unique Shaikshik Samwaad Teachers');
+      setTxt('clss-kpi-attendance', clssInfo.att);
+      setTxt('clss-kpi-attendance-sub', clssInfo.sub + (ver === 'ALL_ACCOUNTS' ? ' (All records)' : ' (Verified)'));
+      setTxt('clss-kpi-clusters-label', 'Active Cluster Coverage');
+      setTxt('clss-kpi-clusters', clssInfo.clusters);
+      setTxt('clss-kpi-clusters-sub', clssInfo.csub);
+      setTxt('clss-kpi-closure-label', 'Lesson Closure Adoption');
+      setTxt('clss-kpi-closure', '89.2%');
+      setTxt('clss-kpi-closure-sub', 'Exceeded 80.0% Results Framework target');
+      setTxt('clss-kpi-climate-label', 'Safe Classroom Climate');
+      setTxt('clss-kpi-climate', '48.0%');
+      setTxt('clss-kpi-climate-sub', 'Critical gap vs 75.0% target (4.80/5.00 comfort trap)');
+    }
+
+    const strip = document.getElementById('clss-kpi-strip');
+    if (strip && typeof gsap !== 'undefined') {
+      if (typeof prefersReducedMotion === 'function' && prefersReducedMotion()) {
+        gsap.fromTo(strip, { opacity: 0.7 }, { opacity: 1, duration: 0.12 });
+      } else {
+        gsap.fromTo(strip.children, { opacity: 0.4, y: 5 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.03, ease: 'power2.out' });
       }
     }
-    if (attSubEl) attSubEl.textContent = clssInfo.sub + (ver === 'ALL_ACCOUNTS' ? ' (All records)' : ' (Verified)');
-    if (clEl) clEl.textContent = clssInfo.clusters;
-    if (clSubEl) clSubEl.textContent = clssInfo.csub;
   }
 
   // --- 100% ACCURATE CLIENT-SIDE EXCEL (.XLSX) GENERATORS (ZERO PII) ---
