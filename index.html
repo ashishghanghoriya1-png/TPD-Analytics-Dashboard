@@ -3531,79 +3531,14 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
   <div id="digital-completion-visual" style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem;">
     <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Course Completion Rate (%)</div>
-    <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Verified DIKSHA completions across major courses</div>
-    <svg viewBox="0 0 420 190" width="100%" height="190" style="display:block;">
-      <text x="0" y="16" font-size="10.5" fill="#1D1D1F">Mission Ankur C1</text>
-      <rect x="125" y="6" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="6" width="197" height="12" rx="6" fill="#0071E3"/>
-      <text x="364" y="16" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">85.6%</text>
-
-      <text x="0" y="39" font-size="10.5" fill="#1D1D1F">Mission Ankur C2</text>
-      <rect x="125" y="29" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="29" width="186" height="12" rx="6" fill="#0071E3"/>
-      <text x="364" y="39" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">81.0%</text>
-
-      <text x="0" y="62" font-size="10.5" fill="#1D1D1F">Mission Ankur C3</text>
-      <rect x="125" y="52" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="52" width="180" height="12" rx="6" fill="#0071E3"/>
-      <text x="364" y="62" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">78.2%</text>
-
-      <text x="0" y="85" font-size="10.5" fill="#1D1D1F">Mission Ankur C6</text>
-      <rect x="125" y="75" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="75" width="161" height="12" rx="6" fill="#0284C7"/>
-      <text x="364" y="85" font-size="10.5" font-weight="700" fill="#0284C7" font-family="monospace">70.0%</text>
-
-      <text x="0" y="108" font-size="10.5" fill="#1D1D1F">Mission Ankur C5</text>
-      <rect x="125" y="98" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="98" width="132" height="12" rx="6" fill="#0284C7"/>
-      <text x="364" y="108" font-size="10.5" font-weight="700" fill="#0284C7" font-family="monospace">57.6%</text>
-
-      <text x="0" y="131" font-size="10.5" fill="#1D1D1F">PSP Course 2</text>
-      <rect x="125" y="121" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="121" width="115" height="12" rx="6" fill="#7C3AED"/>
-      <text x="364" y="131" font-size="10.5" font-weight="700" fill="#7C3AED" font-family="monospace">50.2%</text>
-
-      <text x="0" y="154" font-size="10.5" fill="#1D1D1F">PSP Course 1</text>
-      <rect x="125" y="144" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="144" width="109" height="12" rx="6" fill="#7C3AED"/>
-      <text x="364" y="154" font-size="10.5" font-weight="700" fill="#7C3AED" font-family="monospace">47.6%</text>
-
-      <text x="0" y="177" font-size="10.5" fill="#1D1D1F">Mission Ankur C4</text>
-      <rect x="125" y="167" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="167" width="49" height="12" rx="6" fill="#DC2626"/>
-      <text x="364" y="177" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">21.2%</text>
-    </svg>
+    <div id="dig-completion-chart-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Verified DIKSHA completions across major courses</div>
+    <svg id="dig-completion-chart-svg" viewBox="0 0 420 190" width="100%" height="190" style="display:block;"></svg>
   </div>
 
   <div id="digital-shift-visual" style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem;">
     <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Pre-to-Post Knowledge Shift</div>
-    <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Paired Pre-Test vs Post-Test score change (%)</div>
-    <svg viewBox="0 0 420 190" width="100%" height="190" style="display:block;">
-      <line x1="220" y1="4" x2="220" y2="184" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3,3"/>
-      <text x="0" y="16" font-size="10.5" fill="#1D1D1F">PSP Course 2</text>
-      <rect x="220" y="6" width="125" height="12" rx="5" fill="#059669"/>
-      <text x="352" y="16" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+20.9%</text>
-
-      <text x="0" y="39" font-size="10.5" fill="#1D1D1F">Mission Ankur C3</text>
-      <rect x="220" y="29" width="122" height="12" rx="5" fill="#059669"/>
-      <text x="352" y="39" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+20.3%</text>
-
-      <text x="0" y="62" font-size="10.5" fill="#1D1D1F">Mission Ankur C2</text>
-      <rect x="220" y="52" width="98" height="12" rx="5" fill="#059669"/>
-      <text x="352" y="62" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+16.4%</text>
-
-      <text x="0" y="85" font-size="10.5" fill="#1D1D1F">Mission Ankur C5</text>
-      <rect x="220" y="75" width="65" height="12" rx="5" fill="#10B981"/>
-      <text x="352" y="85" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+10.9%</text>
-
-      <text x="0" y="108" font-size="10.5" fill="#1D1D1F">PSP Course 3</text>
-      <rect x="220" y="98" width="65" height="12" rx="5" fill="#10B981"/>
-      <text x="352" y="108" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+10.9%</text>
-
-      <text x="0" y="131" font-size="10.5" fill="#1D1D1F">Mission Ankur C6</text>
-      <rect x="220" y="121" width="53" height="12" rx="5" fill="#34D399"/>
-      <text x="352" y="131" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+8.9%</text>
-
-      <text x="0" y="154" font-size="10.5" fill="#1D1D1F">Mission Ankur C1</text>
-      <rect x="137" y="144" width="83" height="12" rx="5" fill="#DC2626"/>
-      <text x="352" y="154" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">-13.9%</text>
-
-      <text x="0" y="177" font-size="10.5" fill="#1D1D1F">PSP Course 1</text>
-      <rect x="122" y="167" width="98" height="12" rx="5" fill="#DC2626"/>
-      <text x="352" y="177" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">-16.3%</text>
-    </svg>
+    <div id="dig-shift-chart-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Paired Pre-Test vs Post-Test score change (%)</div>
+    <svg id="dig-shift-chart-svg" viewBox="0 0 420 190" width="100%" height="190" style="display:block;"></svg>
   </div>
 </div>
 <!-- Thematic Assessment Score Table -->
@@ -10100,6 +10035,95 @@ Exact model predictions testing each concrete intervention across the state teac
   }
 
 
+  // --- DYNAMIC DIGITAL CHART RENDERERS ---
+  // Maps each year/era key to the course keys that belong to it
+  const YEAR_TO_COURSES = {
+    'ALL':       ['MA_C1','MA_C2','MA_C3','MA_C6','MA_C5','PSP_2','PSP_1','MA_C4'],
+    'POST_COVID':['MA_C2','MA_C3','MA_C5','MA_C6','PSP_3','PSP_4','PSP_5','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6','NAS','PLC'],
+    'COVID':     ['MA_C1','PSP_1','PSP_2'],
+    'AY 2022-23':['MA_C1','PSP_1','PSP_2'],
+    'AY 2023-24':['MA_C2','MA_C3','PSP_3'],
+    'AY 2024-25':['MA_C4','MA_C5','MA_C6','PSP_4','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6'],
+    'AY 2025-26':['PLC'],
+    'AY 2026-27':['NAS','PSP_5']
+  };
+
+  function renderDigitalCompletionChart(timeKey) {
+    const svg = document.getElementById('dig-completion-chart-svg');
+    if (!svg) return;
+    const key = timeKey || 'ALL';
+    const courseKeys = YEAR_TO_COURSES[key] || YEAR_TO_COURSES['ALL'];
+    // Build data array: get comp rate, sort desc
+    const data = courseKeys.map(k => {
+      const c = DIGITAL_COURSE_SLICES[k];
+      if (!c) return null;
+      const pct = parseFloat(c.compRate);
+      return { label: c.name.split(':')[0].replace('Mission Ankur ', 'MA ').replace('Course ', 'C').replace('Professional Learning Communities (PLC) Digital Course', 'PLC').replace('National Achievement Survey (NAS) Competency Course', 'NAS'), pct, raw: c.compRate };
+    }).filter(Boolean);
+    data.sort((a, b) => b.pct - a.pct);
+    // Limit to 8 rows to fit viewBox
+    const rows = data.slice(0, 8);
+    const rowH = 23, startY = 6, barX = 125, barW = 230;
+    const totalH = rows.length * rowH + 4;
+    svg.setAttribute('viewBox', `0 0 420 ${totalH}`);
+    svg.setAttribute('height', totalH);
+    // Update subtitle
+    const sub = document.getElementById('dig-completion-chart-sub');
+    if (sub) sub.textContent = key === 'ALL' ? 'All courses (sorted by completion rate)' : `Courses active in ${key} (sorted by completion rate)`;
+    let html = '';
+    rows.forEach((row, i) => {
+      const y = startY + i * rowH;
+      const fillW = Math.round((row.pct / 100) * barW);
+      const color = row.pct >= 75 ? '#0071E3' : row.pct >= 50 ? '#0284C7' : row.pct >= 35 ? '#7C3AED' : '#DC2626';
+      html += `<text x="0" y="${y + 10}" font-size="10" fill="#1D1D1F">${row.label}</text>`;
+      html += `<rect x="${barX}" y="${y}" width="${barW}" height="12" rx="6" fill="#E2E8F0"/>`;
+      html += `<rect x="${barX}" y="${y}" width="${fillW}" height="12" rx="6" fill="${color}"/>`;
+      html += `<text x="364" y="${y + 10}" font-size="10" font-weight="700" fill="${color}" font-family="monospace">${row.raw}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+
+  function renderDigitalShiftChart(timeKey) {
+    const svg = document.getElementById('dig-shift-chart-svg');
+    if (!svg) return;
+    const key = timeKey || 'ALL';
+    const courseKeys = YEAR_TO_COURSES[key] || YEAR_TO_COURSES['ALL'];
+    // Build data array: only courses with numeric gain
+    const data = courseKeys.map(k => {
+      const c = DIGITAL_COURSE_SLICES[k];
+      if (!c) return null;
+      const gain = parseFloat(c.gain);
+      if (isNaN(gain)) return null;
+      return { label: c.name.split(':')[0].replace('Mission Ankur ', 'MA ').replace('Course ', 'C').replace('Professional Learning Communities (PLC) Digital Course', 'PLC').replace('National Achievement Survey (NAS) Competency Course', 'NAS'), gain, raw: c.gain };
+    }).filter(Boolean);
+    data.sort((a, b) => b.gain - a.gain);
+    const rows = data.slice(0, 8);
+    if (rows.length === 0) {
+      svg.innerHTML = `<text x="10" y="50" font-size="11" fill="#6E6E73">No pre/post data for this period</text>`;
+      return;
+    }
+    const rowH = 23, startY = 6, midX = 220, maxBar = 130;
+    const maxGain = Math.max(...rows.map(r => Math.abs(r.gain)), 1);
+    const totalH = rows.length * rowH + 4;
+    svg.setAttribute('viewBox', `0 0 420 ${totalH}`);
+    svg.setAttribute('height', totalH);
+    const sub = document.getElementById('dig-shift-chart-sub');
+    if (sub) sub.textContent = key === 'ALL' ? 'Pre vs post knowledge shift (sorted best to worst)' : `Knowledge shift for courses in ${key}`;
+    let html = `<line x1="${midX}" y1="${startY}" x2="${midX}" y2="${totalH}" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3,3"/>`;
+    rows.forEach((row, i) => {
+      const y = startY + i * rowH;
+      const barLen = Math.round((Math.abs(row.gain) / maxGain) * maxBar);
+      const isPos = row.gain >= 0;
+      const color = isPos ? '#059669' : '#DC2626';
+      const barX = isPos ? midX : midX - barLen;
+      html += `<text x="0" y="${y + 10}" font-size="10" fill="#1D1D1F">${row.label}</text>`;
+      html += `<rect x="${barX}" y="${y}" width="${barLen}" height="12" rx="5" fill="${color}"/>`;
+      html += `<text x="358" y="${y + 10}" font-size="10" font-weight="700" fill="${color}" font-family="monospace">${row.raw}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+  // --- END DYNAMIC DIGITAL CHART RENDERERS ---
+
   let activeTimeKey = 'ALL';
   let activeMonthKey = 'ALL';
 
@@ -10928,6 +10952,11 @@ Exact model predictions testing each concrete intervention across the state teac
         gsap.fromTo(strip.children, { opacity: 0.4, y: 5 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.03, ease: 'power2.out' });
       }
     }
+
+    // Re-render digital charts based on the resolved year/era key
+    const digChartKey = (yr === 'ALL' && era !== 'ALL') ? era : yr;
+    if (typeof renderDigitalCompletionChart === 'function') renderDigitalCompletionChart(digChartKey);
+    if (typeof renderDigitalShiftChart === 'function') renderDigitalShiftChart(digChartKey);
   }
 
   // --- 100% ACCURATE CLIENT-SIDE EXCEL (.XLSX) GENERATORS (ZERO PII) ---
@@ -11561,6 +11590,9 @@ Exact model predictions testing each concrete intervention across the state teac
     syncChildSlicers();
     renderMacroSvg();
     renderDrilldown('ALL');
+    // Initialise digital charts with default "ALL" view
+    renderDigitalCompletionChart('ALL');
+    renderDigitalShiftChart('ALL');
 
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
