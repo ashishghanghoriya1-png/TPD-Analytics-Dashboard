@@ -10101,14 +10101,14 @@ Exact model predictions testing each concrete intervention across the state teac
 
   // Sync Top Master Slicer to Tab 1 (CLSS) KPIs so Year/Era/Status changes immediately reflect on Tab 1
   const CLSS_YEAR_KPI_MAP = {
-    'ALL': { att: '51,659', sub: 'Unique verified teachers across all 11 CLSS rounds (Avg monthly: 19,850)', clusters: '3,099', csub: '100% of 52 districts active' },
-    'AY 2022-23': { att: '0', sub: 'CLSS launched in AY 2024-25; AY 2022-23 ran Digital C1 only', clusters: '0', csub: 'Pre-CLSS period' },
-    'AY 2023-24': { att: '0', sub: 'DO & Pedagogy prep phase prior to state CLSS rollout', clusters: '0', csub: 'Pre-CLSS period' },
-    'AY 2024-25': { att: '52,871', sub: 'Consolidated AY 2024-25 participants (Peak Jan 2025: 28,547)', clusters: '3,099', csub: 'Sep, Oct, Dec 2024 & Jan 2025' },
-    'AY 2025-26': { att: '42,583', sub: 'Unique verified teachers in AY 2025-26 (Peak Aug 2025: 25,512)', clusters: '3,099', csub: 'Aug, Sep, Nov, Dec 2025 & Jan 2026' },
-    'AY 2026-27': { att: '33,607', sub: 'Unique verified teachers in AY 2026-27 (Peak Aug 2026: 23,785)', clusters: '3,099', csub: 'Aug & Sep 2026 active cycles' },
-    'COVID': { att: '0', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: '0', csub: 'Digital-only period' },
-    'POST_COVID': { att: '51,659', sub: 'Post-Covid unique verified teachers across all 11 CLSS rounds', clusters: '3,099', csub: '100% of 52 districts active' }
+    'ALL': { att: '51,659', sub: 'Unique verified teachers across all 11 CLSS rounds (Avg monthly: 19,850)', clusters: '3,099', csub: '100% of 52 districts active', c3lbl: 'Lesson Closure Adoption', c3: '89.2%', c3sub: 'Exceeded 80.0% Results Framework target', c4lbl: 'Safe Classroom Climate', c4: '48.0%', c4sub: 'Critical gap vs 75.0% target (4.80/5.00 comfort trap)' },
+    'AY 2022-23': { att: '0', sub: 'CLSS launched in AY 2024-25; AY 2022-23 ran Digital C1 only', clusters: '0', csub: 'Pre-CLSS period', c3lbl: 'Pedagogy Quiz Avg', c3: 'N/A', c3sub: 'No CLSS rounds in AY 2022-23', c4lbl: 'Classroom Alignment', c4: 'N/A', c4sub: 'No CLSS rounds in AY 2022-23' },
+    'AY 2023-24': { att: '0', sub: 'DO & Pedagogy prep phase prior to state CLSS rollout', clusters: '0', csub: 'Pre-CLSS period', c3lbl: 'Pedagogy Quiz Avg', c3: 'N/A', c3sub: 'No CLSS rounds in AY 2023-24', c4lbl: 'Classroom Alignment', c4: 'N/A', c4sub: 'No CLSS rounds in AY 2023-24' },
+    'AY 2024-25': { att: '52,871', sub: 'Consolidated AY 2024-25 participants (Peak Jan 2025: 28,547)', clusters: '3,099', csub: 'Sep, Oct, Dec 2024 & Jan 2025', c3lbl: 'AY 24-25 Pedagogy Score', c3: '86.1%', c3sub: '4-round avg (84.8% to 88.4%)', c4lbl: 'AY 24-25 Classroom Alignment', c4: '82.0%', c4sub: 'Orientation, feedback & lesson consolidation' },
+    'AY 2025-26': { att: '42,583', sub: 'Unique verified teachers in AY 2025-26 (Peak Aug 2025: 25,512)', clusters: '3,099', csub: 'Aug, Sep, Nov, Dec 2025 & Jan 2026', c3lbl: 'AY 25-26 Pedagogy Score', c3: '86.5%', c3sub: '5-round avg (Peak Dec 2025: 92.6%)', c4lbl: 'AY 25-26 Classroom Alignment', c4: '75.1%', c4sub: 'Range: 89.2% closure to 63.8% grouping' },
+    'AY 2026-27': { att: '33,607', sub: 'Unique verified teachers in AY 2026-27 (Peak Aug 2026: 23,785)', clusters: '3,099', csub: 'Aug & Sep 2026 active cycles', c3lbl: 'AY 26-27 Pedagogy Score', c3: '78.0%', c3sub: '2-round avg (75.3% Aug, 80.6% Sep)', c4lbl: 'Safe Climate & TLM Alignment', c4: '54.6%', c4sub: '48.0% safe climate (Aug), 61.2% TLM (Sep)' },
+    'COVID': { att: '0', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: '0', csub: 'Digital-only period', c3lbl: 'Pedagogy Quiz Avg', c3: 'N/A', c3sub: 'Digital-only era', c4lbl: 'Classroom Alignment', c4: 'N/A', c4sub: 'Digital-only era' },
+    'POST_COVID': { att: '51,659', sub: 'Post-Covid unique verified teachers across all 11 CLSS rounds', clusters: '3,099', csub: '100% of 52 districts active', c3lbl: 'Lesson Closure Adoption', c3: '89.2%', c3sub: 'Exceeded 80.0% Results Framework target', c4lbl: 'Safe Classroom Climate', c4: '48.0%', c4sub: 'Critical gap vs 75.0% target (4.80/5.00 comfort trap)' }
   };
 
   let selectedInPersonKey = 'ALL_INPERSON';
@@ -10187,9 +10187,10 @@ Exact model predictions testing each concrete intervention across the state teac
     }
   };
 
-  function onInPersonProgramSelect(key) {
-    selectedInPersonKey = key || 'ALL_INPERSON';
-    const info = INPERSON_PROGRAM_SLICES[selectedInPersonKey] || INPERSON_PROGRAM_SLICES['ALL_INPERSON'];
+  function onInPersonProgramSelect(key, skipUpdateKey) {
+    if (!skipUpdateKey) selectedInPersonKey = key || 'ALL_INPERSON';
+    const effectiveKey = key || selectedInPersonKey || 'ALL_INPERSON';
+    const info = INPERSON_PROGRAM_SLICES[effectiveKey] || INPERSON_PROGRAM_SLICES['ALL_INPERSON'];
     const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
     setTxt('inperson-kpi-label', info.label);
     setTxt('inperson-kpi-participants', info.val);
@@ -10228,12 +10229,24 @@ Exact model predictions testing each concrete intervention across the state teac
     'COVID': { att: '0', attAll: '0', sub: 'Covid era (Before Apr 2023) ran DIKSHA courses only', clusters: '0', csub: 'Digital-only period' }
   };
 
+  const DIGITAL_YEAR_KPI_MAP = {
+    'ALL': { l1: 'Highest Completion Rate', v1: '85.6%', s1: 'Mission Ankur Course 1 (114,575 completions)', l2: 'Top Subject Gain (PSP)', v2: '+20.9%', s2: 'PSP Course 2 (Pre: 44.6% to Post: 65.5%)', l3: 'Top FLN Gain (Mission Ankur)', v3: '+20.3%', s3: 'Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)', l4: 'Peak Assessment Mastery', v4: '83.4%', s4: 'National Achievement Survey (NAS Post-Test)' },
+    'POST_COVID': { l1: 'Post-Covid Digital Learners', v1: '142,300', s1: 'Completed MA C2-C6, PSP 3-5, ECE, NAS & PLC', l2: 'Top FLN Gain (Course 3)', v2: '+20.3%', s2: 'Mission Ankur Course 3 (Pre: 49.2% to Post: 69.4%)', l3: 'Course 6 Mentor Rebound', v3: '69.99%', s3: 'Recovered from 21.21% cliff in Course 4', l4: 'Peak Assessment Mastery', v4: '83.4%', s4: 'National Achievement Survey (NAS Post-Test)' },
+    'AY 2022-23': { l1: 'AY 2022-23 Digital Learners', v1: '130,854', s1: 'Mission Ankur Course 1 & PSP 1-2 (Covid Era)', l2: 'Course 1 Completion Rate', v2: '85.6%', s2: '114,575 completions in Mission Ankur Course 1', l3: 'PSP Course 2 Gain', v3: '+20.9%', s3: 'Pre: 44.6% to Post: 65.5%', l4: 'Course 1 Post-Test Avg', v4: '44.5%', s4: 'Foundational primary math baseline' },
+    'AY 2023-24': { l1: 'AY 2023-24 Digital Learners', v1: '125,100', s1: 'Mission Ankur C2, C3 & PSP 3 active', l2: 'Course 2 Completion Rate', v2: '81.0%', s2: '102,081 completions in Number Sense', l3: 'Course 3 Learning Gain', v3: '+20.3%', s3: 'Pre: 49.2% to Post: 69.4% (Place Value)', l4: 'Course 3 Post-Test Avg', v4: '69.4%', s4: 'Highest FLN knowledge gain in portfolio' },
+    'AY 2024-25': { l1: 'AY 2024-25 Digital Learners', v1: '98,400', s1: 'Mission Ankur C4-C6, PSP 4 & ECE C1-C6', l2: 'Course 4 Assessment Cliff', v2: '21.21%', s2: '57-pt completion drop on strict quiz cutoff', l3: 'Course 6 Mentor Rebound', v3: '69.99%', s3: '62.04% post-test score with mentor review', l4: 'ECE Series Learners', v4: '24,700', s4: 'Early Childhood Education Modules 1 to 6' },
+    'AY 2025-26': { l1: 'AY 2025-26 Digital Learners', v1: '95,604', s1: 'PLC Digital Course active statewide', l2: 'PLC Total Enrollments', v2: '129,818', s2: 'Professional Learning Communities online', l3: 'PLC Certified Teachers', v3: '54,834', s3: 'Verified completions through Mar 2026', l4: 'PLC Post-Test Avg', v4: '57.2%', s4: 'Statewide peer learning digital module' },
+    'AY 2026-27': { l1: 'AY 2026-27 Digital Learners', v1: '46,233', s1: 'NAS Assessment Course & PSP Course 5', l2: 'NAS Completion Rate', v2: '74.2%', s2: 'National Achievement Survey readiness', l3: 'PSP Course 5 Reach', v3: '7,916', s3: 'Latest subject pedagogy online batch', l4: 'NAS Post-Test Mastery', v4: '83.4%', s4: 'Highest post-test mastery score' },
+    'COVID': { l1: 'Covid-Era Digital Learners', v1: '130,854', s1: 'Before Apr 2023: MA C1, PSP 1 & PSP 2', l2: 'Course 1 Completion Rate', v2: '85.6%', s2: '114,575 completions in Mission Ankur C1', l3: 'PSP Course 2 Gain', v3: '+20.9%', s3: 'Pre: 44.6% to Post: 65.5%', l4: 'Course 1 Post-Test Avg', v4: '44.5%', s4: 'Foundational primary math baseline' }
+  };
+
   function updateInterventionTabKpis(yr, era, ver) {
     let key = yr;
     if (yr === 'ALL' && era !== 'ALL') key = era;
-    const activeCadre = document.getElementById('selectClssCadre')?.value || 'CLSS';
     const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
 
+    // 1. Update Tab 1 (CLSS vs DO) all 4 KPI cards
+    const activeCadre = document.getElementById('selectClssCadre')?.value || 'CLSS';
     if (activeCadre === 'DO') {
       const doInfo = DO_YEAR_KPI_MAP[key] || DO_YEAR_KPI_MAP['ALL'];
       setTxt('clss-kpi-attendance-label', 'District Orientation (DO) Trainers');
@@ -10243,11 +10256,11 @@ Exact model predictions testing each concrete intervention across the state teac
       setTxt('clss-kpi-clusters', doInfo.clusters);
       setTxt('clss-kpi-clusters-sub', doInfo.csub);
       setTxt('clss-kpi-closure-label', 'DO Facilitator Attendance');
-      setTxt('clss-kpi-closure', '95.2%');
-      setTxt('clss-kpi-closure-sub', 'Exceeded 90.0% target (99 / 104 sampled)');
+      setTxt('clss-kpi-closure', doInfo.att === '0' ? 'N/A' : '95.2%');
+      setTxt('clss-kpi-closure-sub', doInfo.att === '0' ? 'Pre-DO period' : 'Exceeded 90.0% target (99 / 104 sampled)');
       setTxt('clss-kpi-climate-label', 'DO Design Mastery');
-      setTxt('clss-kpi-climate', '76.0%');
-      setTxt('clss-kpi-climate-sub', 'Facilitators identifying 6+ design principles (73 / 96)');
+      setTxt('clss-kpi-climate', doInfo.att === '0' ? 'N/A' : '76.0%');
+      setTxt('clss-kpi-climate-sub', doInfo.att === '0' ? 'Pre-DO period' : 'Facilitators identifying 6+ design principles (73 / 96)');
     } else {
       const clssInfo = CLSS_YEAR_KPI_MAP[key] || CLSS_YEAR_KPI_MAP['ALL'];
       setTxt('clss-kpi-attendance-label', 'Unique Shaikshik Samwaad Teachers');
@@ -10256,12 +10269,60 @@ Exact model predictions testing each concrete intervention across the state teac
       setTxt('clss-kpi-clusters-label', 'Active Cluster Coverage');
       setTxt('clss-kpi-clusters', clssInfo.clusters);
       setTxt('clss-kpi-clusters-sub', clssInfo.csub);
-      setTxt('clss-kpi-closure-label', 'Lesson Closure Adoption');
-      setTxt('clss-kpi-closure', '89.2%');
-      setTxt('clss-kpi-closure-sub', 'Exceeded 80.0% Results Framework target');
-      setTxt('clss-kpi-climate-label', 'Safe Classroom Climate');
-      setTxt('clss-kpi-climate', '48.0%');
-      setTxt('clss-kpi-climate-sub', 'Critical gap vs 75.0% target (4.80/5.00 comfort trap)');
+      setTxt('clss-kpi-closure-label', clssInfo.c3lbl);
+      setTxt('clss-kpi-closure', clssInfo.c3);
+      setTxt('clss-kpi-closure-sub', clssInfo.c3sub);
+      setTxt('clss-kpi-climate-label', clssInfo.c4lbl);
+      setTxt('clss-kpi-climate', clssInfo.c4);
+      setTxt('clss-kpi-climate-sub', clssInfo.c4sub);
+    }
+
+    // Sync #pedYearFilterPills & #pedagogyTrendSvg to top TIME slicer
+    const mappedPedYr = ['AY 2024-25', 'AY 2025-26', 'AY 2026-27'].includes(yr) ? yr : 'ALL';
+    if (typeof activePedYear !== 'undefined' && activePedYear !== mappedPedYr) {
+      activePedYear = mappedPedYr;
+      document.querySelectorAll('#pedYearFilterPills .shift-pill').forEach(b => {
+        b.classList.toggle('active', b.dataset.pedYear === mappedPedYr);
+      });
+      if (typeof renderPedagogyTrend === 'function') renderPedagogyTrend();
+    }
+
+    // 2. Update Tab 2 (Digital) KPI cards by TIME slice when ALL_DIGITAL is active
+    const digSelVal = document.getElementById('selectDigitalCourse')?.value || 'ALL_DIGITAL';
+    if (digSelVal === 'ALL_DIGITAL') {
+      const dInfo = DIGITAL_YEAR_KPI_MAP[key] || DIGITAL_YEAR_KPI_MAP['ALL'];
+      setTxt('dig-kpi-1-label', dInfo.l1); setTxt('dig-kpi-1-val', dInfo.v1); setTxt('dig-kpi-1-sub', dInfo.s1);
+      setTxt('dig-kpi-2-label', dInfo.l2); setTxt('dig-kpi-2-val', dInfo.v2); setTxt('dig-kpi-2-sub', dInfo.s2);
+      setTxt('dig-kpi-3-label', dInfo.l3); setTxt('dig-kpi-3-val', dInfo.v3); setTxt('dig-kpi-3-sub', dInfo.s3);
+      setTxt('dig-kpi-4-label', dInfo.l4); setTxt('dig-kpi-4-val', dInfo.v4); setTxt('dig-kpi-4-sub', dInfo.s4);
+    }
+
+    // 3. Update Tab 3 (In-Person) KPI cards by TIME slice when ALL_INPERSON is active
+    const inpSelVal = document.getElementById('selectInPersonProgram')?.value || 'ALL_INPERSON';
+    if (inpSelVal === 'ALL_INPERSON') {
+      if (key === 'AY 2023-24') {
+        onInPersonProgramSelect('GEN_PED', true);
+      } else if (key === 'AY 2024-25') {
+        onInPersonProgramSelect('SUBJECT_PED', true);
+      } else if (['AY 2022-23', 'COVID', 'AY 2025-26', 'AY 2026-27'].includes(key)) {
+        setTxt('inperson-kpi-label', 'In-Person Workshop Participants');
+        setTxt('inperson-kpi-participants', '0');
+        setTxt('inperson-kpi-sub', 'No standalone state BTT/STT workshop batch in ' + key);
+        setTxt('inperson-kpi-surveys-label', 'Survey Records');
+        setTxt('inperson-kpi-surveys', '0');
+        setTxt('inperson-kpi-surveys-sub', 'Workshops ran in AY 2023-24 (BTT) and AY 2024-25 (STT)');
+        setTxt('inperson-kpi-clarity-label', 'Handbook Clarity');
+        setTxt('inperson-kpi-clarity', 'N/A');
+        setTxt('inperson-kpi-clarity-sub', 'No BTT/STT batch in ' + key);
+        setTxt('inperson-kpi-practice-label', 'Hands-On Role-Play');
+        setTxt('inperson-kpi-practice', 'N/A');
+        setTxt('inperson-kpi-practice-sub', 'Select All Years, 2023-24, or 2024-25');
+        setTxt('inperson-ctx-title', 'No In-Person Workshop Batch in ' + key);
+        setTxt('inperson-ctx-badge', '0 Workshops');
+        setTxt('inperson-ctx-desc', 'Standalone face-to-face pedagogy workshops were conducted in AY 2023-24 (General Pedagogy BTT) and AY 2024-25 (Subject Pedagogy STT & CRO SRG).');
+      } else {
+        onInPersonProgramSelect('ALL_INPERSON', true);
+      }
     }
 
     const strip = document.getElementById('clss-kpi-strip');
