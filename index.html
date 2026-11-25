@@ -2113,7 +2113,65 @@
       r: 4.5;
       stroke-width: 2.5;
     }
-  </style>
+  
+  /* Concise Expandable Drawers */
+  details.concise-drawer {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  details.concise-drawer > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: var(--surface);
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  details.concise-drawer > summary::-webkit-details-marker { display: none; }
+  details.concise-drawer > summary:hover { background: var(--surface-subtle); }
+  details.concise-drawer .drawer-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+  details.concise-drawer .drawer-meta {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  details.concise-drawer .drawer-toggle {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--blue-primary);
+    background: var(--blue-subtle);
+    border: 1px solid var(--blue-border);
+    padding: 4px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+  details.concise-drawer[open] .drawer-toggle::after { content: "Hide"; }
+  details.concise-drawer:not([open]) .drawer-toggle::after { content: "Expand"; }
+  details.concise-drawer > .drawer-body {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--surface-border);
+  }
+  details.concise-drawer > .drawer-body > .panel {
+    margin-top: 1rem;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+</style>
 </head>
 <body>
   <div class="auth-gate-overlay" id="authGate">
@@ -2437,6 +2495,30 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <div style="font-size: 0.72rem; color: var(--text-body);">Memory decay drops from 18.3% down to 1.7% when Shaikshik Samwaad is paired with micro-nudges.</div>
         </div>
       </div>
+      <div id="clss-transfer-visual" style="margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--surface-border);">
+        <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">Visual Snapshot: Knowledge vs Classroom Transfer (EDS N=60, 103 Features)</div>
+        <svg viewBox="0 0 760 112" width="100%" height="112" style="display:block; max-width:100%;">
+          <text x="0" y="18" font-size="11" font-weight="600" fill="#1D1D1F">Written Test Knowledge</text>
+          <rect x="210" y="7" width="440" height="14" rx="7" fill="#F1F5F9"/>
+          <rect x="210" y="7" width="362" height="14" rx="7" fill="#0071E3"/>
+          <text x="660" y="18" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">82.4%</text>
+
+          <text x="0" y="45" font-size="11" font-weight="600" fill="#1D1D1F">Solo Classroom Confidence</text>
+          <rect x="210" y="34" width="440" height="14" rx="7" fill="#F1F5F9"/>
+          <rect x="210" y="34" width="197" height="14" rx="7" fill="#D97706"/>
+          <text x="660" y="45" font-size="11" font-weight="700" fill="#D97706" font-family="monospace">44.7%</text>
+
+          <text x="0" y="72" font-size="11" font-weight="600" fill="#1D1D1F">30-Day Memory Barrier</text>
+          <rect x="210" y="61" width="440" height="14" rx="7" fill="#F1F5F9"/>
+          <rect x="210" y="61" width="326" height="14" rx="7" fill="#DC2626"/>
+          <text x="660" y="72" font-size="11" font-weight="700" fill="#DC2626" font-family="monospace">74.0%</text>
+
+          <text x="0" y="99" font-size="11" font-weight="600" fill="#1D1D1F">Post-Coaching Decay</text>
+          <rect x="210" y="88" width="440" height="14" rx="7" fill="#F1F5F9"/>
+          <rect x="210" y="88" width="10" height="14" rx="5" fill="#059669"/>
+          <text x="660" y="99" font-size="11" font-weight="700" fill="#059669" font-family="monospace">1.7%</text>
+        </svg>
+      </div>
     </div>
 
     <!-- CLSS Multi-Year Unique Reach & Cycle-Adjusted Trend -->
@@ -2503,7 +2585,16 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </div>
     </div>
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--purple-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Theory of Change & Results Framework Audit (CLSS)</div>
+      <div class="drawer-meta">Planned policy targets vs field actuals across 3,099 clusters</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--purple-primary);">
       <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
         <div>
           <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
@@ -2610,6 +2701,8 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </table>
       </div>
     </div>
+  </div>
+</details>
 
 
 
@@ -3211,13 +3304,22 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 </div>
 </div>
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--purple-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Ecosystem Diagnostic: Why Field Practices Diverged</div>
+      <div class="drawer-meta">False comfort trap (4.80 vs 48.0%), multi-grade barrier, and harvest dip</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--purple-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--purple-subtle); color: var(--purple-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--purple-border); text-transform: uppercase;">FIELD TRANSMISSION AUDIT</span>
           <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Root Cause Diagnostic Analysis</span>
         </div>
-        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Empirical Diagnostic Analysis: Why Field Practices Diverged from Targets</h2>
+        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Ecosystem Diagnostic: Why Field Practices Diverged from Targets</h2>
         <div class="panel-desc" style="margin-top: 0.25rem;">
           Unpacking transmission bottlenecks between orientation attendance and direct classroom practice across 3,099 clusters.
         </div>
@@ -3255,9 +3357,20 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </div>
       </div>
     </div>
+  </div>
+</details>
 
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Shaikshik Samwaad & DO Action Playbook</div>
+      <div class="drawer-meta">Operational fixes for cluster facilitation and classroom practice</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--emerald-border); text-transform: uppercase;">FIELD ACTION PLAYBOOK</span>
@@ -3367,6 +3480,8 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <!-- CARD 4: SCHOOL LEADERSHIP & CONTINUOUS MENTORING -->
       </div>
     </div>
+  </div>
+</details>
 
     </div>
 
@@ -3412,7 +3527,95 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 <div id="dig-kpi-4-sub" style="font-size: 0.74rem; color: var(--text-body);">National Achievement Survey (NAS Post-Test)</div>
 </div>
 </div>
+<!-- Visual Summary Charts for Digital Training -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+  <div id="digital-completion-visual" style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem;">
+    <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Course Completion Rate (%)</div>
+    <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Verified DIKSHA completions across major courses</div>
+    <svg viewBox="0 0 420 190" width="100%" height="190" style="display:block;">
+      <text x="0" y="16" font-size="10.5" fill="#1D1D1F">Mission Ankur C1</text>
+      <rect x="125" y="6" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="6" width="197" height="12" rx="6" fill="#0071E3"/>
+      <text x="364" y="16" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">85.6%</text>
+
+      <text x="0" y="39" font-size="10.5" fill="#1D1D1F">Mission Ankur C2</text>
+      <rect x="125" y="29" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="29" width="186" height="12" rx="6" fill="#0071E3"/>
+      <text x="364" y="39" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">81.0%</text>
+
+      <text x="0" y="62" font-size="10.5" fill="#1D1D1F">Mission Ankur C3</text>
+      <rect x="125" y="52" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="52" width="180" height="12" rx="6" fill="#0071E3"/>
+      <text x="364" y="62" font-size="10.5" font-weight="700" fill="#0071E3" font-family="monospace">78.2%</text>
+
+      <text x="0" y="85" font-size="10.5" fill="#1D1D1F">Mission Ankur C6</text>
+      <rect x="125" y="75" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="75" width="161" height="12" rx="6" fill="#0284C7"/>
+      <text x="364" y="85" font-size="10.5" font-weight="700" fill="#0284C7" font-family="monospace">70.0%</text>
+
+      <text x="0" y="108" font-size="10.5" fill="#1D1D1F">Mission Ankur C5</text>
+      <rect x="125" y="98" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="98" width="132" height="12" rx="6" fill="#0284C7"/>
+      <text x="364" y="108" font-size="10.5" font-weight="700" fill="#0284C7" font-family="monospace">57.6%</text>
+
+      <text x="0" y="131" font-size="10.5" fill="#1D1D1F">PSP Course 2</text>
+      <rect x="125" y="121" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="121" width="115" height="12" rx="6" fill="#7C3AED"/>
+      <text x="364" y="131" font-size="10.5" font-weight="700" fill="#7C3AED" font-family="monospace">50.2%</text>
+
+      <text x="0" y="154" font-size="10.5" fill="#1D1D1F">PSP Course 1</text>
+      <rect x="125" y="144" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="144" width="109" height="12" rx="6" fill="#7C3AED"/>
+      <text x="364" y="154" font-size="10.5" font-weight="700" fill="#7C3AED" font-family="monospace">47.6%</text>
+
+      <text x="0" y="177" font-size="10.5" fill="#1D1D1F">Mission Ankur C4</text>
+      <rect x="125" y="167" width="230" height="12" rx="6" fill="#E2E8F0"/><rect x="125" y="167" width="49" height="12" rx="6" fill="#DC2626"/>
+      <text x="364" y="177" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">21.2%</text>
+    </svg>
+  </div>
+
+  <div id="digital-shift-visual" style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem;">
+    <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Pre-to-Post Knowledge Shift</div>
+    <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.6rem;">Paired Pre-Test vs Post-Test score change (%)</div>
+    <svg viewBox="0 0 420 190" width="100%" height="190" style="display:block;">
+      <line x1="220" y1="4" x2="220" y2="184" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="0" y="16" font-size="10.5" fill="#1D1D1F">PSP Course 2</text>
+      <rect x="220" y="6" width="125" height="12" rx="5" fill="#059669"/>
+      <text x="352" y="16" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+20.9%</text>
+
+      <text x="0" y="39" font-size="10.5" fill="#1D1D1F">Mission Ankur C3</text>
+      <rect x="220" y="29" width="122" height="12" rx="5" fill="#059669"/>
+      <text x="352" y="39" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+20.3%</text>
+
+      <text x="0" y="62" font-size="10.5" fill="#1D1D1F">Mission Ankur C2</text>
+      <rect x="220" y="52" width="98" height="12" rx="5" fill="#059669"/>
+      <text x="352" y="62" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+16.4%</text>
+
+      <text x="0" y="85" font-size="10.5" fill="#1D1D1F">Mission Ankur C5</text>
+      <rect x="220" y="75" width="65" height="12" rx="5" fill="#10B981"/>
+      <text x="352" y="85" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+10.9%</text>
+
+      <text x="0" y="108" font-size="10.5" fill="#1D1D1F">PSP Course 3</text>
+      <rect x="220" y="98" width="65" height="12" rx="5" fill="#10B981"/>
+      <text x="352" y="108" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+10.9%</text>
+
+      <text x="0" y="131" font-size="10.5" fill="#1D1D1F">Mission Ankur C6</text>
+      <rect x="220" y="121" width="53" height="12" rx="5" fill="#34D399"/>
+      <text x="352" y="131" font-size="10.5" font-weight="700" fill="#059669" font-family="monospace">+8.9%</text>
+
+      <text x="0" y="154" font-size="10.5" fill="#1D1D1F">Mission Ankur C1</text>
+      <rect x="137" y="144" width="83" height="12" rx="5" fill="#DC2626"/>
+      <text x="352" y="154" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">-13.9%</text>
+
+      <text x="0" y="177" font-size="10.5" fill="#1D1D1F">PSP Course 1</text>
+      <rect x="122" y="167" width="98" height="12" rx="5" fill="#DC2626"/>
+      <text x="352" y="177" font-size="10.5" font-weight="700" fill="#DC2626" font-family="monospace">-16.3%</text>
+    </svg>
+  </div>
+</div>
 <!-- Thematic Assessment Score Table -->
+<details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Full Digital Course Table (15 Courses)</div>
+      <div class="drawer-meta">Click to expand full course-by-course enrollment, completion, and pre/post table</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body" style="padding-top: 1rem;">
 <div style="overflow-x: auto; border: 1px solid var(--surface-border); border-radius: 8px;">
 <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
 <thead>
@@ -3617,6 +3820,8 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
 </tbody>
 </table>
 </div>
+  </div>
+</details>
 </div>
     
     <!-- EDS Ground-Truth Finding: STEM vs Humanities Execution Divide -->
@@ -3677,7 +3882,16 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </div>
     </div>
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--blue-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Theory of Change & Results Framework Audit (Digital)</div>
+      <div class="drawer-meta">Course targets vs completion and pre/post score actuals</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--blue-primary);">
       <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
         <div>
           <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
@@ -3762,16 +3976,27 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </table>
       </div>
     </div>
+  </div>
+</details>
 
 
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--blue-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Ecosystem Diagnostic: Digital Drop-off and Gains</div>
+      <div class="drawer-meta">Why enrollment drops and how paired pre/post gains vary</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--blue-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--blue-subtle); color: var(--blue-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--blue-border); text-transform: uppercase;">ONLINE LEARNING DIAGNOSTIC</span>
           <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Platform Transmission &amp; Completion Mechanics</span>
         </div>
-        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Empirical Diagnostic Analysis: Understanding Digital Drop-off and Gains</h2>
+        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Ecosystem Diagnostic: Understanding Digital Drop-off and Gains</h2>
         <div class="panel-desc" style="margin-top: 0.25rem;">
           Examining pedagogical design factors that produced both double-digit score gains and steep completion cliffs.
         </div>
@@ -3809,9 +4034,20 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </div>
       </div>
     </div>
+  </div>
+</details>
 
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Digital Online Courses Action Playbook</div>
+      <div class="drawer-meta">Operational steps to lift completion and pre/post gains</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--emerald-border); text-transform: uppercase;">FIELD ACTION PLAYBOOK</span>
@@ -3873,6 +4109,8 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <!-- CARD 2: DISTRICT ORIENTATION (DO) -->
       </div>
     </div>
+  </div>
+</details>
 
     </div>
 
@@ -3910,8 +4148,54 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           Includes General Pedagogy (BTT, 6,541 verified), Subject Pedagogy (Maths/Sci/SSt, 41,883 verified), and CRO SRG Leadership Trainers (263 verified). Use the WORKSHOP dropdown above to isolate any specific intervention.
         </p>
       </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+        <div id="inperson-reach-visual" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1rem; box-shadow: var(--shadow-card);">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem;">Verified Reach by Workshop Track</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">Total verified records: 68,846 across BTT, STT &amp; CRO SRG</div>
+          <svg viewBox="0 0 420 112" width="100%" height="112" style="display:block;">
+            <text x="0" y="20" font-size="11" font-weight="600" fill="#1D1D1F">Subject Pedagogy (STT)</text>
+            <rect x="165" y="9" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="9" width="155" height="14" rx="7" fill="#D97706"/>
+            <text x="358" y="20" font-size="11" font-weight="700" fill="#D97706" font-family="monospace">41,883</text>
+
+            <text x="0" y="54" font-size="11" font-weight="600" fill="#1D1D1F">General Pedagogy (BTT)</text>
+            <rect x="165" y="43" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="43" width="28" height="14" rx="7" fill="#0071E3"/>
+            <text x="358" y="54" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">6,541</text>
+
+            <text x="0" y="88" font-size="11" font-weight="600" fill="#1D1D1F">CRO SRG Leadership</text>
+            <rect x="165" y="77" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="77" width="6" height="14" rx="3" fill="#7C3AED"/>
+            <text x="358" y="88" font-size="11" font-weight="700" fill="#7C3AED" font-family="monospace">263</text>
+          </svg>
+        </div>
+
+        <div id="inperson-practice-visual" style="background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1rem; box-shadow: var(--shadow-card);">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem;">The Lecture Hall Trap (Out of 4.00)</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.65rem;">50,864 survey records: clarity high, hands-on practice low</div>
+          <svg viewBox="0 0 420 112" width="100%" height="112" style="display:block;">
+            <text x="0" y="20" font-size="11" font-weight="600" fill="#1D1D1F">Handbook Clarity</text>
+            <rect x="165" y="9" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="9" width="159" height="14" rx="7" fill="#059669"/>
+            <text x="358" y="20" font-size="11" font-weight="700" fill="#059669" font-family="monospace">3.43/4</text>
+
+            <text x="0" y="54" font-size="11" font-weight="600" fill="#1D1D1F">Trainer Readiness</text>
+            <rect x="165" y="43" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="43" width="152" height="14" rx="7" fill="#0071E3"/>
+            <text x="358" y="54" font-size="11" font-weight="700" fill="#0071E3" font-family="monospace">3.28/4</text>
+
+            <text x="0" y="88" font-size="11" font-weight="600" fill="#1D1D1F">Hands-On Role-Play</text>
+            <rect x="165" y="77" width="185" height="14" rx="7" fill="#F1F5F9"/><rect x="165" y="77" width="63" height="14" rx="7" fill="#DC2626"/>
+            <text x="358" y="88" font-size="11" font-weight="700" fill="#DC2626" font-family="monospace">1.37/4</text>
+          </svg>
+        </div>
+      </div>
       
-    <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--amber-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Theory of Change & Results Framework Audit (In-Person)</div>
+      <div class="drawer-meta">BTT, STT, and CRO SRG targets vs field feedback actuals</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--amber-primary);">
       <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
         <div>
           <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
@@ -3985,6 +4269,8 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         </table>
       </div>
     </div>
+  </div>
+</details>
 
 <div class="panel" id="qualitative-prediction-panel" style="margin-top: 1.5rem;">
 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
@@ -4203,13 +4489,22 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 </div>
 </div>
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--amber-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Ecosystem Diagnostic: The Lecture Hall Trap</div>
+      <div class="drawer-meta">Why 82% readiness drops to 1.37/4.00 hands-on practice</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--amber-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--amber-subtle); color: var(--amber-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--amber-border); text-transform: uppercase;">WORKSHOP TRANSMISSION AUDIT</span>
           <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Analysis of 50,864 Teacher Survey Records</span>
         </div>
-        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Empirical Diagnostic Analysis: The Lecture Hall Trap</h2>
+        <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Ecosystem Diagnostic: The Lecture Hall Trap</h2>
         <div class="panel-desc" style="margin-top: 0.25rem;">
           Investigating why high trainer satisfaction failed to translate into active classroom practice.
         </div>
@@ -4237,9 +4532,20 @@ Action Steps for Peepul and Rajya Shiksha Kendra
         </div>
       </div>
     </div>
+  </div>
+</details>
 
 
-    <div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">In-Person Subject Training Action Playbook</div>
+      <div class="drawer-meta">35-teacher practice pods and 40% peer role-play protocol</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem; border-top: 4px solid var(--emerald-primary);">
       <div class="panel-header">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--emerald-subtle); color: var(--emerald-primary); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--emerald-border); text-transform: uppercase;">FIELD ACTION PLAYBOOK</span>
@@ -4302,6 +4608,8 @@ Action Steps for Peepul and Rajya Shiksha Kendra
       
       </div>
     </div>
+  </div>
+</details>
 
     </div>
 
@@ -4626,7 +4934,16 @@ Action Steps for Peepul and Rajya Shiksha Kendra
       </div>
 
       <!-- SECTION 2: Master Results Framework Matrix -->
-      <div class="panel" style="margin-bottom: 1.5rem;" id="rf-matrix-panel">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Official Results Framework Matrix (AY 2025-26 & 2026-27)</div>
+      <div class="drawer-meta">Full indicator table across state, district, and cluster levels</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;" id="rf-matrix-panel">
         <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; align-items: center;">
           <div>
             <div class="panel-title">Official Results Framework Matrix (AY 2025-26 &amp; 2026-27)</div>
@@ -4869,9 +5186,20 @@ Action Steps for Peepul and Rajya Shiksha Kendra
           </table>
         </div>
       </div>
+  </div>
+</details>
 
       <!-- SECTION 3: Target vs Field Reality Triangulation Panel -->
-      <div class="panel" style="margin-bottom: 1.5rem;" id="triangulation-panel">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Target vs Field Reality Triangulation</div>
+      <div class="drawer-meta">Policy targets compared against independent field observation</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;" id="triangulation-panel">
         <div class="panel-header">
           <div>
             <div class="panel-title">Target vs Field Reality Triangulation (Executive Accountability)</div>
@@ -4906,9 +5234,20 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 
         </div>
       </div>
+  </div>
+</details>
 
       <!-- SECTION 4: Unit Economics & Return on Investment Calculator -->
-      <div class="panel" style="margin-bottom: 1.5rem;" id="unit-economics-panel">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Unit Economics: Blended vs Traditional Training</div>
+      <div class="drawer-meta">Cost per teacher and retention efficiency comparison</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;" id="unit-economics-panel">
         <div class="panel-header">
           <div>
             <div class="panel-title">Unit Economics: Blended Tri-Intervention vs Traditional Training</div>
@@ -4946,9 +5285,20 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 
         </div>
       </div>
+  </div>
+</details>
 
       <!-- SECTION 5: 1-Page Executive Decision Briefing -->
-      <div class="panel" style="margin-bottom: 1.5rem;" id="executive-brief-panel">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">1-Page Decision Brief</div>
+      <div class="drawer-meta">Summary for leadership review and budget allocation</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;" id="executive-brief-panel">
         <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; align-items: center;">
           <div>
             <div class="panel-title">1-Page Executive Decision Brief</div>
@@ -4996,9 +5346,20 @@ Action Steps for Peepul and Rajya Shiksha Kendra
 
         </div>
       </div>
+  </div>
+</details>
 
     <!-- SECTION 4: TRI-INTERVENTION RETENTION ENGINE & CADRE FIDELITY -->
-    <div class="panel" id="persistence-deep-dive-panel" style="margin-top: 1.5rem; border-top: 4px solid #0369A1;">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Teacher Persistence and Dropout Analysis (5 Years)</div>
+      <div class="drawer-meta">Cohort tracking and multi-year retention breakdown</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" id="persistence-deep-dive-panel" style="margin-top: 1.5rem; border-top: 4px solid #0369A1;">
 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: flex-start;">
 <div>
 <div class="panel-title" style="font-size: 1.2rem; color: #0F172A;">Teacher Persistence and Dropout Analysis (AY 2022-23 to AY 2026-27)</div>
@@ -5286,9 +5647,20 @@ Exact model predictions testing each concrete intervention across the state teac
 </table>
 </div>
 </div>
+  </div>
+</details>
     
     <!-- TabFM Policy Scenario Simulator -->
-    <div class="panel" style="margin-top: 1.5rem; border-top: 4px solid var(--blue-primary);">
+    <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Policy Decision Simulator</div>
+      <div class="drawer-meta">Test how changing practice time, nudges, and batch size shifts retention</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-top: 1.5rem; border-top: 4px solid var(--blue-primary);">
       <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem;">
         <div>
           <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
@@ -5376,6 +5748,8 @@ Exact model predictions testing each concrete intervention across the state teac
         </div>
       </div>
     </div>
+  </div>
+</details>
 
     <!-- SECTION 5: PEER BENCHMARKING & MULTI-STATE REPLICATION -->
     <!-- Top Title and Context Panel -->
@@ -5549,7 +5923,25 @@ Exact model predictions testing each concrete intervention across the state teac
       </div>
 
       <!-- SECTION 2: What Stays Local vs The Replicable Core -->
-      <div class="panel" style="margin-bottom: 1.5rem;">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">The Replication Boundary</div>
+      <div class="drawer-meta">Core model elements vs state-specific adaptations</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">The 5-Step Replication Roadmap</div>
+      <div class="drawer-meta">Year 1 rollout sequence for partner states</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;">
         <div class="panel-header">
           <div>
             <div class="panel-title">The Replication Boundary: What Stays Local vs What Can Be Exported</div>
@@ -5584,6 +5976,10 @@ Exact model predictions testing each concrete intervention across the state teac
 
         </div>
       </div>
+  </div>
+</details>
+  </div>
+</details>
 
       <!-- SECTION 3: The 5-Step Replication Roadmap (Year 1 Blueprint) -->
       <div class="panel" style="margin-bottom: 1.5rem;">
@@ -5658,7 +6054,16 @@ Exact model predictions testing each concrete intervention across the state teac
       </div>
 
       <!-- SECTION 4: State Readiness Profiler -->
-      <div class="panel" style="margin-bottom: 1.5rem;">
+      <details class="concise-drawer">
+  <summary>
+    <div>
+      <div class="drawer-title">Target State Readiness Profiler & Cadre Mapping</div>
+      <div class="drawer-meta">Readiness checklist and cadre alignment tool</div>
+    </div>
+    <span class="drawer-toggle"></span>
+  </summary>
+  <div class="drawer-body">
+<div class="panel" style="margin-bottom: 1.5rem;">
         <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
           <div>
             <div class="panel-title">Target State Readiness Profiler &amp; Cadre Mapping</div>
@@ -5678,6 +6083,8 @@ Exact model predictions testing each concrete intervention across the state teac
           <!-- Dynamically populated by updateStateReadinessProfile() -->
         </div>
       </div>
+  </div>
+</details>
 
     </div>
 
