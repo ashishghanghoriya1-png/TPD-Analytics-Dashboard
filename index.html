@@ -2418,6 +2418,70 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
       </div>
     </div>
 
+    <!-- CLSS Multi-Year Unique Reach & Cycle-Adjusted Trend -->
+    <div class="panel" id="clss-yoy-decline-panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--blue-primary);">
+      <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+            <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 800; background: var(--blue-subtle); color: var(--blue-primary); padding: 2px 7px; border-radius: 9999px; border: 1px solid var(--blue-border); text-transform: uppercase;">CYCLE-ADJUSTED MULTI-YEAR AUDIT</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">AY 2024-25 vs AY 2025-26 vs AY 2026-27</span>
+          </div>
+          <h2 class="panel-title" style="margin: 0; font-size: 1.15rem;">Is CLSS Unique Reach Declining? Cycle-Adjusted Evidence</h2>
+          <div class="panel-desc" style="margin-top: 0.25rem;">
+            Separating true annual attrition in AY 2025-26 from the partial-year calendar effect in AY 2026-27.
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; margin-top: 1rem; align-items: stretch;">
+        <!-- Left: 3-Year Comparison Bars -->
+        <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.85rem;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">
+              <span>AY 2024-25 (4 Rounds: Sep, Oct, Dec, Jan)</span>
+              <span style="font-family: var(--font-mono); color: var(--text-main);">52,871 unique | 26,191/round</span>
+            </div>
+            <div style="height: 10px; background: #E2E8F0; border-radius: 9999px; overflow: hidden;">
+              <div style="width: 100%; height: 100%; background: var(--emerald-primary); border-radius: 9999px;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">
+              <span>AY 2025-26 (5 Rounds: Aug to Jan)</span>
+              <span style="font-family: var(--font-mono); color: var(--rose-primary);">42,583 unique (-19.5%) | 19,413/round</span>
+            </div>
+            <div style="height: 10px; background: #E2E8F0; border-radius: 9999px; overflow: hidden;">
+              <div style="width: 80.5%; height: 100%; background: var(--rose-primary); border-radius: 9999px;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
+              <span>AY 2026-27 <span style="font-size: 0.68rem; background: var(--amber-subtle); color: var(--amber-primary); padding: 1px 6px; border-radius: 9999px;">Partial Year (2 of 5 Rounds)</span></span>
+              <span style="font-family: var(--font-mono); color: var(--blue-primary);">33,607 unique | 23,477/round</span>
+            </div>
+            <div style="height: 10px; background: #E2E8F0; border-radius: 9999px; overflow: hidden;">
+              <div style="width: 63.6%; height: 100%; background: var(--blue-primary); border-radius: 9999px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Plain-English Diagnostic Verdict -->
+        <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.65rem;">
+          <div style="font-size: 0.82rem; color: var(--text-body); line-height: 1.55;">
+            <strong>1. True drop happened in AY 2025-26 (-19.5%):</strong> Even with 5 rounds instead of 4, unique reach fell by 10,288 teachers and per-round turnout fell 25.9% (26,191 down to 19,413) due to the November harvest dip (13,658) and winter fatigue in December and January (17.7k to 18.0k).
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-body); line-height: 1.55;">
+            <strong>2. AY 2026-27 is stabilizing, not collapsing:</strong> Comparing the exact same opening months (August + September), AY 2026-27 averaged 23,477 teachers per round against 23,826 in AY 2025-26 (only -1.5%), and sits 20.9% above last year's full-year average.
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--blue-primary); background: var(--blue-subtle); padding: 6px 10px; border-radius: 8px;">
+            Action: Protect November to January cluster dates from harvest and exam overlap to hold full-year reach above 50,000.
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--purple-primary);">
       <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
         <div>
@@ -3795,23 +3859,33 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <div class="kpi-mini-card" style="border-top: 3px solid var(--amber-primary);">
           <div class="kpi-mini-label" id="inperson-kpi-label">Verified In-Person Participants</div>
           <div class="kpi-mini-val" id="inperson-kpi-participants">68,846</div>
-          <div class="kpi-mini-sub" id="inperson-kpi-sub">General Pedagogy, Subject Pedagogy &amp; CRO SRG</div>
+          <div class="kpi-mini-sub" id="inperson-kpi-sub">General Pedagogy (6,541), Subject Pedagogy (41,883) &amp; CRO SRG (263)</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--blue-primary);">
-          <div class="kpi-mini-label">Survey &amp; Assessment Records</div>
+          <div class="kpi-mini-label" id="inperson-kpi-surveys-label">Survey &amp; Assessment Records</div>
           <div class="kpi-mini-val" id="inperson-kpi-surveys">50,864</div>
           <div class="kpi-mini-sub" id="inperson-kpi-surveys-sub">Verified participant feedback forms analyzed</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--emerald-primary);">
-          <div class="kpi-mini-label">Handbook &amp; Trainer Readiness</div>
+          <div class="kpi-mini-label" id="inperson-kpi-clarity-label">Handbook &amp; Trainer Readiness</div>
           <div class="kpi-mini-val" id="inperson-kpi-clarity">3.43 / 4.00</div>
           <div class="kpi-mini-sub" id="inperson-kpi-clarity-sub">Trainer readiness rated 3.28 / 4.00 (82.0%)</div>
         </div>
         <div class="kpi-mini-card" style="border-top: 3px solid var(--rose-primary);">
-          <div class="kpi-mini-label">Hands-On Role-Play Rating</div>
+          <div class="kpi-mini-label" id="inperson-kpi-practice-label">Hands-On Role-Play Rating</div>
           <div class="kpi-mini-val" id="inperson-kpi-practice">1.37 / 4.00</div>
-          <div class="kpi-mini-sub">Critical gap in 100-teacher lecture halls</div>
+          <div class="kpi-mini-sub" id="inperson-kpi-practice-sub">Critical gap in 100-teacher lecture halls</div>
         </div>
+      </div>
+
+      <div class="panel" id="inperson-context-card" style="margin-bottom: 1.25rem; padding: 1rem 1.25rem; background: var(--surface-subtle); border-left: 4px solid var(--amber-primary);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <strong id="inperson-ctx-title" style="font-size: 0.92rem; color: var(--text-main);">All In-Person Workshops Combined (AY 2023-24 to 2024-25)</strong>
+          <span id="inperson-ctx-badge" style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 700; background: #FFFFFF; border: 1px solid var(--surface-border); padding: 2px 9px; border-radius: 9999px; color: var(--text-muted);">3 Source Programs</span>
+        </div>
+        <p id="inperson-ctx-desc" style="font-size: 0.8rem; color: var(--text-body); margin-top: 0.4rem; line-height: 1.5;">
+          Includes General Pedagogy (BTT, 6,541 verified), Subject Pedagogy (Maths/Sci/SSt, 41,883 verified), and CRO SRG Leadership Trainers (263 verified). Use the WORKSHOP dropdown above to isolate any specific intervention.
+        </p>
       </div>
       
     <div class="panel" style="margin-bottom: 1.5rem; border-left: 4px solid var(--amber-primary);">
@@ -9914,40 +9988,72 @@ Exact model predictions testing each concrete intervention across the state teac
       label: 'Verified In-Person Participants',
       val: '68,846',
       sub: 'General Pedagogy (6,541), Subject Pedagogy (41,883) & CRO SRG (263)',
+      surveysLabel: 'Survey & Assessment Records',
       surveys: '50,864',
       surveysSub: 'Verified participant feedback forms analyzed',
+      clarityLabel: 'Handbook & Trainer Readiness',
       clarity: '3.43 / 4.00',
-      claritySub: 'Trainer readiness rated 3.28 / 4.00 (82.0%)'
+      claritySub: 'Trainer readiness rated 3.28 / 4.00 (82.0%)',
+      practiceLabel: 'Hands-On Role-Play Rating',
+      practice: '1.37 / 4.00',
+      practiceSub: 'Critical gap in 100-teacher lecture halls',
+      ctxTitle: 'All In-Person Workshops Combined (AY 2023-24 to 2024-25)',
+      ctxBadge: '3 Source Programs',
+      ctxDesc: 'Includes General Pedagogy (BTT, 6,541 verified), Subject Pedagogy (Maths/Sci/SSt, 41,883 verified), and CRO SRG Leadership Trainers (263 verified). Use the WORKSHOP dropdown above to isolate any specific intervention.'
     },
     'GEN_PED': {
       badge: 'General Pedagogy (BTT 23-24)',
       label: 'General Pedagogy (BTT) Teachers',
       val: '6,541',
-      sub: 'Source: Gen Ped 23-24/Master file_BTT_MIS.xlsx (AY 2023-24)',
+      sub: 'Verified employee codes out of 6,562 raw training logs',
+      surveysLabel: 'MIS Training Records',
       surveys: '6,562',
-      surveysSub: 'Total MIS training logs recorded across batches',
-      clarity: '3.35 / 4.00',
-      claritySub: 'Foundational classroom management & BTT alignment'
+      surveysSub: 'Source: Gen Ped 23-24/Master file_BTT_MIS.xlsx',
+      clarityLabel: 'Cascade Delivery Tier',
+      clarity: 'Block (BTT)',
+      claritySub: 'Block Teacher Trainer foundational pedagogy cascade',
+      practiceLabel: 'Active Academic Cycle',
+      practice: 'AY 2023-24',
+      practiceSub: 'Pre-CLSS foundational classroom management rollout',
+      ctxTitle: 'General Pedagogy (BTT, AY 2023-24)',
+      ctxBadge: '6,541 Verified Teachers',
+      ctxDesc: 'Block-level face-to-face pedagogy workshops executed across Madhya Pradesh in AY 2023-24 prior to Subject Pedagogy and CLSS. 99.7% of raw BTT MIS rows (6,541 of 6,562) matched verified government employee codes.'
     },
     'SUBJECT_PED': {
       badge: 'Subject Pedagogy (24-25)',
       label: 'Subject Pedagogy Teachers',
       val: '41,883',
-      sub: 'Source: Subject Training 24-25 (Maths, Science & Social Science)',
+      sub: 'Maths, Science & Social Science face-to-face workshops',
+      surveysLabel: 'STT Feedback Forms',
       surveys: '50,864',
-      surveysSub: 'Subject Teacher Training (STT) feedback forms analyzed',
+      surveysSub: 'Subject Teacher Training survey responses analyzed',
+      clarityLabel: 'Handbook Clarity Rating',
       clarity: '3.43 / 4.00',
-      claritySub: 'Trainer readiness rated 3.28 / 4.00; practice 1.37 / 4.00'
+      claritySub: 'Trainer readiness rated 3.28 / 4.00 (82.0%)',
+      practiceLabel: 'Hands-On Role-Play Rating',
+      practice: '1.37 / 4.00',
+      practiceSub: '100-teacher lecture halls blocked peer practice',
+      ctxTitle: 'Subject Pedagogy Training (Maths, Science & Social Science, AY 2024-25)',
+      ctxBadge: '41,883 Verified | 50,864 Surveys',
+      ctxDesc: 'Large-scale subject workshops delivered strong handbook clarity (3.43/4.00) and trainer readiness (3.28/4.00), but 80 to 100 teacher halls collapsed hands-on role-play to 1.37/4.00.'
     },
     'CRO_SRG': {
       badge: 'CRO SRG Trainers (24-25)',
       label: 'CRO SRG Leadership Trainers',
       val: '263',
-      sub: 'Source: CRO SRG 24-25/CRO_SRG Training_Batch 1to7_ Assessment status.xlsx',
-      surveys: '263',
-      surveysSub: 'Batch 1 to 7 assessment status records',
+      sub: 'Verified state & cluster leadership cadre across Batches 1 to 7',
+      surveysLabel: 'Training Batches Audited',
+      surveys: '7 Batches',
+      surveysSub: 'Source: CRO_SRG Training_Batch 1to7_ Assessment status.xlsx',
+      clarityLabel: 'Cadre Readiness Score',
       clarity: '3.60 / 4.00',
-      claritySub: 'State & Cluster Resource Group leadership cadre'
+      claritySub: 'Master resource group pre-rollout calibration',
+      practiceLabel: 'Active Academic Cycle',
+      practice: 'AY 2024-25',
+      practiceSub: 'State & Cluster Resource Group leadership orientation',
+      ctxTitle: 'CRO SRG Leadership Training (Batches 1 to 7, AY 2024-25)',
+      ctxBadge: '263 Leadership Trainers',
+      ctxDesc: 'Targeted leadership orientation for 263 State and Cluster Resource Group (CRO/SRG) trainers across 7 batches to anchor district-level academic mentoring.'
     }
   };
 
@@ -9958,13 +10064,18 @@ Exact model predictions testing each concrete intervention across the state teac
     setTxt('inperson-kpi-label', info.label);
     setTxt('inperson-kpi-participants', info.val);
     setTxt('inperson-kpi-sub', info.sub);
+    setTxt('inperson-kpi-surveys-label', info.surveysLabel);
     setTxt('inperson-kpi-surveys', info.surveys);
     setTxt('inperson-kpi-surveys-sub', info.surveysSub);
+    setTxt('inperson-kpi-clarity-label', info.clarityLabel);
     setTxt('inperson-kpi-clarity', info.clarity);
     setTxt('inperson-kpi-clarity-sub', info.claritySub);
-
-    const badgeInv = document.getElementById('badgeSliceInv');
-    if (badgeInv) badgeInv.textContent = 'Program: ' + info.badge;
+    setTxt('inperson-kpi-practice-label', info.practiceLabel);
+    setTxt('inperson-kpi-practice', info.practice);
+    setTxt('inperson-kpi-practice-sub', info.practiceSub);
+    setTxt('inperson-ctx-title', info.ctxTitle);
+    setTxt('inperson-ctx-badge', info.ctxBadge);
+    setTxt('inperson-ctx-desc', info.ctxDesc);
 
     const strip = document.getElementById('inperson-kpi-strip');
     if (strip && typeof gsap !== 'undefined') {
