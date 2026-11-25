@@ -13,42 +13,42 @@
 
 
     :root {
-      --bg: #F8FAFC;
+      --bg: #F5F5F7;
       --surface: #FFFFFF;
-      --surface-subtle: #F1F5F9;
-      --surface-border: #E2E8F0;
-      --border-hover: #CBD5E1;
-      
-      --text-main: #0F172A;
-      --text-body: #334155;
-      --text-muted: #64748B;
-      --text-dim: #94A3B8;
+      --surface-subtle: #F5F5F7;
+      --surface-border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.16);
 
-      --blue-primary: #0284C7;
-      --blue-subtle: #E0F2FE;
-      --blue-border: #BAE6FD;
+      --text-main: #1D1D1F;
+      --text-body: #3A3A3C;
+      --text-muted: #6E6E73;
+      --text-dim: #86868B;
 
-      --emerald-primary: #059669;
-      --emerald-subtle: #D1FAE5;
-      --emerald-border: #A7F3D0;
+      --blue-primary: #0071E3;
+      --blue-subtle: #EAF4FF;
+      --blue-border: #B3D7FF;
 
-      --amber-primary: #D97706;
-      --amber-subtle: #FEF3C7;
-      --amber-border: #FDE68A;
+      --emerald-primary: #248A3D;
+      --emerald-subtle: #E6F6EB;
+      --emerald-border: #A7DFB7;
 
-      --purple-primary: #7C3AED;
-      --purple-subtle: #EDE9FE;
-      --purple-border: #DDD6FE;
+      --amber-primary: #B25000;
+      --amber-subtle: #FFF4E5;
+      --amber-border: #FFD699;
 
-      --rose-primary: #E11D48;
-      --rose-subtle: #FFE4E6;
-      --rose-border: #FECDD3;
+      --purple-primary: #5E5CE6;
+      --purple-subtle: #EFEEFF;
+      --purple-border: #C7C6FA;
 
-      --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --rose-primary: #D70015;
+      --rose-subtle: #FFEBEB;
+      --rose-border: #FFB3BA;
 
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.07);
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", sans-serif;
+      --font-mono: "SF Mono", "JetBrains Mono", monospace;
     }
 
     * {
@@ -2020,6 +2020,80 @@
       font-size: 0.74rem;
       color: var(--text-muted);
       margin-top: 0.25rem;
+    }
+
+    /* --- APPLE DESIGN SYSTEM OVERRIDES (DESIGN.md) --- */
+    h1 {
+      font-weight: 700 !important;
+      letter-spacing: -0.028em !important;
+      color: var(--text-main) !important;
+    }
+    .panel-title {
+      font-weight: 700 !important;
+      letter-spacing: -0.022em !important;
+      color: var(--text-main) !important;
+    }
+    .master-control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 45;
+      background: rgba(255, 255, 255, 0.78) !important;
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-radius: 18px !important;
+      border: 1px solid var(--surface-border) !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    }
+    .panel, .kpi-card, .kpi-mini-card, .playbook-card {
+      border-radius: 18px !important;
+      border: 1px solid var(--surface-border) !important;
+      box-shadow: var(--shadow-card) !important;
+      transition: box-shadow 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.25s ease;
+    }
+    .panel:hover, .kpi-card:hover, .kpi-mini-card:hover {
+      box-shadow: var(--shadow-hover) !important;
+      border-color: var(--border-hover) !important;
+    }
+    .top-dl-btn, .dl-btn {
+      border-radius: 9999px !important;
+      font-weight: 600 !important;
+      background: var(--blue-primary) !important;
+      color: #FFFFFF !important;
+      border: 1px solid var(--blue-primary) !important;
+      transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.15s ease !important;
+    }
+    .top-dl-btn:hover, .dl-btn:hover {
+      background: #0077ED !important;
+      transform: translateY(-1px);
+    }
+    .tab-nav-btn, .slicer-pill, .era-pill, .shift-pill, .district-filter-pill {
+      border-radius: 9999px !important;
+      transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.2s ease, border-color 0.2s ease !important;
+    }
+    .tab-nav-btn.active, .slicer-pill.active, .era-pill.active {
+      background: #1D1D1F !important;
+      color: #FFFFFF !important;
+      border-color: #1D1D1F !important;
+    }
+    .tab-nav-btn.active .tab-num {
+      background: rgba(255, 255, 255, 0.2) !important;
+      color: #FFFFFF !important;
+    }
+    .shift-pill.active, .district-filter-pill.active {
+      background: var(--blue-primary) !important;
+      color: #FFFFFF !important;
+      border-color: var(--blue-primary) !important;
+    }
+    #executive-brief-panel {
+      background: #1D1D1F !important;
+      color: #F5F5F7 !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    #executive-brief-panel .panel-title {
+      color: #FFFFFF !important;
+    }
+    #executive-brief-panel .panel-desc {
+      color: #A1A1A6 !important;
     }
   </style>
 </head>
@@ -9012,7 +9086,20 @@ Exact model predictions testing each concrete intervention across the state teac
       }
     }
 
-    // 4. Smoothly scroll to the master control bar if user is far down
+    // 4. Apple-calm card settle on newly visible tab
+    const activeContainer = document.getElementById(tabId);
+    if (activeContainer && typeof gsap !== 'undefined') {
+      const targets = activeContainer.querySelectorAll(':scope > .kpi-mini-strip > .kpi-mini-card, :scope > .panel');
+      if (targets.length) {
+        if (typeof prefersReducedMotion === 'function' && prefersReducedMotion()) {
+          gsap.fromTo(targets, { opacity: 0.7 }, { opacity: 1, duration: 0.12 });
+        } else {
+          gsap.fromTo(targets, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.30, stagger: 0.04, ease: 'power2.out', clearProps: 'transform' });
+        }
+      }
+    }
+
+    // 5. Smoothly scroll to the master control bar if user is far down
     const masterBar = document.getElementById('masterControlBar');
     if (masterBar && window.scrollY > masterBar.offsetTop + 100) {
       window.scrollTo({ top: masterBar.offsetTop - 15, behavior: 'smooth' });
