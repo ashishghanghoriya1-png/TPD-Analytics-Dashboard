@@ -6218,11 +6218,11 @@ Exact model predictions testing each concrete intervention across the state teac
       },
       'POST_COVID': {
         title: "Post-Covid Period: Blended Clusters & Cadres (After April 2023)",
-        body: "From April 2023 onwards, Madhya Pradesh established a blended teacher development ecosystem, combining monthly in-person school cluster dialogues (CLSS), subject pedagogy workshops, master trainer orientations (DO), and digital learning communities, engaging 200,965 unique verified civil servants across 55 districts.",
-        active: 200965,
+        body: "From April 2023 onwards, Madhya Pradesh established a blended teacher development ecosystem, combining monthly in-person school cluster dialogues (CLSS), subject pedagogy workshops, master trainer orientations (DO), and digital learning communities, engaging 215,996 unique verified civil servants across 55 districts.",
+        active: 215996,
         clssTeachers: 51659,
-        doCadre: 8459,
-        cumulative: 200965,
+        doCadre: 10747,
+        cumulative: 215996,
         programs: [
           { name: "Mission Ankur Courses 2 to 6", category: "Digital", channel: "Digital", count: 123452, download: "participant_lists/Mission_Ankur_4_5_6_Combined.csv" },
           { name: "PLC Digital Course", category: "Digital", channel: "Digital", count: 95604, download: "participant_lists/PLC_Digital_Course_Teachers_129818.csv" },
@@ -6898,7 +6898,7 @@ Exact model predictions testing each concrete intervention across the state teac
       document.getElementById('narrativeYearTag').innerText = 'Covid Period Operational Milestone';
     } else if (selectedEra === 'POST_COVID' && (year === 'ALL' || year === 'POST_COVID')) {
       document.getElementById('drilldown-title').innerText = 'Program Breakdown: Post-Covid Period (After April 2023 - AY 2023-24 to AY 2026-27)';
-      document.getElementById('drilldown-desc').innerText = '200,965 unique educators across in-person school clusters and digital courses (Download available for each intervention)';
+      document.getElementById('drilldown-desc').innerText = '215,996 unique educators across in-person school clusters and digital courses (Download available for each intervention)';
       document.getElementById('narrativeYearTag').innerText = 'Post-Covid Blended Learning Milestone';
     } else {
       document.getElementById('drilldown-title').innerText = year === 'ALL' ? 'Program Breakdown: All Academic Years (AY 2022-23 to AY 2026-27)' : `Program Breakdown: ${year}`;
@@ -9166,12 +9166,12 @@ Exact model predictions testing each concrete intervention across the state teac
   },
   "POST_COVID": {
     "ALL": {
-      "verifiedTeachers": "200,965",
-      "verifiedNum": 200965,
+      "verifiedTeachers": "215,996",
+      "verifiedNum": 215996,
       "unmapped": "99,707",
-      "retained": "118,639",
-      "retainedNum": 118639,
-      "retainedMeta": "91.7% of teachers from the Covid period continued active training Post-Covid",
+      "retained": "120,005",
+      "retainedNum": 120005,
+      "retainedMeta": "91.9% of teachers from the Covid period continued active training Post-Covid",
       "active": "134,268",
       "activeNum": 134268,
       "activeLabel": "Active Teachers in Latest Full AY (2025-26)",
@@ -9437,7 +9437,7 @@ Exact model predictions testing each concrete intervention across the state teac
           if (badgeSpan) badgeSpan.textContent = '130,561';
         } else if (selectedEra === 'POST_COVID') {
           if (labelSpan) labelSpan.textContent = 'All Post-Covid (AY 2023-27)';
-          if (badgeSpan) badgeSpan.textContent = '200,965';
+          if (badgeSpan) badgeSpan.textContent = '215,996';
         } else {
           if (labelSpan) labelSpan.textContent = 'All Academic Years';
           if (badgeSpan) badgeSpan.textContent = '228,143';
