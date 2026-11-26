@@ -2315,8 +2315,10 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <option value="MA_C3">Mission Ankur Course 3 (80,051)</option>
           <option value="MA_C4">Mission Ankur Course 4 (30,378)</option>
           <option value="MA_C5">Mission Ankur Course 5 (29,311)</option>
-          <option value="MA_C6">Mission Ankur Course 6 (20,240)</option>
-          <option value="PSP_3">PSP Course 3 (13,157)</option>
+          <option value="MA_C6">Mission Ankur Course 6 (20,845)</option>
+          <option value="MA_C7">Mission Ankur Course 7 (11,013)</option>
+          <option value="MA_C8">Mission Ankur Course 8 (8,403)</option>
+          <option value="PSP_3">PSP Course 3 (25,581)</option>
           <option value="PSP_4">PSP Course 4 (34,718)</option>
           <option value="PSP_5">PSP Course 5 (7,916)</option>
           <option value="NAS">NAS Assessment Course (46,233)</option>
@@ -9766,6 +9768,30 @@ Exact model predictions testing each concrete intervention across the state teac
       meta: 'Mathematical reasoning and pattern recognition capstone course.',
       source: 'Source: MA C6 Course Progress.xlsx (DIKSHA Online Records)'
     },
+    'MA_C7': {
+      name: 'Mission Ankur Course 7: स्थानीय मान कैसे पढ़ाएं?',
+      enrolled: '11,013',
+      enrolledNum: 11013,
+      compRate: '53.3%',
+      compNum: 5867,
+      preScore: '39.0%',
+      postScore: '47.0%',
+      gain: '+8.0%',
+      meta: 'Place value pedagogical progression. 5,867 certified completions.',
+      source: 'Source: MA7_ Course Progress.xlsx (DIKSHA Updated Registry)'
+    },
+    'MA_C8': {
+      name: 'Mission Ankur Course 8: शुरुआती पठन (Foundational Reading)',
+      enrolled: '8,403',
+      enrolledNum: 8403,
+      compRate: '59.4%',
+      compNum: 4995,
+      preScore: '42.0%',
+      postScore: '47.0%',
+      gain: '+5.0%',
+      meta: 'Early reading and decoding strategies. 4,995 certified teachers.',
+      source: 'Source: MA8_ Course Progress.xlsx (DIKSHA Updated Registry)'
+    },
     'PSP_1': {
       name: 'PSP Course 1 (Primary Practice)',
       enrolled: '25,670',
@@ -9792,15 +9818,15 @@ Exact model predictions testing each concrete intervention across the state teac
     },
     'PSP_3': {
       name: 'PSP Course 3 (Language & Literacy)',
-      enrolled: '13,180',
-      enrolledNum: 13180,
-      compRate: '45.8%',
-      compNum: 6036,
-      preScore: '45.4%',
-      postScore: '56.3%',
-      gain: '+10.9%',
-      meta: 'Subject-specific language instruction and literacy building module.',
-      source: 'Source: PSP3 Course Progress-Ramesh.xlsx (DIKSHA Online Records)'
+      enrolled: '25,581',
+      enrolledNum: 25581,
+      compRate: '53.5%',
+      compNum: 13685,
+      preScore: '56.0%',
+      postScore: '64.0%',
+      gain: '+8.0%',
+      meta: 'Full statewide rollout: 25,581 enrolled, 13,685 certified teachers.',
+      source: 'Source: PSP3 Course Progress.xlsx (DIKSHA Complete Roster)'
     },
     'PSP_4': {
       name: 'PSP Course 4 (Advanced Methods)',
@@ -10043,12 +10069,12 @@ Exact model predictions testing each concrete intervention across the state teac
   // --- DYNAMIC DIGITAL CHART RENDERERS ---
   // Maps each year/era key to the course keys that belong to it
   const YEAR_TO_COURSES = {
-    'ALL':       ['MA_C1','MA_C2','MA_C3','MA_C6','MA_C5','PSP_2','PSP_1','MA_C4'],
-    'POST_COVID':['MA_C2','MA_C3','MA_C5','MA_C6','PSP_3','PSP_4','PSP_5','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6','NAS','PLC'],
+    'ALL':       ['MA_C1','MA_C2','MA_C3','MA_C6','MA_C7','MA_C8','MA_C5','PSP_2','PSP_3','PSP_1','MA_C4'],
+    'POST_COVID':['MA_C2','MA_C3','MA_C5','MA_C6','MA_C7','MA_C8','PSP_3','PSP_4','PSP_5','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6','NAS','PLC'],
     'COVID':     ['MA_C1','PSP_1','PSP_2'],
     'AY 2022-23':['MA_C1','PSP_1','PSP_2'],
     'AY 2023-24':['MA_C2','MA_C3','PSP_3'],
-    'AY 2024-25':['MA_C4','MA_C5','MA_C6','PSP_4','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6'],
+    'AY 2024-25':['MA_C4','MA_C5','MA_C6','MA_C7','MA_C8','PSP_3','PSP_4','ECE_1','ECE_2','ECE_3','ECE_4','ECE_5','ECE_6'],
     'AY 2025-26':['PLC'],
     'AY 2026-27':['NAS','PSP_5']
   };
