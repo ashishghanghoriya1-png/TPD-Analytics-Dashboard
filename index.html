@@ -2513,6 +2513,7 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
           <div style="font-size: 0.78rem; font-weight: 800; color: var(--text-main); text-transform: uppercase;">Statewide TPD Delivery &amp; Leakage Funnel (2022 to 2026)</div>
           <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 700; background: #E2E8F0; padding: 2px 7px; border-radius: 4px;">5-Stage Retention Cascade</span>
         </div>
+        <div style="font-size: 0.72rem; color: var(--text-body); margin-bottom: 0.6rem;">Tracking teacher retention from the baseline registry through digital courses, cluster meetings (CLSS unique count: 51,659), and verified classroom practice adoption (≥70% rubric score).</div>
         <svg id="leakage-funnel-svg" viewBox="0 0 760 115" width="100%" height="115" style="display:block;"></svg>
       </div>
     </div>
@@ -10350,11 +10351,11 @@ Exact model predictions testing each concrete intervention across the state teac
     if (!svg) return;
 
     const stages = [
-      { name: '1. Registered', label: '228,143', pct: '100%', color: '#0071E3', count: 228143 },
-      { name: '2. Enrolled', label: '179,878', pct: '81.8%', color: '#0284C7', count: 179878 },
-      { name: '3. Certified', label: '114,575', pct: '52.8%', color: '#7C3AED', count: 114575 },
-      { name: '4. Samwaad', label: '52,871', pct: '24.4%', color: '#D97706', count: 52871 },
-      { name: '5. High Fidelity', label: '24,700', pct: '11.4%', color: '#059669', count: 24700 }
+      { name: '1. Registered', label: '228,143', pct: '100%', color: '#0071E3', count: 228143, note: 'State Registry' },
+      { name: '2. Enrolled', label: '179,878', pct: '78.8%', color: '#0284C7', count: 179878, note: 'Digital Intake' },
+      { name: '3. Certified', label: '114,575', pct: '50.2%', color: '#7C3AED', count: 114575, note: 'Course Pass' },
+      { name: '4. Samwaad', label: '51,659', pct: '22.6%', color: '#D97706', count: 51659, note: 'Cluster Active' },
+      { name: '5. High Fidelity', label: '24,796', pct: '10.9%', color: '#059669', count: 24796, note: '≥70% Classroom' }
     ];
 
     const boxW = 125, boxH = 50, gap = 24, startX = 10, startY = 22;
@@ -10367,6 +10368,7 @@ Exact model predictions testing each concrete intervention across the state teac
         <text x="${x + boxW / 2}" y="${startY + 17}" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">${st.name}</text>
         <text x="${x + boxW / 2}" y="${startY + 35}" font-size="13" font-weight="800" fill="${st.color}" font-family="monospace" text-anchor="middle">${st.label}</text>
         <text x="${x + boxW / 2}" y="${startY + 62}" font-size="9" font-weight="700" fill="#64748B" text-anchor="middle">Retained: ${st.pct}</text>
+        <text x="${x + boxW / 2}" y="${startY + 76}" font-size="8" font-weight="500" fill="#94A3B8" text-anchor="middle">${st.note}</text>
       `;
 
       if (i < stages.length - 1) {
