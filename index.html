@@ -2507,14 +2507,14 @@ Access Key: <strong onclick="document.getElementById('accessKeyInput').value='RS
         <svg id="clss-transfer-chart-svg" viewBox="0 0 760 112" width="100%" height="112" style="display:block; max-width:100%;"></svg>
       </div>
 
-      <!-- End-to-End Leakage Pipeline Funnel -->
-      <div style="margin-top: 1rem; padding: 1rem; background: #F8FAFC; border: 1px solid var(--surface-border); border-radius: 10px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <div style="font-size: 0.78rem; font-weight: 800; color: var(--text-main); text-transform: uppercase;">Statewide TPD Delivery &amp; Leakage Funnel (2022 to 2026)</div>
-          <span style="font-size: 0.7rem; font-family: var(--font-mono); font-weight: 700; background: #E2E8F0; padding: 2px 7px; border-radius: 4px;">5-Stage Retention Cascade</span>
+      <!-- Dual-Track Delivery Architecture & Blended Cadre Bridge -->
+      <div style="margin-top: 1rem; padding: 1.1rem; background: #F8FAFC; border: 1px solid var(--surface-border); border-radius: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.02em;">Statewide TPD Delivery Architecture: Parallel Pathways &amp; Blended Cadre (2022 to 2026)</div>
+          <span style="font-size: 0.68rem; font-family: var(--font-mono); font-weight: 700; background: #E2E8F0; color: #334155; padding: 2px 7px; border-radius: 4px;">Dual-Track System Model</span>
         </div>
-        <div style="font-size: 0.72rem; color: var(--text-body); margin-bottom: 0.6rem;">Tracking teacher retention from the baseline registry through digital courses, cluster meetings (CLSS unique count: 51,659), and verified classroom practice adoption (≥70% rubric score).</div>
-        <svg id="leakage-funnel-svg" viewBox="0 0 760 115" width="100%" height="115" style="display:block;"></svg>
+        <div style="font-size: 0.72rem; color: var(--text-body); margin-bottom: 0.75rem;">Separating self-paced online modules from mandatory in-person cluster meetings, linked by verified empirical teacher cross-over.</div>
+        <svg id="leakage-funnel-svg" viewBox="0 0 760 288" width="100%" height="288" style="display:block;"></svg>
       </div>
     </div>
 
@@ -10345,42 +10345,88 @@ Exact model predictions testing each concrete intervention across the state teac
     svg.innerHTML = html;
   }
 
-  // --- DYNAMIC 5-STAGE LEAKAGE FUNNEL (EXPERT PANEL) ---
+  // --- DYNAMIC DUAL-TRACK DELIVERY ARCHITECTURE (EXPERT PANEL) ---
   function renderLeakageFunnelChart() {
     const svg = document.getElementById('leakage-funnel-svg');
     if (!svg) return;
 
-    const stages = [
-      { name: '1. Registered', label: '228,143', pct: '100%', color: '#0071E3', count: 228143, note: 'State Registry' },
-      { name: '2. Enrolled', label: '179,878', pct: '78.8%', color: '#0284C7', count: 179878, note: 'Digital Intake' },
-      { name: '3. Certified', label: '114,575', pct: '50.2%', color: '#7C3AED', count: 114575, note: 'Course Pass' },
-      { name: '4. Samwaad', label: '51,659', pct: '22.6%', color: '#D97706', count: 51659, note: 'Cluster Active' },
-      { name: '5. High Fidelity', label: '24,796', pct: '10.9%', color: '#059669', count: 24796, note: '≥70% Classroom' }
-    ];
+    let html = `
+      <!-- Top Baseline Box -->
+      <g>
+        <rect x="210" y="8" width="340" height="46" rx="8" fill="#FFFFFF" stroke="#0071E3" stroke-width="2"/>
+        <text x="380" y="24" font-size="9" font-weight="800" fill="#475569" text-anchor="middle" letter-spacing="0.04em">STATE TEACHER BASELINE (EMIS / HRMS REGISTRY)</text>
+        <text x="380" y="43" font-size="14" font-weight="800" fill="#0071E3" font-family="monospace" text-anchor="middle">228,143 Verified Civil Servants</text>
+      </g>
 
-    const boxW = 125, boxH = 50, gap = 24, startX = 10, startY = 22;
-    let html = '';
+      <!-- Pathway Branch Lines -->
+      <line x1="380" y1="54" x2="380" y2="66" stroke="#94A3B8" stroke-width="2"/>
+      <line x1="185" y1="66" x2="575" y2="66" stroke="#94A3B8" stroke-width="2"/>
+      <line x1="185" y1="66" x2="185" y2="80" stroke="#94A3B8" stroke-width="2"/>
+      <polygon points="185,84 181,77 189,77" fill="#0284C7"/>
+      <line x1="575" y1="66" x2="575" y2="80" stroke="#94A3B8" stroke-width="2"/>
+      <polygon points="575,84 571,77 579,77" fill="#D97706"/>
 
-    stages.forEach((st, i) => {
-      const x = startX + i * (boxW + gap);
-      html += `
-        <rect x="${x}" y="${startY}" width="${boxW}" height="${boxH}" rx="8" fill="#FFFFFF" stroke="${st.color}" stroke-width="1.8"/>
-        <text x="${x + boxW / 2}" y="${startY + 17}" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">${st.name}</text>
-        <text x="${x + boxW / 2}" y="${startY + 35}" font-size="13" font-weight="800" fill="${st.color}" font-family="monospace" text-anchor="middle">${st.label}</text>
-        <text x="${x + boxW / 2}" y="${startY + 62}" font-size="9" font-weight="700" fill="#64748B" text-anchor="middle">Retained: ${st.pct}</text>
-        <text x="${x + boxW / 2}" y="${startY + 76}" font-size="8" font-weight="500" fill="#94A3B8" text-anchor="middle">${st.note}</text>
-      `;
+      <!-- Track Headers -->
+      <text x="185" y="79" font-size="9.5" font-weight="800" fill="#0284C7" text-anchor="middle" letter-spacing="0.03em">TRACK 1: DIGITAL (DIKSHA)</text>
+      <text x="575" y="79" font-size="9.5" font-weight="800" fill="#D97706" text-anchor="middle" letter-spacing="0.03em">TRACK 2: IN-PERSON (CLSS)</text>
 
-      if (i < stages.length - 1) {
-        const nextX = x + boxW;
-        const dropPct = Math.round(((stages[i].count - stages[i + 1].count) / stages[i].count) * 100);
-        html += `
-          <line x1="${nextX + 3}" y1="${startY + boxH / 2}" x2="${nextX + gap - 5}" y2="${startY + boxH / 2}" stroke="#CBD5E1" stroke-width="2"/>
-          <polygon points="${nextX + gap - 3},${startY + boxH / 2} ${nextX + gap - 8},${startY + boxH / 2 - 4} ${nextX + gap - 8},${startY + boxH / 2 + 4}" fill="#94A3B8"/>
-          <text x="${nextX + gap / 2}" y="${startY + boxH / 2 - 8}" font-size="8.5" font-weight="700" fill="#DC2626" text-anchor="middle">-${dropPct}%</text>
-        `;
-      }
-    });
+      <!-- TRACK 1: Box 1 (Enrolled) -->
+      <g>
+        <rect x="65" y="88" width="240" height="48" rx="7" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.8"/>
+        <text x="185" y="103" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">1. Enrolled in Digital Modules</text>
+        <text x="185" y="121" font-size="13.5" font-weight="800" fill="#0284C7" font-family="monospace" text-anchor="middle">179,878 (78.8%)</text>
+        <text x="185" y="132" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">All-Cadre Intake Across 55 Districts</text>
+      </g>
+
+      <!-- Track 1 Arrow -->
+      <line x1="185" y1="136" x2="185" y2="152" stroke="#CBD5E1" stroke-width="2"/>
+      <polygon points="185,155 181,148 189,148" fill="#7C3AED"/>
+      <text x="192" y="147" font-size="8.5" font-weight="700" fill="#DC2626"> -36% drop (63.7% pass rate)</text>
+
+      <!-- TRACK 1: Box 2 (Certified) -->
+      <g>
+        <rect x="65" y="157" width="240" height="48" rx="7" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.8"/>
+        <text x="185" y="172" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">2. Course Pass &amp; Certified</text>
+        <text x="185" y="190" font-size="13.5" font-weight="800" fill="#7C3AED" font-family="monospace" text-anchor="middle">114,575 (50.2%)</text>
+        <text x="185" y="201" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">Passed Assessments on Core Modules</text>
+      </g>
+
+      <!-- TRACK 2: Box 1 (Cluster Active) -->
+      <g>
+        <rect x="455" y="88" width="240" height="48" rx="7" fill="#FFFFFF" stroke="#D97706" stroke-width="1.8"/>
+        <text x="575" y="103" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">1. Active in Monthly Samwaad</text>
+        <text x="575" y="121" font-size="13.5" font-weight="800" fill="#D97706" font-family="monospace" text-anchor="middle">51,659 (22.6%)</text>
+        <text x="575" y="132" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">Deduplicated Primary/Middle Cadre Pool</text>
+      </g>
+
+      <!-- Track 2 Arrow -->
+      <line x1="575" y1="136" x2="575" y2="152" stroke="#CBD5E1" stroke-width="2"/>
+      <polygon points="575,155 571,148 579,148" fill="#059669"/>
+      <text x="582" y="147" font-size="8.5" font-weight="700" fill="#059669">48.0% classroom transfer rate</text>
+
+      <!-- TRACK 2: Box 2 (High Fidelity) -->
+      <g>
+        <rect x="455" y="157" width="240" height="48" rx="7" fill="#FFFFFF" stroke="#059669" stroke-width="1.8"/>
+        <text x="575" y="172" font-size="9.5" font-weight="700" fill="#475569" text-anchor="middle">2. High Classroom Fidelity</text>
+        <text x="575" y="190" font-size="13.5" font-weight="800" fill="#059669" font-family="monospace" text-anchor="middle">24,796 (10.9%)</text>
+        <text x="575" y="201" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">Scoring ≥70% on Observed Pedagogy Rubric</text>
+      </g>
+
+      <!-- Convergence to Bridge Lines -->
+      <line x1="185" y1="205" x2="185" y2="218" stroke="#94A3B8" stroke-width="2"/>
+      <line x1="575" y1="205" x2="575" y2="218" stroke="#94A3B8" stroke-width="2"/>
+      <line x1="185" y1="218" x2="575" y2="218" stroke="#94A3B8" stroke-width="2"/>
+      <line x1="380" y1="218" x2="380" y2="230" stroke="#94A3B8" stroke-width="2"/>
+      <polygon points="380,233 376,226 384,226" fill="#1E293B"/>
+
+      <!-- Blended Cadre Bridge Box -->
+      <g>
+        <rect x="100" y="233" width="560" height="50" rx="8" fill="#F8FAFC" stroke="#334155" stroke-width="1.8"/>
+        <text x="380" y="247" font-size="9" font-weight="800" fill="#334155" text-anchor="middle" letter-spacing="0.04em">BLENDED CADRE BRIDGE (TRACK INTERSECTION)</text>
+        <text x="380" y="263" font-size="12" font-weight="800" fill="#0F172A" font-family="monospace" text-anchor="middle">34,700 Teachers Completed Both Tracks (Digital Modules + Cluster Meetings)</text>
+        <text x="380" y="276" font-size="8.5" font-weight="600" fill="#64748B" text-anchor="middle">90,384 Digital Only   •   34,241 Cluster Only   •   Multi-Year Verified Cadre N=216,954</text>
+      </g>
+    `;
 
     svg.innerHTML = html;
   }
